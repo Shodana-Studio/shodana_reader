@@ -17,6 +17,7 @@ class AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       routeInformationParser: BeamerRouteInformationParser(),
       routerDelegate: rootBeamerRouter,
     );
