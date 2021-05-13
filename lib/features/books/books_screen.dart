@@ -17,11 +17,16 @@ class BooksScreen extends StatelessWidget {
       appBar: AppBar(title: Text(AppLocalizations.of(context)?.appName
           ?? 'No Title')),
       body: Center(
-        child: TextButton(
-          onPressed: () {
-            return context.beamToNamed('/books/0}');
-          },
-          child: const Text('Beam to Test Book 0 Details'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextButton(
+              onPressed: () {
+                return context.beamToNamed('/books/0}');
+              },
+              child: const Text('Beam to Test Book 0 Details'),
+            ),
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -43,12 +48,12 @@ class BooksScreen extends StatelessWidget {
             // print(file.size);
             // print(file.extension);
             // print(file.path);
-          } on Exception catch (e, s) {
+          } on Exception catch (e, _) {
             print(e);
           }
         },
-        child: const Icon(Icons.add),
         tooltip: 'Add an eBook',
+        child: const Icon(Icons.add),
       ),
     );
   }
