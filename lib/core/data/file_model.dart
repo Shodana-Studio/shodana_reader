@@ -1,7 +1,5 @@
 import 'dart:io' as io;
 
-import 'package:file_picker/file_picker.dart';
-
 class FileModel {
   const FileModel({
     required String filename,
