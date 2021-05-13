@@ -17,7 +17,7 @@ Map<String, String> option = {
 };
 
 Map<String, String> internetBook = {
-  'title': 'New Book',
-  'author': 'Best Author',
+  'title': 'New Internet Book',
+  'author': 'Cool Guy',
   'id': '0'
 };
