@@ -1,8 +1,9 @@
 // APP
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'locations/home_location.dart';
+import 'package:shodana_reader/core/locations/home_location.dart';
 
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
@@ -17,9 +18,11 @@ class AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
       routeInformationParser: BeamerRouteInformationParser(),
       routerDelegate: rootBeamerRouter,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      debugShowCheckedModeBanner: false,
     );
   }
 }

@@ -1,20 +1,21 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
-import '../screens/shelves/shelves_screen.dart';
 
-class ShelvesLocation extends BeamLocation {
-  ShelvesLocation(BeamState state) : super(state);
+import 'package:shodana_reader/screens/books/books_screen.dart';
+
+class BooksLocation extends BeamLocation {
+  BooksLocation(BeamState state) : super(state);
 
   @override
-  List<String> get pathBlueprints => ['/shelves/:shelfId'];
+  List<String> get pathBlueprints => ['/books/:itemId'];
 
   @override
   List<BeamPage> pagesBuilder(BuildContext context, BeamState state) => [
     // TODO:
 
     BeamPage(
-      key: const ValueKey('shelves'),
-      child: const ShelvesScreen(),
+      key: const ValueKey('books'),
+      child: const BooksScreen(),
     ),
     // if (state.pathParameters.containsKey('bookId'))
     //   BeamPage(

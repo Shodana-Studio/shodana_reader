@@ -1,14 +1,15 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 
-import '../locations/books_location.dart';
-import '../locations/clubs_location.dart';
-import '../locations/discover_location.dart';
-import '../locations/more_location.dart';
-import '../locations/shelves_location.dart';
+import 'package:shodana_reader/core/locations/books_location.dart';
+import 'package:shodana_reader/core/locations/clubs_location.dart';
+import 'package:shodana_reader/core/locations/discover_location.dart';
+import 'package:shodana_reader/core/locations/more_location.dart';
+import 'package:shodana_reader/core/locations/shelves_location.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AppScreen extends StatefulWidget {
-  AppScreen({required this.beamState});
+  const AppScreen({Key? key, required this.beamState}) : super(key: key);
 
   final BeamState beamState;
 
@@ -83,12 +84,27 @@ class _AppScreenState extends State<AppScreen> {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: _currentIndex,
-        items: const [
-          BottomNavigationBarItem(label: 'Books', icon: Icon(Icons.menu_book_rounded)),
-          BottomNavigationBarItem(label: 'Shelves', icon: Icon(Icons.collections_bookmark_rounded)),
-          BottomNavigationBarItem(label: 'Clubs', icon: Icon(Icons.group_rounded)),
-          BottomNavigationBarItem(label: 'Discover', icon: Icon(Icons.explore_rounded)),
-          BottomNavigationBarItem(label: 'More', icon: Icon(Icons.menu_rounded)),
+        items: [
+          BottomNavigationBarItem(
+              label: AppLocalizations.of(context)?.homeBottomNavItemText
+              ?? 'No Name', icon: const Icon(Icons.menu_book_rounded)
+          ),
+          BottomNavigationBarItem(
+              label: AppLocalizations.of(context)?.shelvesBottomNavItemText
+              ?? 'No Name', icon: const Icon(Icons.collections_bookmark_rounded)
+          ),
+          BottomNavigationBarItem(
+              label: AppLocalizations.of(context)?.clubsBottomNavItemText
+              ?? 'No Name', icon: const Icon(Icons.group_rounded)
+          ),
+          BottomNavigationBarItem(
+              label: AppLocalizations.of(context)?.discoverBottomNavItemText
+              ?? 'No Name', icon: const Icon(Icons.explore_rounded)
+          ),
+          BottomNavigationBarItem(
+              label: AppLocalizations.of(context)?.moreBottomNavItemText
+              ?? 'No Name', icon: const Icon(Icons.menu_rounded)
+          ),
         ],
         onTap: (index) {
           setState(() => _currentIndex = index);

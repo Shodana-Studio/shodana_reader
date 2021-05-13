@@ -66,17 +66,18 @@ linter:
     # Conflicts with disabling `implicit-dynamic`
     avoid_annotating_with_dynamic: false
 
-    # Not nessecary for an application and more pointed towards public API's
+    # Not necessary for an application and more pointed towards public API's
     public_member_api_docs: false
 
-    # Temporarly
+    # Temporarily
     diagnostic_describe_all_properties: false
 
     # I think it's easier to read if they are grouped together
     sort_pub_dependencies: false
 
-    # Conflicts with prefer_relative_imports
-    always_use_package_imports: false
+    # Relative does not work well when moving files around
+    prefer_relative_imports: false
+    always_use_package_imports: true
 
     # Sometimes it is better to use a double
     prefer_int_literals: false

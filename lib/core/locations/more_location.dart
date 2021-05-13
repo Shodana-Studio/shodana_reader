@@ -1,21 +1,20 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
+import 'package:shodana_reader/screens/more/more_screen.dart';
 
-import '../screens/books/books_screen.dart';
-
-class BooksLocation extends BeamLocation {
-  BooksLocation(BeamState state) : super(state);
+class MoreLocation extends BeamLocation {
+  MoreLocation(BeamState state) : super(state);
 
   @override
-  List<String> get pathBlueprints => ['/books/:itemId'];
+  List<String> get pathBlueprints => ['/more/:itemId'];
 
   @override
   List<BeamPage> pagesBuilder(BuildContext context, BeamState state) => [
     // TODO:
 
     BeamPage(
-      key: const ValueKey('books'),
-      child: const BooksScreen(),
+      key: const ValueKey('more'),
+      child: const MoreScreen(),
     ),
     // if (state.pathParameters.containsKey('bookId'))
     //   BeamPage(
