@@ -1,6 +1,8 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
-import 'package:shodana_reader/screens/clubs/clubs_screen.dart';
+import 'package:shodana_reader/core/data/fake_data.dart';
+import 'package:shodana_reader/features/clubs/club_room_screen.dart';
+import 'package:shodana_reader/features/clubs/clubs_screen.dart';
 
 class ClubsLocation extends BeamLocation {
   ClubsLocation(BeamState state) : super(state);
@@ -10,18 +12,16 @@ class ClubsLocation extends BeamLocation {
 
   @override
   List<BeamPage> pagesBuilder(BuildContext context, BeamState state) => [
-    // TODO:
-
     BeamPage(
       key: const ValueKey('clubs'),
       child: const ClubsScreen(),
     ),
-    // if (state.pathParameters.containsKey('bookId'))
-    //   BeamPage(
-    //     key: ValueKey('book-${state.pathParameters['bookId']}'),
-    //     child: BookDetailsScreen(
-    //       bookId: state.pathParameters['bookId'],
-    //     ),
-    //   ),
+    if (state.pathParameters.containsKey('clubId'))
+      BeamPage(
+        key: ValueKey('club-${state.pathParameters['clubId']}'),
+        child: ClubRoomScreen(
+          club: club,
+        ),
+      ),
   ];
 }

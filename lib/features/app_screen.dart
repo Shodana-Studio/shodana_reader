@@ -1,5 +1,7 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:shodana_reader/core/locations/books_location.dart';
 import 'package:shodana_reader/core/locations/clubs_location.dart';
@@ -7,8 +9,9 @@ import 'package:shodana_reader/core/locations/discover_location.dart';
 import 'package:shodana_reader/core/locations/more_location.dart';
 import 'package:shodana_reader/core/locations/shelves_location.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shodana_reader/core/providers/bottom_navigation_provider.dart';
 
-class AppScreen extends StatefulWidget {
+class AppScreen extends StatefulHookWidget {
   const AppScreen({Key? key, required this.beamState}) : super(key: key);
 
   final BeamState beamState;
@@ -70,6 +73,8 @@ class _AppScreenState extends State<AppScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final bool enableBottomNav = useProvider(shouldShowBottomNavigationProvider)
+        .state;
     return Scaffold(
       body: IndexedStack(
         index: _currentIndex,
@@ -81,7 +86,7 @@ class _AppScreenState extends State<AppScreen> {
           Beamer(routerDelegate: _routerDelegates[4]),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: enableBottomNav ? BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: _currentIndex,
         items: [
@@ -107,7 +112,6 @@ class _AppScreenState extends State<AppScreen> {
           ),
         ],
         onTap: (index) {
-          setState(() => _currentIndex = index);
           if (_currentIndex == index) {
             _routerDelegates[_currentIndex].beamToNamed(widget.beamState.uri.path);
           } else {
@@ -117,7 +121,7 @@ class _AppScreenState extends State<AppScreen> {
             );
           }
         },
-      ),
+      ) : const SizedBox(height: 0.0),
     );
   }
 }

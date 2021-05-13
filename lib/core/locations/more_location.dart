@@ -1,6 +1,8 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
-import 'package:shodana_reader/screens/more/more_screen.dart';
+import 'package:shodana_reader/core/data/fake_data.dart';
+import 'package:shodana_reader/features/more/more_details_screen.dart';
+import 'package:shodana_reader/features/more/more_screen.dart';
 
 class MoreLocation extends BeamLocation {
   MoreLocation(BeamState state) : super(state);
@@ -10,18 +12,16 @@ class MoreLocation extends BeamLocation {
 
   @override
   List<BeamPage> pagesBuilder(BuildContext context, BeamState state) => [
-    // TODO:
-
     BeamPage(
       key: const ValueKey('more'),
       child: const MoreScreen(),
     ),
-    // if (state.pathParameters.containsKey('bookId'))
-    //   BeamPage(
-    //     key: ValueKey('book-${state.pathParameters['bookId']}'),
-    //     child: BookDetailsScreen(
-    //       bookId: state.pathParameters['bookId'],
-    //     ),
-    //   ),
+    if (state.pathParameters.containsKey('itemId'))
+      BeamPage(
+        key: ValueKey('more-${state.pathParameters['itemId']}'),
+        child: MoreDetailsScreen(
+          option: option,
+        ),
+      ),
   ];
 }
