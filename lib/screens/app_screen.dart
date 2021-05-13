@@ -17,26 +17,26 @@ class AppScreen extends StatefulWidget {
   _AppScreenState createState() => _AppScreenState();
 }
 
-// These are all the location handlers. They handle the page stacks.
-final routerDelegates = [
-  BeamerRouterDelegate(
-    locationBuilder: (state) => BooksLocation(state),
-  ),
-  BeamerRouterDelegate(
-    locationBuilder: (state) => ShelvesLocation(state),
-  ),
-  BeamerRouterDelegate(
-    locationBuilder: (state) => ClubsLocation(state),
-  ),
-  BeamerRouterDelegate(
-    locationBuilder: (state) => DiscoverLocation(state),
-  ),
-  BeamerRouterDelegate(
-    locationBuilder: (state) => MoreLocation(state),
-  ),
-];
-
 class _AppScreenState extends State<AppScreen> {
+  // These are all the location handlers. They handle the page stacks.
+  final _routerDelegates = [
+    BeamerRouterDelegate(
+      locationBuilder: (state) => BooksLocation(state),
+    ),
+    BeamerRouterDelegate(
+      locationBuilder: (state) => ShelvesLocation(state),
+    ),
+    BeamerRouterDelegate(
+      locationBuilder: (state) => ClubsLocation(state),
+    ),
+    BeamerRouterDelegate(
+      locationBuilder: (state) => DiscoverLocation(state),
+    ),
+    BeamerRouterDelegate(
+      locationBuilder: (state) => MoreLocation(state),
+    ),
+  ];
+
   int _currentIndex = 0;
 
   @override
@@ -74,11 +74,11 @@ class _AppScreenState extends State<AppScreen> {
       body: IndexedStack(
         index: _currentIndex,
         children: [
-          Beamer(routerDelegate: routerDelegates[0]),
-          Beamer(routerDelegate: routerDelegates[1]),
-          Beamer(routerDelegate: routerDelegates[2]),
-          Beamer(routerDelegate: routerDelegates[3]),
-          Beamer(routerDelegate: routerDelegates[4]),
+          Beamer(routerDelegate: _routerDelegates[0]),
+          Beamer(routerDelegate: _routerDelegates[1]),
+          Beamer(routerDelegate: _routerDelegates[2]),
+          Beamer(routerDelegate: _routerDelegates[3]),
+          Beamer(routerDelegate: _routerDelegates[4]),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -103,17 +103,17 @@ class _AppScreenState extends State<AppScreen> {
           ),
           BottomNavigationBarItem(
               label: AppLocalizations.of(context)?.moreBottomNavItemText
-              ?? 'No Name', icon: const Icon(Icons.menu_rounded)
+              ?? 'No Name', icon: const Icon(Icons.more_horiz)
           ),
         ],
         onTap: (index) {
           setState(() => _currentIndex = index);
           if (_currentIndex == index) {
-            routerDelegates[_currentIndex].beamToNamed(widget.beamState.uri.path);
+            _routerDelegates[_currentIndex].beamToNamed(widget.beamState.uri.path);
           } else {
             setState(() => _currentIndex = index);
-            routerDelegates[_currentIndex].parent?.updateRouteInformation(
-              routerDelegates[_currentIndex].currentLocation.state.uri,
+            _routerDelegates[_currentIndex].parent?.updateRouteInformation(
+              _routerDelegates[_currentIndex].currentLocation.state.uri,
             );
           }
         },

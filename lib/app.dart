@@ -11,10 +11,10 @@ class App extends StatefulWidget {
   State<StatefulWidget> createState() => AppState();
 }
 
-final rootBeamerRouter = BeamerRouterDelegate(
-    locationBuilder: (state) => HomeLocation(state));
-
 class AppState extends State<App> {
+  final rootBeamerRouter = BeamerRouterDelegate(
+      locationBuilder: (state) => HomeLocation(state));
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
