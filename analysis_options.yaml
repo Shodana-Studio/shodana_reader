@@ -81,3 +81,6 @@ linter:
 
     # Sometimes it is better to use a double
     prefer_int_literals: false
+
+    # I like type annotations
+    omit_local_variable_types: false
