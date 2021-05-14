@@ -1,6 +1,6 @@
 import 'dart:io' as io;
 
-import 'package:shodana_reader/core/data/file_model.dart';
+import 'file_model.dart';
 
 class BookModel extends FileModel {
   BookModel({

@@ -1,8 +1,8 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
-import 'package:shodana_reader/core/data/fake_data.dart';
-import 'package:shodana_reader/features/discover/discover_details_screen.dart';
-import 'package:shodana_reader/features/discover/discover_screen.dart';
+import '../data/repository/fake_data.dart';
+import '../features/discover/discover_details_screen.dart';
+import '../features/discover/discover_screen.dart';
 
 class DiscoverLocation extends BeamLocation {
   DiscoverLocation(BeamState state) : super(state);

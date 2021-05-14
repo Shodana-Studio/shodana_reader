@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:beamer/beamer.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../core/data/providers/bottom_navigation_provider.dart';
+import '../../data/provider/bottom_navigation_provider.dart';
 
 class BookDetailsScreen extends StatelessWidget {
   const BookDetailsScreen({Key? key, required this.book}) : super(key: key);

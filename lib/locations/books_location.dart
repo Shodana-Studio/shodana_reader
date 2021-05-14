@@ -1,10 +1,9 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
-import 'package:shodana_reader/core/data/fake_data.dart';
-import 'package:shodana_reader/features/books/book_details_screen.dart';
-
-import 'package:shodana_reader/features/books/books_screen.dart';
-import 'package:shodana_reader/features/reader/reader_screen.dart';
+import '../data/repository/fake_data.dart';
+import '../features/books/book_details_screen.dart';
+import '../features/books/books_screen.dart';
+import '../features/reader/reader_screen.dart';
 
 class BooksLocation extends BeamLocation {
   BooksLocation(BeamState state) : super(state);

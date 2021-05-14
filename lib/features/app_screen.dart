@@ -4,12 +4,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../core/data/providers/bottom_navigation_provider.dart';
-import '../core/locations/books_location.dart';
-import '../core/locations/clubs_location.dart';
-import '../core/locations/discover_location.dart';
-import '../core/locations/more_location.dart';
-import '../core/locations/shelves_location.dart';
+import '../data/provider/bottom_navigation_provider.dart';
+import '../locations/locations.dart';
 
 class AppScreen extends StatefulHookWidget {
   const AppScreen({Key? key, required this.beamState}) : super(key: key);
