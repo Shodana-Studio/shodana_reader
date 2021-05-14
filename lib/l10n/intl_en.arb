@@ -1,39 +1,148 @@
 {
+  "@@locale": "en",
+
   "appName":"Shodana Reader",
+  "@appName": {
+    "description": "The name of the app"
+  },
   "loginButtonText":"Login",
+  "@loginButtonText": {
+    "description": "Text used on the login/signup page"
+  },
   "signupButtonText":"Sign up",
+  "@signupButtonText": {
+    "description": "Text used on the login/signup page"
+  },
   "googleButtonText":"Continue with Google",
+  "@googleButtonText": {
+    "description": "Text used on the login/signup page"
+  },
   "welcomePageTitle": "Welcome",
+  "@welcomePageTitle": {
+    "description": "Not used"
+  },
   "welcomePageSubtitle":"EBook Reader App",
+  "@welcomePageSubtitle": {
+    "description": "Not used"
+  },
   "emailFieldlabel":"Email",
+  "@emailFieldlabel": {
+    "description": "Text used on the login/signup page"
+  },
   "passwordFieldLabel":"Password",
+  "@passwordFieldLabel": {
+    "description": "Text used on the login/signup page"
+  },
   "emailValidationError":"Please enter email",
+  "@emailValidationError": {
+    "description": "Text used on the login/signup page"
+  },
   "passwordValidationError":"Please enter password",
+  "@passwordValidationError": {
+    "description": "Text used on the login/signup page"
+  },
   "confirmPasswordValidationEmptyError":"Please confirm password",
+  "@confirmPasswordValidationEmptyError": {
+    "description": "Text used on the login/signup page"
+  },
   "confirmPasswordValidationMatchError":"Passwords do not match",
+  "@confirmPasswordValidationMatchError": {
+    "description": "Text used on the login/signup page"
+  },
   "confirmPasswordFieldLabel":"Confirm password",
-  "logoutButtonText":"Log out",
+  "@confirmPasswordFieldLabel": {
+    "description": "Text used on the login/signup page"
+  },
   "profilePageTitle":"Profile",
-  "homePageTitle":"Shodana",
-  "shelvesPageTitle":"Shelves",
-  "clubsPageTitle":"Clubs",
-  "discoverPageTitle":"Discover",
-  "morePageTitle":"More",
-  "settingsPageTitle":"Settings",
-  "generalPageTitle":"General",
-  "aboutPageTitle":"About",
-  "homeBottomNavItemText":"Home",
-  "shelvesBottomNavItemText":"Shelves",
-  "clubsBottomNavItemText":"Clubs",
-  "discoverBottomNavItemText":"Discover",
-  "moreBottomNavItemText":"More",
+  "@profilePageTitle": {
+    "description": "Not used"
+  },
   "nameFieldLabel":"Name",
+  "@nameFieldLabel": {
+    "description": "Not used"
+  },
   "nameValidationError":"Please enter name",
+  "@nameValidationError": {
+    "description": "Not used"
+  },
   "editProfile":"Edit Profile",
+  "@editProfile": {
+    "description": "Not used"
+  },
   "saveButtonLabel":"Save",
+  "@saveButtonLabel": {
+    "description": "Not used"
+  },
   "pickFromGalleryButtonLabel":"Gallery",
+  "@pickFromGalleryButtonLabel": {
+    "description": "Not used"
+  },
   "pickFromCameraButtonLabel":"Take Photo",
+  "@pickFromCameraButtonLabel": {
+    "description": "Not used"
+  },
   "cancelButtonLabel":"Cancel",
+  "@cancelButtonLabel": {
+    "description": "Not used"
+  },
   "pickImageDialogTitle":"Pick Image",
-  "introFinishButtonLabel":"Get Started"
+  "@pickImageDialogTitle": {
+    "description": "Not used"
+  },
+  "introFinishButtonLabel":"Get Started",
+  "@introFinishButtonLabel": {
+    "description": "Not used"
+  },
+  "homePageTitle":"Shodana",
+  "@homePageTitle": {
+    "description": "App bar title for the home page"
+  },
+  "shelvesPageTitle":"Shelves",
+  "@shelvesPageTitle": {
+    "description": "App bar title for the shelves page"
+  },
+  "clubsPageTitle":"Clubs",
+  "@clubsPageTitle": {
+    "description": "App bar title for the clubs page"
+  },
+  "discoverPageTitle":"Discover",
+  "@discoverPageTitle": {
+    "description": "App bar title for the discover page"
+  },
+  "morePageTitle":"More",
+  "@morePageTitle": {
+    "description": "App bar title for the more page"
+  },
+  "settingsPageTitle":"Settings",
+  "@settingsPageTitle": {
+    "description": "App bar title for the settings page"
+  },
+  "generalPageTitle":"General",
+  "@generalPageTitle": {
+    "description": "App bar title for the settings->general page"
+  },
+  "aboutPageTitle":"About",
+  "@aboutPageTitle": {
+    "description": "App bar title for the settings->about page"
+  },
+  "homeBottomNavItemText":"Home",
+  "@homeBottomNavItemText": {
+    "description": "Navigation bar text for the home item"
+  },
+  "shelvesBottomNavItemText":"Shelves",
+  "@shelvesBottomNavItemText": {
+    "description": "Navigation bar text for the shelves item"
+  },
+  "clubsBottomNavItemText":"Clubs",
+  "@clubsBottomNavItemText": {
+    "description": "Navigation bar text for the clubs item"
+  },
+  "discoverBottomNavItemText":"Discover",
+  "@discoverBottomNavItemText": {
+    "description": "Navigation bar text for the discover item"
+  },
+  "moreBottomNavItemText":"More",
+  "@moreBottomNavItemText": {
+    "description": "Navigation bar text for the more item"
+  }
 }
