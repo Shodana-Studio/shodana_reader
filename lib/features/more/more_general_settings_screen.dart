@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../data/provider/starting_screen_provider.dart';
 import 'widgets/settings_item_button.dart';
-
 class GeneralSettings extends HookWidget {
   const GeneralSettings({Key? key}) : super(key: key);
 
