@@ -26,16 +26,17 @@ class SettingsItemButton extends StatelessWidget {
                   text,
                   style: const TextStyle(
                       fontSize: 16.0,
+                      fontWeight: FontWeight.normal,
                       color: Colors.black
                   ),
                 ),
                 if (secondaryText != null)
                   Text(
                     secondaryText ?? 'No subtitle',
-                    style: const TextStyle(
+                    style: TextStyle(
                         fontSize: 13.0,
                         fontWeight: FontWeight.normal,
-                        color: Colors.black
+                        color: Colors.grey[800]
                     ),
                   ),
               ],

@@ -2,15 +2,18 @@ import 'dart:io' as io;
 
 import 'package:clipboard/clipboard.dart';
 import 'package:beamer/beamer.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:package_info/package_info.dart';
 import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:shodana_reader/features/more/widgets/settings_icon_button.dart';
-import 'package:shodana_reader/features/more/widgets/settings_item_button.dart';
+
+import 'widgets/settings_icon_button.dart';
+import 'widgets/settings_item_button.dart';
 
 
-class MoreDetailsScreen extends StatelessWidget {
+class MoreDetailsScreen extends HookWidget {
   const MoreDetailsScreen({Key? key, required this.option}) : super(key: key);
   final String option;
 
@@ -45,7 +48,7 @@ class MoreDetailsScreen extends StatelessWidget {
         children: [
           const SizedBox(height: 8.0),
           SettingsIconButton(
-              key: const Key('general'),
+              key: const ValueKey('general'),
               text: 'General',
               icon: Icons.tune,
               onPressed: () => context.beamToNamed('/more/settings/general')
@@ -102,7 +105,7 @@ class MoreDetailsScreen extends StatelessWidget {
         children: [
           const SizedBox(height: 8.0),
           SettingsItemButton(
-              key: const Key('version'),
+              key: const ValueKey('version'),
               text: 'Version',
               secondaryText: 'Alpha $version+$buildNumber',
               onPressed: () async {
@@ -163,10 +166,24 @@ class MoreDetailsScreen extends StatelessWidget {
   }
 
   Widget general(BuildContext context) {
+    // final String startingScreenText = useProvider(startingScreenTextProvider).state;
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)?.generalPageTitle
             ?? 'No Title'),
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 8.0,),
+          SettingsItemButton(
+              key: const ValueKey('starting_screen'),
+              text: 'Starting screen',
+              secondaryText: 'Home',
+              onPressed: () {}
+          ),
+          const Divider(),
+        ],
       ),
     );
   }
