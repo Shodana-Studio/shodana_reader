@@ -135,24 +135,26 @@ class MoreDetailsScreen extends StatelessWidget {
                 } else {
                   versionText = 'Copied to clipboard:\nApp version: $version';
                 }
-                await FlutterClipboard.copy(versionText).then((_) {});
-                final snackBar = SnackBar(
-                  content: RichText(
-                    key: const Key('device_info'),
-                    text: TextSpan(
-                      text: versionText,
+                // ignore_for_file: unawaited_futures
+                FlutterClipboard.copy(versionText).then((_) {
+                  final snackBar = SnackBar(
+                    content: RichText(
+                      key: const Key('device_info'),
+                      text: TextSpan(
+                        text: versionText,
+                      ),
+                      // maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    // maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  action: SnackBarAction(
-                    label: 'Close',
-                    onPressed: () {
-                    },
-                  ),
-                  duration: const Duration(seconds: 2),
-                );
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    action: SnackBarAction(
+                      label: 'Close',
+                      onPressed: () {
+                      },
+                    ),
+                    duration: const Duration(seconds: 2),
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                });
               }
           ),
         ],
