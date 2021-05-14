@@ -75,9 +75,9 @@ linter:
     # I think it's easier to read if they are grouped together
     sort_pub_dependencies: false
 
-    # Relative does not work well when moving files around
-    prefer_relative_imports: false
-    always_use_package_imports: true
+    # Easier to identify which files are for this project
+    prefer_relative_imports: true
+    always_use_package_imports: false
 
     # Sometimes it is better to use a double
     prefer_int_literals: false
