@@ -1,8 +1,11 @@
+import 'dart:io' as io;
+
+import 'package:clipboard/clipboard.dart';
+import 'package:beamer/beamer.dart';
+import 'package:package_info/package_info.dart';
 import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'dart:io' as io;
-import 'package:clipboard/clipboard.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shodana_reader/features/more/widgets/settings_icon_button.dart';
 import 'package:shodana_reader/features/more/widgets/settings_item_button.dart';
 
@@ -19,6 +22,9 @@ class MoreDetailsScreen extends StatelessWidget {
     else if (option == 'about') {
       return about(context);
     }
+    else if (option == 'general') {
+      return general(context);
+    }
     else {
       return Scaffold(
         appBar: AppBar(
@@ -31,17 +37,18 @@ class MoreDetailsScreen extends StatelessWidget {
   Widget settings(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Settings'),
+          title: Text(AppLocalizations.of(context)?.settingsPageTitle
+              ?? 'No Title')
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 16.0),
+          const SizedBox(height: 8.0),
           SettingsIconButton(
-              key: const Key('appearance'),
-              text: 'Appearance',
-              icon: Icons.settings_outlined,
-              onPressed: () {}
+              key: const Key('general'),
+              text: 'General',
+              icon: Icons.tune,
+              onPressed: () => context.beamToNamed('/more/settings/general')
           ),
         ],
       ),
@@ -49,9 +56,46 @@ class MoreDetailsScreen extends StatelessWidget {
   }
 
   Widget about(BuildContext context) {
+    return FutureBuilder(
+        builder: (context, AsyncSnapshot<Widget> snapshot) {
+          // Check for errors
+          if (snapshot.hasError) {
+            print('Error');
+          }
+          // Once complete, show your application
+          if (snapshot.connectionState == ConnectionState.done) {
+            return Container(child: snapshot.data,);
+          }
+
+          if (snapshot.connectionState ==
+              ConnectionState.waiting) {
+            // ignore: sized_box_for_whitespace
+            return Container(
+                height: MediaQuery.of(context).size.height /
+                    1.25,
+                width: MediaQuery.of(context).size.width /
+                    1.25,
+                child: const CircularProgressIndicator());
+          }
+
+          return Container();
+        },
+        future: aboutFuture(context)
+    );
+  }
+
+  Future<Widget> aboutFuture(BuildContext context) async {
+    final PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    final String appName = packageInfo.appName;
+    final String packageName = packageInfo.packageName;
+    final String version = packageInfo.version;
+    final String buildNumber = packageInfo.buildNumber;
+    final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('About'),
+          title: Text(AppLocalizations.of(context)?.aboutPageTitle ?? 'No '
+              'Title')
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,20 +104,28 @@ class MoreDetailsScreen extends StatelessWidget {
           SettingsItemButton(
               key: const Key('version'),
               text: 'Version',
-              secondaryText: 'Alpha 0.0.1',
+              secondaryText: 'Alpha $version+$buildNumber',
               onPressed: () async {
-                final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-                const String version = '0.0.1';
                 String versionText;
                 if (io.Platform.isIOS) {
                   final IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
-                  versionText = 'App version: $version\n${iosInfo.utsname}';
+                  versionText = 'App version: $version (build $buildNumber)'
+                      '\niOS version: ${iosInfo.utsname.version}'
+                      '\niOS release: ${iosInfo.utsname.release})'
+                      '\niOS machine: ${iosInfo.utsname.machine})'
+                      '\nDevice name: ${iosInfo.name}'
+                      '\nCurrent Operating System name: ${iosInfo.systemName}'
+                      '\nSystem version: ${iosInfo.systemVersion}'
+                      '\nDevice model: ${iosInfo.model}'
+                      '\nDevice localized model: ${iosInfo.localizedModel}'
+                      '\nOperating System name: ${iosInfo.utsname.sysname}'
+                      '\nNetwork node name: ${iosInfo.utsname.nodename}';
                 } else if (io.Platform.isAndroid) {
                   final AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-                  versionText = 'App version: $version\nAndroid '
-                      'version: ${androidInfo.version.release} (SDK '
-                      '${androidInfo.version.sdkInt})'
-                      '\nAndroid build ID: ${androidInfo.version.incremental}'
+                  versionText = 'App version: $version (build $buildNumber)'
+                      '\nAndroid version: ${androidInfo.version.release} '
+                      '(SDK ${androidInfo.version.sdkInt})'
+                      '\nAndroid version incremental: ${androidInfo.version.incremental}'
                       '\nDevice brand: ${androidInfo.brand}'
                       '\nDevice manufacturer: ${androidInfo.manufacturer}'
                       '\nDevice name: ${androidInfo.device}'
@@ -82,8 +134,7 @@ class MoreDetailsScreen extends StatelessWidget {
                 } else {
                   versionText = 'App version: $version';
                 }
-                await FlutterClipboard.copy(versionText).then((value) {
-                });
+                await FlutterClipboard.copy(versionText).then((_) {});
                 final snackBar = SnackBar(
                   content: Row(
                     children: [
@@ -114,6 +165,15 @@ class MoreDetailsScreen extends StatelessWidget {
               }
           ),
         ],
+      ),
+    );
+  }
+
+  Widget general(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context)?.generalPageTitle
+            ?? 'No Title'),
       ),
     );
   }

@@ -8,7 +8,7 @@ class MoreLocation extends BeamLocation {
   MoreLocation(BeamState state) : super(state);
 
   @override
-  List<String> get pathBlueprints => ['/more/:itemId'];
+  List<String> get pathBlueprints => ['/more/:itemId/:item2Id'];
 
   @override
   List<BeamPage> pagesBuilder(BuildContext context, BeamState state) => [
@@ -21,6 +21,15 @@ class MoreLocation extends BeamLocation {
         key: ValueKey('more-${state.pathParameters['itemId']}'),
         child: MoreDetailsScreen(
           option: state.pathParameters['itemId'] ?? '',
+        ),
+      ),
+    if (state.pathParameters.containsKey('item2Id'))
+      BeamPage(
+        key: ValueKey('more-itemId-${state
+            .pathParameters['itemId']}-item2Id-${state
+            .pathParameters['item2Id']}'),
+        child: MoreDetailsScreen(
+          option: state.pathParameters['item2Id'] ?? '',
         ),
       ),
   ];

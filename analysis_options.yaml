@@ -84,3 +84,6 @@ linter:
 
     # I like type annotations
     omit_local_variable_types: false
+
+    # Breaks FutureBuilder with widgets
+    avoid_types_on_closure_parameters: false
