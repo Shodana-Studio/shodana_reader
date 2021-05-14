@@ -93,7 +93,7 @@ class MoreDetailsScreen extends StatelessWidget {
                         children: [
                           const Text('Copied to clipboard:'),
                           RichText(
-                            key: const Key('deviceinfo'),
+                            key: const Key('device_info'),
                             text: TextSpan(
                               text: versionText,
                             ),
