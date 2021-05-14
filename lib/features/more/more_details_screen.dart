@@ -109,20 +109,21 @@ class MoreDetailsScreen extends StatelessWidget {
                 String versionText;
                 if (io.Platform.isIOS) {
                   final IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
-                  versionText = 'App version: $version (build $buildNumber)'
-                      '\niOS version: ${iosInfo.utsname.version}'
-                      '\niOS release: ${iosInfo.utsname.release})'
-                      '\niOS machine: ${iosInfo.utsname.machine})'
-                      '\nDevice name: ${iosInfo.name}'
+                  versionText = 'Copied to clipboard:'
+                      '\nApp version: $version (build $buildNumber)'
                       '\nCurrent Operating System name: ${iosInfo.systemName}'
-                      '\nSystem version: ${iosInfo.systemVersion}'
+                      '\niOS version: ${iosInfo.systemVersion}'
+                      '\nUtsname version: ${iosInfo.utsname.version}'
+                      '\nUtsname release: ${iosInfo.utsname.release}'
+                      '\nUtsname machine: ${iosInfo.utsname.machine}'
+                      '\nUtsname System name: ${iosInfo.utsname.sysname}'
+                      '\nDevice name: ${iosInfo.name}'
                       '\nDevice model: ${iosInfo.model}'
-                      '\nDevice localized model: ${iosInfo.localizedModel}'
-                      '\nOperating System name: ${iosInfo.utsname.sysname}'
-                      '\nNetwork node name: ${iosInfo.utsname.nodename}';
+                      '\nDevice localized model: ${iosInfo.localizedModel}';
                 } else if (io.Platform.isAndroid) {
                   final AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-                  versionText = 'App version: $version (build $buildNumber)'
+                  versionText = 'Copied to clipboard:'
+                      '\nApp version: $version (build $buildNumber)'
                       '\nAndroid version: ${androidInfo.version.release} '
                       '(SDK ${androidInfo.version.sdkInt})'
                       '\nAndroid version incremental: ${androidInfo.version.incremental}'
@@ -132,27 +133,17 @@ class MoreDetailsScreen extends StatelessWidget {
                       '\nDevice model: ${androidInfo.model}'
                       '\nDevice product name: ${androidInfo.product}';
                 } else {
-                  versionText = 'App version: $version';
+                  versionText = 'Copied to clipboard:\nApp version: $version';
                 }
                 await FlutterClipboard.copy(versionText).then((_) {});
                 final snackBar = SnackBar(
-                  content: Row(
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Text('Copied to clipboard:'),
-                          RichText(
-                            key: const Key('device_info'),
-                            text: TextSpan(
-                              text: versionText,
-                            ),
-                            maxLines: 3,
-                            overflow: TextOverflow.ellipsis,
-                          )
-                      ]),
-                    ],
+                  content: RichText(
+                    key: const Key('device_info'),
+                    text: TextSpan(
+                      text: versionText,
+                    ),
+                    // maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
                   ),
                   action: SnackBarAction(
                     label: 'Close',
