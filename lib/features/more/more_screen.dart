@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:beamer/beamer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shodana_reader/features/more/widgets/settings_icon_button.dart';
 
 class MoreScreen extends StatelessWidget {
   const MoreScreen({Key? key}) : super(key: key);
@@ -10,13 +11,23 @@ class MoreScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text(AppLocalizations.of(context)?.morePageTitle
           ?? 'No Title')),
-      body: Center(
-        child: TextButton(
-          onPressed: () {
-            return context.beamToNamed('/more/0}');
-          },
-          child: const Text('Beam to More Option 0'),
-        ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 8.0),
+          SettingsIconButton(
+              key: const Key('settings'),
+              text: 'Settings',
+              icon: Icons.settings_outlined,
+              onPressed: () => context.beamToNamed('/more/settings')
+          ),
+          SettingsIconButton(
+              key: const Key('about'),
+              text: 'About',
+              icon: Icons.info_outline,
+              onPressed: () => context.beamToNamed('/more/about')
+          ),
+        ],
       ),
     );
   }

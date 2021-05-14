@@ -20,7 +20,7 @@ class MoreLocation extends BeamLocation {
       BeamPage(
         key: ValueKey('more-${state.pathParameters['itemId']}'),
         child: MoreDetailsScreen(
-          option: option,
+          option: state.pathParameters['itemId'] ?? '',
         ),
       ),
   ];
