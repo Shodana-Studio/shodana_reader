@@ -3,11 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:settings_ui/settings_ui.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../data/local/app_shared_preferences.dart';
-import '../../data/provider/app_shared_preferences_provider.dart';
-import '../storage_utils.dart';
+import '../../data/local/storage_utils.dart';
 
 final followSystemThemeSwitchProvider =
     StateNotifierProvider<FollowSystemThemeSwitch, bool>((ref) {
