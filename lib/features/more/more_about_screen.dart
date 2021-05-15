@@ -61,60 +61,72 @@ class AboutScreen extends HookWidget {
               key: const ValueKey('version'),
               title: 'Version',
               subtitle: 'Alpha $version+$buildNumber',
-              onPressed: (BuildContext context) async {
-                String versionText;
-                if (io.Platform.isIOS) {
-                  final IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
-                  versionText = 'Copied to clipboard:'
-                      '\nApp version: $version (build $buildNumber)'
-                      '\nCurrent Operating System name: ${iosInfo.systemName}'
-                      '\niOS version: ${iosInfo.systemVersion}'
-                      '\nUtsname version: ${iosInfo.utsname.version}'
-                      '\nUtsname release: ${iosInfo.utsname.release}'
-                      '\nUtsname machine: ${iosInfo.utsname.machine}'
-                      '\nUtsname System name: ${iosInfo.utsname.sysname}'
-                      '\nDevice name: ${iosInfo.name}'
-                      '\nDevice model: ${iosInfo.model}'
-                      '\nDevice localized model: ${iosInfo.localizedModel}';
-                } else if (io.Platform.isAndroid) {
-                  final AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-                  versionText = 'Copied to clipboard:'
-                      '\nApp version: $version (build $buildNumber)'
-                      '\nAndroid version: ${androidInfo.version.release} '
-                      '(SDK ${androidInfo.version.sdkInt})'
-                      '\nAndroid version incremental: ${androidInfo.version.incremental}'
-                      '\nDevice brand: ${androidInfo.brand}'
-                      '\nDevice manufacturer: ${androidInfo.manufacturer}'
-                      '\nDevice name: ${androidInfo.device}'
-                      '\nDevice model: ${androidInfo.model}'
-                      '\nDevice product name: ${androidInfo.product}';
-                } else {
-                  versionText = 'Copied to clipboard:\nApp version: $version';
-                }
-                // ignore_for_file: unawaited_futures
-                FlutterClipboard.copy(versionText).then((_) {
-                  final snackBar = SnackBar(
-                    content: RichText(
-                      key: const Key('device_info'),
-                      text: TextSpan(
-                        text: versionText,
-                      ),
-                      // maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    action: SnackBarAction(
-                      label: 'Close',
-                      onPressed: () {
-                      },
-                    ),
-                    duration: const Duration(seconds: 2),
-                  );
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                });
-              }
+              onPressed: (BuildContext context) => versionOnPressed(context,
+                  deviceInfo, version, buildNumber)
           ),
         ],
       ),
     );
+  }
+
+  Future<void> versionOnPressed(
+      BuildContext context, DeviceInfoPlugin
+      deviceInfo, String version, String buildNumber
+  ) async {
+    String versionText;
+    if (io.Platform.isIOS) {
+      final IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
+      versionText = 'Copied to clipboard:'
+          '\nApp version: $version (build $buildNumber)'
+          '\nCurrent Operating System name: ${iosInfo.systemName}'
+          '\niOS version: ${iosInfo.systemVersion}'
+          '\nUtsname version: ${iosInfo.utsname.version}'
+          '\nUtsname release: ${iosInfo.utsname.release}'
+          '\nUtsname machine: ${iosInfo.utsname.machine}'
+          '\nUtsname System name: ${iosInfo.utsname.sysname}'
+          '\nDevice name: ${iosInfo.name}'
+          '\nDevice model: ${iosInfo.model}'
+          '\nDevice localized model: ${iosInfo.localizedModel}';
+    } else if (io.Platform.isAndroid) {
+      final AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+      versionText = 'Copied to clipboard:'
+          '\nApp version: $version (build $buildNumber)'
+          '\nAndroid version: ${androidInfo.version.release} '
+          '(SDK ${androidInfo.version.sdkInt})'
+          '\nAndroid version incremental: ${androidInfo.version.incremental}'
+          '\nDevice brand: ${androidInfo.brand}'
+          '\nDevice manufacturer: ${androidInfo.manufacturer}'
+          '\nDevice name: ${androidInfo.device}'
+          '\nDevice model: ${androidInfo.model}'
+          '\nDevice product name: ${androidInfo.product}';
+    } else {
+      versionText = 'Copied to clipboard:\nApp version: $version';
+    }
+    // ignore_for_file: unawaited_futures
+    FlutterClipboard.copy(versionText).then((_) {
+      final snackBar = SnackBar(
+        behavior: Theme.of(context).snackBarTheme.behavior,
+        backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,
+        elevation: Theme.of(context).snackBarTheme.elevation,
+        shape: Theme.of(context).snackBarTheme.shape,
+        content: RichText(
+          key: const ValueKey('device_info'),
+          text: TextSpan(
+            text: versionText,
+            style: Theme.of(context).snackBarTheme.contentTextStyle,
+          ),
+          maxLines: 3,
+          overflow: TextOverflow.ellipsis,
+        ),
+        action: SnackBarAction(
+          label: 'Close',
+          textColor: Theme.of(context).snackBarTheme.actionTextColor,
+          disabledTextColor: Theme.of(context).snackBarTheme.disabledActionTextColor,
+          onPressed: () {},
+        ),
+        duration: const Duration(seconds: 2),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    });
   }
 }
