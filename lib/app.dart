@@ -1,6 +1,7 @@
 // APP
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:beamer/beamer.dart';
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -18,6 +19,9 @@ class App extends HookWidget {
   final rootBeamerRouter = BeamerRouterDelegate(
       locationBuilder: (state) => HomeLocation(state));
 
+  // Used to store which FlexSchemeData option we selected
+  FlexScheme flexScheme = FlexScheme.blue; // Default selected theme
+
   final light = ThemeData(
     appBarTheme: const AppBarTheme(
         centerTitle: false,
@@ -33,7 +37,6 @@ class App extends HookWidget {
         elevation: 0.0
     ),
     brightness: Brightness.light,
-    iconTheme: const IconThemeData(color: Colors.blue),
     primarySwatch: Colors.blue,
     accentColor: Colors.blueAccent,
   );
@@ -61,8 +64,15 @@ class App extends HookWidget {
   @override
   Widget build(BuildContext context) {
     return AdaptiveTheme(
-      light: light,
-      dark: dark,
+      light: FlexColorScheme.light(
+        scheme: flexScheme,
+        // Use comfortable on desktops instead of compact, devices use default.
+        visualDensity: FlexColorScheme.comfortablePlatformDensity,
+      ).toTheme,
+      dark: FlexColorScheme.dark(
+        scheme: flexScheme,
+        visualDensity: FlexColorScheme.comfortablePlatformDensity,
+      ).toTheme,
       initial: savedThemeMode ?? AdaptiveThemeMode.dark,
       builder: (theme, darkTheme) => GetMaterialApp.router(
         theme: theme,

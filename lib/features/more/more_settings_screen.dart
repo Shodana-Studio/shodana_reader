@@ -18,18 +18,13 @@ class MoreSettingsScreen extends StatelessWidget {
         children: [
           SettingsTile(
             title: 'General',
-            leading: const Icon(
+            leading: Icon(
               Icons.tune,
+              color: Theme.of(context).primaryColor,
             ),
             onPressed: (BuildContext context) =>
                 context.beamToNamed('/more/settings/general'),
           ),
-          // SettingsIconButton(
-          //     key: const ValueKey('general'),
-          //     text: 'General',
-          //     icon: Icons.tune,
-          //     onPressed: () => context.beamToNamed('/more/settings/general')
-          // ),
         ],
       ),
     );

@@ -16,16 +16,18 @@ class MoreScreen extends StatelessWidget {
         children: [
           SettingsTile(
           title: 'Settings',
-          leading: const Icon(
+          leading: Icon(
             Icons.settings_outlined,
+            color: Theme.of(context).primaryColor,
           ),
           onPressed: (BuildContext context) =>
               context.beamToNamed('/more/settings'),
           ),
           SettingsTile(
             title: 'About',
-            leading: const Icon(
+            leading: Icon(
               Icons.info_outline,
+              color: Theme.of(context).primaryColor,
             ),
             onPressed: (BuildContext context) =>
                 context.beamToNamed('/more/about'),
