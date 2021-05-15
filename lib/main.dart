@@ -7,5 +7,5 @@ import 'data/local/storage_utils.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await StorageUtil.getInstance();
-  runApp(const ProviderScope(child: App()));
+  runApp(ProviderScope(child: App()));
 }
