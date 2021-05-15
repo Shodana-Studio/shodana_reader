@@ -37,6 +37,8 @@ dependencies:
 
   # For Utilities
   get: ^4.1.4
+  smart_select: ^4.3.2
+  settings_ui: ^1.0.0
 
 dev_dependencies:
   flutter_test:

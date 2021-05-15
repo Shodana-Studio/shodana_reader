@@ -2,11 +2,10 @@ import 'package:beamer/beamer.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:settings_ui/settings_ui.dart';
 
 import 'more_about_screen.dart';
 import 'more_general_settings_screen.dart';
-import 'widgets/settings_icon_button.dart';
-
 
 class MoreDetailsScreen extends HookWidget {
   const MoreDetailsScreen({Key? key, required this.option}) : super(key: key);
@@ -41,17 +40,23 @@ class MoreDetailsScreen extends HookWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 8.0),
-          SettingsIconButton(
-              key: const ValueKey('general'),
-              text: 'General',
-              icon: Icons.tune,
-              onPressed: () => context.beamToNamed('/more/settings/general')
+          SettingsTile(
+            title: 'General',
+            leading: const Icon(
+              Icons.tune,
+              color: Colors.blue,
+            ),
+            onPressed: (BuildContext context) =>
+                context.beamToNamed('/more/settings/general'),
           ),
+          // SettingsIconButton(
+          //     key: const ValueKey('general'),
+          //     text: 'General',
+          //     icon: Icons.tune,
+          //     onPressed: () => context.beamToNamed('/more/settings/general')
+          // ),
         ],
       ),
     );
   }
-
-
 }

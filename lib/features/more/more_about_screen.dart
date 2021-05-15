@@ -6,8 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:package_info/package_info.dart';
-
-import 'widgets/settings_item_button.dart';
+import 'package:settings_ui/settings_ui.dart';
 
 class AboutScreen extends HookWidget {
   const AboutScreen({Key? key}) : super(key: key);
@@ -58,12 +57,11 @@ class AboutScreen extends HookWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 8.0),
-          SettingsItemButton(
+          SettingsTile(
               key: const ValueKey('version'),
-              text: 'Version',
-              secondaryText: 'Alpha $version+$buildNumber',
-              onPressed: () async {
+              title: 'Version',
+              subtitle: 'Alpha $version+$buildNumber',
+              onPressed: (BuildContext context) async {
                 String versionText;
                 if (io.Platform.isIOS) {
                   final IosDeviceInfo iosInfo = await deviceInfo.iosInfo;

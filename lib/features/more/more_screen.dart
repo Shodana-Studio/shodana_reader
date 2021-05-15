@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:beamer/beamer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'widgets/settings_icon_button.dart';
+import 'package:settings_ui/settings_ui.dart';
 
 class MoreScreen extends StatelessWidget {
   const MoreScreen({Key? key}) : super(key: key);
@@ -14,18 +14,23 @@ class MoreScreen extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 8.0),
-          SettingsIconButton(
-              key: const Key('settings'),
-              text: 'Settings',
-              icon: Icons.settings_outlined,
-              onPressed: () => context.beamToNamed('/more/settings')
+          SettingsTile(
+          title: 'Settings',
+          leading: const Icon(
+            Icons.settings_outlined,
+            color: Colors.blue,
           ),
-          SettingsIconButton(
-              key: const Key('about'),
-              text: 'About',
-              icon: Icons.info_outline,
-              onPressed: () => context.beamToNamed('/more/about')
+          onPressed: (BuildContext context) =>
+              context.beamToNamed('/more/settings'),
+          ),
+          SettingsTile(
+            title: 'About',
+            leading: const Icon(
+              Icons.info_outline,
+              color: Colors.blue,
+            ),
+            onPressed: (BuildContext context) =>
+                context.beamToNamed('/more/about'),
           ),
         ],
       ),
