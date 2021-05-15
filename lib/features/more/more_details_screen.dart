@@ -6,6 +6,7 @@ import 'package:settings_ui/settings_ui.dart';
 
 import 'more_about_screen.dart';
 import 'more_general_settings_screen.dart';
+import 'more_settings_screen.dart';
 
 class MoreDetailsScreen extends HookWidget {
   const MoreDetailsScreen({Key? key, required this.option}) : super(key: key);
@@ -14,7 +15,7 @@ class MoreDetailsScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     if (option == 'settings') {
-      return settings(context);
+      return const MoreSettingsScreen();
     }
     else if (option == 'about') {
       return const AboutScreen();
@@ -31,32 +32,5 @@ class MoreDetailsScreen extends HookWidget {
     }
   }
 
-  Widget settings(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-          title: Text(AppLocalizations.of(context)?.settingsPageTitle
-              ?? 'No Title')
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SettingsTile(
-            title: 'General',
-            leading: const Icon(
-              Icons.tune,
-              color: Colors.blue,
-            ),
-            onPressed: (BuildContext context) =>
-                context.beamToNamed('/more/settings/general'),
-          ),
-          // SettingsIconButton(
-          //     key: const ValueKey('general'),
-          //     text: 'General',
-          //     icon: Icons.tune,
-          //     onPressed: () => context.beamToNamed('/more/settings/general')
-          // ),
-        ],
-      ),
-    );
-  }
+
 }

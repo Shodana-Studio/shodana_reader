@@ -1,5 +1,7 @@
 // APP
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:beamer/beamer.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -11,19 +13,66 @@ import 'locations/home_location.dart';
 
 
 class App extends HookWidget {
-  App({Key? key}) : super(key: key);
-
+  App({Key? key, this.savedThemeMode}) : super(key: key);
+  final AdaptiveThemeMode? savedThemeMode;
   final rootBeamerRouter = BeamerRouterDelegate(
       locationBuilder: (state) => HomeLocation(state));
 
+  final light = ThemeData(
+    appBarTheme: const AppBarTheme(
+        centerTitle: false,
+        iconTheme: IconThemeData(color: Colors.black, opacity: 0.87),
+        textTheme: TextTheme(
+          headline6: TextStyle(
+              color: Colors.black,
+              fontSize: 20.0,
+              fontWeight: FontWeight.w500
+          ),
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0.0
+    ),
+    brightness: Brightness.light,
+    iconTheme: const IconThemeData(color: Colors.blue),
+    primarySwatch: Colors.blue,
+    accentColor: Colors.blueAccent,
+  );
+
+  final dark = ThemeData(
+    appBarTheme: const AppBarTheme(
+        centerTitle: false,
+        iconTheme: IconThemeData(color: Colors.white, opacity: 0.87),
+        textTheme: TextTheme(
+          headline6: TextStyle(
+            color: Colors.white,
+            fontSize: 20.0,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0.0
+    ),
+    brightness: Brightness.dark,
+    iconTheme: const IconThemeData(color: Colors.blue),
+    primarySwatch: Colors.blue,
+    accentColor: Colors.blueAccent,
+  );
+
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp.router(
-      routeInformationParser: BeamerRouteInformationParser(),
-      routerDelegate: rootBeamerRouter,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      debugShowCheckedModeBanner: false,
+    return AdaptiveTheme(
+      light: light,
+      dark: dark,
+      initial: savedThemeMode ?? AdaptiveThemeMode.dark,
+      builder: (theme, darkTheme) => GetMaterialApp.router(
+        theme: theme,
+        darkTheme: darkTheme,
+        routeInformationParser: BeamerRouteInformationParser(),
+        routerDelegate: rootBeamerRouter,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        debugShowCheckedModeBanner: false,
+      ),
     );
   }
 }

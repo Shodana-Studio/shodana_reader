@@ -18,7 +18,6 @@ class MoreScreen extends StatelessWidget {
           title: 'Settings',
           leading: const Icon(
             Icons.settings_outlined,
-            color: Colors.blue,
           ),
           onPressed: (BuildContext context) =>
               context.beamToNamed('/more/settings'),
@@ -27,7 +26,6 @@ class MoreScreen extends StatelessWidget {
             title: 'About',
             leading: const Icon(
               Icons.info_outline,
-              color: Colors.blue,
             ),
             onPressed: (BuildContext context) =>
                 context.beamToNamed('/more/about'),
