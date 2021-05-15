@@ -1,5 +1,6 @@
 import 'dart:io' as io;
 
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:package_info/package_info.dart';
 import 'package:settings_ui/settings_ui.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AboutScreen extends HookWidget {
   const AboutScreen({Key? key}) : super(key: key);
@@ -48,6 +50,8 @@ class AboutScreen extends HookWidget {
     final String version = packageInfo.version;
     final String buildNumber = packageInfo.buildNumber;
     final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    const String website = 'https://www.shodana.app';
+    const String github = 'https://github.com/Shodana-Studio/shodana_reader';
 
     return Scaffold(
       appBar: AppBar(
@@ -64,10 +68,37 @@ class AboutScreen extends HookWidget {
               onPressed: (BuildContext context) => versionOnPressed(context,
                   deviceInfo, version, buildNumber)
           ),
+          const Divider(height: 1.0),
+          SettingsSection(
+            title: '',
+            tiles: const [],
+          ),
+          SettingsTile(
+              key: const ValueKey('website'),
+              title: 'Website',
+              subtitle: website,
+              onPressed: (BuildContext context) => _launchURL(website)
+          ),
+          SettingsTile(
+              key: const ValueKey('github'),
+              title: 'Github',
+              subtitle: github,
+              onPressed: (BuildContext context) => _launchURL(github)
+          ),
+          SettingsTile(
+              key: const ValueKey('licenses'),
+              title: 'Open source licenses',
+              onPressed: (BuildContext context) {
+
+              }
+          ),
         ],
       ),
     );
   }
+
+  Future<void> _launchURL(String url) async =>
+      await canLaunch(url) ? await launch(url) : print('Could not launch $url');
 
   Future<void> versionOnPressed(
       BuildContext context, DeviceInfoPlugin
@@ -104,25 +135,23 @@ class AboutScreen extends HookWidget {
     }
     // ignore_for_file: unawaited_futures
     FlutterClipboard.copy(versionText).then((_) {
+      // final isDark = AdaptiveTheme.of(context).mode.isDark;
+      // final isLight = AdaptiveTheme.of(context).mode.isLight;
+      // final isSystem = AdaptiveTheme.of(context).mode.isSystem;
+      final backgroundColor = AdaptiveTheme.of(context).theme.appBarTheme
+          .backgroundColor;
+      final titleTextStyle = AdaptiveTheme.of(context).theme.appBarTheme
+          .titleTextStyle;
       final snackBar = SnackBar(
-        behavior: Theme.of(context).snackBarTheme.behavior,
-        backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,
-        elevation: Theme.of(context).snackBarTheme.elevation,
-        shape: Theme.of(context).snackBarTheme.shape,
+        backgroundColor: backgroundColor,
         content: RichText(
           key: const ValueKey('device_info'),
           text: TextSpan(
             text: versionText,
-            style: Theme.of(context).snackBarTheme.contentTextStyle,
+            style: titleTextStyle,
           ),
           maxLines: 3,
           overflow: TextOverflow.ellipsis,
-        ),
-        action: SnackBarAction(
-          label: 'Close',
-          textColor: Theme.of(context).snackBarTheme.actionTextColor,
-          disabledTextColor: Theme.of(context).snackBarTheme.disabledActionTextColor,
-          onPressed: () {},
         ),
         duration: const Duration(seconds: 2),
       );
