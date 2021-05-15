@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../data/provider/starting_screen_provider.dart';
 import 'widgets/settings_item_button.dart';
 class GeneralSettings extends HookWidget {
   const GeneralSettings({Key? key}) : super(key: key);
@@ -19,10 +17,23 @@ class GeneralSettings extends HookWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 8.0,),
+          const Divider(),
           SettingsItemButton(
-              key: const ValueKey('starting_screen'),
-              text: 'Starting screen',
-              secondaryText: 'Home',
+              key: const ValueKey('dark_mode'),
+              text: 'Dark mode',
+              secondaryText: 'Follow system',
+              onPressed: () {}
+          ),
+          SettingsItemButton(
+              key: const ValueKey('light_theme'),
+              text: 'Light theme',
+              secondaryText: 'Default',
+              onPressed: () {}
+          ),
+          SettingsItemButton(
+              key: const ValueKey('dark_theme'),
+              text: 'Dark theme',
+              secondaryText: 'Default',
               onPressed: () {}
           ),
           const Divider(),

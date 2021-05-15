@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import '../data/provider/bottom_navigation_provider.dart';
 import '../locations/locations.dart';
 
@@ -65,6 +64,7 @@ class _AppScreenState extends State<AppScreen> {
     {
       _currentIndex = 0;
     }
+
   }
 
   @override

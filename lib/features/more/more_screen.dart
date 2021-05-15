@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:beamer/beamer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:shodana_reader/features/more/widgets/settings_icon_button.dart';
+import 'widgets/settings_icon_button.dart';
 
 class MoreScreen extends StatelessWidget {
   const MoreScreen({Key? key}) : super(key: key);
