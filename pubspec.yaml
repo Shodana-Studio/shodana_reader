@@ -32,7 +32,6 @@ dependencies:
 
   # For UIs
   cupertino_icons: ^1.0.3
-  settings_ui: ^1.0.0
   smart_select: ^4.3.2
   adaptive_theme: ^2.2.0
   flex_color_scheme: ^2.1.1

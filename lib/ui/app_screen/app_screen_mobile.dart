@@ -27,14 +27,14 @@ class AppScreenMobile extends HookWidget {
       railRow = Row(
         children: <Widget>[
           if (enableNav)
-            SafeArea(child: LayoutBuilder(
+            LayoutBuilder(
               builder: (context, constraint) => SingleChildScrollView(
                 child: ConstrainedBox(
                     constraints: BoxConstraints(minHeight: constraint.maxHeight),
                     child: IntrinsicHeight(child: navigationRail)
                 ),
               ),
-            )),
+            ),
           if (enableNav)
             const VerticalDivider(thickness: 1, width: 1),
           Expanded(child: indexedStack),
