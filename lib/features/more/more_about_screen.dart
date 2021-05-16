@@ -3,11 +3,11 @@ import 'dart:io' as io;
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:device_info/device_info.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:package_info/package_info.dart';
-import 'package:settings_ui/settings_ui.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AboutScreen extends HookWidget {
@@ -19,25 +19,25 @@ class AboutScreen extends HookWidget {
         builder: (context, AsyncSnapshot<Widget> snapshot) {
           // Check for errors
           if (snapshot.hasError) {
-            print('Error');
+            return const Center(
+                child: Text('Oops, there was an error')
+            );
           }
           // Once complete, show your application
-          if (snapshot.connectionState == ConnectionState.done) {
+          else if (snapshot.hasData) {
             return Container(child: snapshot.data,);
           }
 
-          if (snapshot.connectionState ==
-              ConnectionState.waiting) {
+          else {
             // ignore: sized_box_for_whitespace
             return Container(
                 height: MediaQuery.of(context).size.height /
                     1.25,
                 width: MediaQuery.of(context).size.width /
                     1.25,
-                child: const CircularProgressIndicator());
+                child: const CircularProgressIndicator()
+            );
           }
-
-          return Container();
         },
         future: aboutFuture(context)
     );
@@ -61,34 +61,34 @@ class AboutScreen extends HookWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SettingsTile(
+          ListTile(
               key: const ValueKey('version'),
-              title: 'Version',
-              subtitle: 'Alpha $version+$buildNumber',
-              onPressed: (BuildContext context) => versionOnPressed(context,
+              title: const Text('Version'),
+              subtitle: Text('Alpha $version+$buildNumber'),
+              onTap: () => versionOnPressed(context,
                   deviceInfo, version, buildNumber)
           ),
           const Divider(height: 1.0),
-          SettingsSection(
-            title: '',
-            tiles: const [],
-          ),
-          SettingsTile(
+          // SettingsSection(
+          //   title: '',
+          //   tiles: const [],
+          // ),
+          ListTile(
               key: const ValueKey('website'),
-              title: 'Website',
-              subtitle: website,
-              onPressed: (BuildContext context) => _launchURL(website)
+              title: const Text('Website'),
+              subtitle: const Text(website),
+              onTap: () => _launchURL(website)
           ),
-          SettingsTile(
+          ListTile(
               key: const ValueKey('github'),
-              title: 'Github',
-              subtitle: github,
-              onPressed: (BuildContext context) => _launchURL(github)
+              title: const Text('Github'),
+              subtitle: const Text(github),
+              onTap: () => _launchURL(github)
           ),
-          SettingsTile(
+          ListTile(
               key: const ValueKey('licenses'),
-              title: 'Open source licenses',
-              onPressed: (BuildContext context) => showAboutDialog(
+              title: const Text('Open source licenses'),
+              onTap: () => showAboutDialog(
                 context: context,
                 applicationName: AppLocalizations.of(context)?.appName
                     ?? 'No Title',
@@ -108,8 +108,13 @@ class AboutScreen extends HookWidget {
       BuildContext context, DeviceInfoPlugin
       deviceInfo, String version, String buildNumber
   ) async {
-    String versionText;
-    if (io.Platform.isIOS) {
+    String versionText = '';
+    if (kIsWeb) {
+      versionText = 'Copied to clipboard:'
+          '\nApp version: $version'
+          '\nPlatform: Web';
+    }
+    else if (io.Platform.isIOS) {
       final IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
       versionText = 'Copied to clipboard:'
           '\nApp version: $version (build $buildNumber)'
@@ -145,7 +150,7 @@ class AboutScreen extends HookWidget {
       final backgroundColor = AdaptiveTheme.of(context).theme.appBarTheme
           .backgroundColor;
       final titleTextStyle = AdaptiveTheme.of(context).theme.appBarTheme
-          .titleTextStyle;
+          .toolbarTextStyle;
       final snackBar = SnackBar(
         backgroundColor: backgroundColor,
         content: RichText(

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:beamer/beamer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:settings_ui/settings_ui.dart';
 
 class MoreScreen extends StatelessWidget {
   const MoreScreen({Key? key}) : super(key: key);
@@ -14,23 +13,21 @@ class MoreScreen extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SettingsTile(
-          title: 'Settings',
-          leading: Icon(
-            Icons.settings_outlined,
-            color: Theme.of(context).primaryColor,
+          ListTile(
+            title: const Text('Settings'),
+            leading: Icon(
+              Icons.settings_outlined,
+              color: Theme.of(context).primaryColor,
+            ),
+            onTap: () => context.beamToNamed('/more/settings'),
           ),
-          onPressed: (BuildContext context) =>
-              context.beamToNamed('/more/settings'),
-          ),
-          SettingsTile(
-            title: 'About',
+          ListTile(
+            title: const Text('About'),
             leading: Icon(
               Icons.info_outline,
               color: Theme.of(context).primaryColor,
             ),
-            onPressed: (BuildContext context) =>
-                context.beamToNamed('/more/about'),
+            onTap: () => context.beamToNamed('/more/about'),
           ),
         ],
       ),

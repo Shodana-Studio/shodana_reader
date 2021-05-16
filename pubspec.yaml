@@ -23,7 +23,6 @@ dependencies:
   path_provider: ^2.0.1
   device_info: ^2.0.0
   clipboard: ^0.1.3
-  package_info: ^2.0.0
 
   # For Key-Value local storage
   shared_preferences: ^2.0.5
@@ -35,14 +34,15 @@ dependencies:
   cupertino_icons: ^1.0.3
   settings_ui: ^1.0.0
   smart_select: ^4.3.2
+  adaptive_theme: ^2.2.0
+  flex_color_scheme: ^2.1.1
+  flutter_native_splash: ^1.1.8+4
 
   # For Utilities
   get: ^4.1.4
-  adaptive_theme: ^2.2.0
-  flex_color_scheme: ^2.1.1
   url_launcher: ^6.0.3
   url_strategy: ^0.2.0
-  flutter_native_splash: ^1.1.8+4
+  package_info_plus: ^1.0.1
 
 dev_dependencies:
   flutter_test:

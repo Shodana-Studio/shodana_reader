@@ -1,4 +1,5 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -27,9 +28,9 @@ class GeneralSettings extends HookWidget {
             title: 'Theme',
             tiles: const [],
           ),
-          SettingsTile.switchTile(
-            title: 'Dark mode',
-            onToggle: (bool value) {
+          SwitchListTile(
+            title: const Text('Dark mode'),
+            onChanged: (bool value) {
               context.read(darkModeSwitchProvider.notifier).toggle();
               if (!followSysTheme) {
                 if (value) {
@@ -39,26 +40,12 @@ class GeneralSettings extends HookWidget {
                 }
               }
             },
-            switchValue: darkMode,
+            value: darkMode,
           ),
-          // SettingsTile(
-          //   title: 'Light theme',
-          //   subtitle: 'Default',
-          //   onPressed: (BuildContext context) {
-          //     AdaptiveTheme.of(context).setLight();
-          //   },
-          // ),
-          // SettingsTile(
-          //   title: 'Dark theme',
-          //   subtitle: 'Default',
-          //   onPressed: (BuildContext context) {
-          //     AdaptiveTheme.of(context).setDark();
-          //   },
-          // ),
-          SettingsTile.switchTile(
-            title: 'Follow system theme',
-            subtitle: 'Dark mode setting will be ignored',
-            onToggle: (bool value) {
+          SwitchListTile(
+            title: const Text('Follow system theme'),
+            subtitle: const Text('Dark mode setting will be ignored'),
+            onChanged: (bool value) {
               context.read(followSystemThemeSwitchProvider.notifier).toggle();
               if (value) {
                 AdaptiveTheme.of(context).setSystem();
@@ -71,15 +58,11 @@ class GeneralSettings extends HookWidget {
                 }
               }
             },
-            switchValue: followSysTheme,
+            value: followSysTheme,
           ),
           const Divider(height: 1.0),
         ],
       ),
     );
-  }
-
-  void showDarkModeDialog() {
-
   }
 }
