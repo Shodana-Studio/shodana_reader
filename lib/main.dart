@@ -8,10 +8,17 @@ import 'app.dart';
 import 'data/local/storage_utils.dart';
 
 Future<void> main() async {
-  setPathUrlStrategy();
   WidgetsFlutterBinding.ensureInitialized();
+  setPathUrlStrategy();
   SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle.light,
+    const SystemUiOverlayStyle(
+      systemNavigationBarColor: Colors.transparent,
+      systemNavigationBarDividerColor: Colors.transparent,
+      systemNavigationBarIconBrightness: Brightness.light,
+      statusBarColor: Colors.transparent,
+      statusBarBrightness: Brightness.dark,
+      statusBarIconBrightness: Brightness.light,
+    ),
   );
   await StorageUtil.getInstance();
   final savedThemeMode = await AdaptiveTheme.getThemeMode();
