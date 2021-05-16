@@ -62,7 +62,7 @@ class AppScreenMobile extends HookWidget {
     return OrientationLayoutBuilder(
       portrait: (context) => Scaffold(
         body: indexedStack,
-        bottomNavigationBar: enableNav ? bottomNavigationBar : Container(),
+        bottomNavigationBar: enableNav ? bottomNavigationBar : null,
       ),
       landscape: (context) => Scaffold(
         body: railRow,

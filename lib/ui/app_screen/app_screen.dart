@@ -90,8 +90,6 @@ class _AppScreenState extends State<AppScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final bool enableNav = useProvider(shouldShowBottomNavigationProvider)
-        .state;
 
     final IndexedStack indexedStack = IndexedStack(
       index: _currentIndex,
