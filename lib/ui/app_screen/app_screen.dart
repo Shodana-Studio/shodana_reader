@@ -35,9 +35,9 @@ class _AppScreenState extends State<AppScreen> {
     BeamerRouterDelegate(
       locationBuilder: (state) => ClubsLocation(state),
     ),
-    BeamerRouterDelegate(
-      locationBuilder: (state) => DiscoverLocation(state),
-    ),
+    // BeamerRouterDelegate(
+    //   locationBuilder: (state) => DiscoverLocation(state),
+    // ),
     BeamerRouterDelegate(
       locationBuilder: (state) => MoreLocation(state),
     ),
@@ -99,8 +99,8 @@ class _AppScreenState extends State<AppScreen> {
         Beamer(routerDelegate: _routerDelegates[0]),
         Beamer(routerDelegate: _routerDelegates[1]),
         Beamer(routerDelegate: _routerDelegates[2]),
-        // Beamer(routerDelegate: _routerDelegates[3]),
-        Beamer(routerDelegate: _routerDelegates[4]),
+        Beamer(routerDelegate: _routerDelegates[3]),
+        // Beamer(routerDelegate: _routerDelegates[4]),
       ],
     );
 
