@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -133,6 +134,7 @@ class _AppScreenState extends State<AppScreen> {
     navigationRail = NavigationRail(
       // leading: const ExtendableFab(),
       // extended: true,
+      groupAlignment: 0.0,
       labelType: NavigationRailLabelType.none,
       destinations: <NavigationRailDestination>[
         NavigationRailDestination(

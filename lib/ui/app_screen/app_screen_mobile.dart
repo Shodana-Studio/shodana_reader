@@ -22,7 +22,16 @@ class AppScreenMobile extends StatelessWidget {
       landscape: (context) => Scaffold(
         body: Row(
           children: <Widget>[
-            SafeArea(child: navigationRail),
+            SafeArea(child: LayoutBuilder(
+              builder: (context, constraint) => SingleChildScrollView(
+                child: ConstrainedBox(
+                    constraints: BoxConstraints(minHeight: constraint.maxHeight),
+                    child: IntrinsicHeight(child: navigationRail)
+                ),
+              ),
+            )
+            ),
+            const VerticalDivider(thickness: 1, width: 1),
             Expanded(child: indexedStack),
           ],
         ),

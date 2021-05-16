@@ -155,7 +155,7 @@ class AboutScreen extends HookWidget {
           key: const ValueKey('device_info'),
           text: TextSpan(
             text: versionText,
-            style: titleTextStyle,
+            // style: titleTextStyle,
           ),
           maxLines: 3,
           overflow: TextOverflow.ellipsis,
