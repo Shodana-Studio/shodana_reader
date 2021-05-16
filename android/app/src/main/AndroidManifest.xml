@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="app.shodana.shodana_reader">
    <application
-        android:label="shodana_reader"
+        android:label="Shodana Reader"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
