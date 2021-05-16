@@ -89,7 +89,7 @@ class _AppScreenState extends State<AppScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final bool enableBottomNav = useProvider(shouldShowBottomNavigationProvider)
+    final bool enableNav = useProvider(shouldShowBottomNavigationProvider)
         .state;
 
     final IndexedStack indexedStack = IndexedStack(
@@ -166,25 +166,21 @@ class _AppScreenState extends State<AppScreen> {
       mobile: (BuildContext context) => AppScreenMobile(
         bottomNavigationBar: bottomNavigationBar,
         navigationRail: navigationRail,
-        enableBottomNav: enableBottomNav,
         indexedStack: indexedStack,
       ),
       tablet: (BuildContext context) => AppScreenMobile(
         bottomNavigationBar: bottomNavigationBar,
         navigationRail: navigationRail,
-        enableBottomNav: enableBottomNav,
         indexedStack: indexedStack,
       ),
       desktop: (BuildContext context) => AppScreenMobile(
         bottomNavigationBar: bottomNavigationBar,
         navigationRail: navigationRail,
-        enableBottomNav: enableBottomNav,
         indexedStack: indexedStack,
       ),
       watch: (BuildContext context) => AppScreenMobile(
         bottomNavigationBar: bottomNavigationBar,
         navigationRail: navigationRail,
-        enableBottomNav: enableBottomNav,
         indexedStack: indexedStack,
       ),
     );
