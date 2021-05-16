@@ -104,39 +104,51 @@ class _AppScreenState extends State<AppScreen> {
       ],
     );
 
-    bottomNavigationBar = BottomNavigationBar(
-      type: BottomNavigationBarType.fixed,
-      currentIndex: _currentIndex,
-      elevation: 0.0,
-      items: [
-        BottomNavigationBarItem(
-            label: AppLocalizations.of(context)!.homeBottomNavItemText,
-            icon: const Icon(Icons.menu_book_rounded)
-        ),
-        BottomNavigationBarItem(
-            label: AppLocalizations.of(context)!.shelvesBottomNavItemText,
-            icon: const Icon(Icons.collections_bookmark_rounded)
-        ),
-        BottomNavigationBarItem(
-            label: AppLocalizations.of(context)!.clubsBottomNavItemText,
-            icon: const Icon(Icons.group_rounded)
-        ),
-        // BottomNavigationBarItem(
-        //     label: AppLocalizations.of(context)!.discoverBottomNavItemText,
-        //     icon: const Icon(Icons.explore_rounded)
-        // ),
-        BottomNavigationBarItem(
-            label: AppLocalizations.of(context)!.moreBottomNavItemText,
-            icon: const Icon(Icons.more_horiz)
+    bottomNavigationBar = Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const Divider(thickness: 1, height: 1),
+        BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          // backgroundColor: Theme.of(context).backgroundColor,
+          elevation: 0.0,
+          currentIndex: _currentIndex,
+          items: [
+            BottomNavigationBarItem(
+                label: AppLocalizations.of(context)!.homeBottomNavItemText,
+                icon: const Icon(Icons.menu_book_rounded)
+            ),
+            BottomNavigationBarItem(
+                label: AppLocalizations.of(context)!.shelvesBottomNavItemText,
+                icon: const Icon(Icons.collections_bookmark_rounded)
+            ),
+            BottomNavigationBarItem(
+                label: AppLocalizations.of(context)!.clubsBottomNavItemText,
+                icon: const Icon(Icons.group_rounded)
+            ),
+            // BottomNavigationBarItem(
+            //     label: AppLocalizations.of(context)!.discoverBottomNavItemText,
+            //     icon: const Icon(Icons.explore_rounded)
+            // ),
+            BottomNavigationBarItem(
+                label: AppLocalizations.of(context)!.moreBottomNavItemText,
+                icon: const Icon(Icons.more_horiz)
+            ),
+          ],
+          onTap: onNavigationItemTap,
         ),
       ],
-      onTap: onNavigationItemTap,
     );
 
     navigationRail = NavigationRail(
-      // leading: const ExtendableFab(),
+      // leading: GestureDetector(
+      //   onTap: () {},
+      //   child: const ExtendableFab()
+      // ),
       // extended: true,
       groupAlignment: 0.0,
+      // backgroundColor: Theme.of(context).backgroundColor,
+      // elevation: 8,
       labelType: NavigationRailLabelType.none,
       destinations: <NavigationRailDestination>[
         NavigationRailDestination(
