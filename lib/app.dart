@@ -65,6 +65,7 @@ class App extends HookWidget {
   Widget build(BuildContext context) {
     return AdaptiveTheme(
       light: FlexColorScheme.light(
+        appBarStyle: FlexAppBarStyle.background,
         scheme: flexScheme,
         // Use comfortable on desktops instead of compact, devices use default.
         visualDensity: FlexColorScheme.comfortablePlatformDensity,

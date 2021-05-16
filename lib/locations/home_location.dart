@@ -1,6 +1,6 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
-import 'package:shodana_reader/features/app_screen.dart';
+import '../ui/app_screen/app_screen.dart';
 
 class HomeLocation extends BeamLocation {
   HomeLocation(state) : super(state);
