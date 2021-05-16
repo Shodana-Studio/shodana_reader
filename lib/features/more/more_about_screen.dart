@@ -88,9 +88,13 @@ class AboutScreen extends HookWidget {
           SettingsTile(
               key: const ValueKey('licenses'),
               title: 'Open source licenses',
-              onPressed: (BuildContext context) {
-
-              }
+              onPressed: (BuildContext context) => showAboutDialog(
+                context: context,
+                applicationName: AppLocalizations.of(context)?.appName
+                    ?? 'No Title',
+                applicationVersion: version,
+                applicationLegalese: 'Blah blah.'
+              )
           ),
         ],
       ),
