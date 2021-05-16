@@ -60,13 +60,14 @@ class _AppScreenState extends State<AppScreen> {
     {
       _currentIndex = 2;
     }
-    else if (widget.beamState.uri.path.contains('discover'))
-    {
-      _currentIndex = 3;
-    }
+    // else if (widget.beamState.uri.path.contains('discover'))
+    // {
+    //   _currentIndex = 3;
+    // }
     else if (widget.beamState.uri.path.contains('more'))
     {
-      _currentIndex = 4;
+      // _currentIndex = 4;
+      _currentIndex = 3;
     }
     else
     {
@@ -98,7 +99,7 @@ class _AppScreenState extends State<AppScreen> {
         Beamer(routerDelegate: _routerDelegates[0]),
         Beamer(routerDelegate: _routerDelegates[1]),
         Beamer(routerDelegate: _routerDelegates[2]),
-        Beamer(routerDelegate: _routerDelegates[3]),
+        // Beamer(routerDelegate: _routerDelegates[3]),
         Beamer(routerDelegate: _routerDelegates[4]),
       ],
     );
@@ -106,6 +107,7 @@ class _AppScreenState extends State<AppScreen> {
     bottomNavigationBar = BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       currentIndex: _currentIndex,
+      elevation: 0.0,
       items: [
         BottomNavigationBarItem(
             label: AppLocalizations.of(context)!.homeBottomNavItemText,
@@ -119,10 +121,10 @@ class _AppScreenState extends State<AppScreen> {
             label: AppLocalizations.of(context)!.clubsBottomNavItemText,
             icon: const Icon(Icons.group_rounded)
         ),
-        BottomNavigationBarItem(
-            label: AppLocalizations.of(context)!.discoverBottomNavItemText,
-            icon: const Icon(Icons.explore_rounded)
-        ),
+        // BottomNavigationBarItem(
+        //     label: AppLocalizations.of(context)!.discoverBottomNavItemText,
+        //     icon: const Icon(Icons.explore_rounded)
+        // ),
         BottomNavigationBarItem(
             label: AppLocalizations.of(context)!.moreBottomNavItemText,
             icon: const Icon(Icons.more_horiz)
@@ -149,10 +151,10 @@ class _AppScreenState extends State<AppScreen> {
           label: Text(AppLocalizations.of(context)!.clubsBottomNavItemText),
           icon: const Icon(Icons.group_rounded)
         ),
-        NavigationRailDestination(
-          label: Text(AppLocalizations.of(context)!.discoverBottomNavItemText),
-          icon: const Icon(Icons.explore_rounded)
-        ),
+        // NavigationRailDestination(
+        //   label: Text(AppLocalizations.of(context)!.discoverBottomNavItemText),
+        //   icon: const Icon(Icons.explore_rounded)
+        // ),
         NavigationRailDestination(
           label: Text(AppLocalizations.of(context)!.moreBottomNavItemText),
           icon: const Icon(Icons.more_horiz)
