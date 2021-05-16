@@ -12,10 +12,10 @@ Future<void> main() async {
   setPathUrlStrategy();
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
-      systemNavigationBarColor: Colors.transparent,
-      systemNavigationBarDividerColor: Colors.transparent,
+      systemNavigationBarColor: Color(0x00151414),
+      systemNavigationBarDividerColor: Color(0x00151414),
       systemNavigationBarIconBrightness: Brightness.light,
-      statusBarColor: Colors.transparent,
+      statusBarColor: Color(0x00151414),
       statusBarBrightness: Brightness.dark,
       statusBarIconBrightness: Brightness.light,
     ),
