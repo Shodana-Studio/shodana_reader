@@ -1,8 +1,6 @@
-import 'package:beamer/beamer.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:settings_ui/settings_ui.dart';
 
 import 'more_about_screen.dart';
 import 'more_general_settings_screen.dart';
@@ -24,11 +22,9 @@ class MoreDetailsScreen extends HookWidget {
       return const GeneralSettings();
     }
     else {
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text('Error: Unknown Page'),
-        ),
-      );
+      return Scaffold(appBar: AppBar(
+        title: Text(AppLocalizations.of(context)!.errorPageText),
+      ));
     }
   }
 

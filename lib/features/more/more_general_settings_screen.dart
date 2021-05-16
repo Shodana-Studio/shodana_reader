@@ -1,5 +1,4 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -17,19 +16,18 @@ class GeneralSettings extends HookWidget {
     final darkMode = useProvider(darkModeSwitchProvider);
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)?.generalPageTitle
-            ?? 'No Title'),
+        title: Text(AppLocalizations.of(context)!.generalPageTitle),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 16.0),
           SettingsSection(
-            title: 'Theme',
+            title: AppLocalizations.of(context)!.themeSectionText,
             tiles: const [],
           ),
           SwitchListTile(
-            title: const Text('Dark mode'),
+            title: Text(AppLocalizations.of(context)!.darkModeSwitchText),
             onChanged: (bool value) {
               context.read(darkModeSwitchProvider.notifier).toggle();
               if (!followSysTheme) {
@@ -43,8 +41,8 @@ class GeneralSettings extends HookWidget {
             value: darkMode,
           ),
           SwitchListTile(
-            title: const Text('Follow system theme'),
-            subtitle: const Text('Dark mode setting will be ignored'),
+            title: Text(AppLocalizations.of(context)!.followSysThemeSwitchText),
+            subtitle: Text(AppLocalizations.of(context)!.followSysThemeSwitchSubtitle),
             onChanged: (bool value) {
               context.read(followSystemThemeSwitchProvider.notifier).toggle();
               if (value) {

@@ -19,8 +19,8 @@ class AboutScreen extends HookWidget {
         builder: (context, AsyncSnapshot<Widget> snapshot) {
           // Check for errors
           if (snapshot.hasError) {
-            return const Center(
-                child: Text('Oops, there was an error')
+            return Center(
+                child: Text(AppLocalizations.of(context)!.errorText)
             );
           }
           // Once complete, show your application
@@ -55,15 +55,14 @@ class AboutScreen extends HookWidget {
 
     return Scaffold(
       appBar: AppBar(
-          title: Text(AppLocalizations.of(context)?.aboutPageTitle ?? 'No '
-              'Title')
+          title: Text(AppLocalizations.of(context)!.aboutPageTitle)
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ListTile(
               key: const ValueKey('version'),
-              title: const Text('Version'),
+              title: Text(AppLocalizations.of(context)!.versionButtonText),
               subtitle: Text('Alpha $version+$buildNumber'),
               onTap: () => versionOnPressed(context,
                   deviceInfo, version, buildNumber)
@@ -75,25 +74,24 @@ class AboutScreen extends HookWidget {
           // ),
           ListTile(
               key: const ValueKey('website'),
-              title: const Text('Website'),
+              title: Text(AppLocalizations.of(context)!.websiteButtonText),
               subtitle: const Text(website),
               onTap: () => _launchURL(website)
           ),
           ListTile(
               key: const ValueKey('github'),
-              title: const Text('Github'),
+              title: Text(AppLocalizations.of(context)!.githubButtonText),
               subtitle: const Text(github),
               onTap: () => _launchURL(github)
           ),
           ListTile(
               key: const ValueKey('licenses'),
-              title: const Text('Open source licenses'),
+              title: Text(AppLocalizations.of(context)!.licensesButtonText),
               onTap: () => showAboutDialog(
                 context: context,
-                applicationName: AppLocalizations.of(context)?.appName
-                    ?? 'No Title',
+                applicationName: AppLocalizations.of(context)!.appName,
                 applicationVersion: version,
-                applicationLegalese: 'Blah blah.'
+                applicationLegalese: AppLocalizations.of(context)!.applicationLegalese
               )
           ),
         ],

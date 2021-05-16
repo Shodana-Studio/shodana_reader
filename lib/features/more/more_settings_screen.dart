@@ -9,14 +9,13 @@ class MoreSettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text(AppLocalizations.of(context)?.settingsPageTitle
-              ?? 'No Title')
+          title: Text(AppLocalizations.of(context)!.settingsPageTitle)
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ListTile(
-            title: const Text('General'),
+            title: Text(AppLocalizations.of(context)!.generalButtonText),
             leading: Icon(
               Icons.tune,
               color: Theme.of(context).primaryColor,

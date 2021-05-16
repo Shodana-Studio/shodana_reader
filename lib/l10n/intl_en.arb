@@ -5,6 +5,62 @@
   "@appName": {
     "description": "The name of the app"
   },
+  "errorText":"Oops, there was an error",
+  "@errorText": {
+    "description": "General error text"
+  },
+  "errorPageText":"Error: Unknown Page",
+  "@errorPageText": {
+    "description": "Error text for when it is routed to an invalid url"
+  },
+  "settingsButtonText":"Settings",
+  "@settingsButtonText": {
+    "description": "Text for the settings button"
+  },
+  "versionButtonText":"Version",
+  "@versionButtonText": {
+    "description": "Text for the version button"
+  },
+  "websiteButtonText":"Website",
+  "@websiteButtonText": {
+    "description": "Text for the website button"
+  },
+  "licensesButtonText":"Open source licenses",
+  "@licensesButtonText": {
+    "description": "Text for the open source licenses button"
+  },
+  "applicationLegalese":"Blah blah.",
+  "@applicationLegalese": {
+    "description": "Text for the open source licenses legalese"
+  },
+  "githubButtonText":"Github",
+  "@githubButtonText": {
+    "description": "Text for the Github button"
+  },
+  "aboutButtonText":"About",
+  "@aboutButtonText": {
+    "description": "Text for the about button"
+  },
+  "generalButtonText":"General",
+  "@generalButtonText": {
+    "description": "Text for the general settings button"
+  },
+  "themeSectionText":"Theme",
+  "@themeSectionText": {
+    "description": "Theme section title for the general settings page"
+  },
+  "darkModeSwitchText":"Dark mode",
+  "@darkModeSwitchText": {
+    "description": "Text for the dark mode switch"
+  },
+  "followSysThemeSwitchText":"Follow system theme",
+  "@followSysThemeSwitchText": {
+    "description": "Text for the follow system theme switch"
+  },
+  "followSysThemeSwitchSubtitle":"Dark mode setting will be ignored",
+  "@followSysThemeSwitchSubtitle": {
+    "description": "Descriptoin text for the follow system theme switch"
+  },
   "loginButtonText":"Login",
   "@loginButtonText": {
     "description": "Text used on the login/signup page"
