@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:beamer/beamer.dart';
+import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../data/provider/bottom_navigation_provider.dart';
 
@@ -21,8 +22,9 @@ class BookDetailsScreen extends StatelessWidget {
             child: Text('Author: ${book['author']}'),
           ),
           TextButton(
-            onPressed: () {
+            onPressed: () async {
               context.read(shouldShowBottomNavigationProvider).state = false;
+              await SystemChrome.setEnabledSystemUIOverlays([]);
               // Beam to different locations depending on the current page stack
               if (Beamer.of(context).currentLocation.state
                   .pathBlueprintSegments.first == 'shelves') {

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 import '../../data/provider/bottom_navigation_provider.dart';
 
 class ReaderScreen extends StatelessWidget {
@@ -12,6 +14,7 @@ class ReaderScreen extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async {
         context.read(shouldShowBottomNavigationProvider).state = true;
+        await SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
         return true;
       },
       child: Scaffold(
