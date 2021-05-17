@@ -28,9 +28,10 @@ class GeneralSettings extends HookWidget {
             const SizedBox(height: 16.0),
             SwitchListTile(
               title: Text(AppLocalizations.of(context)!.leftHandedNavigationRailSwitchText),
-              subtitle: Text(leftRail ? AppLocalizations.of(context)!
-                  .leftHandedNavigationRailSubtitleLeftText : AppLocalizations
-                  .of(context)!.leftHandedNavigationRailSubtitleRightText),
+              // subtitle: Text(leftRail ? AppLocalizations.of(context)!
+              //     .leftHandedNavigationRailSubtitleLeftText : AppLocalizations
+              //     .of(context)!.leftHandedNavigationRailSubtitleRightText),
+              subtitle: Text(AppLocalizations.of(context)!.leftHandedNavigationRailSubtitleLeftText),
               onChanged: (bool value) {
                 context.read(leftNavigationRailProvider.notifier).toggle();
               },
