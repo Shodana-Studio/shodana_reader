@@ -57,4 +57,21 @@ class StorageUtil {
     }
     return _preferences!.getBool(key) ?? defValue;
   }
+
+  // get int
+  static int getInt(String key, {int defValue = 0}) {
+    if (_preferences == null) {
+      return defValue;
+    }
+    return _preferences!.getInt(key) ?? defValue;
+  }
+
+  // put bool
+  // ignore: avoid_positional_boolean_parameters
+  static Future<bool> putInt(String key, int value) {
+    if (_preferences == null) {
+      return Future.value(null);
+    }
+    return _preferences!.setInt(key, value);
+  }
 }
