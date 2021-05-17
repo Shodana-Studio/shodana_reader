@@ -2,9 +2,7 @@ import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import '../../data/provider/nav_current_index_provider.dart';
 import '../../locations/locations.dart';
 import 'app_screen_mobile.dart';
 import 'app_screen_tablet.dart';
@@ -41,13 +39,11 @@ class _AppScreenState extends State<AppScreen> {
     ),
   ];
 
-
+  int _currentIndex = 0;
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final currentIndexProvider = context.read(navCurrentIndexProvider);
-    int? _currentIndex;
+  void initState() {
+    super.initState();
     if (widget.beamState.uri.path.contains('books')) {
       _currentIndex = 0;
     } else if (widget.beamState.uri.path.contains('shelves')) {
@@ -62,31 +58,28 @@ class _AppScreenState extends State<AppScreen> {
     else if (widget.beamState.uri.path.contains('more')) {
       // _currentIndex = 4;
       _currentIndex = 3;
-    }
-    if (_currentIndex != null) {
-      currentIndexProvider.state = _currentIndex;
+    } else {
+      _currentIndex = 0;
     }
   }
 
-  void onNavigationItemTap(int index,
-      StateController<int> currentIndexProvider) {
-    if (currentIndexProvider.state == index) {
-      _routerDelegates[currentIndexProvider.state].beamToNamed
-        (_routerDelegates[currentIndexProvider.state].initialPath);
+  void onNavigationItemTap(int index) {
+    if (_currentIndex == index) {
+      _routerDelegates[_currentIndex].beamToNamed
+        (_routerDelegates[_currentIndex].initialPath);
     } else {
-      currentIndexProvider.state = index;
-      _routerDelegates[currentIndexProvider.state].parent?.updateRouteInformation(
-        _routerDelegates[currentIndexProvider.state].currentLocation.state.uri,
+      setState(() => _currentIndex = index);
+      _routerDelegates[_currentIndex].parent?.updateRouteInformation(
+        _routerDelegates[_currentIndex].currentLocation.state.uri,
       );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final currentIndexProvider = useProvider(navCurrentIndexProvider);
     final IndexedStack indexedStack = IndexedStack(
       key: const ValueKey('first'),
-      index: currentIndexProvider.state,
+      index: _currentIndex,
       children: [
         Beamer(routerDelegate: _routerDelegates[0]),
         Beamer(routerDelegate: _routerDelegates[1]),
@@ -104,7 +97,7 @@ class _AppScreenState extends State<AppScreen> {
           type: BottomNavigationBarType.fixed,
           // backgroundColor: Theme.of(context).backgroundColor,
           elevation: 0.0,
-          currentIndex: currentIndexProvider.state,
+          currentIndex: _currentIndex,
           items: [
             BottomNavigationBarItem(
                 label: AppLocalizations.of(context)!.homeBottomNavItemText,
@@ -127,7 +120,7 @@ class _AppScreenState extends State<AppScreen> {
                 icon: const Icon(Icons.more_horiz)
             ),
           ],
-          onTap: (item) => onNavigationItemTap(item, currentIndexProvider),
+          onTap: onNavigationItemTap,
         ),
       ],
     );
@@ -164,8 +157,8 @@ class _AppScreenState extends State<AppScreen> {
           icon: const Icon(Icons.more_horiz)
         ),
       ],
-      selectedIndex: currentIndexProvider.state,
-      onDestinationSelected: (item) => onNavigationItemTap(item, currentIndexProvider),
+      selectedIndex: _currentIndex,
+      onDestinationSelected: onNavigationItemTap,
     );
 
     return ScreenTypeLayout.builder(
