@@ -7,7 +7,7 @@ class BookDetailsScreenMobile extends StatelessWidget {
     required this.startReadingButtonPressed
   }) : super(key: key);
   final Map<String, String> book;
-  final Function startReadingButtonPressed;
+  final Function(BuildContext) startReadingButtonPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class BookDetailsScreenMobile extends StatelessWidget {
             child: Text('Author: ${book['author']}'),
           ),
           TextButton(
-            onPressed: () => startReadingButtonPressed,
+            onPressed: () => startReadingButtonPressed(context),
             child: const Text('Start Reading'),
           ),
         ],

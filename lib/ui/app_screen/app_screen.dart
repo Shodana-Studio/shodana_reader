@@ -2,7 +2,9 @@ import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import '../../data/provider/nav_current_index_provider.dart';
 import '../../locations/locations.dart';
 import 'app_screen_mobile.dart';
 import 'app_screen_tablet.dart';
@@ -59,7 +61,7 @@ class _AppScreenState extends State<AppScreen> {
       // _currentIndex = 4;
       _currentIndex = 3;
     } else {
-      _currentIndex = 0;
+      _currentIndex = context.read(defaultStartingPageProvider);
     }
   }
 
