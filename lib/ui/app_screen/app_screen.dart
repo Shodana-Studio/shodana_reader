@@ -5,6 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import '../../locations/locations.dart';
 import 'app_screen_mobile.dart';
+import 'app_screen_tablet.dart';
 
 class AppScreen extends StatefulHookWidget {
   const AppScreen({Key? key, required this.beamState}) : super(key: key);
@@ -166,7 +167,7 @@ class _AppScreenState extends State<AppScreen> {
         navigationRail: navigationRail,
         indexedStack: indexedStack,
       ),
-      tablet: (BuildContext context) => AppScreenMobile(
+      tablet: (BuildContext context) => AppScreenTablet(
         bottomNavigationBar: bottomNavigationBar,
         navigationRail: navigationRail,
         indexedStack: indexedStack,

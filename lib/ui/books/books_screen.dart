@@ -1,15 +1,13 @@
 import 'dart:io' as io;
-import 'package:multi_screen_layout/multi_screen_layout.dart';
-import 'package:path_provider/path_provider.dart';
 
 import 'package:beamer/beamer.dart';
 import 'package:epubx/epubx.dart' as epubx;
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:shodana_reader/data/repository/fake_data.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
-import 'book_details_screen.dart';
+import 'book_screen_mobile.dart';
 
 
 class BooksScreen extends StatefulWidget {
@@ -21,33 +19,6 @@ class BooksScreen extends StatefulWidget {
 
 class _BooksScreenState extends State<BooksScreen> {
   int? selectedItem;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context)!.appName)),
-      body: const BooksBody(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: fabOnPressed,
-        tooltip: 'Add an eBook',
-        child: const Icon(Icons.add),
-      ),
-    );
-
-    //   MasterDetailLayout(
-    //   master: Scaffold(
-    //     appBar: AppBar(title: Text(AppLocalizations.of(context)!.appName)),
-    //     body: const BooksBody(),
-    //     floatingActionButton: FloatingActionButton(
-    //       onPressed: fabOnPressed,
-    //       tooltip: 'Add an eBook',
-    //       child: const Icon(Icons.add),
-    //     ),
-    //   ),
-    //   detail: BookDetailsScreen(book: book,),
-    //   isSelected: selectedItem != null,
-    // );
-  }
 
   Future<void> fabOnPressed() async {
     try {
@@ -70,6 +41,32 @@ class _BooksScreenState extends State<BooksScreen> {
     } on Exception catch (e, _) {
       print(e);
     }
+  }
+
+  void bookOnPressed() {
+    context.beamToNamed('/books/0}');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ScreenTypeLayout.builder(
+      mobile: (BuildContext context) => BookScreenMobile(
+        fabOnPressed: fabOnPressed,
+        bookOnPressed: bookOnPressed,
+      ),
+      tablet: (BuildContext context) => BookScreenMobile(
+        fabOnPressed: fabOnPressed,
+        bookOnPressed: bookOnPressed,
+      ),
+      desktop: (BuildContext context) => BookScreenMobile(
+        fabOnPressed: fabOnPressed,
+        bookOnPressed: bookOnPressed,
+      ),
+      watch: (BuildContext context) => BookScreenMobile(
+        fabOnPressed: fabOnPressed,
+        bookOnPressed: bookOnPressed,
+      ),
+    );
   }
 
   Future<PlatformFile> fetchFile() async {
@@ -102,28 +99,5 @@ class _BooksScreenState extends State<BooksScreen> {
         .path}/${file.name}');
 
     return newFile;
-  }
-}
-
-class BooksBody extends StatelessWidget {
-  const BooksBody({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          TextButton(
-            onPressed: () {
-              return context.beamToNamed('/books/0}');
-            },
-            child: const Text('Beam to Test Book 0 Details'),
-          ),
-        ],
-      ),
-    );
   }
 }
