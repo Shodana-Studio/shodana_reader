@@ -25,7 +25,10 @@ class GeneralSettings extends HookWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 16.0),
+            const ListTile(
+              title: Text('Starting screen'),
+              subtitle: Text('Last used'),
+            ),
             SwitchListTile(
               title: Text(AppLocalizations.of(context)!.leftHandedNavigationRailSwitchText),
               // subtitle: Text(leftRail ? AppLocalizations.of(context)!
