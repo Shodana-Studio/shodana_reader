@@ -27,12 +27,14 @@ class GeneralSettings extends HookWidget {
           children: [
             const SizedBox(height: 16.0),
             SwitchListTile(
-              title: const Text('Navigation rail side'),
-              subtitle: Text(leftRail ? 'Left' : 'Right'),
+              title: Text(AppLocalizations.of(context)!.leftHandedNavigationRailSwitchText),
+              subtitle: Text(leftRail ? AppLocalizations.of(context)!
+                  .leftHandedNavigationRailSubtitleLeftText : AppLocalizations
+                  .of(context)!.leftHandedNavigationRailSubtitleRightText),
               onChanged: (bool value) {
                 context.read(leftNavigationRailProvider.notifier).toggle();
               },
-              value: !leftRail,
+              value: leftRail,
             ),
             const Divider(height: 1.0),
             Padding(

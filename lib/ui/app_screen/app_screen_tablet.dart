@@ -71,8 +71,11 @@ class AppScreenTablet extends HookWidget {
       landscape: (context) => Scaffold(
         body: Row(
           children: [
-            Expanded(child: indexedStack),
-            railRow
+            if (!isLeftRail)
+              Expanded(child: indexedStack),
+            railRow,
+            if (isLeftRail)
+              Expanded(child: indexedStack),
             // TwoPageLayout(
             //   secondChild: railRow,
             //   child: railRow,

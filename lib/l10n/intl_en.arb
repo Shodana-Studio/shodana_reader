@@ -29,6 +29,18 @@
   "@licensesButtonText": {
     "description": "Text for the open source licenses button"
   },
+  "leftHandedNavigationRailSwitchText":"Left handed navigation rail",
+  "@leftHandedNavigationRailSwitchText": {
+    "description": "Text for the switch to change which side to show the navigation rail on"
+  },
+  "leftHandedNavigationRailSubtitleLeftText":"Show on left side",
+  "@leftHandedNavigationRailSubtitleLeftText": {
+    "description": "Navigation rail will be on the left side of the screen in landscape mode"
+  },
+  "leftHandedNavigationRailSubtitleRightText":"Show on right side",
+  "@leftHandedNavigationRailSubtitleRightText": {
+    "description": "Navigation rail will be on the right side of the screen in landscape mode"
+  },
   "applicationLegalese":"Blah blah.",
   "@applicationLegalese": {
     "description": "Text for the open source licenses legalese"
