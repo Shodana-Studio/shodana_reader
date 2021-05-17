@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// Taken from settings_ui package
+// Taken from settings_ui package and modified
 class SettingsSectionHeader extends StatelessWidget {
   const SettingsSectionHeader({
     Key? key,
@@ -28,30 +28,37 @@ class SettingsSectionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      if (title != null)
-        Padding(
-          padding: const EdgeInsets.only(
-            left: 15.0,
-            right: 15.0,
-            bottom: 6.0,
-          ),
-          child: Text(
-            title!,
-            style: titleTextStyle ??
-                TextStyle(
-                  color: Theme.of(context).accentColor,
-                  fontWeight: FontWeight.bold,
-                ),
-            maxLines: maxLines,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ),
-      if (subtitle != null)
-        Padding(
-          padding: subtitlePadding,
-          child: subtitle,
-        ),
-    ]);
+    return Padding(
+      padding: const EdgeInsets.only(top: 15.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (title != null)
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 15.0,
+                right: 15.0,
+                bottom: 6.0,
+              ),
+              child: Text(
+                title!,
+                style: titleTextStyle ??
+                    TextStyle(
+                      color: Theme.of(context).accentColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                maxLines: maxLines,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          if (subtitle != null) ... [
+            Padding(
+              padding: subtitlePadding,
+              child: subtitle,
+            ),
+          ]
+        ]
+      ),
+    );
   }
 }

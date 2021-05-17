@@ -37,11 +37,8 @@ class GeneralSettings extends HookWidget {
               value: leftRail,
             ),
             const Divider(height: 1.0),
-            Padding(
-              padding: const EdgeInsets.only(top: 15.0),
-              child: SettingsSectionHeader(
-                title: AppLocalizations.of(context)!.themeSectionText,
-              ),
+            SettingsSectionHeader(
+              title: AppLocalizations.of(context)!.themeSectionText,
             ),
             SwitchListTile(
               title: Text(AppLocalizations.of(context)!.darkModeSwitchText),
