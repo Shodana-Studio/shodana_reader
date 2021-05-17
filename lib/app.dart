@@ -33,29 +33,7 @@ class App extends HookWidget {
       visualDensity: FlexColorScheme.comfortablePlatformDensity,
     ).toTheme;
 
-    if (savedThemeMode == AdaptiveThemeMode.dark) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          systemNavigationBarColor: dark.backgroundColor,
-          systemNavigationBarDividerColor: dark.backgroundColor,
-          systemNavigationBarIconBrightness: Brightness.light,
-          statusBarColor: dark.backgroundColor,
-          statusBarBrightness: Brightness.dark,
-          statusBarIconBrightness: Brightness.light,
-        ),
-      );
-    } else {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          systemNavigationBarColor: light.backgroundColor,
-          systemNavigationBarDividerColor: light.backgroundColor,
-          systemNavigationBarIconBrightness: Brightness.dark,
-          statusBarColor: light.backgroundColor,
-          statusBarBrightness: Brightness.light,
-          statusBarIconBrightness: Brightness.dark,
-        ),
-      );
-    }
+
     return AdaptiveTheme(
       light: light,
       dark: dark,
