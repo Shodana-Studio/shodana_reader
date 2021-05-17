@@ -1,14 +1,8 @@
-import 'dart:ui';
-
-import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import '../../data/provider/bottom_navigation_provider.dart';
 import '../../locations/locations.dart';
 import 'app_screen_mobile.dart';
 
@@ -49,29 +43,21 @@ class _AppScreenState extends State<AppScreen> {
   @override
   void initState() {
     super.initState();
-    if (widget.beamState.uri.path.contains('books'))
-    {
+    if (widget.beamState.uri.path.contains('books')) {
       _currentIndex = 0;
-    }
-    else if (widget.beamState.uri.path.contains('shelves'))
-    {
+    } else if (widget.beamState.uri.path.contains('shelves')) {
       _currentIndex = 1;
-    }
-    else if (widget.beamState.uri.path.contains('clubs'))
-    {
+    } else if (widget.beamState.uri.path.contains('clubs')) {
       _currentIndex = 2;
     }
     // else if (widget.beamState.uri.path.contains('discover'))
     // {
     //   _currentIndex = 3;
     // }
-    else if (widget.beamState.uri.path.contains('more'))
-    {
+    else if (widget.beamState.uri.path.contains('more')) {
       // _currentIndex = 4;
       _currentIndex = 3;
-    }
-    else
-    {
+    } else {
       _currentIndex = 0;
     }
   }
@@ -91,6 +77,7 @@ class _AppScreenState extends State<AppScreen> {
   @override
   Widget build(BuildContext context) {
     final IndexedStack indexedStack = IndexedStack(
+      key: const ValueKey('first'),
       index: _currentIndex,
       children: [
         Beamer(routerDelegate: _routerDelegates[0]),
@@ -198,40 +185,3 @@ class _AppScreenState extends State<AppScreen> {
   }
 }
 
-class ExtendableFab extends StatelessWidget {
-  const ExtendableFab({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-   final Animation<double> animation = NavigationRail.extendedAnimation(context);
-   return AnimatedBuilder(
-     animation: animation,
-     builder: (BuildContext context, Widget? child) {
-       // The extended fab has a shorter height than the regular fab.
-       return Container(
-         height: 56,
-         padding: EdgeInsets.symmetric(
-           vertical: lerpDouble(0, 6, animation.value)!,
-         ),
-         child: animation.value == 0
-           ? FloatingActionButton(
-               onPressed: () {},
-               child: const Icon(Icons.add),
-             )
-           : Align(
-               alignment: AlignmentDirectional.centerStart,
-               widthFactor: animation.value,
-               child: Padding(
-                 padding: const EdgeInsetsDirectional.only(start: 8),
-                 child: FloatingActionButton.extended(
-                   icon: const Icon(Icons.add),
-                   label: const Text('UPLOAD'),
-                   onPressed: () {},
-                 ),
-               ),
-             ),
-       );
-     },
-   );
-  }
-}

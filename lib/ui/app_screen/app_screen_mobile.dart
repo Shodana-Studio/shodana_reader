@@ -1,15 +1,18 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:multi_screen_layout/multi_screen_layout.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import '../../data/provider/left_navigation_rail_provider.dart';
+
 import '../../data/provider/bottom_navigation_provider.dart';
+import '../../data/provider/left_navigation_rail_provider.dart';
 
 class AppScreenMobile extends HookWidget {
   const AppScreenMobile({Key? key,
     required this.indexedStack,
-    this.bottomNavigationBar, required this.navigationRail}) : super(key: key);
-
+    this.bottomNavigationBar,
+    required this.navigationRail,}) : super(key: key);
   final IndexedStack indexedStack;
   final Widget? bottomNavigationBar;
   final NavigationRail navigationRail;
@@ -19,12 +22,13 @@ class AppScreenMobile extends HookWidget {
   Widget build(BuildContext context) {
     final bool enableNav = useProvider(shouldShowBottomNavigationProvider)
         .state;
-    final bool leftRail = useProvider(leftNavigationRailProvider);
+    final bool isLeftRail = useProvider(leftNavigationRailProvider);
 
-    final Row railRow;
+    final Widget railRow;
 
-    if (leftRail) {
+    if (isLeftRail) {
       railRow = Row(
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           if (enableNav)
             LayoutBuilder(
@@ -37,27 +41,27 @@ class AppScreenMobile extends HookWidget {
             ),
           if (enableNav)
             const VerticalDivider(thickness: 1, width: 1),
-          Expanded(child: indexedStack),
         ],
       );
     } else {
       railRow = Row(
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Expanded(child: indexedStack),
           if (enableNav)
             const VerticalDivider(thickness: 1, width: 1),
           if (enableNav)
-            SafeArea(child: LayoutBuilder(
+            LayoutBuilder(
               builder: (context, constraint) => SingleChildScrollView(
                 child: ConstrainedBox(
                     constraints: BoxConstraints(minHeight: constraint.maxHeight),
                     child: IntrinsicHeight(child: navigationRail)
                 ),
               ),
-            )),
+            ),
         ],
       );
     }
+
 
     return OrientationLayoutBuilder(
       portrait: (context) => Scaffold(
@@ -65,8 +69,21 @@ class AppScreenMobile extends HookWidget {
         bottomNavigationBar: enableNav ? bottomNavigationBar : null,
       ),
       landscape: (context) => Scaffold(
-        body: railRow,
+        body: Row(
+          children: [
+            Expanded(child: indexedStack),
+            railRow
+            // TwoPageLayout(
+            //   secondChild: railRow,
+            //   child: railRow,
+            // ),
+          ],
+        ),
       ),
     );
   }
 }
+
+// Scaffold(
+//   body: railRow,
+// ),
