@@ -6,6 +6,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:shodana_reader/data/provider/starting_screen_provider.dart';
 import '../../data/provider/nav_current_index_provider.dart';
 import '../../locations/locations.dart';
 import 'app_screen_mobile.dart';
@@ -48,6 +49,10 @@ class _AppScreenState extends State<AppScreen> {
   @override
   void initState() {
     super.initState();
+    final bool lastUsedEnabled = context.read(lastUsedEnabledProvider).state;
+    final int lastUsedIndex = context.read(lastUsedIndexProvider).state;
+    final int defaultStartingPage = context.read(defaultStartingPageProvider);
+
     if (widget.beamState.uri.path.contains('books')) {
       _currentIndex = 0;
     } else if (widget.beamState.uri.path.contains('shelves')) {
@@ -63,16 +68,24 @@ class _AppScreenState extends State<AppScreen> {
       // _currentIndex = 4;
       _currentIndex = 3;
     } else {
-      _currentIndex = context.read(defaultStartingPageProvider);
+      if (lastUsedEnabled) {
+        _currentIndex = lastUsedIndex;
+      } else {
+        _currentIndex = defaultStartingPage;
+      }
     }
   }
 
-  void onNavigationItemTap(int index) {
+  void onNavigationItemTap(int index, StateController<bool> lastUsedEnabled,
+      StateController<int> lastUsedIndex) {
     if (_currentIndex == index) {
       _routerDelegates[_currentIndex].beamToNamed
         (_routerDelegates[_currentIndex].initialPath);
     } else {
       setState(() => _currentIndex = index);
+      if (lastUsedEnabled.state) {
+        lastUsedIndex.state = _currentIndex;
+      }
       _routerDelegates[_currentIndex].parent?.updateRouteInformation(
         _routerDelegates[_currentIndex].currentLocation.state.uri,
       );
@@ -81,6 +94,11 @@ class _AppScreenState extends State<AppScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final StateController<bool> lastUsedEnabled = context.read
+      (lastUsedEnabledProvider);
+    final StateController<int> lastUsedIndex = context.read
+      (lastUsedIndexProvider);
+
     final brightness = Theme.of(context).brightness;
     if (brightness == Brightness.dark) {
       SystemChrome.setSystemUIOverlayStyle(
@@ -149,7 +167,7 @@ class _AppScreenState extends State<AppScreen> {
                 icon: const Icon(Icons.more_horiz)
             ),
           ],
-          onTap: onNavigationItemTap,
+          onTap: (i) => onNavigationItemTap(i, lastUsedEnabled, lastUsedIndex),
         ),
       ],
     );
@@ -187,7 +205,7 @@ class _AppScreenState extends State<AppScreen> {
         ),
       ],
       selectedIndex: _currentIndex,
-      onDestinationSelected: onNavigationItemTap,
+      onDestinationSelected: (i) => onNavigationItemTap(i, lastUsedEnabled, lastUsedIndex),
     );
 
     return ScreenTypeLayout.builder(

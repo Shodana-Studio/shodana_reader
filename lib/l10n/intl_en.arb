@@ -212,5 +212,29 @@
   "moreBottomNavItemText":"More",
   "@moreBottomNavItemText": {
     "description": "Navigation bar text for the more item"
+  },
+  "startingScreenOptionLastUsedText":"Last used (Home, Shelves, or Clubs)",
+  "@startingScreenOptionLastUsedText": {
+    "description": "Text for button to set the starting screen to the last used, given that it is home, shelves, or clubs."
+  },
+  "startingScreenOptionHomeText":"Home",
+  "@startingScreenOptionHomeText": {
+    "description": "Text for button to set the starting screen to the home screen"
+  },
+  "startingScreenOptionShelvesText":"Shelves",
+  "@startingScreenOptionShelvesText": {
+    "description": "Text for button to set the starting screen to shelves"
+  },
+  "startingScreenOptionClubsText":"Clubs",
+  "@startingScreenOptionClubsText": {
+    "description": "Text for button to set the starting screen to clubs"
+  },
+  "startingScreenOptionDiscoverText":"Discover",
+  "@startingScreenOptionDiscoverText": {
+    "description": "Text for button to set the starting screen to discover"
+  },
+  "startingScreenOptionMoreText":"More",
+  "@startingScreenOptionMoreText": {
+    "description": "Text for button to set the starting screen to more"
   }
 }
