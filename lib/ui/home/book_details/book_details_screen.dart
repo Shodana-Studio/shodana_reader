@@ -18,7 +18,7 @@ class BookDetailsScreen extends StatelessWidget {
         .pathBlueprintSegments.first == 'shelves') {
       return context.beamToNamed('/shelves/0/0/1}');
     } else {
-      return context.beamToNamed('/books/0/1}');
+      return context.beamToNamed('/home/0/1}');
     }
   }
 

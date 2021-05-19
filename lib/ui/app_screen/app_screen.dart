@@ -29,7 +29,7 @@ class _AppScreenState extends State<AppScreen> {
   // These are all the location handlers. They handle the page stacks.
   final _routerDelegates = [
     BeamerRouterDelegate(
-      locationBuilder: (state) => BooksLocation(state),
+      locationBuilder: (state) => HomeLocation(state),
     ),
     BeamerRouterDelegate(
       locationBuilder: (state) => ShelvesLocation(state),
@@ -54,7 +54,7 @@ class _AppScreenState extends State<AppScreen> {
     final int lastUsedIndex = context.read(lastUsedIndexProvider).state;
     final int defaultStartingPage = context.read(defaultStartingPageProvider);
 
-    if (widget.beamState.uri.path.contains('books')) {
+    if (widget.beamState.uri.path.contains('home')) {
       _currentIndex = 0;
     } else if (widget.beamState.uri.path.contains('shelves')) {
       _currentIndex = 1;

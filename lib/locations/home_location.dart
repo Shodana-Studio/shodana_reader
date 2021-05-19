@@ -1,21 +1,23 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import '../data/repository/fake_data.dart';
-import '../ui/books/book_details/book_details_screen.dart';
-import '../ui/books/books_screen.dart';
+import '../ui/home/book_details/book_details_screen.dart';
+import '../ui/home/home_screen.dart';
 import '../ui/reader/reader_screen.dart';
 
-class BooksLocation extends BeamLocation {
-  BooksLocation(BeamState state) : super(state);
+/// The home tab will contain recent books, books that haven't been started,
+/// reading stats, and reading goals.
+class HomeLocation extends BeamLocation {
+  HomeLocation(BeamState state) : super(state);
 
   @override
-  List<String> get pathBlueprints => ['/books/:bookId/:chapterId'];
+  List<String> get pathBlueprints => ['/home/:bookId/:chapterId'];
 
   @override
   List<BeamPage> pagesBuilder(BuildContext context, BeamState state) => [
     BeamPage(
-      key: const ValueKey('books'),
-      child: const BooksScreen(),
+      key: const ValueKey('home'),
+      child: const HomeScreen(),
     ),
 
     if (state.pathParameters.containsKey('bookId'))
@@ -28,7 +30,7 @@ class BooksLocation extends BeamLocation {
 
     if (state.pathParameters.containsKey('chapterId'))
       BeamPage(
-        key: ValueKey('book-${state.pathParameters['bookId']}-chapter-${state
+        key: ValueKey('home-${state.pathParameters['bookId']}-chapter-${state
             .pathParameters['chapterId']}'),
         child: ReaderScreen(
           book: book,

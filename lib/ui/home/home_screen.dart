@@ -10,14 +10,14 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'book_screen_mobile.dart';
 
 
-class BooksScreen extends StatefulWidget {
-  const BooksScreen({Key? key}) : super(key: key);
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  _BooksScreenState createState() => _BooksScreenState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _BooksScreenState extends State<BooksScreen> {
+class _HomeScreenState extends State<HomeScreen> {
   int? selectedItem;
 
   Future<void> fabOnPressed() async {
@@ -44,7 +44,7 @@ class _BooksScreenState extends State<BooksScreen> {
   }
 
   void bookOnPressed() {
-    context.beamToNamed('/books/0}');
+    context.beamToNamed('/home/0}');
   }
 
   @override

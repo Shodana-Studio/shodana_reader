@@ -58,7 +58,7 @@ class StartingPage extends StateNotifier<String>{
     } else if (screen == AppLocalizations.of(context)!
         .startingScreenOptionMoreText) {
       context.read(lastUsedEnabledProvider).state = false;
-      defaultStartingPageProvider.setPage(3);
+      defaultStartingPageProvider.setPage(3); //.setPage(4)
     } else {
       debugPrint('Error: Invalid screen passed into setScreen');
     }
