@@ -31,32 +31,27 @@ class StartingPage extends StateNotifier<String>{
   void setScreen(String screen) {
     state = screen;
     StorageUtil.putString('starting_screen', screen);
-      // 1: AppLocalizations.of(context)!.startingScreenOptionHomeText,
-      // 2: AppLocalizations.of(context)!.startingScreenOptionShelvesText,
-      // 3: AppLocalizations.of(context)!.startingScreenOptionClubsText,
-      // // 4: AppLocalizations.of(context)!.startingScreenOptionDiscoverText,
-      // 4: AppLocalizations.of(context)!.startingScreenOptionMoreText,
-    if (screen == AppLocalizations.of(context)!
-        .startingScreenOptionLastUsedText) {
+    // 0: last_used
+    // 1: home
+    // 2: shelves
+    // 3: clubs
+    // // 4: discover
+    // 4: more
+    if (screen == 'last_used') {
       context.read(lastUsedEnabledProvider).state = true;
-    } else if (screen == AppLocalizations.of(context)!
-        .startingScreenOptionHomeText) {
+    } else if (screen == 'home') {
       context.read(lastUsedEnabledProvider).state = false;
       defaultStartingPageProvider.setPage(0);
-    } else if (screen == AppLocalizations.of(context)!
-        .startingScreenOptionShelvesText) {
+    } else if (screen == 'shelves') {
       context.read(lastUsedEnabledProvider).state = false;
       defaultStartingPageProvider.setPage(1);
-    } else if (screen == AppLocalizations.of(context)!
-        .startingScreenOptionClubsText) {
+    } else if (screen == 'clubs') {
       context.read(lastUsedEnabledProvider).state = false;
       defaultStartingPageProvider.setPage(2);
-    // } else if (screen == AppLocalizations.of(context)!
-    //     .startingScreenOptionDiscoverText) {
+    // } else if (screen == 'discover') {
     //   context.read(lastUsedEnabledProvider).state = false;
     //   defaultStartingPageProvider.setPage(3);
-    } else if (screen == AppLocalizations.of(context)!
-        .startingScreenOptionMoreText) {
+    } else if (screen == 'more') {
       context.read(lastUsedEnabledProvider).state = false;
       defaultStartingPageProvider.setPage(3); //.setPage(4)
     } else {

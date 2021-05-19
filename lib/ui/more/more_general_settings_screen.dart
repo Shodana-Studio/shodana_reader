@@ -114,20 +114,23 @@ class _StartingScreenWidgetState extends State<StartingScreenWidget> {
 
   Future<MapEntry<int, String>> onStartingScreenTapped(BuildContext context)
   async {
-    final Map<int, String> options = {
-      0: AppLocalizations.of(context)!.startingScreenOptionLastUsedText,
-      1: AppLocalizations.of(context)!.startingScreenOptionHomeText,
-      2: AppLocalizations.of(context)!.startingScreenOptionShelvesText,
-      3: AppLocalizations.of(context)!.startingScreenOptionClubsText,
-      // 4: AppLocalizations.of(context)!.startingScreenOptionDiscoverText,
-      4: AppLocalizations.of(context)!.startingScreenOptionMoreText,
+    final Map<int, Map<String, String>> options = {
+      0: {'last_used': AppLocalizations.of(context)!
+        .startingScreenOptionLastUsedText},
+      1: {'home': AppLocalizations.of(context)!.startingScreenOptionHomeText},
+      2: {'shelves': AppLocalizations.of(context)!
+          .startingScreenOptionShelvesText},
+      3: {'clubs': AppLocalizations.of(context)!.startingScreenOptionClubsText},
+      // 4: {'discover': AppLocalizations.of(context)!
+      //     .startingScreenOptionDiscoverText}
+      4: {'more': AppLocalizations.of(context)!.startingScreenOptionMoreText},
     };
     return await showDialog(
       context: context,
       builder: (context) => SimpleDialog(
         title: const Text('Alert Dialog Box'),
         children: [
-          for (final MapEntry<int, String> option in options.entries)
+          for (final MapEntry<int, Map<String, String>> option in options.entries)
             SimpleDialogItem(
               leading: Radio(value: option.key, groupValue: _value,
                 onChanged: (int? value) {
@@ -136,12 +139,12 @@ class _StartingScreenWidgetState extends State<StartingScreenWidget> {
                 },
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
               ),
-              text: option.value,
+              text: option.value.entries.first.value,
               onPressed: () {
                 setState(() {
-                  _value = 0;
+                  _value = option.key;
                 });
-                Navigator.pop(context, option.value);
+                Navigator.pop(context, option.value.entries.first.key);
               },
             ),
         ],
