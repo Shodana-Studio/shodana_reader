@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-import 'book_screen_mobile.dart';
+import 'home_screen_mobile.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -50,19 +50,19 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return ScreenTypeLayout.builder(
-      mobile: (BuildContext context) => BookScreenMobile(
+      mobile: (BuildContext context) => HomeScreenMobile(
         fabOnPressed: fabOnPressed,
         bookOnPressed: bookOnPressed,
       ),
-      tablet: (BuildContext context) => BookScreenMobile(
+      tablet: (BuildContext context) => HomeScreenMobile(
         fabOnPressed: fabOnPressed,
         bookOnPressed: bookOnPressed,
       ),
-      desktop: (BuildContext context) => BookScreenMobile(
+      desktop: (BuildContext context) => HomeScreenMobile(
         fabOnPressed: fabOnPressed,
         bookOnPressed: bookOnPressed,
       ),
-      watch: (BuildContext context) => BookScreenMobile(
+      watch: (BuildContext context) => HomeScreenMobile(
         fabOnPressed: fabOnPressed,
         bookOnPressed: bookOnPressed,
       ),

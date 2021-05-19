@@ -3,8 +3,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-import '../../data/provider/bottom_navigation_provider.dart';
-import '../../data/provider/left_navigation_rail_provider.dart';
+import 'provider/bottom_navigation_provider.dart';
+import 'provider/left_navigation_rail_provider.dart';
 
 class AppScreenTablet extends HookWidget {
   const AppScreenTablet({Key? key,

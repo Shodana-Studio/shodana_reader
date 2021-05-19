@@ -3,7 +3,7 @@ import 'package:beamer/beamer.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import '../../../data/provider/bottom_navigation_provider.dart';
+import '../../app_screen/provider/bottom_navigation_provider.dart';
 import 'book_details_screen_mobile.dart';
 
 class BookDetailsScreen extends StatelessWidget {

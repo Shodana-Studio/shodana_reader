@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../data/provider/bottom_navigation_provider.dart';
+import '../app_screen/provider/bottom_navigation_provider.dart';
 
 class ReaderScreen extends StatelessWidget {
   const ReaderScreen({Key? key, required this.book, required this.chapter}) : super(key: key);

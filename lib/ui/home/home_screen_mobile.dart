@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class BookScreenMobile extends StatelessWidget {
-  const BookScreenMobile({
+class HomeScreenMobile extends StatelessWidget {
+  const HomeScreenMobile({
     Key? key,
     required this.fabOnPressed,
     required this.bookOnPressed,
