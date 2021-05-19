@@ -7,11 +7,11 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-import '../../data/provider/nav_current_index_provider.dart';
-import '../../data/provider/starting_screen_provider.dart';
 import '../../locations/locations.dart';
 import 'app_screen_mobile.dart';
 import 'app_screen_tablet.dart';
+import 'provider/default_starting_page_provider.dart';
+import 'provider/starting_screen_provider.dart';
 
 class AppScreen extends StatefulHookWidget {
   const AppScreen({Key? key, required this.beamState}) : super(key: key);
@@ -69,6 +69,9 @@ class _AppScreenState extends State<AppScreen> {
       // _currentIndex = 4;
       _currentIndex = 3;
     } else {
+      // If the user has the default screen set to last used, launch the screen
+      // to the last used screen. Otherwise launch to the default screen
+      // selected by the user
       if (lastUsedEnabled) {
         _currentIndex = lastUsedIndex;
       } else {
@@ -77,16 +80,16 @@ class _AppScreenState extends State<AppScreen> {
     }
   }
 
-  void onNavigationItemTap(int index, StateController<bool> lastUsedEnabled,
-      StateController<int> lastUsedIndex) {
+  void onNavigationItemTap(int index, StateController<int> lastUsedIndex) {
     if (_currentIndex == index) {
       _routerDelegates[_currentIndex].beamToNamed
         (_routerDelegates[_currentIndex].initialPath);
     } else {
       setState(() => _currentIndex = index);
-      if (lastUsedEnabled.state) {
-        lastUsedIndex.state = _currentIndex;
-      }
+
+      // Always keep track of the last used index
+      lastUsedIndex.state = _currentIndex;
+
       _routerDelegates[_currentIndex].parent?.updateRouteInformation(
         _routerDelegates[_currentIndex].currentLocation.state.uri,
       );
@@ -95,8 +98,8 @@ class _AppScreenState extends State<AppScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final StateController<bool> lastUsedEnabled = context.read
-      (lastUsedEnabledProvider);
+    // final StateController<bool> lastUsedEnabled = context.read
+    //   (lastUsedEnabledProvider);
     final StateController<int> lastUsedIndex = context.read
       (lastUsedIndexProvider);
 
@@ -168,7 +171,7 @@ class _AppScreenState extends State<AppScreen> {
                 icon: const Icon(Icons.more_horiz)
             ),
           ],
-          onTap: (i) => onNavigationItemTap(i, lastUsedEnabled, lastUsedIndex),
+          onTap: (i) => onNavigationItemTap(i, lastUsedIndex),
         ),
       ],
     );
@@ -206,7 +209,7 @@ class _AppScreenState extends State<AppScreen> {
         ),
       ],
       selectedIndex: _currentIndex,
-      onDestinationSelected: (i) => onNavigationItemTap(i, lastUsedEnabled, lastUsedIndex),
+      onDestinationSelected: (i) => onNavigationItemTap(i, lastUsedIndex),
     );
 
     return ScreenTypeLayout.builder(

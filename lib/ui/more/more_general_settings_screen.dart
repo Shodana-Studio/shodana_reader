@@ -7,7 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../data/provider/dark_mode_provider.dart';
 import '../../data/provider/follow_system_theme_provider.dart';
 import '../../data/provider/left_navigation_rail_provider.dart';
-import '../../data/provider/starting_screen_provider.dart';
+import '../app_screen/provider/starting_screen_provider.dart';
 import 'settings_section_header.dart';
 
 class GeneralSettings extends HookWidget {

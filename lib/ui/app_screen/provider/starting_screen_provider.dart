@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../data/local/storage_utils.dart';
-import 'nav_current_index_provider.dart';
+import '../../../data/local/storage_utils.dart';
+import 'default_starting_page_provider.dart';
 // TODO: Convert to StateNotifierProvider to use SharedPreferences
 final lastUsedEnabledProvider = StateProvider((ref) => true);
 final lastUsedIndexProvider = StateProvider((ref) => ref.read(defaultStartingPageProvider));
