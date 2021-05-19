@@ -7,6 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../data/provider/dark_mode_provider.dart';
 import '../../data/provider/follow_system_theme_provider.dart';
 import '../app_screen/provider/left_navigation_rail_provider.dart';
+import '../app_screen/provider/starting_screen_button_choice.dart';
 import '../app_screen/provider/starting_screen_provider.dart';
 import 'settings_section_header.dart';
 
@@ -82,28 +83,40 @@ class GeneralSettings extends HookWidget {
   }
 }
 
-class StartingScreenWidget extends StatefulWidget {
+class StartingScreenWidget extends HookWidget {
   const StartingScreenWidget({Key? key}) : super(key: key);
-
-  @override
-  _StartingScreenWidgetState createState() => _StartingScreenWidgetState();
-}
-
-class _StartingScreenWidgetState extends State<StartingScreenWidget> {
-  int? _value = 0; // TODO: Store in a provider
+  // int? _value = 0; // TODO: Store in a provider
 
   @override
   Widget build(BuildContext context) {
     // TODO: set _value to value from SharedPrefs
     // _value = context.read()
+    final String screen = useProvider(startingPageProvider(context));
+    final String subtitle;
+    if (screen == 'last_used') {
+      subtitle = AppLocalizations.of(context)!.startingScreenOptionLastUsedText;
+    } else if (screen == 'home') {
+      subtitle = AppLocalizations.of(context)!.startingScreenOptionHomeText;
+    } else if (screen == 'shelves') {
+      subtitle = AppLocalizations.of(context)!.startingScreenOptionShelvesText;
+    } else if (screen == 'clubs') {
+      subtitle = AppLocalizations.of(context)!.startingScreenOptionClubsText;
+      // } else if (screen == 'discover') {
+      // subtitle = AppLocalizations.of(context)!.startingScreenOptionDiscoverText;
+    } else if (screen == 'more') {
+      subtitle = AppLocalizations.of(context)!.startingScreenOptionMoreText;//.setPage(4)
+    } else {
+      debugPrint('Error: Invalid screen id in StartingScreenWidget');
+      subtitle = 'Unknown screen';
+    }
     return ListTile(
       title: const Text('Starting screen'),
-      subtitle: Text(context.read(startingPageProvider(context))),
+      subtitle: Text(subtitle),
       onTap: () async {
         return onStartingScreenTapped(context)
             .then((screen) {
               context.read(startingPageProvider(context).notifier)
-                  .setScreen(screen.value);
+                  .setScreen(screen);
             })
             .onError((error, stackTrace) {
               debugPrint('Starting screen not set');
@@ -112,8 +125,10 @@ class _StartingScreenWidgetState extends State<StartingScreenWidget> {
     );
   }
 
-  Future<MapEntry<int, String>> onStartingScreenTapped(BuildContext context)
-  async {
+  Future<String> onStartingScreenTapped(
+      BuildContext context) async {
+    final StartingScreenButtonChoice groupProvider = context.read
+      (startingScreenButtonChoiceProvider.notifier);
     final Map<int, Map<String, String>> options = {
       0: {'last_used': AppLocalizations.of(context)!
         .startingScreenOptionLastUsedText},
@@ -132,18 +147,18 @@ class _StartingScreenWidgetState extends State<StartingScreenWidget> {
         children: [
           for (final MapEntry<int, Map<String, String>> option in options.entries)
             SimpleDialogItem(
-              leading: Radio(value: option.key, groupValue: _value,
-                onChanged: (int? value) {
-                  setState(() => _value = value);
-                  Navigator.pop(context, option.value);
+              leading: Radio(value: option.key, groupValue: groupProvider.getChoice(),
+                onChanged: (int? newValue) {
+                  if (newValue != null) {
+                    groupProvider.setPage(newValue);
+                  }
+                  Navigator.pop(context, option.value.entries.first.key);
                 },
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
               ),
               text: option.value.entries.first.value,
               onPressed: () {
-                setState(() {
-                  _value = option.key;
-                });
+                groupProvider.setPage(option.key);
                 Navigator.pop(context, option.value.entries.first.key);
               },
             ),

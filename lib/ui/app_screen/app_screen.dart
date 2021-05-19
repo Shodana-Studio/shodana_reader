@@ -6,14 +6,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:shodana_reader/ui/app_screen/provider/last_used_enabled_provider.dart';
-import 'package:shodana_reader/ui/app_screen/provider/last_used_index_provider.dart';
 
 import '../../locations/locations.dart';
 import 'app_screen_mobile.dart';
 import 'app_screen_tablet.dart';
 import 'provider/default_starting_page_provider.dart';
-import 'provider/starting_screen_provider.dart';
+import 'provider/last_used_enabled_provider.dart';
+import 'provider/last_used_index_provider.dart';
 
 class AppScreen extends StatefulHookWidget {
   const AppScreen({Key? key, required this.beamState}) : super(key: key);

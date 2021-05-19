@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../data/local/storage_utils.dart';
 import 'default_starting_page_provider.dart';
 import 'last_used_enabled_provider.dart';
-// TODO: Convert to StateNotifierProvider to use SharedPreferences
-// final lastUsedEnabledProvider = StateProvider((ref) => true);
-// final lastUsedIndexProvider = StateProvider((ref) => ref.read(defaultStartingPageProvider));
 
 final startingPageProvider =
 StateNotifierProvider.family<StartingPage, String, BuildContext>((ref,
@@ -25,7 +21,7 @@ class StartingPage extends StateNotifier<String>{
     required this.context,
     required this.defaultStartingPageProvider}) :
         super(StorageUtil.getString('starting_screen',
-          defValue: AppLocalizations.of(context)!.startingScreenOptionLastUsedText));
+          defValue: 'last_used'));
   final DefaultStartingPage defaultStartingPageProvider;
   final BuildContext context;
 
