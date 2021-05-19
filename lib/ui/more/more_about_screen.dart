@@ -1,6 +1,5 @@
 import 'dart:io' as io;
 
-import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:device_info/device_info.dart';
 import 'package:flutter/foundation.dart';

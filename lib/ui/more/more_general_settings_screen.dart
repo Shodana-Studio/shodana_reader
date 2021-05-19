@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:shodana_reader/data/provider/starting_screen_provider.dart';
 
 import '../../data/provider/dark_mode_provider.dart';
 import '../../data/provider/follow_system_theme_provider.dart';
 import '../../data/provider/left_navigation_rail_provider.dart';
+import '../../data/provider/starting_screen_provider.dart';
 import 'settings_section_header.dart';
 
 class GeneralSettings extends HookWidget {

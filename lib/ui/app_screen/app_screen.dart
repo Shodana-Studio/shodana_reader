@@ -6,8 +6,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:shodana_reader/data/provider/starting_screen_provider.dart';
+
 import '../../data/provider/nav_current_index_provider.dart';
+import '../../data/provider/starting_screen_provider.dart';
 import '../../locations/locations.dart';
 import 'app_screen_mobile.dart';
 import 'app_screen_tablet.dart';

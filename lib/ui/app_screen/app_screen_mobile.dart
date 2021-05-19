@@ -1,8 +1,6 @@
-import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:multi_screen_layout/multi_screen_layout.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../data/provider/bottom_navigation_provider.dart';
