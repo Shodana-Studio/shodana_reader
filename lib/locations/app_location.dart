@@ -2,8 +2,8 @@ import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import '../ui/app_screen/app_screen.dart';
 
-class HomeLocation extends BeamLocation {
-  HomeLocation(state) : super(state);
+class AppLocation extends BeamLocation {
+  AppLocation(state) : super(state);
 
   @override
   List<String> get pathBlueprints => ['/*'];

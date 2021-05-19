@@ -8,14 +8,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'locations/home_location.dart';
+import 'locations/app_location.dart';
 
 
 class App extends HookWidget {
   App({Key? key, this.savedThemeMode}) : super(key: key);
   final AdaptiveThemeMode? savedThemeMode;
   final rootBeamerRouter = BeamerRouterDelegate(
-      locationBuilder: (state) => HomeLocation(state));
+      locationBuilder: (state) => AppLocation(state));
 
   // Used to store which FlexSchemeData option we selected
   final FlexScheme flexScheme = FlexScheme.blue; // Default selected theme
