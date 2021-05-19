@@ -145,17 +145,18 @@ class AboutScreen extends HookWidget {
       // final isDark = AdaptiveTheme.of(context).mode.isDark;
       // final isLight = AdaptiveTheme.of(context).mode.isLight;
       // final isSystem = AdaptiveTheme.of(context).mode.isSystem;
-      final backgroundColor = AdaptiveTheme.of(context).theme.appBarTheme
+      final backgroundColor = Theme.of(context).appBarTheme
           .backgroundColor;
-      final titleTextStyle = AdaptiveTheme.of(context).theme.appBarTheme
-          .toolbarTextStyle;
+      final titleTextStyle = Theme.of(context).textTheme.bodyText2?.copyWith(
+        color: Theme.of(context).textTheme.headline6?.color,
+      );
       final snackBar = SnackBar(
         backgroundColor: backgroundColor,
         content: RichText(
           key: const ValueKey('device_info'),
           text: TextSpan(
             text: versionText,
-            // style: titleTextStyle,
+            style: titleTextStyle,
           ),
           maxLines: 3,
           overflow: TextOverflow.ellipsis,

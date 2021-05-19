@@ -94,7 +94,8 @@ class _StartingScreenWidgetState extends State<StartingScreenWidget> {
 
   @override
   Widget build(BuildContext context) {
-    _value = context.read()
+    // TODO: set _value to value from SharedPrefs
+    // _value = context.read()
     return ListTile(
       title: const Text('Starting screen'),
       subtitle: Text(context.read(startingPageProvider(context))),
