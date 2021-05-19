@@ -30,6 +30,6 @@ class BookScreenMobile extends StatelessWidget {
         tooltip: 'Add an eBook',
         child: const Icon(Icons.add),
       ),
-    );;
+    );
   }
 }

@@ -44,8 +44,8 @@ class AboutScreen extends HookWidget {
 
   Future<Widget> aboutFuture(BuildContext context) async {
     final PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    final String appName = packageInfo.appName;
-    final String packageName = packageInfo.packageName;
+    // final String appName = packageInfo.appName;
+    // final String packageName = packageInfo.packageName;
     final String version = packageInfo.version;
     final String buildNumber = packageInfo.buildNumber;
     final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
