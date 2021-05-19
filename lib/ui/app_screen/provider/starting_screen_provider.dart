@@ -4,9 +4,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../data/local/storage_utils.dart';
 import 'default_starting_page_provider.dart';
+import 'last_used_enabled_provider.dart';
 // TODO: Convert to StateNotifierProvider to use SharedPreferences
-final lastUsedEnabledProvider = StateProvider((ref) => true);
-final lastUsedIndexProvider = StateProvider((ref) => ref.read(defaultStartingPageProvider));
+// final lastUsedEnabledProvider = StateProvider((ref) => true);
+// final lastUsedIndexProvider = StateProvider((ref) => ref.read(defaultStartingPageProvider));
 
 final startingPageProvider =
 StateNotifierProvider.family<StartingPage, String, BuildContext>((ref,
@@ -38,21 +39,21 @@ class StartingPage extends StateNotifier<String>{
     // // 4: discover
     // 4: more
     if (screen == 'last_used') {
-      context.read(lastUsedEnabledProvider).state = true;
+      context.read(lastUsedEnabledProvider.notifier).setEnabled();
     } else if (screen == 'home') {
-      context.read(lastUsedEnabledProvider).state = false;
+      context.read(lastUsedEnabledProvider.notifier).setDisabled();
       defaultStartingPageProvider.setPage(0);
     } else if (screen == 'shelves') {
-      context.read(lastUsedEnabledProvider).state = false;
+      context.read(lastUsedEnabledProvider.notifier).setDisabled();
       defaultStartingPageProvider.setPage(1);
     } else if (screen == 'clubs') {
-      context.read(lastUsedEnabledProvider).state = false;
+      context.read(lastUsedEnabledProvider.notifier).setDisabled();
       defaultStartingPageProvider.setPage(2);
     // } else if (screen == 'discover') {
-    //   context.read(lastUsedEnabledProvider).state = false;
+    //   context.read(lastUsedEnabledProvider.notifier).setDisabled();
     //   defaultStartingPageProvider.setPage(3);
     } else if (screen == 'more') {
-      context.read(lastUsedEnabledProvider).state = false;
+      context.read(lastUsedEnabledProvider.notifier).setDisabled();
       defaultStartingPageProvider.setPage(3); //.setPage(4)
     } else {
       debugPrint('Error: Invalid screen passed into setScreen');

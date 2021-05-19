@@ -6,6 +6,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:shodana_reader/ui/app_screen/provider/last_used_enabled_provider.dart';
+import 'package:shodana_reader/ui/app_screen/provider/last_used_index_provider.dart';
 
 import '../../locations/locations.dart';
 import 'app_screen_mobile.dart';
@@ -50,8 +52,8 @@ class _AppScreenState extends State<AppScreen> {
   @override
   void initState() {
     super.initState();
-    final bool lastUsedEnabled = context.read(lastUsedEnabledProvider).state;
-    final int lastUsedIndex = context.read(lastUsedIndexProvider).state;
+    final bool lastUsedEnabled = context.read(lastUsedEnabledProvider);
+    final int lastUsedIndex = context.read(lastUsedIndexProvider);
     final int defaultStartingPage = context.read(defaultStartingPageProvider);
 
     if (widget.beamState.uri.path.contains('home')) {
@@ -80,15 +82,17 @@ class _AppScreenState extends State<AppScreen> {
     }
   }
 
-  void onNavigationItemTap(int index, StateController<int> lastUsedIndex) {
+  void onNavigationItemTap(int index, LastUsedIndex lastUsedIndex) {
     if (_currentIndex == index) {
       _routerDelegates[_currentIndex].beamToNamed
         (_routerDelegates[_currentIndex].initialPath);
     } else {
       setState(() => _currentIndex = index);
 
-      // Always keep track of the last used index
-      lastUsedIndex.state = _currentIndex;
+      // Always keep track of the last used index unless its the 'more' page
+      if (index != 3) { // TODO: change to 4 when adding the discover page
+        lastUsedIndex.setPage(_currentIndex);
+      }
 
       _routerDelegates[_currentIndex].parent?.updateRouteInformation(
         _routerDelegates[_currentIndex].currentLocation.state.uri,
@@ -100,8 +104,8 @@ class _AppScreenState extends State<AppScreen> {
   Widget build(BuildContext context) {
     // final StateController<bool> lastUsedEnabled = context.read
     //   (lastUsedEnabledProvider);
-    final StateController<int> lastUsedIndex = context.read
-      (lastUsedIndexProvider);
+    final LastUsedIndex lastUsedIndex = context.read
+      (lastUsedIndexProvider.notifier);
 
     final brightness = Theme.of(context).brightness;
     if (brightness == Brightness.dark) {
