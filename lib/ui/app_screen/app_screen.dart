@@ -26,27 +26,56 @@ class AppScreen extends StatefulHookWidget {
 class _AppScreenState extends State<AppScreen> {
   Widget? bottomNavigationBar;
   late NavigationRail navigationRail;
+  late int currentIndex;
 
   // These are all the location handlers. They handle the page stacks.
-  final _routerDelegates = [
-    BeamerRouterDelegate(
-      locationBuilder: (state) => HomeLocation(state),
+  final routerDelegates = [
+    BeamerDelegate(
+      initialPath: '/home',
+      locationBuilder: (state) {
+      if (state.uri.path.contains('home')) {
+        return HomeLocation(state);
+      }
+        return NotFound(path: state.uri.toString());
+      },
     ),
-    BeamerRouterDelegate(
-      locationBuilder: (state) => ShelvesLocation(state),
+    BeamerDelegate(
+      initialPath: '/shelves',
+      locationBuilder: (state) {
+        if (state.uri.path.contains('shelves')) {
+          return ShelvesLocation(state);
+        }
+        return NotFound(path: state.uri.toString());
+      },
     ),
-    BeamerRouterDelegate(
-      locationBuilder: (state) => ClubsLocation(state),
+    BeamerDelegate(
+      initialPath: '/clubs',
+      locationBuilder: (state) {
+        if (state.uri.path.contains('clubs')) {
+          return ClubsLocation(state);
+        }
+        return NotFound(path: state.uri.toString());
+      },
     ),
-    // BeamerRouterDelegate(
-    //   locationBuilder: (state) => DiscoverLocation(state),
+    // BeamerDelegate(
+    //   initialPath: '/discover',
+    //   locationBuilder: (state) {
+    //     if (state.uri.path.contains('discover')) {
+    //       return DiscoverLocation(state);
+    //     }
+    //     return NotFound(path: state.uri.toString());
+    //   },
     // ),
-    BeamerRouterDelegate(
-      locationBuilder: (state) => MoreLocation(state),
+    BeamerDelegate(
+      initialPath: '/more',
+      locationBuilder: (state) {
+        if (state.uri.path.contains('more')) {
+          return MoreLocation(state);
+        }
+        return NotFound(path: state.uri.toString());
+      },
     ),
   ];
-
-  int _currentIndex = 0;
 
   @override
   void initState() {
@@ -56,11 +85,11 @@ class _AppScreenState extends State<AppScreen> {
     final int defaultStartingPage = context.read(defaultStartingPageProvider);
 
     if (widget.beamState.uri.path.contains('home')) {
-      _currentIndex = 0;
+      currentIndex = 0;
     } else if (widget.beamState.uri.path.contains('shelves')) {
-      _currentIndex = 1;
+      currentIndex = 1;
     } else if (widget.beamState.uri.path.contains('clubs')) {
-      _currentIndex = 2;
+      currentIndex = 2;
     }
     // else if (widget.beamState.uri.path.contains('discover'))
     // {
@@ -68,35 +97,53 @@ class _AppScreenState extends State<AppScreen> {
     // }
     else if (widget.beamState.uri.path.contains('more')) {
       // _currentIndex = 4;
-      _currentIndex = 3;
+      currentIndex = 3;
     } else {
       // If the user has the default screen set to last used, launch the screen
       // to the last used screen. Otherwise launch to the default screen
       // selected by the user
       if (lastUsedEnabled) {
-        _currentIndex = lastUsedIndexNotifier.getPage();
+        currentIndex = lastUsedIndexNotifier.getPage();
       } else {
-        _currentIndex = defaultStartingPage;
+        currentIndex = defaultStartingPage;
       }
     }
-    lastUsedIndexNotifier.setPage(_currentIndex);
+    lastUsedIndexNotifier.setPage(currentIndex);
+
+    // Set the current index to active, all others to not active
+    int i = 0;
+    for ( i = 0; i < routerDelegates.length; i++ ) {
+      if (currentIndex == i) {
+        routerDelegates[i].active();
+      } else {
+        routerDelegates[i].active(false);
+      }
+    }
+
   }
 
   void onNavigationItemTap(int index, LastUsedIndex lastUsedIndex) {
-    if (_currentIndex == index) {
-      _routerDelegates[_currentIndex].beamToNamed
-        (_routerDelegates[_currentIndex].initialPath);
+    if (currentIndex == index) {
+      routerDelegates[currentIndex].beamToNamed
+        (routerDelegates[currentIndex].initialPath);
     } else {
-      setState(() => _currentIndex = index);
+      setState(() => currentIndex = index);
+
+      int i = 0;
+      for ( i = 0; i < routerDelegates.length; i++ ) {
+        if (currentIndex == i) {
+          routerDelegates[i].active();
+        } else {
+          routerDelegates[i].active(false);
+        }
+      }
 
       // Always keep track of the last used index unless its the 'more' page
       if (index != 3) { // TODO: change to 4 when adding the discover page
-        lastUsedIndex.setPage(_currentIndex);
+        lastUsedIndex.setPage(currentIndex);
       }
 
-      _routerDelegates[_currentIndex].parent?.updateRouteInformation(
-        _routerDelegates[_currentIndex].currentLocation.state.uri,
-      );
+      routerDelegates[currentIndex].update(rebuild: false);
     }
   }
 
@@ -134,12 +181,12 @@ class _AppScreenState extends State<AppScreen> {
 
     final IndexedStack indexedStack = IndexedStack(
       key: const ValueKey('first'),
-      index: _currentIndex,
+      index: currentIndex,
       children: [
-        Beamer(routerDelegate: _routerDelegates[0]),
-        Beamer(routerDelegate: _routerDelegates[1]),
-        Beamer(routerDelegate: _routerDelegates[2]),
-        Beamer(routerDelegate: _routerDelegates[3]),
+        Beamer(routerDelegate: routerDelegates[0]),
+        Beamer(routerDelegate: routerDelegates[1]),
+        Beamer(routerDelegate: routerDelegates[2]),
+        Beamer(routerDelegate: routerDelegates[3]),
         // Beamer(routerDelegate: _routerDelegates[4]),
       ],
     );
@@ -152,7 +199,7 @@ class _AppScreenState extends State<AppScreen> {
           type: BottomNavigationBarType.fixed,
           // backgroundColor: Theme.of(context).backgroundColor,
           elevation: 0.0,
-          currentIndex: _currentIndex,
+          currentIndex: currentIndex,
           items: [
             BottomNavigationBarItem(
                 label: AppLocalizations.of(context)!.homeBottomNavItemText,
@@ -212,7 +259,7 @@ class _AppScreenState extends State<AppScreen> {
           icon: const Icon(Icons.more_horiz)
         ),
       ],
-      selectedIndex: _currentIndex,
+      selectedIndex: currentIndex,
       onDestinationSelected: (i) => onNavigationItemTap(i, lastUsedIndex),
     );
 

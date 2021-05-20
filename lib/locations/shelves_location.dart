@@ -14,9 +14,11 @@ class ShelvesLocation extends BeamLocation {
   List<String> get pathBlueprints => ['/shelves/:shelfId/:bookId/:chapterId'];
 
   @override
-  List<BeamPage> pagesBuilder(BuildContext context, BeamState state) => [
+  List<BeamPage> buildPages(BuildContext context, BeamState state) => [
     BeamPage(
       key: const ValueKey('shelves'),
+      title: 'Shelves - Shodana Reader',
+      type: BeamPageType.noTransition,
       child: const ShelvesScreen(),
     ),
 

@@ -7,26 +7,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'locations/app_location.dart';
+import 'ui/app_screen/app_screen.dart';
 
 
 class App extends HookWidget {
   App({Key? key, this.savedThemeMode}) : super(key: key);
   final AdaptiveThemeMode? savedThemeMode;
-  final rootBeamerRouter = BeamerRouterDelegate(
-      locationBuilder: (state) => AppLocation(state));
 
   // Used to store which FlexSchemeData option we selected
   final FlexScheme flexScheme = FlexScheme.blue; // Default selected theme
 
+  // App screen state
+  final rootBeamerRouter = BeamerDelegate(
+    initialPath: '/home',
+    locationBuilder: SimpleLocationBuilder(
+      routes: {
+        '/*': (context) => AppScreen(beamState: Beamer.of(context).state),
+      },
+    ),
+  );
+
+
   @override
   Widget build(BuildContext context) {
+    // Theming
     final light = FlexColorScheme.light(
       appBarStyle: FlexAppBarStyle.background,
       scheme: flexScheme,
       // Use comfortable on desktops instead of compact, devices use default.
       visualDensity: FlexColorScheme.comfortablePlatformDensity,
     ).toTheme;
+
     final dark = FlexColorScheme.dark(
       scheme: flexScheme,
       visualDensity: FlexColorScheme.comfortablePlatformDensity,
@@ -40,7 +51,7 @@ class App extends HookWidget {
       builder: (theme, darkTheme) => GetMaterialApp.router(
         theme: theme,
         darkTheme: darkTheme,
-        routeInformationParser: BeamerRouteInformationParser(),
+        routeInformationParser: BeamerParser(),
         routerDelegate: rootBeamerRouter,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,

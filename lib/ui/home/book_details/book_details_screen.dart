@@ -14,7 +14,7 @@ class BookDetailsScreen extends StatelessWidget {
     context.read(shouldShowBottomNavigationProvider).state = false;
     await SystemChrome.setEnabledSystemUIOverlays([]);
     // Beam to different locations depending on the current page stack
-    if (Beamer.of(context).currentLocation.state
+    if (Beamer.of(context).currentBeamLocation.state
         .pathBlueprintSegments.first == 'shelves') {
       return context.beamToNamed('/shelves/0/0/1}');
     } else {

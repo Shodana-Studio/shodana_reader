@@ -14,9 +14,11 @@ class HomeLocation extends BeamLocation {
   List<String> get pathBlueprints => ['/home/:bookId/:chapterId'];
 
   @override
-  List<BeamPage> pagesBuilder(BuildContext context, BeamState state) => [
+  List<BeamPage> buildPages(BuildContext context, BeamState state) => [
     BeamPage(
       key: const ValueKey('home'),
+      title: 'Shodana Reader Home',
+      type: BeamPageType.noTransition,
       child: const HomeScreen(),
     ),
 

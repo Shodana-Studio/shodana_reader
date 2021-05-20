@@ -11,11 +11,13 @@ class DiscoverLocation extends BeamLocation {
   List<String> get pathBlueprints => ['/discover/:itemId'];
 
   @override
-  List<BeamPage> pagesBuilder(BuildContext context, BeamState state) => [
+  List<BeamPage> buildPages(BuildContext context, BeamState state) => [
     // TODO:
 
     BeamPage(
       key: const ValueKey('discover'),
+      title: 'Discover - Shodana Reader',
+      type: BeamPageType.noTransition,
       child: const DiscoverScreen(),
     ),
     if (state.pathParameters.containsKey('itemId'))

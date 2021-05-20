@@ -10,9 +10,11 @@ class MoreLocation extends BeamLocation {
   List<String> get pathBlueprints => ['/more/:itemId/:item2Id'];
 
   @override
-  List<BeamPage> pagesBuilder(BuildContext context, BeamState state) => [
+  List<BeamPage> buildPages(BuildContext context, BeamState state) => [
     BeamPage(
       key: const ValueKey('more'),
+      title: 'More - Shodana Reader',
+      type: BeamPageType.noTransition,
       child: const MoreScreen(),
     ),
     if (state.pathParameters.containsKey('itemId'))

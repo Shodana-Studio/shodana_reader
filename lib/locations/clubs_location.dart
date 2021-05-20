@@ -11,9 +11,11 @@ class ClubsLocation extends BeamLocation {
   List<String> get pathBlueprints => ['/clubs/:clubId'];
 
   @override
-  List<BeamPage> pagesBuilder(BuildContext context, BeamState state) => [
+  List<BeamPage> buildPages(BuildContext context, BeamState state) => [
     BeamPage(
       key: const ValueKey('clubs'),
+      title: 'Clubs - Shodana Reader',
+      type: BeamPageType.noTransition,
       child: const ClubsScreen(),
     ),
     if (state.pathParameters.containsKey('clubId'))
