@@ -52,7 +52,7 @@ class _AppScreenState extends State<AppScreen> {
   void initState() {
     super.initState();
     final bool lastUsedEnabled = context.read(lastUsedEnabledProvider);
-    final int lastUsedIndex = context.read(lastUsedIndexProvider);
+    final lastUsedIndexNotifier = context.read(lastUsedIndexProvider.notifier);
     final int defaultStartingPage = context.read(defaultStartingPageProvider);
 
     if (widget.beamState.uri.path.contains('home')) {
@@ -74,11 +74,12 @@ class _AppScreenState extends State<AppScreen> {
       // to the last used screen. Otherwise launch to the default screen
       // selected by the user
       if (lastUsedEnabled) {
-        _currentIndex = lastUsedIndex;
+        _currentIndex = lastUsedIndexNotifier.getPage();
       } else {
         _currentIndex = defaultStartingPage;
       }
     }
+    lastUsedIndexNotifier.setPage(_currentIndex);
   }
 
   void onNavigationItemTap(int index, LastUsedIndex lastUsedIndex) {
