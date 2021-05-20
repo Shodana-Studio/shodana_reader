@@ -91,7 +91,7 @@ class StartingScreenWidget extends HookWidget {
   Widget build(BuildContext context) {
     // TODO: set _value to value from SharedPrefs
     // _value = context.read()
-    final String screen = useProvider(startingPageProvider(context));
+    final String screen = useProvider(startingPageProvider);
     final String subtitle;
     if (screen == 'last_used') {
       subtitle = AppLocalizations.of(context)!.startingScreenOptionLastUsedText;
@@ -115,7 +115,7 @@ class StartingScreenWidget extends HookWidget {
       onTap: () async {
         return onStartingScreenTapped(context)
             .then((screen) {
-              context.read(startingPageProvider(context).notifier)
+              context.read(startingPageProvider.notifier)
                   .setScreen(screen);
             })
             .onError((error, stackTrace) {

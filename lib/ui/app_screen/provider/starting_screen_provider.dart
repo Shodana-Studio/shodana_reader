@@ -6,24 +6,23 @@ import 'default_starting_page_provider.dart';
 import 'last_used_enabled_provider.dart';
 
 final startingPageProvider =
-StateNotifierProvider.family<StartingPage, String, BuildContext>((ref,
-    context) {
+StateNotifierProvider<StartingPage, String>((ref) {
   final defaultStartingPageProviderNotifier = ref.read
     (defaultStartingPageProvider.notifier);
+
   return StartingPage(
     defaultStartingPageProvider: defaultStartingPageProviderNotifier,
-    context: context
+    lastUsedEnabled: ref.read(lastUsedEnabledProvider.notifier),
   );
 });
 
 class StartingPage extends StateNotifier<String>{
   StartingPage({
-    required this.context,
-    required this.defaultStartingPageProvider}) :
-        super(StorageUtil.getString('starting_screen',
-          defValue: 'last_used'));
+    required this.defaultStartingPageProvider,
+    required this.lastUsedEnabled,
+  }) : super(StorageUtil.getString('starting_screen', defValue: 'last_used'));
   final DefaultStartingPage defaultStartingPageProvider;
-  final BuildContext context;
+  final LastUsedEnabled lastUsedEnabled;
 
   void setScreen(String screen) {
     state = screen;
@@ -35,21 +34,21 @@ class StartingPage extends StateNotifier<String>{
     // // 4: discover
     // 4: more
     if (screen == 'last_used') {
-      context.read(lastUsedEnabledProvider.notifier).setEnabled();
+      lastUsedEnabled.setEnabled();
     } else if (screen == 'home') {
-      context.read(lastUsedEnabledProvider.notifier).setDisabled();
+      lastUsedEnabled.setDisabled();
       defaultStartingPageProvider.setPage(0);
     } else if (screen == 'shelves') {
-      context.read(lastUsedEnabledProvider.notifier).setDisabled();
+      lastUsedEnabled.setDisabled();
       defaultStartingPageProvider.setPage(1);
     } else if (screen == 'clubs') {
-      context.read(lastUsedEnabledProvider.notifier).setDisabled();
+      lastUsedEnabled.setDisabled();
       defaultStartingPageProvider.setPage(2);
     // } else if (screen == 'discover') {
-    //   context.read(lastUsedEnabledProvider.notifier).setDisabled();
+    //   lastUsedEnabled.setDisabled();
     //   defaultStartingPageProvider.setPage(3);
     } else if (screen == 'more') {
-      context.read(lastUsedEnabledProvider.notifier).setDisabled();
+      lastUsedEnabled.setDisabled();
       defaultStartingPageProvider.setPage(3); //.setPage(4)
     } else {
       debugPrint('Error: Invalid screen passed into setScreen');
