@@ -4,6 +4,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../data/constants.dart';
 import '../app_screen/provider/bottom_navigation_provider.dart';
+import 'ebook_reader/ebook_reader_screen.dart';
+import 'html_reader/html_reader_screen.dart';
 
 class ReaderScreen extends StatelessWidget {
   const ReaderScreen({
@@ -28,63 +30,14 @@ class ReaderScreen extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(top: 24.0),
         child: bookFileType == BookFileType.epub ?
-          EBookReader(
+          EBookReaderScreen(
             book: book,
             chapter: chapter
           ) :
-          HTMLReader(
+          HTMLReaderScreen(
             book: book,
             chapter: chapter,
           ),
-      ),
-    );
-  }
-}
-
-// TODO: Create reader for EPUB and other ebook files
-class EBookReader extends StatelessWidget {
-  const EBookReader({
-    Key? key,
-    required this.book,
-    required this.chapter,
-  }) : super(key: key);
-  final Map<String, String> book;
-  final List<String> chapter;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Reading: ${chapter.first}'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text('Chapter Contents: ${chapter[1]}'),
-      ),
-    );
-  }
-}
-
-
-// TODO: Create reader for html files
-class HTMLReader extends StatelessWidget {
-  const HTMLReader({
-    Key? key,
-    required this.book,
-    required this.chapter,
-  }) : super(key: key);
-  final Map<String, String> book;
-  final List<String> chapter;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Reading: ${chapter.first}'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text('Chapter Contents: ${chapter[1]}'),
       ),
     );
   }
