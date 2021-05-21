@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
-class DiscoverDetailsScreen extends StatelessWidget {
-  const DiscoverDetailsScreen({Key? key, required this.internetBook}) : super(key: key);
+class InternetBookDetailsScreenMobile extends StatelessWidget {
+  const InternetBookDetailsScreenMobile({
+    Key? key,
+    required this.internetBook,
+  }) : super(key: key);
+
   final Map<String, String> internetBook;
 
   @override
