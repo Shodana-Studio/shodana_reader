@@ -19,7 +19,7 @@ class StorageUtil {
     _preferences = await SharedPreferences.getInstance();
   }
 
-  // get string
+  /// get string from Shared Preferences
   static String getString(String key, {String defValue = ''}) {
     if (_preferences == null) {
       return defValue;
@@ -27,7 +27,7 @@ class StorageUtil {
     return _preferences!.getString(key) ?? defValue;
   }
 
-  // put string
+  /// put string in Shared Preferences
   static Future<bool> putString(String key, String value) {
     if (_preferences == null) {
       return Future.value(null);
@@ -35,22 +35,22 @@ class StorageUtil {
     return _preferences!.setString(key, value);
   }
 
-  // clear string
+  /// clear Shared Preferences
   static Future<bool> clrPrefs() {
     final SharedPreferences prefs = _preferences!;
     return prefs.clear();
   }
 
-  // put bool
   // ignore: avoid_positional_boolean_parameters
   static Future<bool> putBool(String key, bool value) {
+  /// put bool in Shared Preferences
     if (_preferences == null) {
       return Future.value(null);
     }
     return _preferences!.setBool(key, value);
   }
 
-  // get string
+  /// get bool from Shared Preferences
   static bool getBool(String key, {bool defValue = true}) {
     if (_preferences == null) {
       return defValue;
@@ -58,7 +58,7 @@ class StorageUtil {
     return _preferences!.getBool(key) ?? defValue;
   }
 
-  // get int
+  /// get int from Shared Preferences
   static int getInt(String key, {int defValue = 0}) {
     if (_preferences == null) {
       return defValue;
@@ -66,8 +66,7 @@ class StorageUtil {
     return _preferences!.getInt(key) ?? defValue;
   }
 
-  // put bool
-  // ignore: avoid_positional_boolean_parameters
+  /// put bool in Shared Preferences
   static Future<bool> putInt(String key, int value) {
     if (_preferences == null) {
       return Future.value(null);

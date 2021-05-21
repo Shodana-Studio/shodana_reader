@@ -12,7 +12,7 @@ class FollowSystemThemeSwitch extends StateNotifier<bool>{
 
   void toggle() {
     state = !state;
-    StorageUtil.putBool('followSystemTheme', state);
+    StorageUtil.putBool('followSystemTheme', value: state);
   }
 
   bool getState() {
