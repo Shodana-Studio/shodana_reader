@@ -7,38 +7,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import 'more_about_screen_mobile.dart';
 
 class AboutScreen extends HookWidget {
   const AboutScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-        builder: (context, AsyncSnapshot<Widget> snapshot) {
-          // Check for errors
-          if (snapshot.hasError) {
-            return Center(
-                child: Text(AppLocalizations.of(context)!.errorText)
-            );
-          }
-          // Once complete, show your application
-          else if (snapshot.hasData) {
-            return Container(child: snapshot.data,);
-          }
-
-          else {
-            // ignore: sized_box_for_whitespace
-            return Container(
-                height: MediaQuery.of(context).size.height /
-                    1.25,
-                width: MediaQuery.of(context).size.width /
-                    1.25,
-                child: const CircularProgressIndicator()
-            );
-          }
-        },
-        future: aboutFuture(context)
+    return ScreenTypeLayout.builder(
+      mobile: (BuildContext context) => MoreAboutScreenMobile(
+        aboutFuture: aboutFuture(context),
+      ),
+      tablet: (BuildContext context) => MoreAboutScreenMobile(
+        aboutFuture: aboutFuture(context),
+      ),
+      desktop: (BuildContext context) => MoreAboutScreenMobile(
+        aboutFuture: aboutFuture(context),
+      ),
+      watch: (BuildContext context) => MoreAboutScreenMobile(
+        aboutFuture: aboutFuture(context),
+      ),
     );
   }
 
