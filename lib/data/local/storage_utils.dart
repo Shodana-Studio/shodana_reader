@@ -41,9 +41,8 @@ class StorageUtil {
     return prefs.clear();
   }
 
-  // ignore: avoid_positional_boolean_parameters
-  static Future<bool> putBool(String key, bool value) {
   /// put bool in Shared Preferences
+  static Future<bool> putBool(String key, {required bool value}) {
     if (_preferences == null) {
       return Future.value(null);
     }

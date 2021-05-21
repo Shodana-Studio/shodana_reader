@@ -13,7 +13,7 @@ class LeftNavigationRail extends StateNotifier<bool>{
 
   void toggle() {
     state = !state;
-    StorageUtil.putBool('leftNavigationRail', state);
+    StorageUtil.putBool('leftNavigationRail', value: state);
   }
 
   bool getState() {

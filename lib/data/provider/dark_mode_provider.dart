@@ -12,7 +12,7 @@ class DarkModeSwitch extends StateNotifier<bool>{
 
   void toggle() {
     state = !state;
-    StorageUtil.putBool('darkMode', state);
+    StorageUtil.putBool('darkMode', value: state);
   }
 
   bool getState() {

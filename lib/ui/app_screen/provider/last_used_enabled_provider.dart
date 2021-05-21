@@ -11,12 +11,12 @@ class LastUsedEnabled extends StateNotifier<bool>{
 
   void setEnabled() {
     state = true;
-    StorageUtil.putBool('lastUsedEnabled', true);
+    StorageUtil.putBool('lastUsedEnabled', value: true);
   }
 
   void setDisabled() {
     state = false;
-    StorageUtil.putBool('lastUsedEnabled', false);
+    StorageUtil.putBool('lastUsedEnabled', value: false);
   }
 
   bool getStatus() {
