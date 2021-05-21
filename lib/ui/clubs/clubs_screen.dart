@@ -1,22 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:beamer/beamer.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:responsive_builder/responsive_builder.dart';
+
+import 'clubs_screen_mobile.dart';
 
 class ClubsScreen extends StatelessWidget {
   const ClubsScreen({Key? key}) : super(key: key);
 
+  void beamToClub(BuildContext context, String club) {
+    context.beamToNamed('/clubs/$club');
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context)?.clubsPageTitle
-          ?? 'No Title')),
-      body: Center(
-        child: TextButton(
-          onPressed: () {
-            context.beamToNamed('/clubs/0}');
-          },
-          child: const Text('Beam to Test Club 0'),
-        ),
+    return ScreenTypeLayout.builder(
+      mobile: (BuildContext context) => ClubsScreenMobile(
+        beamToClub: beamToClub,
+      ),
+      tablet: (BuildContext context) => ClubsScreenMobile(
+        beamToClub: beamToClub,
+      ),
+      desktop: (BuildContext context) => ClubsScreenMobile(
+        beamToClub: beamToClub,
+      ),
+      watch: (BuildContext context) => ClubsScreenMobile(
+        beamToClub: beamToClub,
       ),
     );
   }
