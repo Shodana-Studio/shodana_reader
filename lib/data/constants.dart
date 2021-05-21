@@ -1,3 +1,3 @@
-enum navigationTabs{home, shelves, clubs, /*discover,*/ more}
-enum tileType{series, book}
-enum fileType{epub, pdf, mobi}
+enum NavigationTabs{home, shelves, clubs, discover, more}
+enum TileType{series, book}
+enum BookFileType{epub, pdf, mobi, html}

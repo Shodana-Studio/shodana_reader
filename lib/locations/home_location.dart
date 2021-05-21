@@ -1,5 +1,6 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
+import 'package:shodana_reader/data/constants.dart';
 import '../data/repository/fake_data.dart';
 import '../ui/home/book_details/book_details_screen.dart';
 import '../ui/home/home_screen.dart';
@@ -37,6 +38,7 @@ class HomeLocation extends BeamLocation {
         child: ReaderScreen(
           book: book,
           chapter: chapter,
+          bookFileType: BookFileType.epub,
         ),
       ),
   ];
