@@ -57,15 +57,15 @@ class _AppScreenState extends State<AppScreen> {
         return NotFound(path: state.uri.toString());
       },
     ),
-    // BeamerDelegate(
-    //   initialPath: '/discover',
-    //   locationBuilder: (state) {
-    //     if (state.uri.path.contains('discover')) {
-    //       return DiscoverLocation(state);
-    //     }
-    //     return NotFound(path: state.uri.toString());
-    //   },
-    // ),
+    BeamerDelegate(
+      initialPath: '/discover',
+      locationBuilder: (state) {
+        if (state.uri.path.contains('discover')) {
+          return DiscoverLocation(state);
+        }
+        return NotFound(path: state.uri.toString());
+      },
+    ),
     BeamerDelegate(
       initialPath: '/more',
       locationBuilder: (state) {
@@ -92,13 +92,12 @@ class _AppScreenState extends State<AppScreen> {
     } else if (widget.beamState.uri.path.contains('clubs')) {
       currentIndex = 2;
     }
-    // else if (widget.beamState.uri.path.contains('discover'))
-    // {
-    //   _currentIndex = 3;
-    // }
-    else if (widget.beamState.uri.path.contains('more')) {
-      // _currentIndex = 4;
+    else if (widget.beamState.uri.path.contains('discover'))
+    {
       currentIndex = 3;
+    }
+    else if (widget.beamState.uri.path.contains('more')) {
+      currentIndex = 4;
     } else {
       // If the user has the default screen set to last used, launch the screen
       // to the last used screen. Otherwise launch to the default screen
@@ -140,7 +139,7 @@ class _AppScreenState extends State<AppScreen> {
       }
 
       // Always keep track of the last used index unless its the 'more' page
-      if (index != 3) { // TODO: change to 4 when adding the discover page
+      if (index != 4) {
         lastUsedIndex.setPage(currentIndex);
       }
 
@@ -188,7 +187,7 @@ class _AppScreenState extends State<AppScreen> {
         Beamer(routerDelegate: routerDelegates[1]),
         Beamer(routerDelegate: routerDelegates[2]),
         Beamer(routerDelegate: routerDelegates[3]),
-        // Beamer(routerDelegate: _routerDelegates[4]),
+        Beamer(routerDelegate: routerDelegates[4]),
       ],
     );
 
@@ -214,10 +213,10 @@ class _AppScreenState extends State<AppScreen> {
                 label: AppLocalizations.of(context)!.clubsBottomNavItemText,
                 icon: const Icon(Icons.group_rounded)
             ),
-            // BottomNavigationBarItem(
-            //     label: AppLocalizations.of(context)!.discoverBottomNavItemText,
-            //     icon: const Icon(Icons.explore_rounded)
-            // ),
+            BottomNavigationBarItem(
+                label: AppLocalizations.of(context)!.discoverBottomNavItemText,
+                icon: const Icon(Icons.explore_rounded)
+            ),
             BottomNavigationBarItem(
                 label: AppLocalizations.of(context)!.moreBottomNavItemText,
                 icon: const Icon(Icons.more_horiz)
@@ -251,10 +250,10 @@ class _AppScreenState extends State<AppScreen> {
           label: Text(AppLocalizations.of(context)!.clubsBottomNavItemText),
           icon: const Icon(Icons.group_rounded)
         ),
-        // NavigationRailDestination(
-        //   label: Text(AppLocalizations.of(context)!.discoverBottomNavItemText),
-        //   icon: const Icon(Icons.explore_rounded)
-        // ),
+        NavigationRailDestination(
+          label: Text(AppLocalizations.of(context)!.discoverBottomNavItemText),
+          icon: const Icon(Icons.explore_rounded)
+        ),
         NavigationRailDestination(
           label: Text(AppLocalizations.of(context)!.moreBottomNavItemText),
           icon: const Icon(Icons.more_horiz)

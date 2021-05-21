@@ -25,8 +25,8 @@ class StartingScreenWidget extends HookWidget {
       subtitle = AppLocalizations.of(context)!.startingScreenOptionShelvesText;
     } else if (screen == 'clubs') {
       subtitle = AppLocalizations.of(context)!.startingScreenOptionClubsText;
-      // } else if (screen == 'discover') {
-      // subtitle = AppLocalizations.of(context)!.startingScreenOptionDiscoverText;
+      } else if (screen == 'discover') {
+      subtitle = AppLocalizations.of(context)!.startingScreenOptionDiscoverText;
     } else if (screen == 'more') {
       subtitle = AppLocalizations.of(context)!.startingScreenOptionMoreText;//.setPage(4)
     } else {
@@ -60,9 +60,9 @@ class StartingScreenWidget extends HookWidget {
       2: {'shelves': AppLocalizations.of(context)!
           .startingScreenOptionShelvesText},
       3: {'clubs': AppLocalizations.of(context)!.startingScreenOptionClubsText},
-      // 4: {'discover': AppLocalizations.of(context)!
-      //     .startingScreenOptionDiscoverText}
-      4: {'more': AppLocalizations.of(context)!.startingScreenOptionMoreText},
+      4: {'discover': AppLocalizations.of(context)!
+          .startingScreenOptionDiscoverText},
+      5: {'more': AppLocalizations.of(context)!.startingScreenOptionMoreText},
     };
     return await showDialog(
       context: context,

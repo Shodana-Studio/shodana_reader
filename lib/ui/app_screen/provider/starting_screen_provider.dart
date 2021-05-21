@@ -31,8 +31,8 @@ class StartingPage extends StateNotifier<String>{
     // 1: home
     // 2: shelves
     // 3: clubs
-    // // 4: discover
-    // 4: more
+    // 4: discover
+    // 5: more
     if (screen == 'last_used') {
       lastUsedEnabled.setEnabled();
     } else if (screen == 'home') {
@@ -44,12 +44,12 @@ class StartingPage extends StateNotifier<String>{
     } else if (screen == 'clubs') {
       lastUsedEnabled.setDisabled();
       defaultStartingPageProvider.setPage(2);
-    // } else if (screen == 'discover') {
-    //   lastUsedEnabled.setDisabled();
-    //   defaultStartingPageProvider.setPage(3);
+    } else if (screen == 'discover') {
+      lastUsedEnabled.setDisabled();
+      defaultStartingPageProvider.setPage(3);
     } else if (screen == 'more') {
       lastUsedEnabled.setDisabled();
-      defaultStartingPageProvider.setPage(3); //.setPage(4)
+      defaultStartingPageProvider.setPage(4);
     } else {
       debugPrint('Error: Invalid screen passed into setScreen');
     }

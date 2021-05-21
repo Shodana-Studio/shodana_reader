@@ -71,7 +71,7 @@
   },
   "followSysThemeSwitchSubtitle":"Dark mode setting will be ignored",
   "@followSysThemeSwitchSubtitle": {
-    "description": "Descriptoin text for the follow system theme switch"
+    "description": "Description text for the follow system theme switch"
   },
   "loginButtonText":"Login",
   "@loginButtonText": {
@@ -213,7 +213,7 @@
   "@moreBottomNavItemText": {
     "description": "Navigation bar text for the more item"
   },
-  "startingScreenOptionLastUsedText":"Last used (Home, Shelves, or Clubs)",
+  "startingScreenOptionLastUsedText":"Last used (Home, Shelves, Clubs or Discover)",
   "@startingScreenOptionLastUsedText": {
     "description": "Text for button to set the starting screen to the last used, given that it is home, shelves, or clubs."
   },
