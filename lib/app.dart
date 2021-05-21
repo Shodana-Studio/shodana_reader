@@ -20,7 +20,11 @@ class App extends HookWidget {
   final FlexScheme flexScheme = FlexScheme.blue; // Default selected theme
 
   // App screen state
-  final rootBeamerRouter =// kIsWeb ?
+  final rootBeamerRouter =
+    // TODO: This breaks opening to a different tab than home by default. Need
+    // to get from shared preferences instead of setting it to home by default.
+
+    // kIsWeb ?
     // BeamerDelegate(
     //   initialPath: '/home',
     //   locationBuilder: SimpleLocationBuilder(
