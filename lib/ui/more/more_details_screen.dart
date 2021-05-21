@@ -2,9 +2,9 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'more_about_screen.dart';
-import 'more_general_settings_screen.dart';
-import 'more_settings_screen.dart';
+import 'more_about/more_about_screen.dart';
+import 'more_general_settings/more_general_settings_screen.dart';
+import 'more_settings/more_settings_screen.dart';
 
 class MoreDetailsScreen extends HookWidget {
   const MoreDetailsScreen({Key? key, required this.option}) : super(key: key);

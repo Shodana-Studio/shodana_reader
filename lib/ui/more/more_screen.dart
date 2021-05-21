@@ -1,35 +1,40 @@
-import 'package:flutter/material.dart';
 import 'package:beamer/beamer.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter/material.dart';
+import 'package:responsive_builder/responsive_builder.dart';
+
+import 'more_screen_mobile.dart';
 
 class MoreScreen extends StatelessWidget {
   const MoreScreen({Key? key}) : super(key: key);
 
+  void settingsOnPressed(BuildContext context) {
+    context.beamToNamed('/more/settings');
+  }
+
+  void aboutOnPressed(BuildContext context) {
+    context.beamToNamed('/more/about');
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context)!.morePageTitle)),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ListTile(
-            title: Text(AppLocalizations.of(context)!.settingsButtonText),
-            leading: Icon(
-              Icons.settings_outlined,
-              color: Theme.of(context).primaryColor,
-            ),
-            onTap: () => context.beamToNamed('/more/settings'),
-          ),
-          ListTile(
-            title: Text(AppLocalizations.of(context)!.aboutButtonText),
-            leading: Icon(
-              Icons.info_outline,
-              color: Theme.of(context).primaryColor,
-            ),
-            onTap: () => context.beamToNamed('/more/about'),
-          ),
-        ],
+    return ScreenTypeLayout.builder(
+      mobile: (BuildContext context) => MoreScreenMobile(
+        settingsOnPressed: () => settingsOnPressed(context),
+        aboutOnPressed: () => aboutOnPressed(context),
+      ),
+      tablet: (BuildContext context) => MoreScreenMobile(
+        settingsOnPressed: () => settingsOnPressed(context),
+        aboutOnPressed: () => aboutOnPressed(context),
+      ),
+      desktop: (BuildContext context) => MoreScreenMobile(
+        settingsOnPressed: () => settingsOnPressed(context),
+        aboutOnPressed: () => aboutOnPressed(context),
+      ),
+      watch: (BuildContext context) => MoreScreenMobile(
+        settingsOnPressed: () => settingsOnPressed(context),
+        aboutOnPressed: () => aboutOnPressed(context),
       ),
     );
   }
 }
+
