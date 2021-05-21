@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
-class ClubRoomScreen extends StatelessWidget {
-  const ClubRoomScreen({Key? key, required this.club}) : super(key: key);
+class ClubRoomScreenMobile extends StatelessWidget {
+  const ClubRoomScreenMobile({
+    Key? key,
+    required this.club,
+  }) : super(key: key);
+
   final Map<String, String> club;
 
   @override
