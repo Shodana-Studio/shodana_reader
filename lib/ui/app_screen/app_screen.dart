@@ -108,7 +108,7 @@ class _AppScreenState extends State<AppScreen> {
         currentIndex = defaultStartingPage;
       }
     }
-    
+
     if (currentIndex != 4) {
       lastUsedIndexNotifier.setPage(currentIndex);
     }
