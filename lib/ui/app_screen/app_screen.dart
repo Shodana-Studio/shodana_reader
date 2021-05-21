@@ -80,6 +80,7 @@ class _AppScreenState extends State<AppScreen> {
   @override
   void initState() {
     super.initState();
+    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
     final bool lastUsedEnabled = context.read(lastUsedEnabledProvider);
     final lastUsedIndexNotifier = context.read(lastUsedIndexProvider.notifier);
     final int defaultStartingPage = context.read(defaultStartingPageProvider);

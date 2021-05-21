@@ -11,19 +11,23 @@ class ReaderScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIOverlays([]);
     return WillPopScope(
       onWillPop: () async {
         context.read(shouldShowBottomNavigationProvider).state = true;
         await SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
         return true;
       },
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text('Reading: ${chapter.first}'),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text('Chapter Contents: ${chapter[1]}'),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 24.0),
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text('Reading: ${chapter.first}'),
+          ),
+          body: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text('Chapter Contents: ${chapter[1]}'),
+          ),
         ),
       ),
     );

@@ -12,7 +12,6 @@ class BookDetailsScreen extends StatelessWidget {
 
   Future<void> startReadingButtonPressed(BuildContext context) async {
     context.read(shouldShowBottomNavigationProvider).state = false;
-    await SystemChrome.setEnabledSystemUIOverlays([]);
     // Beam to different locations depending on the current page stack
     if (Beamer.of(context).currentBeamLocation.state
         .pathBlueprintSegments.first == 'shelves') {
