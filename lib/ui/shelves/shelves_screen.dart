@@ -1,34 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:beamer/beamer.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:responsive_builder/responsive_builder.dart';
+
+import 'shelves_screen_mobile.dart';
 
 class ShelvesScreen extends StatelessWidget {
   const ShelvesScreen({Key? key}) : super(key: key);
 
+  void beamToShelf(BuildContext context, String shelf) {
+    context.beamToNamed('/shelves/$shelf}');
+  }
+
+  void beamToBook(BuildContext context, String shelf, String book) {
+    context.beamToNamed('/shelves/$shelf/$book');
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context)?.shelvesPageTitle
-          ?? 'No Title')),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextButton(
-              onPressed: () {
-                return context.beamToNamed('/shelves/0}');
-              },
-              child: const Text('Beam to Test Shelf 0 Details'),
-            ),
-            TextButton(
-              onPressed: () {
-                return context.beamToNamed('/shelves/0/0}');
-              },
-              child: const Text('Beam to Test Book 0 Details'),
-            ),
-          ],
-        ),
+    return ScreenTypeLayout.builder(
+      mobile: (BuildContext context) => ShelvesScreenMobile(
+        beamToShelf: beamToShelf,
+        beamToBook: beamToBook,
+      ),
+      tablet: (BuildContext context) => ShelvesScreenMobile(
+        beamToShelf: beamToShelf,
+        beamToBook: beamToBook,
+      ),
+      desktop: (BuildContext context) => ShelvesScreenMobile(
+        beamToShelf: beamToShelf,
+        beamToBook: beamToBook,
+      ),
+      watch: (BuildContext context) => ShelvesScreenMobile(
+        beamToShelf: beamToShelf,
+        beamToBook: beamToBook,
       ),
     );
   }
 }
+
