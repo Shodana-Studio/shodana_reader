@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:beamer/beamer.dart';
 
-class ShelfDetailsScreen extends StatelessWidget {
-  const ShelfDetailsScreen({Key? key, required this.shelf}) : super(key: key);
+class ShelfDetailsScreenMobile extends StatelessWidget {
+  const ShelfDetailsScreenMobile({
+    Key? key,
+    required this.beamToBook,
+    required this.shelf,
+  }) : super(key: key);
+  final Function(BuildContext, String, String) beamToBook;
   final Map<String, String> shelf;
 
   @override
@@ -22,13 +26,11 @@ class ShelfDetailsScreen extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 8.0),
             child: Text('Books:', style: TextStyle(
-              fontWeight: FontWeight.bold
+                fontWeight: FontWeight.bold
             )),
           ),
           TextButton(
-            onPressed: () {
-              return context.beamToNamed('/shelves/0/0}');
-            },
+            onPressed: () => beamToBook(context, '0', '0'),
             child: const Text('Beam to Test Book 0 Details'),
           ),
         ],
