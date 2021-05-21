@@ -3,10 +3,12 @@ import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:beamer/beamer.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'locations/app_location.dart';
 import 'ui/app_screen/app_screen.dart';
 
 
@@ -18,14 +20,17 @@ class App extends HookWidget {
   final FlexScheme flexScheme = FlexScheme.blue; // Default selected theme
 
   // App screen state
-  final rootBeamerRouter = BeamerDelegate(
-    initialPath: '/home',
-    locationBuilder: SimpleLocationBuilder(
-      routes: {
-        '/*': (context) => AppScreen(beamState: Beamer.of(context).state),
-      },
-    ),
-  );
+  final rootBeamerRouter =// kIsWeb ?
+    // BeamerDelegate(
+    //   initialPath: '/home',
+    //   locationBuilder: SimpleLocationBuilder(
+    //     routes: {
+    //       '/*': (context) => AppScreen(beamState: Beamer.of(context).state),
+    //     },
+    //   ),
+    // ) :
+    BeamerDelegate(
+      locationBuilder: (state) => AppLocation(state));
 
 
   @override
