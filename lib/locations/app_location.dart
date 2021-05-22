@@ -7,9 +7,15 @@ class AppLocation extends BeamLocation {
   List<String> get pathBlueprints => ['/*'];
   @override
   List<BeamPage> buildPages(BuildContext context, BeamState state) => [
-    BeamPage(
-      key: ValueKey('app-${state.uri}'),
-      child: AppScreen(beamState: state),
-    ),
+    // if (!state.pathParameters.containsValue('login'))
+      BeamPage(
+        key: ValueKey('app-${state.uri}'),
+        child: AppScreen(beamState: state),
+      ),
+    // if (state.pathParameters.containsValue('login'))
+    //   BeamPage(
+    //     key: ValueKey('app-${state.uri}'),
+    //     child: LoginScreen(beamState: state),
+    //   ),
   ];
 }
