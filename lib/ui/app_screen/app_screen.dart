@@ -7,7 +7,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-import '../../locations/locations.dart';
+import '../../core/res/locations/locations.dart';
 import 'app_screen_mobile.dart';
 import 'app_screen_tablet.dart';
 import 'provider/default_starting_page_provider.dart';

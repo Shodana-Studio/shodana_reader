@@ -1,6 +1,6 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
-import '../ui/app_screen/app_screen.dart';
+import '../../../ui/app_screen/app_screen.dart';
 class AppLocation extends BeamLocation {
   AppLocation(state) : super(state);
   @override
