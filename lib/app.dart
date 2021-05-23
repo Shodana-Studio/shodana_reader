@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'core/res/locations/app_location.dart';
+import 'core/presentation/locations/app_location.dart';
 import 'ui/app_screen/app_screen.dart';
 
 

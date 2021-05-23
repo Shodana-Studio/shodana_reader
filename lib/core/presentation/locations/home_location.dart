@@ -1,11 +1,11 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 
-import '../../../core/data/repository/fake_data.dart';
 import '../../../ui/home/book_details/book_details_screen.dart';
 import '../../../ui/home/home_screen.dart';
 import '../../../ui/reader/reader_screen.dart';
-import '../constants.dart';
+import '../../data/repository/fake_data.dart';
+import '../../res/constants.dart';
 
 /// The home tab will contain recent books, books that haven't been started,
 /// reading stats, and reading goals.

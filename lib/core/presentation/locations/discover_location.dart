@@ -1,9 +1,9 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 
-import '../../../core/data/repository/fake_data.dart';
 import '../../../ui/discover/discover_screen.dart';
 import '../../../ui/discover/internet_book_details/discover_details_screen.dart';
+import '../../data/repository/fake_data.dart';
 
 class DiscoverLocation extends BeamLocation {
   DiscoverLocation(BeamState state) : super(state);
