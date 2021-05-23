@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:beamer/beamer.dart';
 
 import 'app.dart';
-import 'data/local/storage_utils.dart';
+import 'data/storage_utils.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

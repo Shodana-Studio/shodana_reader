@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../data/local/storage_utils.dart';
+import '../storage_utils.dart';
 
 final followSystemThemeSwitchProvider =
 StateNotifierProvider<FollowSystemThemeSwitch, bool>((ref) {
