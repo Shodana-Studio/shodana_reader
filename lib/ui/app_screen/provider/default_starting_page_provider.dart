@@ -1,5 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../data/storage_utils.dart';
+import '../../../core/data/service/storage_utils.dart';
 
 final defaultStartingPageProvider =
 StateNotifierProvider<DefaultStartingPage, int>((ref) {

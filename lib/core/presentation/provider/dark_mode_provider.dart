@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../storage_utils.dart';
+import '../../data/service/storage_utils.dart';
 
 final darkModeSwitchProvider =
 StateNotifierProvider<DarkModeSwitch, bool>((ref) {
