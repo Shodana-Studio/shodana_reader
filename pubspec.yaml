@@ -20,6 +20,9 @@ dependencies:
   multi_screen_layout: ^2.0.0
   intl: ^0.17.0
 
+  # For backend
+  appwrite: ^0.6.0
+
   # For books
   file_picker: ^3.0.1
   epubx: ^3.0.0-dev.3
