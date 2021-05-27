@@ -1,25 +1,27 @@
 // APP
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:beamer/beamer.dart';
+import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'core/presentation/locations/app_location.dart';
-import 'ui/app_screen/app_screen.dart';
 
 
-class App extends HookWidget {
-  App({Key? key, this.savedThemeMode}) : super(key: key);
+class App extends StatefulWidget {
+  const App({Key? key, this.savedThemeMode}) : super(key: key);
   final AdaptiveThemeMode? savedThemeMode;
 
-  // Used to store which FlexSchemeData option we selected
-  final FlexScheme flexScheme = FlexScheme.blue; // Default selected theme
+  @override
+  _AppState createState() => _AppState();
+}
 
-  // App screen state
+class _AppState extends State<App> {
+  late Client client;
+  final FlexScheme flexScheme = FlexScheme.blue;
   final rootBeamerRouter =
     // TODO: This breaks opening to a different tab than home by default. Need
     // to get from shared preferences instead of setting it to home by default.
@@ -34,8 +36,20 @@ class App extends HookWidget {
     //   ),
     // ) :
     BeamerDelegate(
-      locationBuilder: (state) => AppLocation(state));
+      locationBuilder: (state) => AppLocation(state),
+    );
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    client = Client();
+    client
+        .setEndpoint('http://192.168.1.204/v1')
+        .setProject('60a984c918aa7')
+        .setSelfSigned() // TODO: Remove in production
+        ;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,18 +67,21 @@ class App extends HookWidget {
     ).toTheme;
 
 
-    return AdaptiveTheme(
-      light: light,
-      dark: dark,
-      initial: savedThemeMode ?? AdaptiveThemeMode.dark,
-      builder: (theme, darkTheme) => GetMaterialApp.router(
-        theme: theme,
-        darkTheme: darkTheme,
-        routeInformationParser: BeamerParser(),
-        routerDelegate: rootBeamerRouter,
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-        debugShowCheckedModeBanner: false,
+    return FlAppwriteAccountKit(
+      client: client,
+      child: AdaptiveTheme(
+        light: light,
+        dark: dark,
+        initial: widget.savedThemeMode ?? AdaptiveThemeMode.dark,
+        builder: (theme, darkTheme) => GetMaterialApp.router(
+          theme: theme,
+          darkTheme: darkTheme,
+          routeInformationParser: BeamerParser(),
+          routerDelegate: rootBeamerRouter,
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          debugShowCheckedModeBanner: false,
+        ),
       ),
     );
   }
