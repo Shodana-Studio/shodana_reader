@@ -1,6 +1,9 @@
 import 'package:beamer/beamer.dart';
+import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 import 'package:flutter/material.dart';
+
 import '../../../core/data/repository/fake_data.dart';
+import '../../../ui/auth/login_screen.dart';
 import '../../../ui/clubs/club_room/club_room_screen.dart';
 import '../../../ui/clubs/clubs_screen.dart';
 
@@ -25,5 +28,21 @@ class ClubsLocation extends BeamLocation {
           club: club,
         ),
       ),
+  ];
+
+  // in your location implementation
+  @override
+  List<BeamGuard> get guards => [
+    // Show forbiddenPage if the user tries to enter books/2:
+    BeamGuard(
+      pathBlueprints: ['/clubs', 'clubs/*'],
+      check: (context, location) =>
+        (context.authNotifier?.status ?? AuthStatus.uninitialized)
+            == AuthStatus.authenticated,
+      showPage: BeamPage(
+        key: const ValueKey('login'),
+        child: LoginScreen(),
+      ),
+    ),
   ];
 }
