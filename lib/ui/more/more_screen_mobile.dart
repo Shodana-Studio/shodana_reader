@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -16,11 +18,30 @@ class MoreScreenMobile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Client? client = context.authNotifier?.client;
+    final Avatars? avatars = (client == null) ? null : Avatars(client);
+    
     return Scaffold(
       appBar: AppBar(title: Text(AppLocalizations.of(context)!.morePageTitle)),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (user != null) ...[
+          if (user != null && avatars != null) ...[
+            FutureBuilder(
+              future: avatars.getInitials(
+              ), //works for both public file and private file, for private files you need to be logged in
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  print(snapshot.error);
+                }
+                return snapshot.hasData && snapshot.data != null
+                    ? Image.memory(
+                      (snapshot.data! as Response).data,
+                      fit: BoxFit.contain,
+                      width: 80,
+                    ) : const CircularProgressIndicator();
+              },
+            ),
             Text(user!.name),
             Text(user!.email),
             const SizedBox(height: 20.0),
