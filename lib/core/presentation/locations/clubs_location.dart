@@ -41,7 +41,7 @@ class ClubsLocation extends BeamLocation {
             == AuthStatus.authenticated,
       showPage: BeamPage(
         key: const ValueKey('login'),
-        child: LoginScreen(),
+        child: LoginPage(),
       ),
     ),
   ];

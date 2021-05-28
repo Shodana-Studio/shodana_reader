@@ -1,95 +1,254 @@
 import 'package:flutter/material.dart';
 import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-class LoginScreen extends StatefulWidget {
-  @override
-  _LoginScreenState createState() => _LoginScreenState();
-}
+// class LoginScreen extends StatefulWidget {
+//   const LoginScreen({Key? key}) : super(key: key);
+//
+//   @override
+//   _LoginScreenState createState() => _LoginScreenState();
+// }
+//
+// class _LoginScreenState extends State<LoginScreen> {
+//   late TextEditingController _email;
+//   late TextEditingController _password;
+//
+//   @override
+//   void initState() {
+//     super.initState();
+//     _email = TextEditingController();
+//     _password = TextEditingController();
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: SafeArea(
+//         child: ListView(
+//           children: [
+//             const SizedBox(height: 30.0),
+//             Text(
+//               'Shodana Reader',
+//               textAlign: TextAlign.center,
+//               style: Theme.of(context).textTheme.headline3?.copyWith(
+//                 color: Theme.of(context).primaryColor,
+//               ),
+//             ),
+//             const SizedBox(height: 20.0),
+//             Card(
+//               margin: const EdgeInsets.all(32.0),
+//               shape: RoundedRectangleBorder(
+//                 borderRadius: BorderRadius.circular(10.0),
+//               ),
+//               child: ListView(
+//                 shrinkWrap: true,
+//                 primary: false,
+//                 physics: const NeverScrollableScrollPhysics(),
+//                 padding: const EdgeInsets.all(16.0),
+//                 children: [
+//                   const SizedBox(height: 20.0),
+//                   Text(
+//                     'Login Required',
+//                     textAlign: TextAlign.center,
+//                     style: Theme.of(context).textTheme.headline5?.copyWith(
+//                       color: Colors.red,
+//                     ),
+//                   ),
+//                   const SizedBox(height: 10.0),
+//                   Text(
+//                     'Online features require an account to use.',
+//                     textAlign: TextAlign.center,
+//                     style: Theme.of(context).textTheme.subtitle1,
+//                   ),
+//                   const SizedBox(height: 20.0),
+//                   TextField(
+//                     controller: _email,
+//                     decoration: const InputDecoration(
+//                       labelText: 'Enter email',
+//                     ),
+//                   ),
+//                   TextField(
+//                     controller: _password,
+//                     obscureText: true,
+//                     decoration: const InputDecoration(
+//                       labelText: 'Enter password',
+//                     ),
+//                   ),
+//                   const SizedBox(height: 30.0),
+//                   ElevatedButton(
+//                     onPressed: () async {
+//                       final email = _email.text;
+//                       final password = _password.text;
+//
+//                       if (!(await context.authNotifier?.createSession(
+//                           email: email, password: password) ??
+//                           false)) {
+//                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+//                             content: Text(context.authNotifier?.error ??
+//                                 'Unknown error')));
+//                       }
+//                     },
+//                     style: ElevatedButton.styleFrom(
+//                       padding: const EdgeInsets.all(16.0),
+//                     ),
+//                     child: const Text('Login'),
+//                   ),
+//                   const SizedBox(height: 20.0),
+//                 ],
+//               ),
+//             )
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
+//
+// class LoadingPage extends StatelessWidget {
+//   const LoadingPage({Key? key}) : super(key: key);
+//   @override
+//   Widget build(BuildContext context) {
+//     return const Scaffold(
+//       body: Center(
+//         child: CircularProgressIndicator(),
+//       ),
+//     );
+//   }
+// }
 
-class _LoginScreenState extends State<LoginScreen> {
-  late TextEditingController _email;
-  late TextEditingController _password;
 
-  @override
-  void initState() {
-    super.initState();
-    _email = TextEditingController();
-    _password = TextEditingController();
-  }
+class LoginPage extends HookWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: ListView(
-          children: [
-            const SizedBox(height: 30.0),
-            Text(
-              'Shodana Reader',
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.headline3?.copyWith(
-                color: Theme.of(context).primaryColor,
-              ),
-            ),
-            const SizedBox(height: 20.0),
-            Card(
-              margin: const EdgeInsets.all(32.0),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: ListView(
-                shrinkWrap: true,
-                primary: false,
-                physics: const NeverScrollableScrollPhysics(),
-                padding: const EdgeInsets.all(16.0),
-                children: [
-                  const SizedBox(height: 20.0),
-                  Text(
-                    'Account Required',
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.headline5?.copyWith(
-                      color: Colors.red,
-                    ),
-                  ),
-                  const SizedBox(height: 20.0),
-                  TextField(
-                    controller: _email,
-                    decoration: const InputDecoration(
-                      labelText: 'Enter email',
-                    ),
-                  ),
-                  TextField(
-                    controller: _password,
-                    obscureText: true,
-                    decoration: const InputDecoration(
-                      labelText: 'Enter password',
-                    ),
-                  ),
-                  const SizedBox(height: 30.0),
-                  ElevatedButton(
-                    onPressed: () async {
-                      final email = _email.text;
-                      final password = _password.text;
+    final emailController = useTextEditingController();
+    final passwordController = useTextEditingController();
+    // final authNotifier = context.authNotifier;
 
-                      if (!(await context.authNotifier?.createSession(
-                          email: email, password: password) ??
-                          false)) {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text(context.authNotifier?.error ??
-                                'Unknown error')));
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.all(16.0),
-                    ),
-                    child: const Text('Login'),
-                  ),
-                  const SizedBox(height: 20.0),
-                ],
+    return Scaffold(
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 256),
+          child: Wrap(
+            spacing: 32,
+            runSpacing: 32,
+            alignment: WrapAlignment.center,
+            children: [
+              const FlutterLogo(size: 128),
+              Text(
+                'Login',
+                style: Theme.of(context).textTheme.headline2,
               ),
-            )
-          ],
+              EmailInput(controller: emailController),
+              PasswordInput(controller: passwordController),
+              LoginButton(
+                  usernameController: emailController,
+                  passwordController: passwordController),
+              // Text('STATE: ${authNotifier?.status ?? AuthStatus
+              //     .uninitialized}'),
+              // if ((authNotifier?.status ?? AuthStatus.uninitialized)
+              // == AuthStatus.authenticating)
+              //   const CircularProgressIndicator()
+            ],
+          ),
         ),
+      ),
+    );
+  }
+}
+
+class EmailInput extends StatelessWidget {
+  const EmailInput({Key? key, required this.controller}) : super(key: key);
+
+  final TextEditingController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      autofillHints: const [AutofillHints.email],
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      validator: (value) {
+        if (value == null) {
+          return null;
+        }
+        const String pattern =
+            r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+        final RegExp regex = RegExp(pattern);
+        if (!regex.hasMatch(value)) {
+          return 'Enter a valid email';
+        } else {
+          return null;
+        }
+      },
+      keyboardType: TextInputType.emailAddress,
+      controller: controller,
+      decoration: const InputDecoration(
+          labelText: 'Email',
+          border: OutlineInputBorder(),
+          // hintText: 'beamer'
+      ),
+    );
+  }
+}
+
+class PasswordInput extends StatelessWidget {
+  const PasswordInput({Key? key, required this.controller}) : super(key: key);
+
+  final TextEditingController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      autofillHints: const [AutofillHints.password],
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      validator: (value) {
+        if (value == null){
+          return null;
+        }
+        if (value.length < 6 || value.length > 32) {
+          return 'Must be between 6 and 32 characters';
+        }
+      },
+      obscureText: true,
+      controller: controller,
+      decoration: const InputDecoration(
+          labelText: 'Password',
+          border: OutlineInputBorder(),
+          // hintText: 'supersecret'
+      ),
+    );
+  }
+}
+
+class LoginButton extends StatelessWidget {
+  const LoginButton(
+      {Key? key,
+        required this.usernameController,
+        required this.passwordController})
+      : super(key: key);
+
+  final TextEditingController usernameController;
+  final TextEditingController passwordController;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
+        onPressed: () async {
+          final email = usernameController.text;
+          final password = passwordController.text;
+
+          if (!(await context.authNotifier?.createSession(
+              email: email, password: password) ??
+              false)) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text(context.authNotifier?.error ??
+                    'Unknown error')));
+          }
+        },
+        child: const Text('Login'),
       ),
     );
   }
