@@ -25,6 +25,9 @@ dependencies:
   flappwrite_account_kit:
     git: https://github.com/lohanidamodar/flappwrite_account_kit
 
+  # For login
+  email_validator: ^2.0.1
+
   # For books
   file_picker: ^3.0.1
   epubx: ^3.0.0-dev.3

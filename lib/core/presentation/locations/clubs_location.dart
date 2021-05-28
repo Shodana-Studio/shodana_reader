@@ -33,7 +33,7 @@ class ClubsLocation extends BeamLocation {
   // in your location implementation
   @override
   List<BeamGuard> get guards => [
-    // Show forbiddenPage if the user tries to enter books/2:
+    // Show forbiddenPage if the user tries to enter clubs:
     BeamGuard(
       pathBlueprints: ['/clubs', 'clubs/*'],
       check: (context, location) =>
@@ -41,7 +41,7 @@ class ClubsLocation extends BeamLocation {
             == AuthStatus.authenticated,
       showPage: BeamPage(
         key: const ValueKey('login'),
-        child: LoginPage(),
+        child: const LoginPage(),
       ),
     ),
   ];

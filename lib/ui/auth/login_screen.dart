@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 // class LoginScreen extends StatefulWidget {
@@ -168,19 +169,9 @@ class EmailInput extends StatelessWidget {
     return TextFormField(
       autofillHints: const [AutofillHints.email],
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      validator: (value) {
-        if (value == null) {
-          return null;
-        }
-        const String pattern =
-            r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-        final RegExp regex = RegExp(pattern);
-        if (!regex.hasMatch(value)) {
-          return 'Enter a valid email';
-        } else {
-          return null;
-        }
-      },
+      validator: (val) => EmailValidator.validate(val!, true)
+        ? 'Not a valid email.'
+        : null,
       keyboardType: TextInputType.emailAddress,
       controller: controller,
       decoration: const InputDecoration(
