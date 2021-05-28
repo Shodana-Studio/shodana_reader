@@ -25,7 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
           children: [
             const SizedBox(height: 30.0),
             Text(
-              'Appwrite Auth Provider Example',
+              'Shodana Reader',
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headline3?.copyWith(
                 color: Theme.of(context).primaryColor,
@@ -45,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   const SizedBox(height: 20.0),
                   Text(
-                    'Log In',
+                    'Account Required',
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.headline5?.copyWith(
                       color: Colors.red,
