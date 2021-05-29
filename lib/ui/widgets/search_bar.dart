@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
+import 'package:shodana_reader/ui/more/more_screen.dart';
 
 class SearchBar extends StatelessWidget {
   const SearchBar({
@@ -26,8 +27,8 @@ class SearchBar extends StatelessWidget {
       scrollPadding: const EdgeInsets.only(/*top: 0, */bottom: 80),
       // padding: const EdgeInsets.symmetric(horizontal: 0),
       // backdropColor: Colors.transparent,
-      margins: EdgeInsets.symmetric(vertical: MediaQuery.of(context)
-          .viewPadding.top.toDouble() + 8, horizontal: 16.0),
+      margins: EdgeInsets.only(top: MediaQuery.of(context)
+          .viewPadding.top.toDouble() + 8, bottom: 8.0, left: 16.0, right: 16),
       transitionDuration: const Duration(milliseconds: 200),
       borderRadius: BorderRadius.circular(8.0),
       transitionCurve: Curves.easeInOut,
@@ -83,10 +84,7 @@ class SearchBar extends StatelessWidget {
               showDialog(
                 context: context,
                 builder: (BuildContext context) {
-                  return const AlertDialog(
-                    title: Text('Shodana'),
-                    content: Text('email'),
-                  );
+                  return const MoreScreen();
                 },
               );
             },
