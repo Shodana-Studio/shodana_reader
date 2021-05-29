@@ -45,6 +45,7 @@ dependencies:
   adaptive_theme: ^2.2.0
   flex_color_scheme: ^2.1.1
   flutter_native_splash: ^1.1.8+4
+  material_floating_search_bar: ^0.3.4
 
   # For Utilities
   get: ^4.1.4
