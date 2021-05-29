@@ -16,18 +16,21 @@ class DiscoverScreenMobile extends StatelessWidget {
     );
   }
 
-  Center buildDiscover(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: kToolbarHeight + 8,),
-          TextButton(
-            onPressed: () => beamToInternetBook(context, '0'),
-            child: const Text('Beam to Test Internet Book 0 Details'),
-          ),
-        ],
+  Widget buildDiscover(BuildContext context) {
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: kToolbarHeight + 8,),
+            TextButton(
+              onPressed: () => beamToInternetBook(context, '0'),
+              child: const Text('Beam to Test Internet Book 0 Details'),
+            ),
+            const SizedBox(height: 800,),
+          ],
+        ),
       ),
     );
   }

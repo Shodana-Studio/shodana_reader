@@ -18,20 +18,24 @@ class ShelvesScreenMobile extends StatelessWidget {
   }
 
   Widget buildShelves(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const SizedBox(height: kToolbarHeight + 8,),
-          TextButton(
-            onPressed: () => beamToShelf(context, '0'),
-            child: const Text('Beam to Test Shelf 0 Details'),
-          ),
-          TextButton(
-            onPressed: () => beamToBook(context, '0', '0'),
-            child: const Text('Beam to Test Book 0 Details'),
-          ),
-        ],
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: kToolbarHeight + 8,),
+            TextButton(
+              onPressed: () => beamToShelf(context, '0'),
+              child: const Text('Beam to Test Shelf 0 Details'),
+            ),
+            TextButton(
+              onPressed: () => beamToBook(context, '0', '0'),
+              child: const Text('Beam to Test Book 0 Details'),
+            ),
+            const SizedBox(height: 800,),
+          ],
+        ),
       ),
     );
   }

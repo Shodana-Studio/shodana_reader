@@ -25,16 +25,24 @@ class HomeScreenMobile extends StatelessWidget {
   }
 
   Widget buildHome(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const SizedBox(height: kToolbarHeight + 8,),
-          TextButton(
-            onPressed: bookOnPressed,
-            child: const Text('Beam to Test Book 0 Details'),
-          ),
-        ],
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: kToolbarHeight + 8,),
+            // ListTile(
+            //   title: const Text('Beam to Test Book 0 Details'),
+            //   onTap: bookOnPressed,
+            // ),
+            TextButton(
+              onPressed: bookOnPressed,
+              child: const Text('Beam to Test Book 0 Details'),
+            ),
+            const SizedBox(height: 800,),
+          ],
+        ),
       ),
     );
   }
