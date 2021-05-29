@@ -25,6 +25,7 @@ class SearchBar extends StatelessWidget {
       // automaticallyImplyBackButton: true,
       scrollPadding: const EdgeInsets.only(/*top: 0, */bottom: 80),
       // padding: const EdgeInsets.symmetric(horizontal: 0),
+      // backdropColor: Colors.transparent,
       margins: EdgeInsets.symmetric(vertical: MediaQuery.of(context)
           .viewPadding.top.toDouble() + 8, horizontal: 16.0),
       transitionDuration: const Duration(milliseconds: 200),
