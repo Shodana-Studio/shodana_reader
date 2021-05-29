@@ -1,6 +1,5 @@
-import 'dart:typed_data';
-
 import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'widgets/settings_list.dart';
@@ -35,11 +34,14 @@ class MoreScreenMobile extends StatelessWidget {
                   print(snapshot.error);
                 }
                 return snapshot.hasData && snapshot.data != null
-                    ? Image.memory(
-                      (snapshot.data! as Response).data,
-                      fit: BoxFit.contain,
-                      width: 80,
-                    ) : const CircularProgressIndicator();
+                    ? ClipRRect(
+                  borderRadius: BorderRadius.circular(360.0),
+                  child: Image.memory(
+                    (snapshot.data! as Response).data,
+                    fit: BoxFit.contain,
+                    width: 80.0,
+                  ),
+                ) : const CircularProgressIndicator();
               },
             ),
             Text(user!.name),
