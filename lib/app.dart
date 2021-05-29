@@ -85,6 +85,7 @@ class _AppState extends State<App> {
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           debugShowCheckedModeBanner: false,
+          backButtonDispatcher: BeamerBackButtonDispatcher(delegate: rootBeamerRouter)
         ),
       ),
     );
