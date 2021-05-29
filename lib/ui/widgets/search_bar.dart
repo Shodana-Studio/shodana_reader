@@ -74,20 +74,53 @@ class SearchBar extends StatelessWidget {
         FloatingSearchBarAction.back(),
       ],
       actions: [
+        // FloatingSearchBarAction(
+        //   child: CircularButton(
+        //     icon: const CircleAvatar(
+        //       radius: 16.0,
+        //       child: Text('A'),
+        //     ),
+        //     onPressed: () {
+        //       showDialog(
+        //         context: context,
+        //         builder: (BuildContext context) {
+        //           return const MoreScreen();
+        //         },
+        //       );
+        //     },
+        //   ),
+        // ),
         FloatingSearchBarAction(
-          child: CircularButton(
+          child: PopupMenuButton(
+            offset: Offset(0.0, MediaQuery.of(context)
+                .viewPadding.top.toDouble()),
             icon: const CircleAvatar(
               radius: 16.0,
               child: Text('A'),
             ),
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return const MoreScreen();
-                },
-              );
-            },
+            itemBuilder: (BuildContext context) => <PopupMenuEntry>[
+              const PopupMenuItem(
+                child: ListTile(
+                  leading: Icon(Icons.add),
+                  title: Text('Item 1'),
+                ),
+              ),
+              const PopupMenuItem(
+                child: ListTile(
+                  leading: Icon(Icons.anchor),
+                  title: Text('Item 2'),
+                ),
+              ),
+              const PopupMenuItem(
+                child: ListTile(
+                  leading: Icon(Icons.article),
+                  title: Text('Item 3'),
+                ),
+              ),
+              const PopupMenuDivider(),
+              const PopupMenuItem(child: Text('Item A')),
+              const PopupMenuItem(child: Text('Item B')),
+            ],
           ),
         ),
         FloatingSearchBarAction.searchToClear(
