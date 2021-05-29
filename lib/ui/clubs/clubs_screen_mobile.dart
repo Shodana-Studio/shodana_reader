@@ -13,7 +13,7 @@ class ClubsScreenMobile extends StatelessWidget {
     return Scaffold(
       // appBar: AppBar(title: Text(AppLocalizations.of(context)?.clubsPageTitle
       //     ?? 'No Title')),
-      body: SearchBar(body: buildClubs(context), hint: 'Search Clubs',),
+      body: SearchBar(body: buildClubs(context), hint: 'Search clubs...',),
     );
   }
 

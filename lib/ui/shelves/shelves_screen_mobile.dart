@@ -13,7 +13,7 @@ class ShelvesScreenMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       // appBar: AppBar(title: Text(AppLocalizations.of(context)!.shelvesPageTitle)),
-      body: SearchBar(body: buildShelves(context), hint: 'Search Shelves',),
+      body: SearchBar(body: buildShelves(context), hint: 'Search shelves...',),
     );
   }
 
@@ -22,6 +22,7 @@ class ShelvesScreenMobile extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          const SizedBox(height: kToolbarHeight + 8,),
           TextButton(
             onPressed: () => beamToShelf(context, '0'),
             child: const Text('Beam to Test Shelf 0 Details'),

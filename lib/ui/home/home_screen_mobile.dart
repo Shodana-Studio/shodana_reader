@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../widgets/search_bar.dart';
 
 class HomeScreenMobile extends StatelessWidget {
   const HomeScreenMobile({
@@ -13,22 +14,27 @@ class HomeScreenMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context)!.appName)),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextButton(
-              onPressed: bookOnPressed,
-              child: const Text('Beam to Test Book 0 Details'),
-            ),
-          ],
-        ),
-      ),
+      // appBar: AppBar(title: Text(AppLocalizations.of(context)!.appName)),
+      body: SearchBar(body: buildHome(context), hint: 'Search recents...',),
       floatingActionButton: FloatingActionButton(
         onPressed: fabOnPressed,
         tooltip: 'Add an eBook',
         child: const Icon(Icons.add),
+      ),
+    );
+  }
+
+  Widget buildHome(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const SizedBox(height: kToolbarHeight + 8,),
+          TextButton(
+            onPressed: bookOnPressed,
+            child: const Text('Beam to Test Book 0 Details'),
+          ),
+        ],
       ),
     );
   }
