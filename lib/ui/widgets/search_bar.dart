@@ -23,8 +23,12 @@ class SearchBar extends StatelessWidget {
       hint: hint,
       backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,
       // automaticallyImplyBackButton: true,
-      scrollPadding: const EdgeInsets.only(top: 16, bottom: 80),
+      scrollPadding: const EdgeInsets.only(/*top: 0, */bottom: 80),
+      // padding: const EdgeInsets.symmetric(horizontal: 0),
+      margins: EdgeInsets.symmetric(vertical: MediaQuery.of(context)
+          .viewPadding.top.toDouble() + 8, horizontal: 16.0),
       transitionDuration: const Duration(milliseconds: 200),
+      borderRadius: BorderRadius.circular(8.0),
       transitionCurve: Curves.easeInOut,
       physics: const BouncingScrollPhysics(),
       axisAlignment: isPortrait ? 0.0 : -1.0,

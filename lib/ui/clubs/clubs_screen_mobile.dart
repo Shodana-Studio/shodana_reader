@@ -24,28 +24,18 @@ class ClubsScreenMobile extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: kToolbarHeight,),
+            const SizedBox(height: kToolbarHeight + 8,),
             ListTile(
               title: const Text('Beam to Test Club 0'),
               subtitle: const Text('Best club there is'),
               onTap: () => beamToClub(context, '0'),
-            ),
-            const Divider(
-              height: 1.0,
-              thickness: 1.0,
-              indent: 16.0,
-              endIndent: 16.0,
+              contentPadding: const EdgeInsets.symmetric(horizontal: 12,),
             ),
             ListTile(
               title: const Text('Beam to Test Club 0'),
               subtitle: const Text('Best club there is'),
               onTap: () => beamToClub(context, '0'),
-            ),
-            const Divider(
-              height: 1.0,
-              thickness: 1.0,
-              indent: 16.0,
-              endIndent: 16.0,
+              contentPadding: const EdgeInsets.symmetric(horizontal: 12,),
             ),
             const SizedBox(height: 800,),
           ],
