@@ -169,7 +169,7 @@ class EmailInput extends StatelessWidget {
     return TextFormField(
       autofillHints: const [AutofillHints.email],
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      validator: (val) => EmailValidator.validate(val!, true)
+      validator: (val) => !EmailValidator.validate(val!, true)
         ? 'Not a valid email.'
         : null,
       keyboardType: TextInputType.emailAddress,
