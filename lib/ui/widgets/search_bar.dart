@@ -104,27 +104,91 @@ class SearchBar extends StatelessWidget {
               child: Text('A'),
             ),
             itemBuilder: (BuildContext context) => <PopupMenuEntry>[
-              const PopupMenuItem(
+              // Account
+              PopupMenuItem(
                 child: ListTile(
-                  leading: Icon(Icons.add),
-                  title: Text('Item 1'),
+                  contentPadding: const EdgeInsets.all(0),
+                  leading: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const <Widget>[
+                      CircleAvatar(
+                        radius: 20.0,
+                        child: Text('A'),
+                      ),
+                    ],
+                  ),
+                  title: const Text('Admin'),
+                  subtitle: const Text('admin@shodana.app'),
                 ),
               ),
-              const PopupMenuItem(
+              // Divider
+              const PopupMenuDivider(height: 1,),
+              // Incognito Mode
+              PopupMenuItem(
                 child: ListTile(
-                  leading: Icon(Icons.anchor),
-                  title: Text('Item 2'),
+                  contentPadding: const EdgeInsets.all(0),
+                  minLeadingWidth: 0.0,
+                  leading: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const <Widget>[
+                      Icon(Icons.history_toggle_off_outlined),
+                    ],
+                  ),
+                  title: const Text('Turn on Incognito mode'),
+                  // subtitle: const Text('Pauses reading history'),
                 ),
               ),
-              const PopupMenuItem(
+              // Settings
+              PopupMenuItem(
                 child: ListTile(
-                  leading: Icon(Icons.article),
-                  title: Text('Item 3'),
+                  contentPadding: const EdgeInsets.all(0),
+                  minLeadingWidth: 0.0,
+                  leading: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const <Widget>[
+                      Icon(Icons.settings_outlined),
+                    ],
+                  ),
+                  title: const Text('Settings'),
                 ),
               ),
-              const PopupMenuDivider(),
-              const PopupMenuItem(child: Text('Item A')),
-              const PopupMenuItem(child: Text('Item B')),
+              // About
+              PopupMenuItem(
+                child: ListTile(
+                  contentPadding: const EdgeInsets.all(0),
+                  minLeadingWidth: 0.0,
+                  leading: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const <Widget>[
+                      Icon(Icons.info_outline),
+                    ],
+                  ),
+                  title: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text('About', style: Theme.of(context).textTheme
+                          .bodyText1,),
+                      Text('v0.0.2', style: Theme.of(context).textTheme
+                          .subtitle2,),
+                    ],
+                  ),
+                  // subtitle: const Text('v0.0.2'),
+                ),
+              ),
+              // Help
+              PopupMenuItem(
+                child: ListTile(
+                  contentPadding: const EdgeInsets.all(0),
+                  minLeadingWidth: 0.0,
+                  leading: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const <Widget>[
+                      Icon(Icons.help_outline),
+                    ],
+                  ),
+                  title: const Text('Help'),
+                ),
+              ),
             ],
           ),
         ),
