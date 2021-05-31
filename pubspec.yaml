@@ -21,7 +21,7 @@ dependencies:
   intl: ^0.17.0
 
   # For backend
-  appwrite: ^0.6.0
+  appwrite: ^0.6.2
   flappwrite_account_kit:
     git: https://github.com/lohanidamodar/flappwrite_account_kit
 
