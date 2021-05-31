@@ -78,22 +78,21 @@ class SearchBar extends StatelessWidget {
         //   child: CircularButton(
         //     icon: const CircleAvatar(
         //       radius: 16.0,
-        //       child: Text('A'),
+        //       child: Text('B'),
         //     ),
         //     onPressed: () {
-        //       showDialog(
-        //         context: context,
-        //         builder: (BuildContext context) {
-        //           return const MoreScreen();
-        //         },
-        //       );
+        //       Navigator.of(context).push(MaterialPageRoute<Null>(
+        //           builder: (BuildContext context) {
+        //             return const MoreScreen();
+        //           },
+        //           fullscreenDialog: true
+        //       ));
         //     },
         //   ),
         // ),
         FloatingSearchBarAction(
           child: PopupMenuButton(
-            offset: Offset(0.0, MediaQuery.of(context)
-                .viewPadding.top.toDouble()),
+            offset: const Offset(0.0, kToolbarHeight),
             icon: const CircleAvatar(
               radius: 16.0,
               child: Text('A'),
