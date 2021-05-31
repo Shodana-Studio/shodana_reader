@@ -70,10 +70,12 @@ class _AppState extends State<App> {
       client: client,
       child: AdaptiveTheme(
         light: light.copyWith(snackBarTheme: dark.snackBarTheme.copyWith(
-            backgroundColor: Colors.white
+          backgroundColor: Colors.grey[800],
+          contentTextStyle: dark.textTheme.bodyText2
         )),
         dark: dark.copyWith(snackBarTheme: dark.snackBarTheme.copyWith(
-          backgroundColor: Colors.grey[900]
+          backgroundColor: Colors.grey[800],
+          contentTextStyle: dark.textTheme.bodyText2
         )),
         initial: widget.savedThemeMode ?? AdaptiveThemeMode.dark,
         builder: (theme, darkTheme) => MaterialApp.router(
