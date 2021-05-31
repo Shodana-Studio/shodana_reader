@@ -22,7 +22,7 @@ class SearchBar extends StatelessWidget {
 
     return FloatingSearchBar(
       hint: hint,
-      backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,
+      backgroundColor: Theme.of(context).bottomAppBarTheme.color,
       // automaticallyImplyBackButton: true,
       scrollPadding: const EdgeInsets.only(/*top: 0, */bottom: 80),
       // padding: const EdgeInsets.symmetric(horizontal: 0),
@@ -56,7 +56,7 @@ class SearchBar extends StatelessWidget {
 
                 return SearchToClear(
                   isEmpty: isEmpty,
-                  color: bar.style.iconColor,
+                  color: Theme.of(context).iconTheme.color,
                   duration: const Duration(milliseconds: 900) * 0.5,
                   onTap: () {
                     if (!isEmpty) {
@@ -71,7 +71,9 @@ class SearchBar extends StatelessWidget {
             );
           },
         ),
-        FloatingSearchBarAction.back(),
+        FloatingSearchBarAction.back(
+          color: Theme.of(context).iconTheme.color,
+        ),
       ],
       actions: [
         FloatingSearchBarAction(
@@ -134,7 +136,7 @@ class SearchBar extends StatelessWidget {
         return ClipRRect(
           borderRadius: BorderRadius.circular(8),
           child: Material(
-            color: Theme.of(context).snackBarTheme.backgroundColor,
+            color: Theme.of(context).bottomAppBarTheme.color,
             elevation: 4.0,
             child: Column(
               mainAxisSize: MainAxisSize.min,

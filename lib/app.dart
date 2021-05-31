@@ -69,14 +69,24 @@ class _AppState extends State<App> {
     return FlAppwriteAccountKit(
       client: client,
       child: AdaptiveTheme(
-        light: light.copyWith(snackBarTheme: dark.snackBarTheme.copyWith(
-          backgroundColor: Colors.grey[800],
-          contentTextStyle: dark.textTheme.bodyText2
-        )),
-        dark: dark.copyWith(snackBarTheme: dark.snackBarTheme.copyWith(
-          backgroundColor: Colors.grey[800],
-          contentTextStyle: dark.textTheme.bodyText2
-        )),
+        light: light.copyWith(
+          snackBarTheme: dark.snackBarTheme.copyWith(
+            backgroundColor: Colors.grey[800],
+            contentTextStyle: dark.textTheme.bodyText2
+          ),
+          bottomAppBarTheme: dark.bottomAppBarTheme.copyWith(
+              color: Colors.white,
+          ),
+        ),
+        dark: dark.copyWith(
+          snackBarTheme: dark.snackBarTheme.copyWith(
+            backgroundColor: Colors.grey[800],
+            contentTextStyle: dark.textTheme.bodyText2
+          ),
+          bottomAppBarTheme: dark.bottomAppBarTheme.copyWith(
+            color: Colors.grey[900],
+          ),
+        ),
         initial: widget.savedThemeMode ?? AdaptiveThemeMode.dark,
         builder: (theme, darkTheme) => MaterialApp.router(
           theme: theme,
