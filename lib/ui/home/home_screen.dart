@@ -44,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void bookOnPressed() {
-    context.beamToNamed('/home/0}');
+    context.beamToNamed('/home/0');
   }
 
   @override
