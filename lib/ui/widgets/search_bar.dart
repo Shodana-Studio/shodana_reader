@@ -92,6 +92,10 @@ class SearchBar extends StatelessWidget {
         ),
         FloatingSearchBarAction(
           child: PopupMenuButton(
+            padding: const EdgeInsets.all(0),
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(8.0))
+            ),
             offset: const Offset(0.0, kToolbarHeight),
             icon: const CircleAvatar(
               radius: 16.0,
