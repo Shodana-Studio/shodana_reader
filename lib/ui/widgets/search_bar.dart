@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
-import 'package:shodana_reader/ui/more/more_screen.dart';
+import '../more/more_screen.dart';
 
 class SearchBar extends StatelessWidget {
   const SearchBar({
@@ -74,22 +74,22 @@ class SearchBar extends StatelessWidget {
         FloatingSearchBarAction.back(),
       ],
       actions: [
-        // FloatingSearchBarAction(
-        //   child: CircularButton(
-        //     icon: const CircleAvatar(
-        //       radius: 16.0,
-        //       child: Text('B'),
-        //     ),
-        //     onPressed: () {
-        //       Navigator.of(context).push(MaterialPageRoute<Null>(
-        //           builder: (BuildContext context) {
-        //             return const MoreScreen();
-        //           },
-        //           fullscreenDialog: true
-        //       ));
-        //     },
-        //   ),
-        // ),
+        FloatingSearchBarAction(
+          child: CircularButton(
+            icon: const CircleAvatar(
+              radius: 16.0,
+              child: Text('B'),
+            ),
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute<void>(
+                  builder: (BuildContext context) {
+                    return const MoreScreen();
+                  },
+                  fullscreenDialog: true
+              ));
+            },
+          ),
+        ),
         FloatingSearchBarAction(
           child: PopupMenuButton(
             offset: const Offset(0.0, kToolbarHeight),

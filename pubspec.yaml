@@ -48,7 +48,6 @@ dependencies:
   material_floating_search_bar: ^0.3.4
 
   # For Utilities
-  get: ^4.1.4
   url_launcher: ^6.0.3
   package_info_plus: ^1.0.1
   device_info: ^2.0.0

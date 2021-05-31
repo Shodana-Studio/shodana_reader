@@ -237,6 +237,8 @@ class LoginButton extends StatelessWidget {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 content: Text(context.authNotifier?.error ??
                     'Unknown error')));
+            print(context.authNotifier?.error ??
+                'Unknown error');
           }
         },
         child: const Text('Login'),

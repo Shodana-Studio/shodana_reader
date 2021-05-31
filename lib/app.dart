@@ -7,7 +7,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:get/get.dart';
 import 'core/presentation/locations/app_location.dart';
 
 
@@ -77,7 +76,7 @@ class _AppState extends State<App> {
           backgroundColor: Colors.grey[900]
         )),
         initial: widget.savedThemeMode ?? AdaptiveThemeMode.dark,
-        builder: (theme, darkTheme) => GetMaterialApp.router(
+        builder: (theme, darkTheme) => MaterialApp.router(
           theme: theme,
           darkTheme: darkTheme,
           routeInformationParser: BeamerParser(),
