@@ -21,7 +21,7 @@ class MoreScreenMobile extends StatelessWidget {
     final Avatars? avatars = (client == null) ? null : Avatars(client);
     
     return Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context)!.morePageTitle)),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.accountPageTitle)),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -34,24 +34,55 @@ class MoreScreenMobile extends StatelessWidget {
                   print(snapshot.error);
                 }
                 return snapshot.hasData && snapshot.data != null
-                    ? ClipRRect(
-                  borderRadius: BorderRadius.circular(360.0),
-                  child: Image.memory(
-                    (snapshot.data! as Response).data,
-                    fit: BoxFit.contain,
-                    width: 80.0,
+                    ? ListTile(
+                  onTap: () {},
+                  leading: ClipRRect(
+                    borderRadius: BorderRadius.circular(90.0),
+                    child: Image.memory(
+                      (snapshot.data! as Response).data,
+                      fit: BoxFit.contain,
+                    ),
                   ),
+                  trailing: IconButton(
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: const Text('Log out'),
+                            content: const Text("Are you sure? You won't be able "
+                                'to access any online content without being '
+                                'logged in.'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                style: Theme.of(context).textButtonTheme.style,
+                                child: const Text('CANCEL'),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  context.authNotifier?.deleteSession();
+                                  Navigator.of(context).pop();
+                                },
+                                style: Theme.of(context).textButtonTheme.style,
+                                child: const Text('LOGOUT'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                    icon: const Icon(Icons.logout),
+                  ),
+                  title: Text(user!.name),
+                  subtitle: Text(user!.email),
+                  // subtitle: const Text('Pauses reading history'),
                 ) : const CircularProgressIndicator();
               },
             ),
-            Text(user!.name),
-            Text(user!.email),
-            const SizedBox(height: 20.0),
-            ElevatedButton(
-                onPressed: () {
-                  context.authNotifier?.deleteSession();
-                },
-                child: const Text('Logout'))
+            const Divider(height: 16,),
           ],
           SettingsList(
             settingsOnPressed: settingsOnPressed,
