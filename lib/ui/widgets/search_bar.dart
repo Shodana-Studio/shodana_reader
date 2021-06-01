@@ -32,7 +32,7 @@ class SearchBar extends StatelessWidget {
     return FloatingSearchBar(
       hint: hint,
       backgroundColor: Theme.of(context).bottomAppBarTheme.color,
-      // automaticallyImplyBackButton: true,
+      automaticallyImplyBackButton: false,
       scrollPadding: const EdgeInsets.only(/*top: 0, */bottom: 80),
       // padding: const EdgeInsets.symmetric(horizontal: 0),
       // backdropColor: Colors.transparent,
