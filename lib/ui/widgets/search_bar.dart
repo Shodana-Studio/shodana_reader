@@ -54,6 +54,7 @@ class SearchBar extends StatelessWidget {
       transition: CircularFloatingSearchBarTransition(),
       // transition: ExpandingFloatingSearchBarTransition(),
       leadingActions: [
+        // Search icon
         FloatingSearchBarAction(
           builder: (context, animation) {
             final bar = FloatingSearchAppBar.of(context)!;
@@ -80,28 +81,31 @@ class SearchBar extends StatelessWidget {
             );
           },
         ),
+        // Back button
         FloatingSearchBarAction.back(
           color: Theme.of(context).iconTheme.color,
         ),
       ],
       actions: [
-        FloatingSearchBarAction(
-          child: CircularButton(
-            icon: const CircleAvatar(
-              radius: 16.0,
-              child: Text('B'),
-            ),
-            onPressed: () {
-              context.read(shouldShowBottomNavigationProvider).state = false;
-              Navigator.of(context).push(MaterialPageRoute<void>(
-                builder: (BuildContext context) {
-                  return const MoreScreen();
-                },
-                fullscreenDialog: true
-              ));
-            },
-          ),
-        ),
+        // Profile button (Option B)
+        // FloatingSearchBarAction(
+        //   child: CircularButton(
+        //     icon: const CircleAvatar(
+        //       radius: 16.0,
+        //       child: Text('B'),
+        //     ),
+        //     onPressed: () {
+        //       context.read(shouldShowBottomNavigationProvider).state = false;
+        //       Navigator.of(context).push(MaterialPageRoute<void>(
+        //         builder: (BuildContext context) {
+        //           return const MoreScreen();
+        //         },
+        //         fullscreenDialog: true
+        //       ));
+        //     },
+        //   ),
+        // ),
+        // Profile button (Option A)
         FloatingSearchBarAction(
           child: PopupMenuButton(
             padding: const EdgeInsets.all(0),
@@ -109,46 +113,77 @@ class SearchBar extends StatelessWidget {
                 borderRadius: BorderRadius.all(Radius.circular(8.0))
             ),
             offset: const Offset(0.0, kToolbarHeight),
-            icon: const CircleAvatar(
-              radius: 16.0,
-              child: Text('A'),
-            ),
+            icon: (client != null && user != null)
+              ? CircleAvatar(
+                radius: 16.0,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(90.0),
+                  child: buildProfileImage(client, user),
+                ),
+              )
+              : const CircleAvatar(
+                radius: 16.0,
+                child: Icon(Icons.no_accounts_outlined),
+              ),
             itemBuilder: (BuildContext context) => <PopupMenuEntry>[
               // Account
-              PopupMenuItem(
-                child: ListTile(
-                  contentPadding: const EdgeInsets.all(0),
-                  leading: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      if (client != null && user != null)
-                        CircleAvatar(
-                          radius: 20.0,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(90.0),
-                            child: CachedNetworkImage(
-                              imageUrl: '${client
-                                  .endPoint}/avatars/initials?project=60a984c918aa7'
-                                  '&name=${user.name}&width=100&height=100',
-                              progressIndicatorBuilder: (context, url, downloadProgress) =>
-                                  CircularProgressIndicator(value: downloadProgress.progress),
-                              errorWidget: (context, url, error) => const Icon(Icons.error),
+              if (user != null) ...[
+                PopupMenuItem(
+                  child: ListTile(
+                    contentPadding: const EdgeInsets.all(0),
+                    leading: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        if (client != null )
+                          CircleAvatar(
+                            radius: 20.0,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(90.0),
+                              child: buildProfileImage(client, user),
                             ),
                           ),
-                        ),
-                      if (client == null || user == null)
-                        const CircleAvatar(
-                          radius: 20.0,
-                          child: Icon(Icons.no_accounts_outlined),
-                        ),
-                    ],
+                        if (client == null)
+                          // No user logged in
+                          const CircleAvatar(
+                            radius: 20.0,
+                            child: Icon(Icons.no_accounts_outlined),
+                          ),
+                      ],
+                    ),
+                    title: Text(user.name),
+                    subtitle: Text(user.email),
+                    // trailing: IconButton(
+                    //   onPressed: () {
+                    //     showDialog(
+                    //       context: context,
+                    //       builder: buildLogOutAlertDialog,
+                    //     );
+                    //   },
+                    //   icon: const Icon(Icons.logout),
+                    // ),
                   ),
-                  title: const Text('Admin'),
-                  subtitle: const Text('admin@shodana.app'),
                 ),
-              ),
+              ],
+              if (user == null) ... [
+                PopupMenuItem(
+                  child: ListTile(
+                    contentPadding: const EdgeInsets.all(0),
+                    leading: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const <Widget>[
+                        // No user logged in
+                          CircleAvatar(
+                            radius: 20.0,
+                            child: Icon(Icons.no_accounts_outlined),
+                          ),
+                      ],
+                    ),
+                    title: const Text('Log in or Sign up'),
+                  ),
+                ),
+              ],
               // Divider
-              const PopupMenuDivider(height: 1,),
+              const PopupMenuDivider(height: 1),
               // Incognito Mode
               PopupMenuItem(
                 child: ListTile(
@@ -232,11 +267,13 @@ class SearchBar extends StatelessWidget {
             ],
           ),
         ),
+        // Search/Clear button
         FloatingSearchBarAction.searchToClear(
           showIfClosed: false,
         ),
       ],
       builder: (context, transition) {
+        // Recent searches/search history list
         return ClipRRect(
           borderRadius: BorderRadius.circular(8),
           child: Material(
@@ -264,6 +301,43 @@ class SearchBar extends StatelessWidget {
         );
       },
       body: FloatingSearchBarScrollNotifier(child: body ?? Container()),
+    );
+  }
+
+  CachedNetworkImage buildProfileImage(Client client, User user) {
+    return CachedNetworkImage(
+                            imageUrl: '${client
+                                .endPoint}/avatars/initials?project=60a984c918aa7'
+                                '&name=${user.name}&width=100&height=100',
+                            progressIndicatorBuilder: (context, url, downloadProgress) =>
+                                CircularProgressIndicator(value: downloadProgress.progress),
+                            errorWidget: (context, url, error) => const Icon(Icons.error),
+                          );
+  }
+
+  AlertDialog buildLogOutAlertDialog(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Log out'),
+      content: const Text("Are you sure? You won't be able "
+          'to access any online content without being '
+          'logged in.'),
+      actions: [
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          style: Theme.of(context).textButtonTheme.style,
+          child: const Text('CANCEL'),
+        ),
+        TextButton(
+          onPressed: () {
+            context.authNotifier?.deleteSession();
+            Navigator.of(context).pop();
+          },
+          style: Theme.of(context).textButtonTheme.style,
+          child: const Text('LOGOUT'),
+        ),
+      ],
     );
   }
 }
