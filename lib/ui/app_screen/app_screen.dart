@@ -220,10 +220,10 @@ class _AppScreenState extends State<AppScreen> {
                 label: AppLocalizations.of(context)!.discoverBottomNavItemText,
                 icon: const Icon(Icons.explore_rounded)
             ),
-            BottomNavigationBarItem(
-                label: AppLocalizations.of(context)!.moreBottomNavItemText,
-                icon: const Icon(Icons.more_horiz)
-            ),
+            // BottomNavigationBarItem(
+            //     label: AppLocalizations.of(context)!.moreBottomNavItemText,
+            //     icon: const Icon(Icons.more_horiz)
+            // ),
           ],
           onTap: (i) => onNavigationItemTap(i, lastUsedIndex),
         ),
@@ -257,10 +257,10 @@ class _AppScreenState extends State<AppScreen> {
           label: Text(AppLocalizations.of(context)!.discoverBottomNavItemText),
           icon: const Icon(Icons.explore_rounded)
         ),
-        NavigationRailDestination(
-          label: Text(AppLocalizations.of(context)!.moreBottomNavItemText),
-          icon: const Icon(Icons.more_horiz)
-        ),
+        // NavigationRailDestination(
+        //   label: Text(AppLocalizations.of(context)!.moreBottomNavItemText),
+        //   icon: const Icon(Icons.more_horiz)
+        // ),
       ],
       selectedIndex: currentIndex,
       onDestinationSelected: (i) => onNavigationItemTap(i, lastUsedIndex),

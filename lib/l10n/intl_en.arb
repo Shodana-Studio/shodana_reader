@@ -217,7 +217,7 @@
   "@moreBottomNavItemText": {
     "description": "Navigation bar text for the more item"
   },
-  "startingScreenOptionLastUsedText":"Last used (Home, Shelves, Clubs or Discover)",
+  "startingScreenOptionLastUsedText":"Last used",
   "@startingScreenOptionLastUsedText": {
     "description": "Text for button to set the starting screen to the last used, given that it is home, shelves, or clubs."
   },

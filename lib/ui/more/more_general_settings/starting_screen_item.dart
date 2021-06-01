@@ -27,8 +27,8 @@ class StartingScreenWidget extends HookWidget {
       subtitle = AppLocalizations.of(context)!.startingScreenOptionClubsText;
       } else if (screen == 'discover') {
       subtitle = AppLocalizations.of(context)!.startingScreenOptionDiscoverText;
-    } else if (screen == 'more') {
-      subtitle = AppLocalizations.of(context)!.startingScreenOptionMoreText;//.setPage(4)
+    // } else if (screen == 'more') {
+    //   subtitle = AppLocalizations.of(context)!.startingScreenOptionMoreText;//.setPage(4)
     } else {
       debugPrint('Error: Invalid screen id in StartingScreenWidget');
       subtitle = 'Unknown screen';
@@ -62,7 +62,7 @@ class StartingScreenWidget extends HookWidget {
       3: {'clubs': AppLocalizations.of(context)!.startingScreenOptionClubsText},
       4: {'discover': AppLocalizations.of(context)!
           .startingScreenOptionDiscoverText},
-      5: {'more': AppLocalizations.of(context)!.startingScreenOptionMoreText},
+      // 5: {'more': AppLocalizations.of(context)!.startingScreenOptionMoreText},
     };
     return await showDialog(
       context: context,
