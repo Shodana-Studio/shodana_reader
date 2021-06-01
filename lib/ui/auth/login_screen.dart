@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 import 'package:email_validator/email_validator.dart';
@@ -167,7 +168,7 @@ class EmailInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      autofillHints: const [AutofillHints.email],
+      autofillHints: !kIsWeb ? [AutofillHints.email] : null,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (val) => !EmailValidator.validate(val!, true)
         ? 'Not a valid email.'
@@ -191,7 +192,7 @@ class PasswordInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      autofillHints: const [AutofillHints.password],
+      autofillHints: !kIsWeb ? [AutofillHints.password] : null,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
         if (value == null){
@@ -231,9 +232,8 @@ class LoginButton extends StatelessWidget {
           final email = usernameController.text;
           final password = passwordController.text;
 
-          if (!(await context.authNotifier?.createSession(
-              email: email, password: password) ??
-              false)) {
+          if ( !(await context.authNotifier?.createSession(
+              email: email, password: password) ?? false) ) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,
               content: Text(context.authNotifier?.error ??

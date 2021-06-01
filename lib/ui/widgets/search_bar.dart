@@ -1,13 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
-import 'package:shodana_reader/ui/more/more_about/more_about_screen.dart';
-import 'package:shodana_reader/ui/more/more_settings/more_settings_screen.dart';
 
-import '../app_screen/provider/bottom_navigation_provider.dart';
-import '../more/more_screen.dart';
+import '../more/more_about/more_about_screen.dart';
+import '../more/more_settings/more_settings_screen.dart' show MoreSettingsScreen;
 
 class SearchBar extends StatelessWidget {
   const SearchBar({
