@@ -126,8 +126,9 @@ class SearchBar extends StatelessWidget {
               // Account
               if (user != null) ...[
                 PopupMenuItem(
+                  padding: EdgeInsets.zero,
                   child: ListTile(
-                    contentPadding: const EdgeInsets.all(0),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
                     leading: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
@@ -149,22 +150,17 @@ class SearchBar extends StatelessWidget {
                     ),
                     title: Text(user.name),
                     subtitle: Text(user.email),
-                    // trailing: IconButton(
-                    //   onPressed: () {
-                    //     showDialog(
-                    //       context: context,
-                    //       builder: buildLogOutAlertDialog,
-                    //     );
-                    //   },
-                    //   icon: const Icon(Icons.logout),
-                    // ),
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
                   ),
                 ),
               ],
               if (user == null) ... [
                 PopupMenuItem(
+                  padding: EdgeInsets.zero,
                   child: ListTile(
-                    contentPadding: const EdgeInsets.all(0),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
                     leading: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: const <Widget>[
@@ -176,6 +172,9 @@ class SearchBar extends StatelessWidget {
                       ],
                     ),
                     title: const Text('Log in or Sign up'),
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
                   ),
                 ),
               ],
@@ -183,8 +182,9 @@ class SearchBar extends StatelessWidget {
               const PopupMenuDivider(height: 1),
               // Incognito Mode
               PopupMenuItem(
+                padding: EdgeInsets.zero,
                 child: ListTile(
-                  contentPadding: const EdgeInsets.all(0),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
                   minLeadingWidth: 0.0,
                   leading: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -193,13 +193,17 @@ class SearchBar extends StatelessWidget {
                     ],
                   ),
                   title: const Text('Turn on Incognito mode'),
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
                   // subtitle: const Text('Pauses reading history'),
                 ),
               ),
               // Settings
               PopupMenuItem(
+                padding: EdgeInsets.zero,
                 child: ListTile(
-                  contentPadding: const EdgeInsets.all(0),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
                   minLeadingWidth: 0.0,
                   leading: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -209,6 +213,7 @@ class SearchBar extends StatelessWidget {
                   ),
                   title: const Text('Settings'),
                   onTap: () {
+                    Navigator.of(context).pop();
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) {
                           return const MoreSettingsScreen();
@@ -219,8 +224,9 @@ class SearchBar extends StatelessWidget {
               ),
               // About
               PopupMenuItem(
+                padding: EdgeInsets.zero,
                 child: ListTile(
-                  contentPadding: const EdgeInsets.all(0),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
                   minLeadingWidth: 0.0,
                   leading: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -239,6 +245,7 @@ class SearchBar extends StatelessWidget {
                   ),
                   // subtitle: const Text('v0.0.2'),
                   onTap: () {
+                    Navigator.of(context).pop();
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) {
                           return const AboutScreen();
@@ -249,8 +256,9 @@ class SearchBar extends StatelessWidget {
               ),
               // Help
               PopupMenuItem(
+                padding: EdgeInsets.zero,
                 child: ListTile(
-                  contentPadding: const EdgeInsets.all(0),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
                   minLeadingWidth: 0.0,
                   leading: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -259,6 +267,7 @@ class SearchBar extends StatelessWidget {
                     ],
                   ),
                   title: const Text('Help'),
+                  onTap: () => Navigator.of(context).pop(),
                 ),
               ),
             ],
