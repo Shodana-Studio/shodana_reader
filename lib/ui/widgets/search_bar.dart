@@ -154,6 +154,11 @@ class SearchBar extends StatelessWidget {
                     subtitle: Text(user.email),
                     onTap: () {
                       Navigator.of(context).pop();
+                      // TODO: Move logout into account screen
+                      showDialog(
+                        context: context,
+                        builder: buildLogOutAlertDialog,
+                      );
                     },
                   ),
                 ),
@@ -316,17 +321,6 @@ class SearchBar extends StatelessWidget {
     );
   }
 
-  CachedNetworkImage buildProfileImage(Client client, User user) {
-    return CachedNetworkImage(
-      imageUrl: '${client
-          .endPoint}/avatars/initials?project=60a984c918aa7'
-          '&name=${user.name}&width=100&height=100',
-      progressIndicatorBuilder: (context, url, downloadProgress) =>
-          CircularProgressIndicator(value: downloadProgress.progress),
-      errorWidget: (context, url, error) => const Icon(Icons.error),
-    );
-  }
-
   AlertDialog buildLogOutAlertDialog(BuildContext context) {
     return AlertDialog(
       title: const Text('Log out'),
@@ -350,6 +344,17 @@ class SearchBar extends StatelessWidget {
           child: const Text('LOGOUT'),
         ),
       ],
+    );
+  }
+
+  CachedNetworkImage buildProfileImage(Client client, User user) {
+    return CachedNetworkImage(
+      imageUrl: '${client
+          .endPoint}/avatars/initials?project=60a984c918aa7'
+          '&name=${user.name}&width=100&height=100',
+      progressIndicatorBuilder: (context, url, downloadProgress) =>
+          CircularProgressIndicator(value: downloadProgress.progress),
+      errorWidget: (context, url, error) => const Icon(Icons.error),
     );
   }
 }
