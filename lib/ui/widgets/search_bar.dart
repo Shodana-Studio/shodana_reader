@@ -84,10 +84,10 @@ class SearchBar extends StatelessWidget {
             ),
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute<void>(
-                  builder: (BuildContext context) {
-                    return const MoreScreen();
-                  },
-                  fullscreenDialog: true
+                builder: (BuildContext context) {
+                  return const MoreScreen();
+                },
+                fullscreenDialog: true
               ));
             },
           ),
