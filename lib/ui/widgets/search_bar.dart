@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
+import '../app_screen/provider/bottom_navigation_provider.dart';
 
 import '../more/more_about/more_about_screen.dart';
 import '../more/more_settings/more_settings_screen.dart' show MoreSettingsScreen;
@@ -213,6 +215,8 @@ class SearchBar extends StatelessWidget {
                   ),
                   title: const Text('Settings'),
                   onTap: () {
+                    context.read(shouldShowBottomNavigationProvider).state =
+                    false;
                     Navigator.of(context).pop();
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) {
@@ -245,6 +249,8 @@ class SearchBar extends StatelessWidget {
                   ),
                   // subtitle: const Text('v0.0.2'),
                   onTap: () {
+                    context.read(shouldShowBottomNavigationProvider).state =
+                        false;
                     Navigator.of(context).pop();
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) {

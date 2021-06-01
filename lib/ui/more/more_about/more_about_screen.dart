@@ -6,10 +6,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../app_screen/provider/bottom_navigation_provider.dart';
 import 'more_about_screen_mobile.dart';
 
 class AboutScreen extends HookWidget {
@@ -17,18 +19,24 @@ class AboutScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenTypeLayout.builder(
-      mobile: (BuildContext context) => MoreAboutScreenMobile(
-        aboutFuture: aboutFuture(context),
-      ),
-      tablet: (BuildContext context) => MoreAboutScreenMobile(
-        aboutFuture: aboutFuture(context),
-      ),
-      desktop: (BuildContext context) => MoreAboutScreenMobile(
-        aboutFuture: aboutFuture(context),
-      ),
-      watch: (BuildContext context) => MoreAboutScreenMobile(
-        aboutFuture: aboutFuture(context),
+    return WillPopScope(
+      onWillPop: () async {
+        context.read(shouldShowBottomNavigationProvider).state = true;
+        return true;
+      },
+      child: ScreenTypeLayout.builder(
+        mobile: (BuildContext context) => MoreAboutScreenMobile(
+          aboutFuture: aboutFuture(context),
+        ),
+        tablet: (BuildContext context) => MoreAboutScreenMobile(
+          aboutFuture: aboutFuture(context),
+        ),
+        desktop: (BuildContext context) => MoreAboutScreenMobile(
+          aboutFuture: aboutFuture(context),
+        ),
+        watch: (BuildContext context) => MoreAboutScreenMobile(
+          aboutFuture: aboutFuture(context),
+        ),
       ),
     );
   }
