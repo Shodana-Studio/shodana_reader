@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
+
+import '../app_screen/provider/bottom_navigation_provider.dart';
 import '../more/more_screen.dart';
 
 class SearchBar extends StatelessWidget {
@@ -83,6 +86,7 @@ class SearchBar extends StatelessWidget {
               child: Text('B'),
             ),
             onPressed: () {
+              context.read(shouldShowBottomNavigationProvider).state = false;
               Navigator.of(context).push(MaterialPageRoute<void>(
                 builder: (BuildContext context) {
                   return const MoreScreen();
