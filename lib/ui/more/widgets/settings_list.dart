@@ -15,6 +15,15 @@ class SettingsList extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ListTile(
+          leading: Icon(
+            Icons.history_toggle_off_outlined,
+            color: Theme.of(context).primaryColor,
+          ),
+          title: const Text('Turn on Incognito mode'),
+          // subtitle: const Text('Pauses reading history'),
+          onTap: () {},
+        ),
+        ListTile(
           title: Text(AppLocalizations.of(context)!.settingsButtonText),
           leading: Icon(
             Icons.settings_outlined,
@@ -29,6 +38,14 @@ class SettingsList extends StatelessWidget {
             color: Theme.of(context).primaryColor,
           ),
           onTap: aboutOnPressed,
+        ),
+        ListTile(
+          title: Text('Help'),
+          leading: Icon(
+            Icons.info_outline,
+            color: Theme.of(context).primaryColor,
+          ),
+          onTap: () {},
         ),
       ],
     );
