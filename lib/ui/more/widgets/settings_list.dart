@@ -40,9 +40,9 @@ class SettingsList extends StatelessWidget {
           onTap: aboutOnPressed,
         ),
         ListTile(
-          title: Text('Help'),
+          title: const Text('Help'),
           leading: Icon(
-            Icons.info_outline,
+            Icons.help_outline,
             color: Theme.of(context).primaryColor,
           ),
           onTap: () {},
