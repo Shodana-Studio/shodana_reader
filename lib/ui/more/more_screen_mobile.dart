@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -26,61 +27,24 @@ class MoreScreenMobile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (user != null && avatars != null) ...[
-            FutureBuilder(
-              future: avatars.getInitials(
-              ), //works for both public file and private file, for private files you need to be logged in
-              builder: (context, snapshot) {
-                if (snapshot.hasError) {
-                  print(snapshot.error);
-                }
-                return snapshot.hasData && snapshot.data != null
-                    ? ListTile(
-                  onTap: () {},
-                  leading: ClipRRect(
-                    borderRadius: BorderRadius.circular(90.0),
-                    child: Image.memory(
-                      (snapshot.data! as Response).data,
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                  trailing: IconButton(
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            title: const Text('Log out'),
-                            content: const Text("Are you sure? You won't be able "
-                                'to access any online content without being '
-                                'logged in.'),
-                            actions: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                                style: Theme.of(context).textButtonTheme.style,
-                                child: const Text('CANCEL'),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  context.authNotifier?.deleteSession();
-                                  Navigator.of(context).pop();
-                                },
-                                style: Theme.of(context).textButtonTheme.style,
-                                child: const Text('LOGOUT'),
-                              ),
-                            ],
-                          );
-                        },
-                      );
-                    },
-                    icon: const Icon(Icons.logout),
-                  ),
-                  title: Text(user!.name),
-                  subtitle: Text(user!.email),
-                  // subtitle: const Text('Pauses reading history'),
-                ) : const CircularProgressIndicator();
-              },
+            ListTile(
+              onTap: () {},
+              leading: ClipRRect(
+                borderRadius: BorderRadius.circular(90.0),
+                child: buildProfileImage(client!),
+              ),
+              trailing: IconButton(
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: buildLogOutAlertDialog,
+                  );
+                },
+                icon: const Icon(Icons.logout),
+              ),
+              title: Text(user!.name),
+              subtitle: Text(user!.email),
+              // subtitle: const Text('Pauses reading history'),
             ),
             const Divider(height: 16,),
           ],
@@ -90,6 +54,46 @@ class MoreScreenMobile extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  AlertDialog buildLogOutAlertDialog(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Log out'),
+      content: const Text("Are you sure? You won't be able "
+          'to access any online content without being '
+          'logged in.'),
+      actions: [
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          style: Theme.of(context).textButtonTheme.style,
+          child: const Text('CANCEL'),
+        ),
+        TextButton(
+          onPressed: () {
+            context.authNotifier?.deleteSession();
+            Navigator.of(context).pop();
+          },
+          style: Theme.of(context).textButtonTheme.style,
+          child: const Text('LOGOUT'),
+        ),
+      ],
+    );
+  }
+
+  /// for avatars get initials
+  /// <your_endpoint>/avatars/initials?project=<your_project_id>&name=Damodar%20Lohani&width=100&height=100
+  /// and for storage images
+  /// <YOUR_ENDPOINT>/storage/files/<FILE_ID>/preview?width=350&height=250&project=<YOUR_PROJECT_ID>
+  CachedNetworkImage buildProfileImage(Client client) {
+    return CachedNetworkImage(
+      imageUrl: '${client.endPoint}/avatars/initials?project=60a984c918aa7'
+          '&name=${user!.name}&width=100&height=100',
+      progressIndicatorBuilder: (context, url, downloadProgress) =>
+          CircularProgressIndicator(value: downloadProgress.progress),
+      errorWidget: (context, url, error) => const Icon(Icons.error),
     );
   }
 }

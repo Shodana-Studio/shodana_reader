@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
@@ -22,6 +24,8 @@ class SearchBar extends StatelessWidget {
 
   Widget buildFloatingSearchBar(BuildContext context) {
     final isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
+    final Client? client = context.authNotifier?.client;
+    final User? user = context.authNotifier?.user;
 
     return FloatingSearchBar(
       hint: hint,
@@ -114,11 +118,27 @@ class SearchBar extends StatelessWidget {
                   contentPadding: const EdgeInsets.all(0),
                   leading: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const <Widget>[
-                      CircleAvatar(
-                        radius: 20.0,
-                        child: Text('A'),
-                      ),
+                    children: <Widget>[
+                      if (client != null && user != null)
+                        CircleAvatar(
+                          radius: 20.0,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(90.0),
+                            child: CachedNetworkImage(
+                              imageUrl: '${client
+                                  .endPoint}/avatars/initials?project=60a984c918aa7'
+                                  '&name=${user.name}&width=100&height=100',
+                              progressIndicatorBuilder: (context, url, downloadProgress) =>
+                                  CircularProgressIndicator(value: downloadProgress.progress),
+                              errorWidget: (context, url, error) => const Icon(Icons.error),
+                            ),
+                          ),
+                        ),
+                      if (client == null || user == null)
+                        const CircleAvatar(
+                          radius: 20.0,
+                          child: Icon(Icons.no_accounts_outlined),
+                        ),
                     ],
                   ),
                   title: const Text('Admin'),
