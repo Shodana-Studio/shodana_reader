@@ -13,6 +13,7 @@ class MoreScreen extends StatelessWidget {
 
   void settingsOnPressed(BuildContext context) {
     // context.beamToNamed('/more/settings');
+    Navigator.of(context).pop();
     Navigator.of(context).push(MaterialPageRoute(
         builder: (context) {
           return const MoreSettingsScreen();
@@ -22,6 +23,7 @@ class MoreScreen extends StatelessWidget {
 
   void aboutOnPressed(BuildContext context) {
     // context.beamToNamed('/more/about');
+    Navigator.of(context).pop();
     Navigator.of(context).push(MaterialPageRoute(
         builder: (context) {
           return const AboutScreen();

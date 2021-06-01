@@ -3,6 +3,8 @@ import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
+import 'package:shodana_reader/ui/more/more_about/more_about_screen.dart';
+import 'package:shodana_reader/ui/more/more_settings/more_settings_screen.dart';
 
 import '../app_screen/provider/bottom_navigation_provider.dart';
 import '../more/more_screen.dart';
@@ -174,6 +176,13 @@ class SearchBar extends StatelessWidget {
                     ],
                   ),
                   title: const Text('Settings'),
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) {
+                          return const MoreSettingsScreen();
+                        })
+                    );
+                  },
                 ),
               ),
               // About
@@ -197,6 +206,13 @@ class SearchBar extends StatelessWidget {
                     ],
                   ),
                   // subtitle: const Text('v0.0.2'),
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) {
+                          return const AboutScreen();
+                        })
+                    );
+                  },
                 ),
               ),
               // Help
