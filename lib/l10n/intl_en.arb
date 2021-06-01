@@ -240,5 +240,9 @@
   "startingScreenOptionMoreText":"More",
   "@startingScreenOptionMoreText": {
     "description": "Text for button to set the starting screen to more"
+  },
+  "setStartingScreenDialogText":"Starting screen",
+  "@setStartingScreenDialogText": {
+    "description": "Text for dialog for setting the starting screen"
   }
 }

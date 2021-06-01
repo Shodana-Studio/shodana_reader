@@ -67,7 +67,7 @@ class StartingScreenWidget extends HookWidget {
     return await showDialog(
       context: context,
       builder: (context) => SimpleDialog(
-        title: const Text('Alert Dialog Box'),
+        title: const Text('Starting screen'),
         children: [
           for (final MapEntry<int, Map<String, String>> option in options.entries)
             SimpleDialogItem(
