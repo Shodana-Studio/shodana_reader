@@ -177,6 +177,10 @@
   "@discoverPageTitle": {
     "description": "App bar title for the discover page"
   },
+  "accountPageTitle":"Account",
+  "@accountPageTitle": {
+    "description": "App bar title for the account page"
+  },
   "morePageTitle":"More",
   "@morePageTitle": {
     "description": "App bar title for the more page"
