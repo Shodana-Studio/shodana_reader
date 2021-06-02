@@ -58,40 +58,42 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
 
   Widget buildHome(BuildContext context) {
     return SafeArea(
-      child: SmartRefresher(
-        // TODO: Disable pull to refresh on desktop and web, use refresh icon instead
-        // enablePullDown: !kIsWeb,
-        // enablePullUp: false,
-        header: const	CustomWaterDropHeader(
-          offset: kToolbarHeight + 8.0,
-        ),
-        controller: _refreshController,
-        footer: const ClassicFooter(),
-        onRefresh: _onRefresh,
-        onLoading: _onLoading,
-        child: 
-        // ListView.builder(
-        //   itemBuilder: (c, i) => Card(child: Center(child: Text(items[i]))),
-        //   itemExtent: 100.0,
-        //   itemCount: items.length,
-        SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.only(top: kToolbarHeight + 8.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // const SizedBox(height: kToolbarHeight + 8,),
-                // ListTile(
-                //   title: const Text('Beam to Test Book 0 Details'),
-                //   onTap: bookOnPressed,
-                // ),
-                TextButton(
-                  onPressed: widget.bookOnPressed,
-                  child: const Text('Beam to Test Book 0 Details'),
-                ),
-                const SizedBox(height: 1200,),
-              ],
+      child: Scrollbar(
+        child: SmartRefresher(
+          // TODO: Disable pull to refresh on desktop and web, use refresh icon instead
+          // enablePullDown: !kIsWeb,
+          // enablePullUp: false,
+          header: const	CustomWaterDropHeader(
+            offset: kToolbarHeight + 8.0,
+          ),
+          controller: _refreshController,
+          footer: const ClassicFooter(),
+          onRefresh: _onRefresh,
+          onLoading: _onLoading,
+          child: 
+          // ListView.builder(
+          //   itemBuilder: (c, i) => Card(child: Center(child: Text(items[i]))),
+          //   itemExtent: 100.0,
+          //   itemCount: items.length,
+          SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.only(top: kToolbarHeight + 8.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // const SizedBox(height: kToolbarHeight + 8,),
+                  // ListTile(
+                  //   title: const Text('Beam to Test Book 0 Details'),
+                  //   onTap: bookOnPressed,
+                  // ),
+                  TextButton(
+                    onPressed: widget.bookOnPressed,
+                    child: const Text('Beam to Test Book 0 Details'),
+                  ),
+                  const SizedBox(height: 1200,),
+                ],
+              ),
             ),
           ),
         ),
