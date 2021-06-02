@@ -39,6 +39,10 @@ class StartingScreenWidget extends HookWidget {
       onTap: () async {
         return onStartingScreenTapped(context)
             .then((screen) {
+          if (screen == null) {
+            debugPrint('Info: Starting Screen not chosen');
+            return;
+          }
           context.read(startingPageProvider.notifier)
               .setScreen(screen);
         })
@@ -49,10 +53,12 @@ class StartingScreenWidget extends HookWidget {
     );
   }
 
-  Future<String> onStartingScreenTapped(
-      BuildContext context) async {
+  Future<String?> onStartingScreenTapped(
+      BuildContext context) {
+
     final StartingScreenButtonChoice groupProvider = context.read
       (startingScreenButtonChoiceProvider.notifier);
+
     final Map<int, Map<String, String>> options = {
       0: {'last_used': AppLocalizations.of(context)!
           .startingScreenOptionLastUsedText},
@@ -64,7 +70,8 @@ class StartingScreenWidget extends HookWidget {
           .startingScreenOptionDiscoverText},
       // 5: {'more': AppLocalizations.of(context)!.startingScreenOptionMoreText},
     };
-    return await showDialog(
+
+    return showDialog(
       context: context,
       builder: (context) => SimpleDialog(
         title: const Text('Starting screen'),
@@ -89,5 +96,6 @@ class StartingScreenWidget extends HookWidget {
         ],
       ),
     );
+    
   }
 }

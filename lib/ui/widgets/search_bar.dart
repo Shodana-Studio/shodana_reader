@@ -186,7 +186,7 @@ class SearchBar extends StatelessWidget {
                 ),
               ],
               // Divider
-              const PopupMenuDivider(height: 1),
+              const PopupMenuDivider(/*height: 1*/),
               // Incognito Mode
               PopupMenuItem(
                 padding: EdgeInsets.zero,

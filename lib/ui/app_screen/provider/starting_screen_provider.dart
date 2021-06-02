@@ -32,7 +32,7 @@ class StartingPage extends StateNotifier<String>{
     // 2: shelves
     // 3: clubs
     // 4: discover
-    // 5: more
+    // // 5: more
     if (screen == 'last_used') {
       lastUsedEnabled.setEnabled();
     } else if (screen == 'home') {
