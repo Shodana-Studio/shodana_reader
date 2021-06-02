@@ -50,6 +50,7 @@ class AboutScreen extends HookWidget {
     final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     const String website = 'https://www.shodana.app';
     const String github = 'https://github.com/Shodana-Studio/shodana_reader';
+    const String discord = 'https://shodana.app/discord';
 
     return Scaffold(
       appBar: AppBar(
@@ -75,6 +76,12 @@ class AboutScreen extends HookWidget {
               title: Text(AppLocalizations.of(context)!.websiteButtonText),
               subtitle: const Text(website),
               onTap: () => _launchURL(website)
+          ),
+          ListTile(
+              key: const ValueKey('discord'),
+              title: Text(AppLocalizations.of(context)!.discordButtonText),
+              subtitle: const Text(discord),
+              onTap: () => _launchURL(discord)
           ),
           ListTile(
               key: const ValueKey('github'),

@@ -49,6 +49,10 @@
   "@githubButtonText": {
     "description": "Text for the Github button"
   },
+  "discordButtonText":"Discord",
+  "@discordButtonText": {
+    "description": "Text for the Discord button"
+  },
   "aboutButtonText":"About",
   "@aboutButtonText": {
     "description": "Text for the about button"
