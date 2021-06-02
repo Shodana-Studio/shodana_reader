@@ -1,8 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
+import '../widgets/custom_waterdrop_header.dart';
 import '../widgets/search_bar.dart';
 
-class HomeScreenMobile extends StatelessWidget {
+class HomeScreenMobile extends StatefulWidget {
   const HomeScreenMobile({
     Key? key,
     required this.fabOnPressed,
@@ -12,12 +15,41 @@ class HomeScreenMobile extends StatelessWidget {
   final VoidCallback bookOnPressed;
 
   @override
+  _HomeScreenMobileState createState() => _HomeScreenMobileState();
+}
+
+class _HomeScreenMobileState extends State<HomeScreenMobile> {
+  // List<String> items = ['1', '2', '3', '4', '5', '6', '7', '8'];
+  final RefreshController _refreshController = RefreshController();
+
+  void _onRefresh() async {
+    // monitor network fetch
+    await Future.delayed(const Duration(milliseconds: 1000));
+    // if failed,use refreshFailed()
+    _refreshController.refreshCompleted();
+  }
+
+  void _onLoading() async{
+    // monitor network fetch
+    await Future.delayed(const Duration(milliseconds: 1000));
+    // if failed,use loadFailed(),if no data return,use LoadNodata()
+    // items.add((items.length+1).toString());
+    if(mounted) {
+      setState(() {});
+    }
+    _refreshController.loadComplete();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       // appBar: AppBar(title: Text(AppLocalizations.of(context)!.appName)),
-      body: SearchBar(body: buildHome(context), hint: 'Search recents...',),
+      body: SearchBar(
+        body: buildHome(context),
+        hint: 'Search recents...',
+      ),
       floatingActionButton: FloatingActionButton(
-        onPressed: fabOnPressed,
+        onPressed: widget.fabOnPressed,
         tooltip: 'Add an eBook',
         child: const Icon(Icons.add),
       ),
@@ -26,22 +58,42 @@ class HomeScreenMobile extends StatelessWidget {
 
   Widget buildHome(BuildContext context) {
     return SafeArea(
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: kToolbarHeight + 8,),
-            // ListTile(
-            //   title: const Text('Beam to Test Book 0 Details'),
-            //   onTap: bookOnPressed,
-            // ),
-            TextButton(
-              onPressed: bookOnPressed,
-              child: const Text('Beam to Test Book 0 Details'),
+      child: SmartRefresher(
+        // TODO: Disable pull to refresh on desktop and web, use refresh icon instead
+        // enablePullDown: !kIsWeb,
+        // enablePullUp: false,
+        header: const	CustomWaterDropHeader(
+          offset: kToolbarHeight + 8.0,
+        ),
+        controller: _refreshController,
+        footer: const ClassicFooter(),
+        onRefresh: _onRefresh,
+        onLoading: _onLoading,
+        child: 
+        // ListView.builder(
+        //   itemBuilder: (c, i) => Card(child: Center(child: Text(items[i]))),
+        //   itemExtent: 100.0,
+        //   itemCount: items.length,
+        SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(top: kToolbarHeight + 8.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // const SizedBox(height: kToolbarHeight + 8,),
+                // ListTile(
+                //   title: const Text('Beam to Test Book 0 Details'),
+                //   onTap: bookOnPressed,
+                // ),
+                TextButton(
+                  onPressed: widget.bookOnPressed,
+                  child: const Text('Beam to Test Book 0 Details'),
+                ),
+                const SizedBox(height: 1200,),
+              ],
             ),
-            const SizedBox(height: 800,),
-          ],
+          ),
         ),
       ),
     );
