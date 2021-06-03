@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../core/data/model/book_search_model.dart';
 import '../widgets/search_bar.dart';
 
-class ClubsScreenMobile extends StatelessWidget {
+class ClubsScreenMobile extends HookWidget {
   const ClubsScreenMobile({
     Key? key, required this.beamToClub,
   }) : super(key: key);
@@ -10,10 +13,16 @@ class ClubsScreenMobile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: Implement search clubs and messages
+    final BookSearchModel searchModel = useProvider(bookSearchProvider);
     return Scaffold(
       // appBar: AppBar(title: Text(AppLocalizations.of(context)?.clubsPageTitle
       //     ?? 'No Title')),
-      body: SearchBar(body: buildClubs(context), hint: 'Search clubs...',),
+      body: SearchBar(
+        body: buildClubs(context),
+        hint: 'Search clubs...',
+        model: searchModel,
+      ),
     );
   }
 

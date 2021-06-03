@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../core/data/model/book_search_model.dart';
 import '../widgets/search_bar.dart';
 
-class DiscoverScreenMobile extends StatelessWidget {
+class DiscoverScreenMobile extends HookWidget {
   const DiscoverScreenMobile({
     Key? key, required this.beamToInternetBook,
   }) : super(key: key);
@@ -10,9 +13,15 @@ class DiscoverScreenMobile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: Implement search public clubs
+    final BookSearchModel searchModel = useProvider(bookSearchProvider);
     return Scaffold(
       // appBar: AppBar(title: Text(AppLocalizations.of(context)!.discoverPageTitle)),
-      body: SearchBar(body: buildDiscover(context), hint: 'Search online...',),
+      body: SearchBar(
+        body: buildDiscover(context),
+        hint: 'Search online...',
+        model: searchModel,
+      ),
     );
   }
 

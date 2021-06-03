@@ -1,11 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import '../../core/data/model/book_search_model.dart';
 import '../widgets/custom_waterdrop_header.dart';
 import '../widgets/search_bar.dart';
 
-class HomeScreenMobile extends StatefulWidget {
+class HomeScreenMobile extends StatefulHookWidget {
   const HomeScreenMobile({
     Key? key,
     required this.fabOnPressed,
@@ -22,14 +26,14 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
   // List<String> items = ['1', '2', '3', '4', '5', '6', '7', '8'];
   final RefreshController _refreshController = RefreshController();
 
-  void _onRefresh() async {
+  Future<void> _onRefresh() async {
     // monitor network fetch
     await Future.delayed(const Duration(milliseconds: 1000));
     // if failed,use refreshFailed()
     _refreshController.refreshCompleted();
   }
 
-  void _onLoading() async{
+  Future<void> _onLoading() async{
     // monitor network fetch
     await Future.delayed(const Duration(milliseconds: 1000));
     // if failed,use loadFailed(),if no data return,use LoadNodata()
@@ -42,11 +46,13 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
 
   @override
   Widget build(BuildContext context) {
+    final BookSearchModel searchModel = useProvider(bookSearchProvider);
     return Scaffold(
       // appBar: AppBar(title: Text(AppLocalizations.of(context)!.appName)),
       body: SearchBar(
         body: buildHome(context),
         hint: 'Search recents...',
+        model: searchModel,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: widget.fabOnPressed,
