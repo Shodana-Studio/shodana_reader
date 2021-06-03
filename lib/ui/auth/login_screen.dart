@@ -124,39 +124,46 @@ class LoginPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isAuthenticated = (context.authNotifier?.status ?? AuthStatus.uninitialized)
+            == AuthStatus.authenticated;
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
     // final authNotifier = context.authNotifier;
 
-    return Scaffold(
-      body: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 256),
-          child: Wrap(
-            spacing: 32,
-            runSpacing: 32,
-            alignment: WrapAlignment.center,
-            children: [
-              const FlutterLogo(size: 128),
-              Text(
-                'Login',
-                style: Theme.of(context).textTheme.headline2,
-              ),
-              EmailInput(controller: emailController),
-              PasswordInput(controller: passwordController),
-              LoginButton(
-                  usernameController: emailController,
-                  passwordController: passwordController),
-              // Text('STATE: ${authNotifier?.status ?? AuthStatus
-              //     .uninitialized}'),
-              // if ((authNotifier?.status ?? AuthStatus.uninitialized)
-              // == AuthStatus.authenticating)
-              //   const CircularProgressIndicator()
-            ],
+    // Show loading screen if the user is not authenticated 
+    if (!isAuthenticated) {
+      return const Center(child: CircularProgressIndicator(),);
+    } else {
+      return Scaffold(
+        body: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 256),
+            child: Wrap(
+              spacing: 32,
+              runSpacing: 32,
+              alignment: WrapAlignment.center,
+              children: [
+                const FlutterLogo(size: 128),
+                Text(
+                  'Login',
+                  style: Theme.of(context).textTheme.headline2,
+                ),
+                EmailInput(controller: emailController),
+                PasswordInput(controller: passwordController),
+                LoginButton(
+                    usernameController: emailController,
+                    passwordController: passwordController),
+                // Text('STATE: ${authNotifier?.status ?? AuthStatus
+                //     .uninitialized}'),
+                // if ((authNotifier?.status ?? AuthStatus.uninitialized)
+                // == AuthStatus.authenticating)
+                //   const CircularProgressIndicator()
+              ],
+            ),
           ),
         ),
-      ),
-    );
+      );
+    }
   }
 }
 
