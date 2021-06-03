@@ -298,13 +298,14 @@ class _SearchState extends State<SearchBar> {
 
     return FloatingSearchBar(
       hint: widget.hint,
+      isScrollControlled: true,
       backgroundColor: Theme.of(context).bottomAppBarTheme.color,
       automaticallyImplyBackButton: false,
       // scrollPadding: const EdgeInsets.only(/*top: 0, */bottom: 80),
       // padding: const EdgeInsets.symmetric(horizontal: 0),
       // backdropColor: Colors.transparent,
       margins: EdgeInsets.only(top: MediaQuery.of(context)
-          .viewPadding.top.toDouble() + 8, bottom: 8.0, left: 16.0, right: 16),
+          .viewPadding.top.toDouble() + 8.0, bottom: 8.0, left: 16.0, right: 16),
       borderRadius: BorderRadius.circular(8.0),
       controller: controller,
       // clearQueryOnClose: true,
@@ -358,30 +359,27 @@ class _SearchState extends State<SearchBar> {
     //     ),
     //   );
     // } else {
-      return Padding(
-        padding: const EdgeInsets.only(top: 16.0),
-        child: Material(
-          color: Theme.of(context).bottomAppBarTheme.color,
-          elevation: 4.0,
-          borderRadius: BorderRadius.circular(8),
-          child: ImplicitlyAnimatedList<BookModel>(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            items: model.suggestions.take(6).toList(),
-            areItemsTheSame: (a, b) => a == b,
-            itemBuilder: (context, animation, book, i) {
-              return SizeFadeTransition(
-                animation: animation,
-                child: SearchItem(book: book),
-              );
-            },
-            updateItemBuilder: (context, animation, book) {
-              return FadeTransition(
-                opacity: animation,
-                child: SearchItem(book: book),
-              );
-            },
-          ),
+      return Material(
+        color: Theme.of(context).bottomAppBarTheme.color,
+        elevation: 4.0,
+        borderRadius: BorderRadius.circular(8),
+        child: ImplicitlyAnimatedList<BookModel>(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          items: model.suggestions.take(6).toList(),
+          areItemsTheSame: (a, b) => a == b,
+          itemBuilder: (context, animation, book, i) {
+            return SizeFadeTransition(
+              animation: animation,
+              child: SearchItem(book: book),
+            );
+          },
+          updateItemBuilder: (context, animation, book) {
+            return FadeTransition(
+              opacity: animation,
+              child: SearchItem(book: book),
+            );
+          },
         ),
       );
     // }
