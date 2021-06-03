@@ -126,6 +126,8 @@ class LoginPage extends HookWidget {
   Widget build(BuildContext context) {
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
+    final FocusNode focusNode1 = useFocusNode();
+    final FocusNode focusNode2 = useFocusNode();
     // final authNotifier = context.authNotifier;
 
     
@@ -143,8 +145,8 @@ class LoginPage extends HookWidget {
                 'Login',
                 style: Theme.of(context).textTheme.headline2,
               ),
-              EmailInput(controller: emailController),
-              PasswordInput(controller: passwordController),
+              EmailInput(controller: emailController, focusNode: focusNode1,),
+              PasswordInput(controller: passwordController, focusNode: focusNode2,),
               LoginButton(
                   usernameController: emailController,
                   passwordController: passwordController),
@@ -162,9 +164,10 @@ class LoginPage extends HookWidget {
 }
 
 class EmailInput extends StatelessWidget {
-  const EmailInput({Key? key, required this.controller}) : super(key: key);
+  const EmailInput({Key? key, required this.controller, required this.focusNode}) : super(key: key);
 
   final TextEditingController controller;
+  final FocusNode focusNode;
 
   @override
   Widget build(BuildContext context) {
@@ -175,6 +178,8 @@ class EmailInput extends StatelessWidget {
         ? 'Not a valid email.'
         : null,
       keyboardType: TextInputType.emailAddress,
+      focusNode: focusNode,
+      textInputAction: TextInputAction.next,
       controller: controller,
       decoration: const InputDecoration(
           labelText: 'Email',
@@ -185,10 +190,24 @@ class EmailInput extends StatelessWidget {
   }
 }
 
-class PasswordInput extends StatelessWidget {
-  const PasswordInput({Key? key, required this.controller}) : super(key: key);
+class PasswordInput extends StatefulWidget {
+  const PasswordInput({Key? key, required this.controller, required this.focusNode}) : super(key: key);
 
   final TextEditingController controller;
+  final FocusNode focusNode;
+
+  @override
+  _PasswordInputState createState() => _PasswordInputState();
+}
+
+class _PasswordInputState extends State<PasswordInput> {
+  bool _isHidden = true;
+
+  void _togglePasswordView() {
+    setState(() {
+      _isHidden = !_isHidden;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -203,11 +222,22 @@ class PasswordInput extends StatelessWidget {
           return 'Must be between 6 and 32 characters';
         }
       },
-      obscureText: true,
-      controller: controller,
-      decoration: const InputDecoration(
+      focusNode: widget.focusNode,
+      textInputAction: TextInputAction.done,
+      obscureText: _isHidden,
+      controller: widget.controller,
+      decoration: InputDecoration(
           labelText: 'Password',
-          border: OutlineInputBorder(),
+          border: const OutlineInputBorder(),
+          suffixIcon: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12.0),
+            child: InkWell(
+              onTap: _togglePasswordView,
+              child: Icon(
+                _isHidden ? Icons.visibility : Icons.visibility_off,
+              ),
+            ), // myIcon is a 48px-wide widget.
+          ),
           // hintText: 'supersecret'
       ),
     );
