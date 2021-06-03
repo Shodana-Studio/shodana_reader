@@ -1,5 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 import '../../../core/data/service/storage_utils.dart';
+import '../../../core/res/constants.dart';
 
 final lastUsedEnabledProvider =
 StateNotifierProvider<LastUsedEnabled, bool>((ref) {
@@ -7,16 +9,20 @@ StateNotifierProvider<LastUsedEnabled, bool>((ref) {
 });
 
 class LastUsedEnabled extends StateNotifier<bool>{
-  LastUsedEnabled() : super(StorageUtil.getBool('lastUsedEnabled'));
+  // LastUsedEnabled() : super(StorageUtil.getBool('lastUsedEnabled'));
+  LastUsedEnabled() : super(StorageUtil.getSetting(key: lastUsedEnabledKey, defValue: true));
+
 
   void setEnabled() {
     state = true;
-    StorageUtil.putBool('lastUsedEnabled', value: true);
+    // StorageUtil.putBool('lastUsedEnabled', value: true);
+    StorageUtil.putSetting(key: lastUsedEnabledKey, value: true);
   }
 
   void setDisabled() {
     state = false;
-    StorageUtil.putBool('lastUsedEnabled', value: false);
+    // StorageUtil.putBool('lastUsedEnabled', value: false);
+    StorageUtil.putSetting(key: lastUsedEnabledKey, value: false);
   }
 
   bool getStatus() {

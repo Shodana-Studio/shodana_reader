@@ -1,6 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../data/service/storage_utils.dart';
+import '../../res/constants.dart';
 
 final darkModeSwitchProvider =
 StateNotifierProvider<DarkModeSwitch, bool>((ref) {
@@ -8,11 +9,13 @@ StateNotifierProvider<DarkModeSwitch, bool>((ref) {
 });
 
 class DarkModeSwitch extends StateNotifier<bool>{
-  DarkModeSwitch() : super(StorageUtil.getBool('darkMode'));
+  // DarkModeSwitch() : super(StorageUtil.getBool('darkMode'));
+  DarkModeSwitch() : super(StorageUtil.getSetting(key: darkModeKey, defValue: true));
 
   void toggle() {
     state = !state;
-    StorageUtil.putBool('darkMode', value: state);
+    // StorageUtil.putBool('darkMode', value: state);
+    StorageUtil.putSetting(key: darkModeKey, value: state);
   }
 
   bool getState() {

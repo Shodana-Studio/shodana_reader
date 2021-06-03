@@ -1,6 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../core/data/service/storage_utils.dart';
+import '../../../core/res/constants.dart';
 
 final leftNavigationRailProvider =
 StateNotifierProvider<LeftNavigationRail, bool>((ref) {
@@ -8,12 +9,13 @@ StateNotifierProvider<LeftNavigationRail, bool>((ref) {
 });
 
 class LeftNavigationRail extends StateNotifier<bool>{
-  LeftNavigationRail() : super(StorageUtil.getBool('leftNavigationRail',
-      defValue: false));
+  // LeftNavigationRail() : super(StorageUtil.getBool('leftNavigationRail', defValue: false));
+  LeftNavigationRail() : super(StorageUtil.getSetting(key: leftNavigationRailKey, defValue: false));
 
   void toggle() {
     state = !state;
-    StorageUtil.putBool('leftNavigationRail', value: state);
+    // StorageUtil.putBool('leftNavigationRail', value: state);
+    StorageUtil.putSetting(key: leftNavigationRailKey, value: state);
   }
 
   bool getState() {
