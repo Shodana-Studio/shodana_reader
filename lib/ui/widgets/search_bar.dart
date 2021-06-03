@@ -98,7 +98,7 @@ class _SearchState extends State<SearchBar> {
             ),
           itemBuilder: (BuildContext context) => <PopupMenuEntry>[
             // Account
-            if (user != null) ...[
+            // if (user != null) ...[
               PopupMenuItem(
                 padding: EdgeInsets.zero,
                 child: ListTile(
@@ -106,7 +106,7 @@ class _SearchState extends State<SearchBar> {
                   leading: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      if (client != null )
+                      if (client != null && user != null)
                         CircleAvatar(
                           radius: 20.0,
                           child: ClipRRect(
@@ -114,7 +114,7 @@ class _SearchState extends State<SearchBar> {
                             child: buildProfileImage(client, user),
                           ),
                         ),
-                      if (client == null)
+                      if (client == null || user == null)
                         // No user logged in
                         const CircleAvatar(
                           radius: 20.0,
@@ -122,41 +122,45 @@ class _SearchState extends State<SearchBar> {
                         ),
                     ],
                   ),
-                  title: Text(user.name),
-                  subtitle: Text(user.email),
+                  title: Text(user?.name ?? 'Log in or Sign up'),
+                  subtitle: (client != null && user != null) ? Text(user.email) : null,
                   onTap: () {
-                    Navigator.of(context).pop();
-                    // TODO: Move logout into account screen
-                    showDialog(
-                      context: context,
-                      builder: buildLogOutAlertDialog,
-                    );
+                    if (client != null && user != null) {
+                      Navigator.of(context).pop();
+                      // TODO: Move logout into account screen
+                      showDialog(
+                        context: context,
+                        builder: buildLogOutAlertDialog,
+                      );
+                    } else {
+                      // TODO: Navigate to login screen
+                    }
                   },
                 ),
               ),
-            ],
-            if (user == null) ... [
-              PopupMenuItem(
-                padding: EdgeInsets.zero,
-                child: ListTile(
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  leading: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const <Widget>[
-                      // No user logged in
-                        CircleAvatar(
-                          radius: 20.0,
-                          child: Icon(Icons.no_accounts_outlined),
-                        ),
-                    ],
-                  ),
-                  title: const Text('Log in or Sign up'),
-                  onTap: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ),
-            ],
+            // ],
+            // if (user == null) ... [
+            //   PopupMenuItem(
+            //     padding: EdgeInsets.zero,
+            //     child: ListTile(
+            //       contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
+            //       leading: Column(
+            //         mainAxisAlignment: MainAxisAlignment.center,
+            //         children: const <Widget>[
+            //           // No user logged in
+            //             CircleAvatar(
+            //               radius: 20.0,
+            //               child: Icon(Icons.no_accounts_outlined),
+            //             ),
+            //         ],
+            //       ),
+            //       title: const Text('Log in or Sign up'),
+            //       onTap: () {
+            //         Navigator.of(context).pop();
+            //       },
+            //     ),
+            //   ),
+            // ],
             // Divider
             const PopupMenuDivider(/*height: 1*/),
             // Incognito Mode
@@ -411,11 +415,11 @@ class _SearchState extends State<SearchBar> {
     );
   }
 
-  Widget buildProfileImage(Client client, User user) {
+  Widget buildProfileImage(Client client, User? user) {
     return CachedNetworkImage(
       imageUrl: '${client
           .endPoint}/avatars/initials?project=60a984c918aa7'
-          '&name=${user.name}&width=100&height=100',
+          '&name=${user?.name ?? 'Admin'}&width=100&height=100',
       progressIndicatorBuilder: (context, url, downloadProgress) =>
           CircularProgressIndicator(value: downloadProgress.progress),
       errorWidget: (context, url, error) => const Icon(Icons.error),
