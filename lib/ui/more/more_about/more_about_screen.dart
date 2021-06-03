@@ -56,50 +56,52 @@ class AboutScreen extends HookWidget {
       appBar: AppBar(
           title: Text(AppLocalizations.of(context)!.aboutPageTitle)
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ListTile(
-              key: const ValueKey('version'),
-              title: Text(AppLocalizations.of(context)!.versionButtonText),
-              subtitle: Text('Alpha $version+$buildNumber'),
-              onTap: () => versionOnPressed(context,
-                  deviceInfo, version, buildNumber)
-          ),
-          const Divider(height: 1.0),
-          // SettingsSection(
-          //   title: '',
-          //   tiles: const [],
-          // ),
-          ListTile(
-              key: const ValueKey('website'),
-              title: Text(AppLocalizations.of(context)!.websiteButtonText),
-              subtitle: const Text(website),
-              onTap: () => _launchURL(website)
-          ),
-          ListTile(
-              key: const ValueKey('discord'),
-              title: Text(AppLocalizations.of(context)!.discordButtonText),
-              subtitle: const Text(discord),
-              onTap: () => _launchURL(discord)
-          ),
-          ListTile(
-              key: const ValueKey('github'),
-              title: Text(AppLocalizations.of(context)!.githubButtonText),
-              subtitle: const Text(github),
-              onTap: () => _launchURL(github)
-          ),
-          ListTile(
-              key: const ValueKey('licenses'),
-              title: Text(AppLocalizations.of(context)!.licensesButtonText),
-              onTap: () => showAboutDialog(
-                context: context,
-                applicationName: AppLocalizations.of(context)!.appName,
-                applicationVersion: version,
-                applicationLegalese: AppLocalizations.of(context)!.applicationLegalese
-              )
-          ),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ListTile(
+                key: const ValueKey('version'),
+                title: Text(AppLocalizations.of(context)!.versionButtonText),
+                subtitle: Text('Alpha $version+$buildNumber'),
+                onTap: () => versionOnPressed(context,
+                    deviceInfo, version, buildNumber)
+            ),
+            const Divider(height: 1.0),
+            // SettingsSection(
+            //   title: '',
+            //   tiles: const [],
+            // ),
+            ListTile(
+                key: const ValueKey('website'),
+                title: Text(AppLocalizations.of(context)!.websiteButtonText),
+                subtitle: const Text(website),
+                onTap: () => _launchURL(website)
+            ),
+            ListTile(
+                key: const ValueKey('discord'),
+                title: Text(AppLocalizations.of(context)!.discordButtonText),
+                subtitle: const Text(discord),
+                onTap: () => _launchURL(discord)
+            ),
+            ListTile(
+                key: const ValueKey('github'),
+                title: Text(AppLocalizations.of(context)!.githubButtonText),
+                subtitle: const Text(github),
+                onTap: () => _launchURL(github)
+            ),
+            ListTile(
+                key: const ValueKey('licenses'),
+                title: Text(AppLocalizations.of(context)!.licensesButtonText),
+                onTap: () => showAboutDialog(
+                  context: context,
+                  applicationName: AppLocalizations.of(context)!.appName,
+                  applicationVersion: version,
+                  applicationLegalese: AppLocalizations.of(context)!.applicationLegalese
+                )
+            ),
+          ],
+        ),
       ),
     );
   }
