@@ -10,12 +10,12 @@ StateNotifierProvider<FollowSystemThemeSwitch, bool>((ref) {
 
 class FollowSystemThemeSwitch extends StateNotifier<bool>{
   // FollowSystemThemeSwitch() : super(StorageUtil.getBool('followSystemTheme'));
-  FollowSystemThemeSwitch() : super(StorageUtil.getSetting(key: followSystemThemeKey, defValue: true));
+  FollowSystemThemeSwitch() : super(StorageUtil.getSetting(key: AppConstants.followSystemThemeKey, defValue: true));
 
   void toggle() {
     state = !state;
     // StorageUtil.putBool('followSystemTheme', value: state);
-    StorageUtil.putSetting(key: followSystemThemeKey, value: state);
+    StorageUtil.putSetting(key: AppConstants.followSystemThemeKey, value: state);
   }
 
   bool getState() {

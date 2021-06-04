@@ -8,11 +8,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:implicitly_animated_reorderable_list/implicitly_animated_reorderable_list.dart';
 import 'package:implicitly_animated_reorderable_list/transitions.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
-import 'package:shodana_reader/core/data/model/book_search_model.dart';
-import 'package:shodana_reader/core/data/repository/fake_data.dart';
+import 'package:shodana_reader/core/data/service/appwrite_service.dart';
 
 import '../../core/data/model/book_model.dart';
+import '../../core/data/model/book_search_model.dart';
 import '../../core/data/model/search_model.dart';
+import '../../core/data/repository/fake_data.dart';
+import '../../core/res/constants.dart';
 import '../app_screen/provider/bottom_navigation_provider.dart';
 import '../more/more_about/more_about_screen.dart';
 import '../more/more_settings/more_settings_screen.dart' show MoreSettingsScreen;
@@ -51,216 +53,240 @@ class _SearchState extends State<SearchBar> {
     );
   }
 
+  List<PopupMenuEntry> buildProfileMenuItems(BuildContext context) => [
+    PopupMenuItem(
+      padding: EdgeInsets.zero,
+      child: FutureBuilder(
+        future: context.authNotifier?.account.get(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return ListTile(
+              contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
+              leading: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const <Widget>[
+                  CircleAvatar(
+                    radius: 20.0,
+                    child: Icon(Icons.no_accounts_outlined),
+                  ),
+                ],
+              ),
+              title: const Text('Log in or Sign up'),
+              onTap: () {
+                // TODO: Navigate to login screen
+              },
+            );
+          }
+
+          else if (snapshot.hasData) {
+            final User user = User.fromMap((snapshot.data! as Response<dynamic>).data);
+            return ListTile(
+              contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
+              leading: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  if (snapshot.hasError)
+                    const CircleAvatar(
+                      radius: 20.0,
+                      child: Icon(Icons.no_accounts_outlined),
+                    ),
+                  if (snapshot.hasData)
+                    CircleAvatar(
+                      radius: 20.0,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(90.0),
+                        child: buildProfileImage(user.name),
+                      ),
+                    ),
+                ],
+              ),
+              title: Text(user.name),
+              subtitle: Text(user.email),
+              onTap: () {
+                Navigator.of(context).pop();
+                // TODO: Move logout into account screen
+                showDialog(
+                  context: context,
+                  builder: buildLogOutAlertDialog,
+                );
+              },
+            );
+          }
+
+          else {
+            return ListTile(
+              contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
+              leading: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  if (snapshot.hasError)
+                    const CircleAvatar(
+                      radius: 20.0,
+                      child: Icon(Icons.no_accounts_outlined),
+                    ),
+                  if (snapshot.hasData)
+                    CircleAvatar(
+                      radius: 20.0,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(90.0),
+                        child: const CircularProgressIndicator(),
+                      ),
+                    ),
+                ],
+              ),
+              title: const Text(''),
+              subtitle: const Text(''),
+              // onTap: () {
+              //   Navigator.of(context).pop();
+              //   // TODO: Move logout into account screen
+              //   showDialog(
+              //     context: context,
+              //     builder: buildLogOutAlertDialog,
+              //   );
+              // },
+            );
+          }
+        }
+      ),
+    ),
+    // Divider
+    const PopupMenuDivider(),
+    // Incognito Mode
+    PopupMenuItem(
+      padding: EdgeInsets.zero,
+      child: ListTile(
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
+        minLeadingWidth: 0.0,
+        leading: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const <Widget>[
+            Icon(Icons.history_toggle_off_outlined),
+          ],
+        ),
+        title: const Text('Turn on Incognito mode'),
+        onTap: () {
+          Navigator.of(context).pop();
+        },
+        // subtitle: const Text('Pauses reading history'),
+      ),
+    ),
+    // Settings
+    PopupMenuItem(
+      padding: EdgeInsets.zero,
+      child: ListTile(
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
+        minLeadingWidth: 0.0,
+        leading: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const <Widget>[
+            Icon(Icons.settings_outlined),
+          ],
+        ),
+        title: const Text('Settings'),
+        onTap: () {
+          context.read(shouldShowBottomNavigationProvider).state =
+          false;
+          Navigator.of(context).pop();
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) {
+                return const MoreSettingsScreen();
+              })
+          );
+        },
+      ),
+    ),
+    // About
+    PopupMenuItem(
+      padding: EdgeInsets.zero,
+      child: ListTile(
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
+        minLeadingWidth: 0.0,
+        leading: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const <Widget>[
+            Icon(Icons.info_outline),
+          ],
+        ),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text('About', style: Theme.of(context).textTheme
+                .bodyText1,),
+            Text('v0.0.2', style: Theme.of(context).textTheme
+                .subtitle2,),
+          ],
+        ),
+        // subtitle: const Text('v0.0.2'),
+        onTap: () {
+          context.read(shouldShowBottomNavigationProvider).state =
+              false;
+          Navigator.of(context).pop();
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) {
+                return const AboutScreen();
+              })
+          );
+        },
+      ),
+    ),
+    // Help
+    PopupMenuItem(
+      padding: EdgeInsets.zero,
+      child: ListTile(
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
+        minLeadingWidth: 0.0,
+        leading: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const <Widget>[
+            Icon(Icons.help_outline),
+          ],
+        ),
+        title: const Text('Help'),
+        onTap: () => Navigator.of(context).pop(),
+      ),
+    ),
+  ];
+
   
   Widget buildFloatingSearchBar(BuildContext context, FloatingSearchBarController controller) {
     final isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
-    final Client? client = context.authNotifier?.client;
-    final User? user = context.authNotifier?.user;
-
     final actions = [
-      // Profile button (Option B)
-      // FloatingSearchBarAction(
-      //   child: CircularButton(
-      //     icon: const CircleAvatar(
-      //       radius: 16.0,
-      //       child: Text('B'),
-      //     ),
-      //     onPressed: () {
-      //       context.read(shouldShowBottomNavigationProvider).state = false;
-      //       Navigator.of(context).push(MaterialPageRoute<void>(
-      //         builder: (BuildContext context) {
-      //           return const MoreScreen();
-      //         },
-      //         fullscreenDialog: true
-      //       ));
-      //     },
-      //   ),
-      // ),
-      // Profile button (Option A)
+      // Profile button
       FloatingSearchBarAction(
         child: PopupMenuButton(
           padding: const EdgeInsets.all(0),
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(8.0))
-          ),
+          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8.0))),
           offset: const Offset(0.0, kToolbarHeight),
-          icon: (client != null && user != null)
-            ? CircleAvatar(
-              radius: 16.0,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(90.0),
-                child: buildProfileImage(client, user),
-              ),
-            )
-            : const CircleAvatar(
-              radius: 16.0,
-              child: Icon(Icons.no_accounts_outlined),
-            ),
-          itemBuilder: (BuildContext context) => <PopupMenuEntry>[
-            // Account
-            // if (user != null) ...[
-              PopupMenuItem(
-                padding: EdgeInsets.zero,
-                child: ListTile(
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  leading: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      if (client != null && user != null)
-                        CircleAvatar(
-                          radius: 20.0,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(90.0),
-                            child: buildProfileImage(client, user),
-                          ),
-                        ),
-                      if (client == null || user == null)
-                        // No user logged in
-                        const CircleAvatar(
-                          radius: 20.0,
-                          child: Icon(Icons.no_accounts_outlined),
-                        ),
-                    ],
-                  ),
-                  title: Text(user?.name ?? 'Log in or Sign up'),
-                  subtitle: (client != null && user != null) ? Text(user.email) : null,
-                  onTap: () {
-                    if (client != null && user != null) {
-                      Navigator.of(context).pop();
-                      // TODO: Move logout into account screen
-                      showDialog(
-                        context: context,
-                        builder: buildLogOutAlertDialog,
-                      );
-                    } else {
-                      // TODO: Navigate to login screen
-                    }
-                  },
-                ),
-              ),
-            // ],
-            // if (user == null) ... [
-            //   PopupMenuItem(
-            //     padding: EdgeInsets.zero,
-            //     child: ListTile(
-            //       contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
-            //       leading: Column(
-            //         mainAxisAlignment: MainAxisAlignment.center,
-            //         children: const <Widget>[
-            //           // No user logged in
-            //             CircleAvatar(
-            //               radius: 20.0,
-            //               child: Icon(Icons.no_accounts_outlined),
-            //             ),
-            //         ],
-            //       ),
-            //       title: const Text('Log in or Sign up'),
-            //       onTap: () {
-            //         Navigator.of(context).pop();
-            //       },
-            //     ),
-            //   ),
-            // ],
-            // Divider
-            const PopupMenuDivider(/*height: 1*/),
-            // Incognito Mode
-            PopupMenuItem(
-              padding: EdgeInsets.zero,
-              child: ListTile(
-                contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
-                minLeadingWidth: 0.0,
-                leading: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const <Widget>[
-                    Icon(Icons.history_toggle_off_outlined),
-                  ],
-                ),
-                title: const Text('Turn on Incognito mode'),
-                onTap: () {
-                  Navigator.of(context).pop();
-                },
-                // subtitle: const Text('Pauses reading history'),
+          icon: CircleAvatar(
+            radius: 16.0,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(90.0),
+              child: FutureBuilder(
+                future: context.authNotifier?.account.get(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return const CircleAvatar(
+                      radius: 20.0,
+                      child: Icon(Icons.no_accounts_outlined),
+                    );
+                  }
+
+                  else if (snapshot.hasData) {
+                    final User user = User.fromMap((snapshot.data! as Response<dynamic>).data);
+                    return buildProfileImage(user.name);
+                  }
+                  
+                  else {
+                    return Container(color: Theme.of(context).backgroundColor, child: const Icon(Icons.account_circle),);
+                  }
+                }
               ),
             ),
-            // Settings
-            PopupMenuItem(
-              padding: EdgeInsets.zero,
-              child: ListTile(
-                contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
-                minLeadingWidth: 0.0,
-                leading: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const <Widget>[
-                    Icon(Icons.settings_outlined),
-                  ],
-                ),
-                title: const Text('Settings'),
-                onTap: () {
-                  context.read(shouldShowBottomNavigationProvider).state =
-                  false;
-                  Navigator.of(context).pop();
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) {
-                        return const MoreSettingsScreen();
-                      })
-                  );
-                },
-              ),
-            ),
-            // About
-            PopupMenuItem(
-              padding: EdgeInsets.zero,
-              child: ListTile(
-                contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
-                minLeadingWidth: 0.0,
-                leading: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const <Widget>[
-                    Icon(Icons.info_outline),
-                  ],
-                ),
-                title: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text('About', style: Theme.of(context).textTheme
-                        .bodyText1,),
-                    Text('v0.0.2', style: Theme.of(context).textTheme
-                        .subtitle2,),
-                  ],
-                ),
-                // subtitle: const Text('v0.0.2'),
-                onTap: () {
-                  context.read(shouldShowBottomNavigationProvider).state =
-                      false;
-                  Navigator.of(context).pop();
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) {
-                        return const AboutScreen();
-                      })
-                  );
-                },
-              ),
-            ),
-            // Help
-            PopupMenuItem(
-              padding: EdgeInsets.zero,
-              child: ListTile(
-                contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
-                minLeadingWidth: 0.0,
-                leading: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const <Widget>[
-                    Icon(Icons.help_outline),
-                  ],
-                ),
-                title: const Text('Help'),
-                onTap: () => Navigator.of(context).pop(),
-              ),
-            ),
-          ],
+          ),
+          itemBuilder: buildProfileMenuItems,
         ),
       ),
-      // Search/Clear button
+      // Clear button
       FloatingSearchBarAction.searchToClear(
         showIfClosed: false,
       ),
@@ -415,11 +441,9 @@ class _SearchState extends State<SearchBar> {
     );
   }
 
-  Widget buildProfileImage(Client client, User? user) {
+  Widget buildProfileImage(String name) {
     return CachedNetworkImage(
-      imageUrl: '${client
-          .endPoint}/avatars/initials?project=60a984c918aa7'
-          '&name=${user?.name ?? 'Admin'}&width=100&height=100',
+      imageUrl: AppwriteService.instance.getInitialsLink(name),
       progressIndicatorBuilder: (context, url, downloadProgress) =>
           CircularProgressIndicator(value: downloadProgress.progress),
       errorWidget: (context, url, error) => const Icon(Icons.error),

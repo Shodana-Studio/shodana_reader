@@ -7,7 +7,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shodana_reader/core/data/service/appwrite_service.dart';
 import 'core/presentation/locations/app_location.dart';
+import 'core/res/constants.dart';
 
 
 class App extends StatefulWidget {
@@ -19,7 +21,6 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  late Client client;
   final FlexScheme flexScheme = FlexScheme.blue;
   final rootBeamerRouter =
     // TODO: This breaks opening to a different tab than home by default. Need
@@ -38,17 +39,7 @@ class _AppState extends State<App> {
       locationBuilder: (state) => AppLocation(state),
     );
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    client = Client();
-    client
-        .setEndpoint('http://192.168.1.204/v1')
-        .setProject('60a984c918aa7')
-        .setSelfSigned() // TODO: Remove in production
-        ;
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +58,7 @@ class _AppState extends State<App> {
 
 
     return FlAppwriteAccountKit(
-      client: client,
+      client: AppwriteService.instance.client,
       child: AdaptiveTheme(
         light: light.copyWith(
           snackBarTheme: dark.snackBarTheme.copyWith(

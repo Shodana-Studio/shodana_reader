@@ -10,12 +10,12 @@ StateNotifierProvider<DefaultStartingPage, int>((ref) {
 
 class DefaultStartingPage extends StateNotifier<int>{
   // DefaultStartingPage() : super(StorageUtil.getInt('defaultStartingPage'));
-  DefaultStartingPage() : super(StorageUtil.getSetting(key: defaultStartingPageKey, defValue: 0));
+  DefaultStartingPage() : super(StorageUtil.getSetting(key: AppConstants.defaultStartingPageKey, defValue: 0));
 
   void setPage(int page) {
     state = page;
     // StorageUtil.putInt('defaultStartingPage', page);
-    StorageUtil.putSetting(key: defaultStartingPageKey, value: page);
+    StorageUtil.putSetting(key: AppConstants.defaultStartingPageKey, value: page);
   }
 
   int getDefaultPage() {

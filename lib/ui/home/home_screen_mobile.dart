@@ -1,11 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hive/hive.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+
 import '../../core/data/model/book_search_model.dart';
+import '../../core/res/constants.dart';
 import '../widgets/custom_waterdrop_header.dart';
 import '../widgets/search_bar.dart';
 
@@ -96,6 +97,15 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
                   TextButton(
                     onPressed: widget.bookOnPressed,
                     child: const Text('Beam to Test Book 0 Details'),
+                  ),
+                  Center(
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        final box = Hive.box(AppConstants.settingsBoxKey);
+                        await box.put(AppConstants.welcomeShown, false);
+                      },
+                      child: const Text('Go to welcome screen'),
+                    ),
                   ),
                   const SizedBox(height: 1200,),
                 ],

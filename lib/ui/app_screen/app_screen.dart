@@ -1,13 +1,19 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:beamer/beamer.dart';
+import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:pedantic/pedantic.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:shodana_reader/ui/auth/login_screen.dart';
 
 import '../../core/presentation/locations/locations.dart';
+import '../../core/res/constants.dart';
 import 'app_screen_mobile.dart';
 import 'app_screen_tablet.dart';
 import 'provider/default_starting_page_provider.dart';
@@ -152,6 +158,7 @@ class _AppScreenState extends State<AppScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final authNotifier = context.authNotifier;
     // final StateController<bool> lastUsedEnabled = context.read
     //   (lastUsedEnabledProvider);
     final LastUsedIndex lastUsedIndex = context.read
@@ -266,28 +273,96 @@ class _AppScreenState extends State<AppScreen> {
       onDestinationSelected: (i) => onNavigationItemTap(i, lastUsedIndex),
     );
 
-    return ScreenTypeLayout.builder(
-      mobile: (BuildContext context) => AppScreenMobile(
-        bottomNavigationBar: bottomNavigationBar,
-        navigationRail: navigationRail,
-        indexedStack: indexedStack,
-      ),
-      tablet: (BuildContext context) => AppScreenTablet(
-        bottomNavigationBar: bottomNavigationBar,
-        navigationRail: navigationRail,
-        indexedStack: indexedStack,
-      ),
-      desktop: (BuildContext context) => AppScreenMobile(
-        bottomNavigationBar: bottomNavigationBar,
-        navigationRail: navigationRail,
-        indexedStack: indexedStack,
-      ),
-      watch: (BuildContext context) => AppScreenMobile(
-        bottomNavigationBar: bottomNavigationBar,
-        navigationRail: navigationRail,
-        indexedStack: indexedStack,
+    // FutureBuilder(
+    //   future: AppwriteService.instance.getUser(),
+    //   builder: (BuildContext context, AsyncSnapshot snapshot) {
+    //     return const CircularProgressIndicator();
+    //   },
+    // ),
+
+
+    Widget widget;
+    switch(authNotifier?.status ?? AuthStatus.uninitialized) {
+      case AuthStatus.authenticated:
+        widget = ValueListenableBuilder(
+          valueListenable: Hive.box(AppConstants.settingsBoxKey).listenable(),
+          builder: (context, Box box, child) =>
+            box.get(AppConstants.welcomeShown, defaultValue: false)
+              ? ScreenTypeLayout.builder(
+                  mobile: (BuildContext context) => AppScreenMobile(
+                    bottomNavigationBar: bottomNavigationBar,
+                    navigationRail: navigationRail,
+                    indexedStack: indexedStack,
+                  ),
+                  tablet: (BuildContext context) => AppScreenTablet(
+                    bottomNavigationBar: bottomNavigationBar,
+                    navigationRail: navigationRail,
+                    indexedStack: indexedStack,
+                  ),
+                  desktop: (BuildContext context) => AppScreenMobile(
+                    bottomNavigationBar: bottomNavigationBar,
+                    navigationRail: navigationRail,
+                    indexedStack: indexedStack,
+                  ),
+                  watch: (BuildContext context) => AppScreenMobile(
+                    bottomNavigationBar: bottomNavigationBar,
+                    navigationRail: navigationRail,
+                    indexedStack: indexedStack,
+                  ),
+                )
+              : const WelcomePage()
+        );
+        break;
+      case AuthStatus.unauthenticated:
+      case AuthStatus.authenticating:
+        widget = const LoginPage();
+        break;
+      case AuthStatus.uninitialized:
+        widget = const LoadingScreen();
+        break;
+    }
+
+    return widget;
+  }
+}
+
+class WelcomePage extends StatelessWidget {
+  const WelcomePage({ Key? key }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Welcome!'),),
+      body: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text('Welcome Page'),
+            ElevatedButton(
+              onPressed: () async {
+                final box = Hive.box(AppConstants.settingsBoxKey);
+                unawaited(box.put(AppConstants.welcomeShown, true));
+              },
+              child: const Text('Get Started'),
+            ),
+
+          ],
+        ),
       ),
     );
   }
 }
 
+class LoadingScreen extends StatelessWidget {
+  const LoadingScreen({ Key? key }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
+      body: const Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+  }
+}

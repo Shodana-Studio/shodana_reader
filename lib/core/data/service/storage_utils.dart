@@ -21,7 +21,7 @@ class StorageUtil {
 
   Future _init() async {
     _preferences = await SharedPreferences.getInstance();
-    _settingsBox = await Hive.openBox(settingsBoxKey);
+    _settingsBox = await Hive.openBox(AppConstants.settingsBoxKey);
   }
 
 

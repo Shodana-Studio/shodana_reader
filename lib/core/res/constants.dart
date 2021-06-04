@@ -1,20 +1,33 @@
+class AppConstants {
+  // Settings
+  static const String settingsBoxKey = 'settings';
+  static const String darkModeKey = 'darkMode';
+  static const String followSystemThemeKey = 'followSystemTheme';
+  static const String defaultStartingPageKey = 'defaultStartingPage';
+  static const String lastUsedEnabledKey = 'lastUsedEnabled';
+  static const String lastUsedIntKey = 'lastUsedInt';
+  static const String leftNavigationRailKey = 'leftNavigationRail';
+  static const String startingScreenButtonChoiceKey = 'startingScreenButtonChoice';
+
+  // Starting screen choices
+  static const String startingScreenKey = 'startingScreen';
+  static const String lastUsedScreen = 'last_used';
+  static const String homeScreen = 'home';
+  static const String shelvesScreen = 'shelves';
+  static const String clubsScreen = 'clubs';
+  static const String discoverScreen = 'discover';
+  static const String moreScreen = 'more';
+
+  // Intro
+  static const String welcomeShown = 'welcome_shown';
+
+  // Appwrite
+  static const String url = 'http://192.168.1.204';
+  static const String endpoint = 'http://192.168.1.204/v1';
+  static const String project = '60a984c918aa7';
+
+}
+
 enum NavigationTabs{home, shelves, clubs, discover, more}
 enum TileType{series, book}
 enum BookFileType{epub, pdf, mobi, html}
-const String settingsBoxKey = 'settings';
-const String darkModeKey = 'darkMode';
-const String followSystemThemeKey = 'followSystemTheme';
-const String defaultStartingPageKey = 'defaultStartingPage';
-const String lastUsedEnabledKey = 'lastUsedEnabled';
-const String lastUsedIntKey = 'lastUsedInt';
-const String leftNavigationRailKey = 'leftNavigationRail';
-const String startingScreenButtonChoiceKey = 'startingScreenButtonChoice';
-
-// Starting screen choices
-const String startingScreenKey = 'startingScreen';
-const String lastUsedScreen = 'last_used';
-const String homeScreen = 'home';
-const String shelvesScreen = 'shelves';
-const String clubsScreen = 'clubs';
-const String discoverScreen = 'discover';
-const String moreScreen = 'more';

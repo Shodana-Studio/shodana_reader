@@ -10,19 +10,19 @@ StateNotifierProvider<LastUsedEnabled, bool>((ref) {
 
 class LastUsedEnabled extends StateNotifier<bool>{
   // LastUsedEnabled() : super(StorageUtil.getBool('lastUsedEnabled'));
-  LastUsedEnabled() : super(StorageUtil.getSetting(key: lastUsedEnabledKey, defValue: true));
+  LastUsedEnabled() : super(StorageUtil.getSetting(key: AppConstants.lastUsedEnabledKey, defValue: true));
 
 
   void setEnabled() {
     state = true;
     // StorageUtil.putBool('lastUsedEnabled', value: true);
-    StorageUtil.putSetting(key: lastUsedEnabledKey, value: true);
+    StorageUtil.putSetting(key: AppConstants.lastUsedEnabledKey, value: true);
   }
 
   void setDisabled() {
     state = false;
     // StorageUtil.putBool('lastUsedEnabled', value: false);
-    StorageUtil.putSetting(key: lastUsedEnabledKey, value: false);
+    StorageUtil.putSetting(key: AppConstants.lastUsedEnabledKey, value: false);
   }
 
   bool getStatus() {

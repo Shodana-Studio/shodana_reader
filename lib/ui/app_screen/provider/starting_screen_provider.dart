@@ -25,14 +25,14 @@ class StartingPage extends StateNotifier<String>{
   StartingPage({
     required this.defaultStartingPageProvider,
     required this.lastUsedEnabled,
-  }) : super(StorageUtil.getSetting(key: startingScreenKey, defValue: lastUsedScreen));
+  }) : super(StorageUtil.getSetting(key: AppConstants.startingScreenKey, defValue: AppConstants.lastUsedScreen));
   final DefaultStartingPage defaultStartingPageProvider;
   final LastUsedEnabled lastUsedEnabled;
 
   void setScreen(String screen) {
     state = screen;
     // StorageUtil.putString('starting_screen', screen);
-    StorageUtil.putSetting(key: startingScreenKey, value: screen);
+    StorageUtil.putSetting(key: AppConstants.startingScreenKey, value: screen);
     
     // 0: lastUsedScreen
     // 1: homeScreen
@@ -40,18 +40,18 @@ class StartingPage extends StateNotifier<String>{
     // 3: clubsScreen
     // 4: discoverScreen
     // // 5: moreScreen
-    if (screen == lastUsedScreen) {
+    if (screen == AppConstants.lastUsedScreen) {
       lastUsedEnabled.setEnabled();
-    } else if (screen == homeScreen) {
+    } else if (screen == AppConstants.homeScreen) {
       lastUsedEnabled.setDisabled();
       defaultStartingPageProvider.setPage(0);
-    } else if (screen == shelvesScreen) {
+    } else if (screen == AppConstants.shelvesScreen) {
       lastUsedEnabled.setDisabled();
       defaultStartingPageProvider.setPage(1);
-    } else if (screen == clubsScreen) {
+    } else if (screen == AppConstants.clubsScreen) {
       lastUsedEnabled.setDisabled();
       defaultStartingPageProvider.setPage(2);
-    } else if (screen == discoverScreen) {
+    } else if (screen == AppConstants.discoverScreen) {
       lastUsedEnabled.setDisabled();
       defaultStartingPageProvider.setPage(3);
     // } else if (screen == moreScreen) {
