@@ -1,4 +1,5 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
@@ -12,6 +13,7 @@ import 'core/data/service/storage_utils.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Beamer.setPathUrlStrategy();
+  EquatableConfig.stringify = true;
   await Hive.initFlutter('hive_database');
   await StorageUtil.getInstance();
   final savedThemeMode = await AdaptiveTheme.getThemeMode();
