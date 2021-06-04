@@ -135,27 +135,31 @@ class LoginPage extends HookWidget {
       body: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 256),
-          child: Wrap(
-            spacing: 32,
-            runSpacing: 32,
-            alignment: WrapAlignment.center,
-            children: [
-              const FlutterLogo(size: 128),
-              Text(
-                'Login',
-                style: Theme.of(context).textTheme.headline2,
-              ),
-              EmailInput(controller: emailController, focusNode: focusNode1,),
-              PasswordInput(controller: passwordController, focusNode: focusNode2,),
-              LoginButton(
-                  usernameController: emailController,
-                  passwordController: passwordController),
-              // Text('STATE: ${authNotifier?.status ?? AuthStatus
-              //     .uninitialized}'),
-              // if ((authNotifier?.status ?? AuthStatus.uninitialized)
-              // == AuthStatus.authenticating)
-              //   const CircularProgressIndicator()
-            ],
+          child: SingleChildScrollView(
+            child: Wrap(
+              spacing: 32,
+              runSpacing: 32,
+              alignment: WrapAlignment.center,
+              children: [
+                const FlutterLogo(size: 128),
+                Text(
+                  'Login',
+                  style: Theme.of(context).textTheme.headline2,
+                ),
+                EmailInput(controller: emailController, focusNode: focusNode1,),
+                PasswordInput(controller: passwordController, focusNode: focusNode2,),
+                LoginButton(
+                    emailController: emailController,
+                    passwordController: passwordController
+                ),
+                const GoToSignupButton(),
+                // Text('STATE: ${authNotifier?.status ?? AuthStatus
+                //     .uninitialized}'),
+                // if ((authNotifier?.status ?? AuthStatus.uninitialized)
+                // == AuthStatus.authenticating)
+                //   const CircularProgressIndicator()
+              ],
+            ),
           ),
         ),
       ),
@@ -247,11 +251,11 @@ class _PasswordInputState extends State<PasswordInput> {
 class LoginButton extends StatelessWidget {
   const LoginButton(
       {Key? key,
-        required this.usernameController,
+        required this.emailController,
         required this.passwordController})
       : super(key: key);
 
-  final TextEditingController usernameController;
+  final TextEditingController emailController;
   final TextEditingController passwordController;
 
   @override
@@ -260,7 +264,7 @@ class LoginButton extends StatelessWidget {
       width: double.infinity,
       child: ElevatedButton(
         onPressed: () async {
-          final email = usernameController.text;
+          final email = emailController.text;
           final password = passwordController.text;
 
           if ( !(await context.authNotifier?.createSession(
@@ -270,11 +274,150 @@ class LoginButton extends StatelessWidget {
               content: Text(context.authNotifier?.error ??
                   'Unknown error', style: Theme.of(context).snackBarTheme.contentTextStyle),
             ));
-            print(context.authNotifier?.error ??
+            debugPrint(context.authNotifier?.error ??
                 'Unknown error');
           }
         },
         child: const Text('Login'),
+      ),
+    );
+  }
+}
+
+
+class GoToSignupButton extends StatelessWidget {
+  const GoToSignupButton({ Key? key }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      child: TextButton(
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(
+            builder: (_) => const SignupPage(),
+          ));
+        },
+        child: const Text('Not registered? Sign up.'),
+      ),
+    );
+  }
+}
+
+
+class SignupPage extends HookWidget {
+  const SignupPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final usernameController = useTextEditingController();
+    final emailController = useTextEditingController();
+    final passwordController = useTextEditingController();
+    final FocusNode focusNode1 = useFocusNode();
+    final FocusNode focusNode2 = useFocusNode();
+    final FocusNode focusNode3 = useFocusNode();
+    // final authNotifier = context.authNotifier;
+
+    
+    return Scaffold(
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 256),
+          child: SingleChildScrollView(
+            child: Wrap(
+              spacing: 32,
+              runSpacing: 32,
+              alignment: WrapAlignment.center,
+              children: [
+                const FlutterLogo(size: 128),
+                Text(
+                  'Signup',
+                  style: Theme.of(context).textTheme.headline2,
+                ),
+                UsernameInput(controller: usernameController, focusNode: focusNode1,),
+                EmailInput(controller: emailController, focusNode: focusNode2,),
+                PasswordInput(controller: passwordController, focusNode: focusNode3,),
+                SignupButton(
+                  usernameController: usernameController,
+                  emailController: emailController,
+                  passwordController: passwordController,
+                ),
+                // Text('STATE: ${authNotifier?.status ?? AuthStatus
+                //     .uninitialized}'),
+                // if ((authNotifier?.status ?? AuthStatus.uninitialized)
+                // == AuthStatus.authenticating)
+                //   const CircularProgressIndicator()
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class SignupButton extends StatelessWidget {
+  const SignupButton(
+      {Key? key,
+        required this.usernameController,
+        required this.emailController,
+        required this.passwordController})
+      : super(key: key);
+
+  final TextEditingController usernameController;
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
+        onPressed: () async {
+          final username = usernameController.text;
+          final email = emailController.text;
+          final password = passwordController.text;
+
+          if ( !(await context.authNotifier?.create(name: username, email: email, password: password) ?? false) ) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,
+              content: Text(context.authNotifier?.error ??
+                  'Unknown error', style: Theme.of(context).snackBarTheme.contentTextStyle),
+            ));
+            debugPrint(context.authNotifier?.error ??
+                'Unknown error');
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,
+              content: const Text('Successfully signed up.'),
+            ));
+            Navigator.pop(context);
+          }
+        },
+        child: const Text('Signup'),
+      ),
+    );
+  }
+}
+
+class UsernameInput extends StatelessWidget {
+  const UsernameInput({Key? key, required this.controller, required this.focusNode}) : super(key: key);
+
+  final TextEditingController controller;
+  final FocusNode focusNode;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      autofillHints: !kIsWeb ? [AutofillHints.username] : null,
+      keyboardType: TextInputType.name,
+      focusNode: focusNode,
+      textInputAction: TextInputAction.next,
+      controller: controller,
+      decoration: const InputDecoration(
+          labelText: 'Username',
+          border: OutlineInputBorder(),
+          // hintText: 'beamer'
       ),
     );
   }

@@ -8,8 +8,11 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pedantic/pedantic.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:shodana_reader/core/data/model/book_search_model.dart';
+import 'package:shodana_reader/ui/widgets/search_bar.dart';
 
 import '../../core/presentation/locations/locations.dart';
 import '../../core/res/constants.dart';
@@ -326,28 +329,32 @@ class _AppScreenState extends State<AppScreen> {
   }
 }
 
-class WelcomePage extends StatelessWidget {
+class WelcomePage extends HookWidget {
   const WelcomePage({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final BookSearchModel searchModel = useProvider(bookSearchProvider);
     return Scaffold(
-      appBar: AppBar(title: const Text('Welcome!'),),
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text('Welcome Page'),
-            ElevatedButton(
-              onPressed: () async {
-                final box = Hive.box(AppConstant.settingsBoxKey);
-                unawaited(box.put(AppConstant.welcomeShown, true));
-              },
-              child: const Text('Get Started'),
-            ),
+      body: SearchBar(
+        body: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text('Welcome Page'),
+              ElevatedButton(
+                onPressed: () async {
+                  final box = Hive.box(AppConstant.settingsBoxKey);
+                  unawaited(box.put(AppConstant.welcomeShown, true));
+                },
+                child: const Text('Get Started'),
+              ),
 
-          ],
+            ],
+          ),
         ),
+        hint: 'Welcome!',
+        model: searchModel,
       ),
     );
   }
