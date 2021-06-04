@@ -3,12 +3,12 @@
 // import 'package:http/http.dart' as http;
 import '../repository/fake_data.dart';
 
-import 'book_model.dart';
+import 'book.dart';
 
 abstract class SearchModel {
   bool isLoading = false;
 
-  List<BookModel> suggestions = history;
+  List<Book> suggestions = history;
 
   String query = '';
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../repository/fake_data.dart';
-import 'book_model.dart';
+import 'book.dart';
 import 'search_model.dart';
 
 final bookSearchProvider =
@@ -30,7 +30,10 @@ class BookSearchModel extends ChangeNotifier implements SearchModel {
       // final features = body['features'] as List;
       
       // Fake database of books
-      suggestions = books.where((book) => book.title.toLowerCase().contains(query.toLowerCase()) || book.author.toLowerCase().contains(query.toLowerCase())).toSet().toList();
+      suggestions = books.where((book) {
+        print(book.toString());
+        return book.toString().toLowerCase().contains(query.toLowerCase());
+      }).toSet().toList();
       // _suggestions = features.map((e) => BookModel.fromJson(e)).toSet().toList();
     }
 
@@ -45,7 +48,7 @@ class BookSearchModel extends ChangeNotifier implements SearchModel {
   String query = '';
 
   @override
-  List<BookModel> suggestions = history;
+  List<Book> suggestions = history;
 
   @override
   void clear() {

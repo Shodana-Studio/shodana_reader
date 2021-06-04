@@ -8,13 +8,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:implicitly_animated_reorderable_list/implicitly_animated_reorderable_list.dart';
 import 'package:implicitly_animated_reorderable_list/transitions.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
-import 'package:shodana_reader/core/data/service/appwrite_service.dart';
 
-import '../../core/data/model/book_model.dart';
+import '../../core/data/model/book.dart';
 import '../../core/data/model/book_search_model.dart';
-import '../../core/data/model/search_model.dart';
 import '../../core/data/repository/fake_data.dart';
-import '../../core/res/constants.dart';
+import '../../core/data/service/appwrite_service.dart';
 import '../app_screen/provider/bottom_navigation_provider.dart';
 import '../more/more_about/more_about_screen.dart';
 import '../more/more_settings/more_settings_screen.dart' show MoreSettingsScreen;
@@ -366,7 +364,7 @@ class _SearchState extends State<SearchBar> {
       color: Theme.of(context).bottomAppBarTheme.color,
       elevation: 4.0,
       borderRadius: BorderRadius.circular(8),
-      child: ImplicitlyAnimatedList<BookModel>(
+      child: ImplicitlyAnimatedList<Book>(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         items: model.suggestions.take(6).toList(),
@@ -429,7 +427,7 @@ class SearchItem extends HookWidget {
     required this.book,
   }) : super(key: key);
 
-  final BookModel book;
+  final Book book;
 
   @override
   Widget build(BuildContext context) {
@@ -469,12 +467,12 @@ class SearchItem extends HookWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        book.title,
+                        book.title ?? 'No title',
                         style: textTheme.subtitle1,
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        book.author,
+                        book.author ?? 'No author',
                         style: textTheme.bodyText2?.copyWith(color: Colors.grey.shade600),
                       ),
                     ],
