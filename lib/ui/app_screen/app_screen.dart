@@ -3,7 +3,7 @@ import 'package:beamer/beamer.dart';
 import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shodana_reader/l10n/tr.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
@@ -215,23 +215,23 @@ class _AppScreenState extends State<AppScreen> {
           currentIndex: currentIndex,
           items: [
             BottomNavigationBarItem(
-                label: AppLocalizations.of(context)!.homeBottomNavItemText,
+                label: TR.of(context)!.homeBottomNavItemText,
                 icon: const Icon(Icons.menu_book_rounded)
             ),
             BottomNavigationBarItem(
-                label: AppLocalizations.of(context)!.shelvesBottomNavItemText,
+                label: TR.of(context)!.shelvesBottomNavItemText,
                 icon: const Icon(Icons.collections_bookmark_rounded)
             ),
             BottomNavigationBarItem(
-                label: AppLocalizations.of(context)!.clubsBottomNavItemText,
+                label: TR.of(context)!.clubsBottomNavItemText,
                 icon: const Icon(Icons.group_rounded)
             ),
             BottomNavigationBarItem(
-                label: AppLocalizations.of(context)!.discoverBottomNavItemText,
+                label: TR.of(context)!.discoverBottomNavItemText,
                 icon: const Icon(Icons.explore_rounded)
             ),
             // BottomNavigationBarItem(
-            //     label: AppLocalizations.of(context)!.moreBottomNavItemText,
+            //     label: TR.of(context)!.moreBottomNavItemText,
             //     icon: const Icon(Icons.more_horiz)
             // ),
           ],
@@ -252,23 +252,23 @@ class _AppScreenState extends State<AppScreen> {
       labelType: NavigationRailLabelType.none,
       destinations: <NavigationRailDestination>[
         NavigationRailDestination(
-          label: Text(AppLocalizations.of(context)!.homeBottomNavItemText),
+          label: Text(TR.of(context)!.homeBottomNavItemText),
           icon: const Icon(Icons.menu_book_rounded),
         ),
         NavigationRailDestination(
-          label: Text(AppLocalizations.of(context)!.shelvesBottomNavItemText),
+          label: Text(TR.of(context)!.shelvesBottomNavItemText),
           icon: const Icon(Icons.collections_bookmark_rounded)
         ),
         NavigationRailDestination(
-          label: Text(AppLocalizations.of(context)!.clubsBottomNavItemText),
+          label: Text(TR.of(context)!.clubsBottomNavItemText),
           icon: const Icon(Icons.group_rounded)
         ),
         NavigationRailDestination(
-          label: Text(AppLocalizations.of(context)!.discoverBottomNavItemText),
+          label: Text(TR.of(context)!.discoverBottomNavItemText),
           icon: const Icon(Icons.explore_rounded)
         ),
         // NavigationRailDestination(
-        //   label: Text(AppLocalizations.of(context)!.moreBottomNavItemText),
+        //   label: Text(TR.of(context)!.moreBottomNavItemText),
         //   icon: const Icon(Icons.more_horiz)
         // ),
       ],

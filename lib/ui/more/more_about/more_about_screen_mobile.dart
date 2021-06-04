@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shodana_reader/l10n/tr.dart';
 
 class MoreAboutScreenMobile extends StatelessWidget {
   const MoreAboutScreenMobile({
@@ -14,7 +14,7 @@ class MoreAboutScreenMobile extends StatelessWidget {
         // Check for errors
         if (snapshot.hasError) {
           return Center(
-              child: Text(AppLocalizations.of(context)!.errorText)
+              child: Text(TR.of(context)!.errorText)
           );
         }
         // Once complete, show your application

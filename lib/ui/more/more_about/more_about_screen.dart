@@ -4,7 +4,7 @@ import 'package:clipboard/clipboard.dart';
 import 'package:device_info/device_info.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shodana_reader/l10n/tr.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -54,7 +54,7 @@ class AboutScreen extends HookWidget {
 
     return Scaffold(
       appBar: AppBar(
-          title: Text(AppLocalizations.of(context)!.aboutPageTitle)
+          title: Text(TR.of(context)!.aboutPageTitle)
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -62,7 +62,7 @@ class AboutScreen extends HookWidget {
           children: [
             ListTile(
                 key: const ValueKey('version'),
-                title: Text(AppLocalizations.of(context)!.versionButtonText),
+                title: Text(TR.of(context)!.versionButtonText),
                 subtitle: Text('Alpha $version+$buildNumber'),
                 onTap: () => versionOnPressed(context,
                     deviceInfo, version, buildNumber)
@@ -74,30 +74,30 @@ class AboutScreen extends HookWidget {
             // ),
             ListTile(
                 key: const ValueKey('website'),
-                title: Text(AppLocalizations.of(context)!.websiteButtonText),
+                title: Text(TR.of(context)!.websiteButtonText),
                 subtitle: const Text(website),
                 onTap: () => _launchURL(website)
             ),
             ListTile(
                 key: const ValueKey('discord'),
-                title: Text(AppLocalizations.of(context)!.discordButtonText),
+                title: Text(TR.of(context)!.discordButtonText),
                 subtitle: const Text(discord),
                 onTap: () => _launchURL(discord)
             ),
             ListTile(
                 key: const ValueKey('github'),
-                title: Text(AppLocalizations.of(context)!.githubButtonText),
+                title: Text(TR.of(context)!.githubButtonText),
                 subtitle: const Text(github),
                 onTap: () => _launchURL(github)
             ),
             ListTile(
                 key: const ValueKey('licenses'),
-                title: Text(AppLocalizations.of(context)!.licensesButtonText),
+                title: Text(TR.of(context)!.licensesButtonText),
                 onTap: () => showAboutDialog(
                   context: context,
-                  applicationName: AppLocalizations.of(context)!.appName,
+                  applicationName: TR.of(context)!.appName,
                   applicationVersion: version,
-                  applicationLegalese: AppLocalizations.of(context)!.applicationLegalese
+                  applicationLegalese: TR.of(context)!.applicationLegalese
                 )
             ),
           ],

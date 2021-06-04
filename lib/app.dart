@@ -6,9 +6,9 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'core/data/service/appwrite_service.dart';
 import 'core/presentation/locations/app_location.dart';
+import 'package:shodana_reader/l10n/tr.dart';
 
 
 class App extends StatefulWidget {
@@ -83,8 +83,8 @@ class _AppState extends State<App> {
           darkTheme: darkTheme,
           routeInformationParser: BeamerParser(),
           routerDelegate: rootBeamerRouter,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
+          localizationsDelegates: TR.localizationsDelegates,
+          supportedLocales: TR.supportedLocales,
           debugShowCheckedModeBanner: false,
         ),
       ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shodana_reader/l10n/tr.dart';
 
 import 'more_general_settings_list.dart';
 
@@ -19,7 +19,7 @@ class MoreGeneralSettingsScreenMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.generalPageTitle),
+        title: Text(TR.of(context)!.generalPageTitle),
       ),
       body: GeneralSettingsList(leftRail: leftRail, followSysTheme: followSysTheme, darkMode: darkMode),
     );

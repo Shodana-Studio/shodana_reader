@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shodana_reader/l10n/tr.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../app_screen/provider/starting_screen_button_choice.dart';
@@ -18,17 +18,17 @@ class StartingScreenWidget extends HookWidget {
     final String screen = useProvider(startingPageProvider);
     final String subtitle;
     if (screen == 'last_used') {
-      subtitle = AppLocalizations.of(context)!.startingScreenOptionLastUsedText;
+      subtitle = TR.of(context)!.startingScreenOptionLastUsedText;
     } else if (screen == 'home') {
-      subtitle = AppLocalizations.of(context)!.startingScreenOptionHomeText;
+      subtitle = TR.of(context)!.startingScreenOptionHomeText;
     } else if (screen == 'shelves') {
-      subtitle = AppLocalizations.of(context)!.startingScreenOptionShelvesText;
+      subtitle = TR.of(context)!.startingScreenOptionShelvesText;
     } else if (screen == 'clubs') {
-      subtitle = AppLocalizations.of(context)!.startingScreenOptionClubsText;
+      subtitle = TR.of(context)!.startingScreenOptionClubsText;
       } else if (screen == 'discover') {
-      subtitle = AppLocalizations.of(context)!.startingScreenOptionDiscoverText;
+      subtitle = TR.of(context)!.startingScreenOptionDiscoverText;
     // } else if (screen == 'more') {
-    //   subtitle = AppLocalizations.of(context)!.startingScreenOptionMoreText;//.setPage(4)
+    //   subtitle = TR.of(context)!.startingScreenOptionMoreText;//.setPage(4)
     } else {
       debugPrint('Error: Invalid screen id in StartingScreenWidget');
       subtitle = 'Unknown screen';
@@ -60,15 +60,15 @@ class StartingScreenWidget extends HookWidget {
       (startingScreenButtonChoiceProvider.notifier);
 
     final Map<int, Map<String, String>> options = {
-      0: {'last_used': AppLocalizations.of(context)!
+      0: {'last_used': TR.of(context)!
           .startingScreenOptionLastUsedText},
-      1: {'home': AppLocalizations.of(context)!.startingScreenOptionHomeText},
-      2: {'shelves': AppLocalizations.of(context)!
+      1: {'home': TR.of(context)!.startingScreenOptionHomeText},
+      2: {'shelves': TR.of(context)!
           .startingScreenOptionShelvesText},
-      3: {'clubs': AppLocalizations.of(context)!.startingScreenOptionClubsText},
-      4: {'discover': AppLocalizations.of(context)!
+      3: {'clubs': TR.of(context)!.startingScreenOptionClubsText},
+      4: {'discover': TR.of(context)!
           .startingScreenOptionDiscoverText},
-      // 5: {'more': AppLocalizations.of(context)!.startingScreenOptionMoreText},
+      // 5: {'more': TR.of(context)!.startingScreenOptionMoreText},
     };
 
     return showDialog(

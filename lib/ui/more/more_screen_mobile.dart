@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shodana_reader/l10n/tr.dart';
 import 'widgets/settings_list.dart';
 
 class MoreScreenMobile extends StatelessWidget {
@@ -22,7 +22,7 @@ class MoreScreenMobile extends StatelessWidget {
     final Avatars? avatars = (client == null) ? null : Avatars(client);
     
     return Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context)!.accountPageTitle)),
+      appBar: AppBar(title: Text(TR.of(context)!.accountPageTitle)),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

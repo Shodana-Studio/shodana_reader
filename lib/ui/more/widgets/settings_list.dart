@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shodana_reader/l10n/tr.dart';
 
 class SettingsList extends StatelessWidget {
   const SettingsList({
@@ -24,7 +24,7 @@ class SettingsList extends StatelessWidget {
           onTap: () {},
         ),
         ListTile(
-          title: Text(AppLocalizations.of(context)!.settingsButtonText),
+          title: Text(TR.of(context)!.settingsButtonText),
           leading: Icon(
             Icons.settings_outlined,
             color: Theme.of(context).primaryColor,
@@ -32,7 +32,7 @@ class SettingsList extends StatelessWidget {
           onTap: settingsOnPressed,
         ),
         ListTile(
-          title: Text(AppLocalizations.of(context)!.aboutButtonText),
+          title: Text(TR.of(context)!.aboutButtonText),
           leading: Icon(
             Icons.info_outline,
             color: Theme.of(context).primaryColor,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shodana_reader/l10n/tr.dart';
 
 class MoreSettingsScreenMobile extends StatelessWidget {
   const MoreSettingsScreenMobile({
@@ -11,13 +11,13 @@ class MoreSettingsScreenMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text(AppLocalizations.of(context)!.settingsPageTitle)
+          title: Text(TR.of(context)!.settingsPageTitle)
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ListTile(
-            title: Text(AppLocalizations.of(context)!.generalButtonText),
+            title: Text(TR.of(context)!.generalButtonText),
             leading: Icon(
               Icons.tune,
               color: Theme.of(context).primaryColor,

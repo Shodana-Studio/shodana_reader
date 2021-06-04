@@ -1,7 +1,7 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shodana_reader/l10n/tr.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../core/presentation/provider/dark_mode_provider.dart';
@@ -33,11 +33,11 @@ class GeneralSettingsList extends StatelessWidget {
 
           // Left handed navigation rail
           SwitchListTile(
-            title: Text(AppLocalizations.of(context)!.leftHandedNavigationRailSwitchText),
-            // subtitle: Text(leftRail ? AppLocalizations.of(context)!
-            //     .leftHandedNavigationRailSubtitleLeftText : AppLocalizations
+            title: Text(TR.of(context)!.leftHandedNavigationRailSwitchText),
+            // subtitle: Text(leftRail ? TR.of(context)!
+            //     .leftHandedNavigationRailSubtitleLeftText : TR
             //     .of(context)!.leftHandedNavigationRailSubtitleRightText),
-            subtitle: Text(AppLocalizations.of(context)!.leftHandedNavigationRailSubtitleLeftText),
+            subtitle: Text(TR.of(context)!.leftHandedNavigationRailSubtitleLeftText),
             onChanged: (bool value) {
               context.read(leftNavigationRailProvider.notifier).toggle();
             },
@@ -48,12 +48,12 @@ class GeneralSettingsList extends StatelessWidget {
           // Theme section
           const Divider(height: 1.0),
           SettingsSectionHeader(
-            title: AppLocalizations.of(context)!.themeSectionText,
+            title: TR.of(context)!.themeSectionText,
           ),
 
           // Dark mode toggle
           SwitchListTile(
-            title: Text(AppLocalizations.of(context)!.darkModeSwitchText),
+            title: Text(TR.of(context)!.darkModeSwitchText),
             onChanged: (bool value) {
               context.read(darkModeSwitchProvider.notifier).toggle();
               if (!followSysTheme) {
@@ -89,8 +89,8 @@ class GeneralSettingsList extends StatelessWidget {
           
           // Follow systen theme switch
           SwitchListTile(
-            title: Text(AppLocalizations.of(context)!.followSysThemeSwitchText),
-            subtitle: Text(AppLocalizations.of(context)!.followSysThemeSwitchSubtitle),
+            title: Text(TR.of(context)!.followSysThemeSwitchText),
+            subtitle: Text(TR.of(context)!.followSysThemeSwitchSubtitle),
             onChanged: (bool value) {
               context.read(followSystemThemeSwitchProvider.notifier).toggle();
               if (value) {

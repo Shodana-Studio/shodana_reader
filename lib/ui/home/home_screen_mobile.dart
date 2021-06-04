@@ -50,7 +50,7 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
   Widget build(BuildContext context) {
     final BookSearchModel searchModel = useProvider(bookSearchProvider);
     return Scaffold(
-      // appBar: AppBar(title: Text(AppLocalizations.of(context)!.appName)),
+      // appBar: AppBar(title: Text(TR.of(context)!.appName)),
       body: SearchBar(
         body: buildHome(context),
         hint: 'Search recents...',

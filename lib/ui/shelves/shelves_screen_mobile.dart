@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../core/data/model/book_search_model.dart';
@@ -17,7 +16,7 @@ class ShelvesScreenMobile extends HookWidget {
     // TODO: Implement search clubs and messages
     final BookSearchModel searchModel = useProvider(bookSearchProvider);
     return Scaffold(
-      // appBar: AppBar(title: Text(AppLocalizations.of(context)!.shelvesPageTitle)),
+      // appBar: AppBar(title: Text(TR.of(context)!.shelvesPageTitle)),
       body: SearchBar(
         body: buildShelves(context),
         hint: 'Search shelves...',
