@@ -11,12 +11,12 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pedantic/pedantic.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:shodana_reader/core/data/model/book_search_model.dart';
-import 'package:shodana_reader/ui/widgets/search_bar.dart';
 
+import '../../core/data/model/book_search_model.dart';
 import '../../core/presentation/locations/locations.dart';
 import '../../core/res/constants.dart';
 import '../auth/login_screen.dart';
+import '../widgets/search_bar.dart';
 import 'app_screen_mobile.dart';
 import 'app_screen_tablet.dart';
 import 'provider/default_starting_page_provider.dart';

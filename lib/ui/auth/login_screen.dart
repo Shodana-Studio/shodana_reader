@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:sign_button/sign_button.dart' as sign_button;
+import 'package:flutter_signin_button/flutter_signin_button.dart' as flutter_signin_button;
 
 // class LoginScreen extends StatefulWidget {
 //   const LoginScreen({Key? key}) : super(key: key);
@@ -146,6 +148,8 @@ class LoginPage extends HookWidget {
                   'Login',
                   style: Theme.of(context).textTheme.headline2,
                 ),
+                // const SignInWithGithub(),
+                // const SignInWithDiscord(),
                 EmailInput(controller: emailController, focusNode: focusNode1,),
                 PasswordInput(controller: passwordController, focusNode: focusNode2,),
                 LoginButton(
@@ -352,6 +356,56 @@ class SignupPage extends HookWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class SignInWithGithub extends StatelessWidget {
+  const SignInWithGithub({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return sign_button.SignInButton(
+      buttonType: sign_button.ButtonType.github,
+      onPressed: () async {
+        if ( !(await context.authNotifier?.createOAuth2Session(provider: 'google') ?? false) ) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,
+            content: Text(context.authNotifier?.error ??
+                'Unknown error', style: Theme.of(context).snackBarTheme.contentTextStyle),
+          ));
+          debugPrint(context.authNotifier?.error ??
+              'Unknown error');
+        }
+      },
+    );
+  }
+}
+
+class SignInWithDiscord extends StatelessWidget {
+  const SignInWithDiscord({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return flutter_signin_button.SignInButtonBuilder(
+      backgroundColor: const Color.fromRGBO(64, 78, 237, 1),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.horizontal(left: Radius.circular(90.0), right: Radius.circular(90.0))),
+      text: 'Sign in with Discord',
+      onPressed: () async {
+        if ( !(await context.authNotifier?.createOAuth2Session(provider: 'google') ?? false) ) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,
+            content: Text(context.authNotifier?.error ??
+                'Unknown error', style: Theme.of(context).snackBarTheme.contentTextStyle),
+          ));
+          debugPrint(context.authNotifier?.error ??
+              'Unknown error');
+        }
+      },
     );
   }
 }

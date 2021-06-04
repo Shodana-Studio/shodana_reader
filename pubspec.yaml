@@ -29,6 +29,8 @@ dependencies:
 
   # For login
   email_validator: ^2.0.1
+  sign_button: ^2.0.0
+  flutter_signin_button: ^2.0.0
 
   # For books
   file_picker: ^3.0.1
