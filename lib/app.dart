@@ -7,9 +7,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:shodana_reader/core/data/service/appwrite_service.dart';
+import 'core/data/service/appwrite_service.dart';
 import 'core/presentation/locations/app_location.dart';
-import 'core/res/constants.dart';
 
 
 class App extends StatefulWidget {

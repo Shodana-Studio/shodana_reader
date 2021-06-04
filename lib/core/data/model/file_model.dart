@@ -1,5 +1,3 @@
-import 'dart:io' as io;
-
 import 'package:flutter/cupertino.dart';
 @immutable
 class FileModel {

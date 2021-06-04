@@ -10,10 +10,10 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:pedantic/pedantic.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:shodana_reader/ui/auth/login_screen.dart';
 
 import '../../core/presentation/locations/locations.dart';
 import '../../core/res/constants.dart';
+import '../auth/login_screen.dart';
 import 'app_screen_mobile.dart';
 import 'app_screen_tablet.dart';
 import 'provider/default_starting_page_provider.dart';

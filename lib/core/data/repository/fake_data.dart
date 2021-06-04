@@ -8,7 +8,7 @@ const List<BookModel> books = [
     path: 'Android/data/app.shodana.shodana_reader/files',
   ),
   BookModel(
-    title: "I Shall Survive Using Potions",
+    title: 'I Shall Survive Using Potions',
     author: 'FUNA',
     filename: 'I%20Shall%20Survive%20Using%20Potions.epub',
     path: 'Android/data/app.shodana.shodana_reader/files',
