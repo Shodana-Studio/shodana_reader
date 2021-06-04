@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 @immutable
@@ -8,14 +10,23 @@ class FileModel extends Equatable {
   })  : _filename = filename,
         _path = path;
 
-  factory FileModel.fromJson(Map<String, dynamic> map) {
-    final Map<String, dynamic> props = map['properties'];
-
+  factory FileModel.fromMap(Map<String, dynamic> map) {
     return FileModel(
-      filename: props['filename'],
-      path: props['path'],
+      filename: map['filename'],
+      path: map['path'],
     );
   }
+
+  factory FileModel.fromJson(String source) => FileModel.fromMap(json.decode(source));
+
+  Map<String, dynamic> toMap() {
+    return {
+      'filename': filename,
+      'path': path,
+    };
+  }
+
+  String toJson() => json.encode(toMap());
 
   final String _filename;
   final String _path;
@@ -38,6 +49,16 @@ class FileModel extends Equatable {
 
   // @override
   // int get hashCode => filename.hashCode ^ path.hashCode;
+
+  FileModel copyWith({
+    String? filename,
+    String? path,
+  }) {
+    return FileModel(
+      filename: filename ?? this.filename,
+      path: path ?? this.path,
+    );
+  }
 
   @override
   List<Object?> get props => [filename, path];

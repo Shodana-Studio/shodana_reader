@@ -23,6 +23,7 @@ class BookModel extends FileModel {
 
   factory BookModel.fromJson(String source) => BookModel.fromMap(json.decode(source));
 
+  @override
   Map<String, dynamic> toMap() {
     return {
       'title': title,
@@ -32,6 +33,7 @@ class BookModel extends FileModel {
     };
   }
 
+  @override
   String toJson() => json.encode(toMap());
 
   final String _title;
@@ -56,9 +58,6 @@ class BookModel extends FileModel {
   // int get hashCode => title.hashCode ^ filename.hashCode ^ path.hashCode;
 
   @override
-  List<Object?> get props => [title, author, filename, path];
-
-
   BookModel copyWith({
     String? title,
     String? author,
@@ -72,4 +71,7 @@ class BookModel extends FileModel {
       path: path ?? this.path,
     );
   }
+
+  @override
+  List<Object?> get props => [title, author, filename, path];
 }
