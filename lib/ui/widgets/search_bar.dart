@@ -362,57 +362,29 @@ class _SearchState extends State<SearchBar> {
   }
 
   Widget buildExpandableBody(BuildContext context, BookSearchModel model) {
-    // if (model == null) {
-    //   return ClipRRect(
-    //     borderRadius: BorderRadius.circular(8),
-    //     child: Material(
-    //       color: Theme.of(context).bottomAppBarTheme.color,
-    //       elevation: 4.0,
-    //       child: Column(
-    //         mainAxisSize: MainAxisSize.min,
-    //         children: [
-    //           ListTile(
-    //             title: Text('white', style: Theme.of(context).textTheme.bodyText1,),
-    //             leading: const Icon(Icons.history),
-    //           ),
-    //           ListTile(
-    //             title: Text("Didn't I say to make my abilities "
-    //                 'average in the next life?!',
-    //               style: Theme.of(context).textTheme.bodyText1,
-    //               maxLines: 1,
-    //               overflow: TextOverflow.ellipsis,
-    //             ),
-    //             leading: const Icon(Icons.history),
-    //           ),
-    //         ],
-    //       ),
-    //     ),
-    //   );
-    // } else {
-      return Material(
-        color: Theme.of(context).bottomAppBarTheme.color,
-        elevation: 4.0,
-        borderRadius: BorderRadius.circular(8),
-        child: ImplicitlyAnimatedList<BookModel>(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          items: model.suggestions.take(6).toList(),
-          areItemsTheSame: (a, b) => a == b,
-          itemBuilder: (context, animation, book, i) {
-            return SizeFadeTransition(
-              animation: animation,
-              child: SearchItem(book: book),
-            );
-          },
-          updateItemBuilder: (context, animation, book) {
-            return FadeTransition(
-              opacity: animation,
-              child: SearchItem(book: book),
-            );
-          },
-        ),
-      );
-    // }
+    return Material(
+      color: Theme.of(context).bottomAppBarTheme.color,
+      elevation: 4.0,
+      borderRadius: BorderRadius.circular(8),
+      child: ImplicitlyAnimatedList<BookModel>(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        items: model.suggestions.take(6).toList(),
+        areItemsTheSame: (a, b) => a == b,
+        itemBuilder: (context, animation, book, i) {
+          return SizeFadeTransition(
+            animation: animation,
+            child: SearchItem(book: book),
+          );
+        },
+        updateItemBuilder: (context, animation, book) {
+          return FadeTransition(
+            opacity: animation,
+            child: SearchItem(book: book),
+          );
+        },
+      ),
+    );
   }
 
   Widget buildLogOutAlertDialog(BuildContext context) {
