@@ -10,12 +10,12 @@ StateNotifierProvider<DarkModeSwitch, bool>((ref) {
 
 class DarkModeSwitch extends StateNotifier<bool>{
   // DarkModeSwitch() : super(StorageUtil.getBool('darkMode'));
-  DarkModeSwitch() : super(StorageUtil.getSetting(key: AppConstants.darkModeKey, defValue: true));
+  DarkModeSwitch() : super(StorageUtil.getSetting(key: AppConstant.darkModeKey, defValue: true));
 
   void toggle() {
     state = !state;
     // StorageUtil.putBool('darkMode', value: state);
-    StorageUtil.putSetting(key: AppConstants.darkModeKey, value: state);
+    StorageUtil.putSetting(key: AppConstant.darkModeKey, value: state);
   }
 
   bool getState() {

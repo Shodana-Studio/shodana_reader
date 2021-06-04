@@ -10,12 +10,12 @@ StateNotifierProvider<LeftNavigationRail, bool>((ref) {
 
 class LeftNavigationRail extends StateNotifier<bool>{
   // LeftNavigationRail() : super(StorageUtil.getBool('leftNavigationRail', defValue: false));
-  LeftNavigationRail() : super(StorageUtil.getSetting(key: AppConstants.leftNavigationRailKey, defValue: false));
+  LeftNavigationRail() : super(StorageUtil.getSetting(key: AppConstant.leftNavigationRailKey, defValue: false));
 
   void toggle() {
     state = !state;
     // StorageUtil.putBool('leftNavigationRail', value: state);
-    StorageUtil.putSetting(key: AppConstants.leftNavigationRailKey, value: state);
+    StorageUtil.putSetting(key: AppConstant.leftNavigationRailKey, value: state);
   }
 
   bool getState() {

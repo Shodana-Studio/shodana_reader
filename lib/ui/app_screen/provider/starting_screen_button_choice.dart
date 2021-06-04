@@ -9,12 +9,12 @@ StateNotifierProvider<StartingScreenButtonChoice, int>((ref) {
 
 class StartingScreenButtonChoice extends StateNotifier<int>{
   // StartingScreenButtonChoice() : super(StorageUtil.getInt('startingScreenButtonChoice'));
-  StartingScreenButtonChoice() : super(StorageUtil.getSetting(key: AppConstants.startingScreenButtonChoiceKey, defValue: 0));
+  StartingScreenButtonChoice() : super(StorageUtil.getSetting(key: AppConstant.startingScreenButtonChoiceKey, defValue: 0));
 
   void setPage(int choice) {
     state = choice;
     // StorageUtil.putInt('startingScreenButtonChoice', choice);
-    StorageUtil.putSetting(key: AppConstants.startingScreenButtonChoiceKey, value: choice);
+    StorageUtil.putSetting(key: AppConstant.startingScreenButtonChoiceKey, value: choice);
   }
 
   int getChoice() {

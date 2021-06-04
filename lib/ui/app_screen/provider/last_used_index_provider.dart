@@ -10,12 +10,12 @@ StateNotifierProvider<LastUsedIndex, int>((ref) {
 
 class LastUsedIndex extends StateNotifier<int>{
   // LastUsedIndex() : super(StorageUtil.getInt('lastUsedInt'));
-  LastUsedIndex() : super(StorageUtil.getSetting(key: AppConstants.lastUsedIntKey, defValue: 0));
+  LastUsedIndex() : super(StorageUtil.getSetting(key: AppConstant.lastUsedIntKey, defValue: 0));
 
   void setPage(int page) {
     state = page;
     // StorageUtil.putInt('lastUsedInt', page);
-    StorageUtil.putSetting(key: AppConstants.lastUsedIntKey, value: page);
+    StorageUtil.putSetting(key: AppConstant.lastUsedIntKey, value: page);
   }
 
   int getPage() {

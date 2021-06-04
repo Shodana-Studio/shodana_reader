@@ -1,4 +1,4 @@
-class AppConstants {
+class AppConstant {
   // Settings
   static const String settingsBoxKey = 'settings';
   static const String darkModeKey = 'darkMode';

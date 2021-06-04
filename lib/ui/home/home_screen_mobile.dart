@@ -101,8 +101,8 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
                   Center(
                     child: ElevatedButton(
                       onPressed: () async {
-                        final box = Hive.box(AppConstants.settingsBoxKey);
-                        await box.put(AppConstants.welcomeShown, false);
+                        final box = Hive.box(AppConstant.settingsBoxKey);
+                        await box.put(AppConstant.welcomeShown, false);
                       },
                       child: const Text('Go to welcome screen'),
                     ),

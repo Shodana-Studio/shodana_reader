@@ -285,9 +285,9 @@ class _AppScreenState extends State<AppScreen> {
     switch(authNotifier?.status ?? AuthStatus.uninitialized) {
       case AuthStatus.authenticated:
         widget = ValueListenableBuilder(
-          valueListenable: Hive.box(AppConstants.settingsBoxKey).listenable(),
+          valueListenable: Hive.box(AppConstant.settingsBoxKey).listenable(),
           builder: (context, Box box, child) =>
-            box.get(AppConstants.welcomeShown, defaultValue: false)
+            box.get(AppConstant.welcomeShown, defaultValue: false)
               ? ScreenTypeLayout.builder(
                   mobile: (BuildContext context) => AppScreenMobile(
                     bottomNavigationBar: bottomNavigationBar,
@@ -340,8 +340,8 @@ class WelcomePage extends StatelessWidget {
             const Text('Welcome Page'),
             ElevatedButton(
               onPressed: () async {
-                final box = Hive.box(AppConstants.settingsBoxKey);
-                unawaited(box.put(AppConstants.welcomeShown, true));
+                final box = Hive.box(AppConstant.settingsBoxKey);
+                unawaited(box.put(AppConstant.welcomeShown, true));
               },
               child: const Text('Get Started'),
             ),

@@ -5,8 +5,8 @@ import '../../res/constants.dart';
 
 class AppwriteService {
   AppwriteService._internal() {
-    _client = Client(endPoint: AppConstants.endpoint,)
-        .setProject(AppConstants.project)
+    _client = Client(endPoint: AppConstant.endpoint,)
+        .setProject(AppConstant.project)
         .setSelfSigned() // TODO: Remove in production
         ;
     _account = Account(_client);
@@ -66,7 +66,7 @@ class AppwriteService {
     required String email,
     required List<String> roles,
   }) {
-    return _teams.createMembership(teamId: teamId, email: email, roles: roles, url: AppConstants.url);
+    return _teams.createMembership(teamId: teamId, email: email, roles: roles, url: AppConstant.url);
   }
 
   Future deleteMember({required String teamId, required String membershipId}) {
@@ -126,6 +126,6 @@ class AppwriteService {
   }
 
   String getInitialsLink(String name, {int width = 100, int height = 100}) {
-    return '${AppConstants.endpoint}/avatars/initials?project=${AppConstants.project}&name=$name&width=$width&height=$height';
+    return '${AppConstant.endpoint}/avatars/initials?project=${AppConstant.project}&name=$name&width=$width&height=$height';
   }
 }
