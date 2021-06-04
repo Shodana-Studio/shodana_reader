@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
+import 'reading_stats.dart';
+
 class Book extends Equatable {
   const Book({
     this.title,
@@ -33,7 +35,7 @@ class Book extends Equatable {
       readingProgress: map['readingProgress'],
       userId: map['userId'],
       metadata: map['metadata'],
-      readingTimes: List<String>.from(map['readingTimes']),
+      readingTimes: List<ReadingStats>.from(map['readingTimes']?.map((x) => ReadingStats.fromMap(x))),
     );
   }
 
@@ -51,7 +53,7 @@ class Book extends Equatable {
   final int? readingProgress;
   final String userId;
   final dynamic metadata;
-  final List<String>? readingTimes;
+  final List<ReadingStats>? readingTimes;
 
   Map<String, dynamic> toMap() {
     return {
@@ -67,7 +69,7 @@ class Book extends Equatable {
       'readingProgress': readingProgress,
       'userId': userId,
       'metadata': metadata,
-      'readingTimes': readingTimes,
+      'readingTimes': readingTimes?.map((x) => x.toMap()).toList(),
     };
   }
 
@@ -85,8 +87,8 @@ class Book extends Equatable {
     DateTime? finishReadingDate,
     int? readingProgress,
     String? userId,
-    dynamic? metadata,
-    List<String>? readingTimes,
+    dynamic metadata,
+    List<ReadingStats>? readingTimes,
   }) {
     return Book(
       title: title ?? this.title,
@@ -112,15 +114,9 @@ class Book extends Equatable {
       author ?? '',
       description ?? '',
       filename,
-      publisher ?? '',
-      publishedDate ?? DateTime.now(),
-      createdDate,
-      startReadingDate ?? DateTime.now(),
-      finishReadingDate ?? DateTime.now(),
-      readingProgress ?? 0,
+      readingProgress ?? -1,
       userId,
-      metadata ?? {},
-      readingTimes ?? '',
+      publisher ?? '',
     ];
   }
 

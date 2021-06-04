@@ -441,6 +441,9 @@ class SearchItem extends HookWidget {
       children: [
         InkWell(
           onTap: () {
+            if (!history.contains(book)) {
+              history.add(book);
+            }
             FloatingSearchBar.of(context)?.close();
             Future.delayed(
               const Duration(milliseconds: 500),
