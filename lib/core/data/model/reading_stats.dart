@@ -12,8 +12,8 @@ class ReadingStats extends Equatable {
   factory ReadingStats.fromMap(Map<String, dynamic> map) {
     return ReadingStats(
       date: DateTime.fromMillisecondsSinceEpoch(map['date']),
-      timeRead: map['time_read'],
-      userId: map['user_id'],
+      timeRead: map['timeRead'],
+      userId: map['userId'],
     );
   }
 
@@ -26,8 +26,8 @@ class ReadingStats extends Equatable {
   Map<String, dynamic> toMap() {
     return {
       'date': date.millisecondsSinceEpoch,
-      'time_read': timeRead,
-      'user_id': userId,
+      'timeRead': timeRead,
+      'userId': userId,
     };
   }
 

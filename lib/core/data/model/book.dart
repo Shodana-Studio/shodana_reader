@@ -35,7 +35,7 @@ class Book extends Equatable {
       readingProgress: map['readingProgress'],
       userId: map['userId'],
       metadata: map['metadata'],
-      readingTimes: List<ReadingStats>.from(map['readingTimes']?.map((x) => ReadingStats.fromMap(x))),
+      readingTimes: List<ReadingStats>.from((map['readingTimes'] as List<Map<String, ReadingStats>>).map((x) => ReadingStats.fromMap(x))),
     );
   }
 
