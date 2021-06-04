@@ -13,9 +13,9 @@ class MoreSettingsScreen extends StatelessWidget {
   void generalOnPressed(BuildContext context) {
     // context.beamToNamed('/more/settings/general');
     Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) {
-          return const GeneralSettings();
-        })
+      builder: (context) {
+        return const GeneralSettings();
+      })
     );
   }
 
