@@ -8,7 +8,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'core/data/service/appwrite_service.dart';
 import 'core/presentation/locations/app_location.dart';
-import 'package:shodana_reader/l10n/tr.dart';
+import 'l10n/tr.dart';
 
 
 class App extends StatefulWidget {
