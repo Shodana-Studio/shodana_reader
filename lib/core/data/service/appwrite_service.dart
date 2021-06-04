@@ -32,11 +32,7 @@ class AppwriteService {
 
   Client get client => _client;
 
-  // Account functions
-
-  // Future verifyEmail() {
-  //   return _account.createVerification(url: url;)
-  // }
+  // Account functions in flappwrite_account_kit
 
   Future<Map<String, dynamic>> updatePrefs(Map<String, dynamic> prefs) async {
     final res = await _account.updatePrefs(prefs: prefs);

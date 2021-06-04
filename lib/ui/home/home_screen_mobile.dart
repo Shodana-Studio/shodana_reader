@@ -4,6 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hive/hive.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 
 import '../../core/data/model/book_search_model.dart';
 import '../../core/res/constants.dart';
@@ -87,18 +88,23 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
               padding: const EdgeInsets.only(top: kToolbarHeight + 8.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   // const SizedBox(height: kToolbarHeight + 8,),
                   // ListTile(
                   //   title: const Text('Beam to Test Book 0 Details'),
                   //   onTap: bookOnPressed,
                   // ),
-                  TextButton(
-                    onPressed: widget.bookOnPressed,
-                    child: const Text('Beam to Test Book 0 Details'),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: TextButton(
+                      onPressed: widget.bookOnPressed,
+                      child: const Text('Beam to Test Book 0 Details'),
+                    ),
                   ),
-                  Center(
+                  // Temp button
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
                     child: ElevatedButton(
                       onPressed: () async {
                         final box = Hive.box(AppConstant.settingsBoxKey);
@@ -107,6 +113,28 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
                       child: const Text('Go to welcome screen'),
                     ),
                   ),
+                  // Temp button
+                  // Padding(
+                  //   padding: const EdgeInsets.all(8.0),
+                  //   child: ElevatedButton(
+                  //     onPressed: () async {
+                  //       if (!(await context.authNotifier?.createVerification(url: 'http://192.168.1.204:5500/complete_verify.html') ?? false)) {
+                  //         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  //           backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,
+                  //           content: Text(context.authNotifier?.error ??
+                  //               'Unknown error', style: Theme.of(context).snackBarTheme.contentTextStyle),
+                  //         ));
+                  //         debugPrint(context.authNotifier?.error ?? 'Unknown error');
+                  //       } else {
+                  //         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  //           backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,
+                  //           content: const Text('Verification email sent'),
+                  //         ));
+                  //       }
+                  //     },
+                  //     child: const Text('Verify email'),
+                  //   ),
+                  // ),
                   const SizedBox(height: 1200,),
                 ],
               ),
