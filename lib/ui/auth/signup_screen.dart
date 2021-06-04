@@ -4,15 +4,17 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 import 'widgets/form.dart';
 
-class LoginScreen extends HookWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class SignupScreen extends HookWidget {
+  const SignupScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final usernameController = useTextEditingController();
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
     final FocusNode focusNode1 = useFocusNode();
     final FocusNode focusNode2 = useFocusNode();
+    final FocusNode focusNode3 = useFocusNode();
     // final authNotifier = context.authNotifier;
 
     
@@ -28,18 +30,17 @@ class LoginScreen extends HookWidget {
               children: [
                 const FlutterLogo(size: 128),
                 Text(
-                  'Login',
+                  'Signup',
                   style: Theme.of(context).textTheme.headline2,
                 ),
-                // const SignInWithGithub(),
-                // const SignInWithDiscord(),
-                EmailInput(controller: emailController, focusNode: focusNode1,),
-                PasswordInput(controller: passwordController, focusNode: focusNode2,),
-                LoginButton(
-                    emailController: emailController,
-                    passwordController: passwordController
+                UsernameInput(controller: usernameController, focusNode: focusNode1,),
+                EmailInput(controller: emailController, focusNode: focusNode2,),
+                PasswordInput(controller: passwordController, focusNode: focusNode3,),
+                SignupButton(
+                  usernameController: usernameController,
+                  emailController: emailController,
+                  passwordController: passwordController,
                 ),
-                const GoToSignupButton(),
                 // Text('STATE: ${authNotifier?.status ?? AuthStatus
                 //     .uninitialized}'),
                 // if ((authNotifier?.status ?? AuthStatus.uninitialized)

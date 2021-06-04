@@ -100,13 +100,10 @@ class _AppScreenState extends State<AppScreen> {
       currentIndex = 1;
     } else if (widget.beamState.uri.path.contains('clubs')) {
       currentIndex = 2;
-    }
-    else if (widget.beamState.uri.path.contains('discover'))
-    {
+    } else if (widget.beamState.uri.path.contains('discover')) {
       currentIndex = 3;
-    }
-    else if (widget.beamState.uri.path.contains('more')) {
-      currentIndex = 4;
+    // } else if (widget.beamState.uri.path.contains('more')) {
+    //   currentIndex = 4;
     } else {
       // If the user has the default screen set to last used, launch the screen
       // to the last used screen. Otherwise launch to the default screen
@@ -118,9 +115,10 @@ class _AppScreenState extends State<AppScreen> {
       }
     }
 
-    if (currentIndex != 4) {
-      lastUsedIndexNotifier.setPage(currentIndex);
-    }
+    lastUsedIndexNotifier.setPage(currentIndex);
+    // if (currentIndex != 4) {
+    //   lastUsedIndexNotifier.setPage(currentIndex);
+    // }
 
     // Set the current index to active, all others to not active
     int i = 0;
@@ -200,7 +198,7 @@ class _AppScreenState extends State<AppScreen> {
         Beamer(routerDelegate: routerDelegates[1]),
         Beamer(routerDelegate: routerDelegates[2]),
         Beamer(routerDelegate: routerDelegates[3]),
-        Beamer(routerDelegate: routerDelegates[4]),
+        // Beamer(routerDelegate: routerDelegates[4]),
       ],
     );
 
@@ -276,13 +274,6 @@ class _AppScreenState extends State<AppScreen> {
       onDestinationSelected: (i) => onNavigationItemTap(i, lastUsedIndex),
     );
 
-    // FutureBuilder(
-    //   future: AppwriteService.instance.getUser(),
-    //   builder: (BuildContext context, AsyncSnapshot snapshot) {
-    //     return const CircularProgressIndicator();
-    //   },
-    // ),
-
 
     Widget widget;
     switch(authNotifier?.status ?? AuthStatus.uninitialized) {
@@ -318,7 +309,7 @@ class _AppScreenState extends State<AppScreen> {
         break;
       case AuthStatus.unauthenticated:
       case AuthStatus.authenticating:
-        widget = const LoginPage();
+        widget = const LoginScreen();
         break;
       case AuthStatus.uninitialized:
         widget = const LoadingScreen();
