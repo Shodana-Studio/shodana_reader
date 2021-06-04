@@ -34,11 +34,6 @@ class AppwriteService {
 
   // Account functions in flappwrite_account_kit
 
-  Future<Map<String, dynamic>> updatePrefs(Map<String, dynamic> prefs) async {
-    final res = await _account.updatePrefs(prefs: prefs);
-    return res.data;
-  }
-
   // Teams functions
 
   Future listTeams() {
