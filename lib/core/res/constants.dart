@@ -22,9 +22,9 @@ class AppConstant {
   static const String welcomeShown = 'welcome_shown';
 
   // Appwrite
-  static const String url = 'http://192.168.1.204';
-  static const String endpoint = 'http://192.168.1.204/v1';
-  static const String project = '60a984c918aa7';
+  static const String url = 'http://192.168.1.47';
+  static const String endpoint = 'http://192.168.1.47/v1';
+  static const String project = '60baf81c4c87b';
 
 }
 
