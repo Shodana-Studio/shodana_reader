@@ -102,13 +102,13 @@ class _SearchState extends State<SearchBar> {
               title: Text(user.name),
               subtitle: Text(user.email),
               onTap: () {
-                
-                // Navigator.of(context).pop();
-                // // TODO: Move logout into account screen
-                // showDialog(
-                //   context: context,
-                //   builder: buildLogOutAlertDialog,
-                // );
+                // TODO: Navigate to account screen
+                // TODO: Move logout into account screen
+                Navigator.of(context).pop();
+                showDialog(
+                  context: context,
+                  builder: buildLogOutAlertDialog,
+                );
               },
             );
           }
@@ -137,12 +137,7 @@ class _SearchState extends State<SearchBar> {
               title: const Text(''),
               subtitle: const Text(''),
               // onTap: () {
-              //   Navigator.of(context).pop();
-              //   // TODO: Move logout into account screen
-              //   showDialog(
-              //     context: context,
-              //     builder: buildLogOutAlertDialog,
-              //   );
+                // TODO: Navigate to account screen
               // },
             );
           }
