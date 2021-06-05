@@ -6,7 +6,8 @@ import '../../../ui/clubs/club_room/club_room_screen.dart';
 import '../../../ui/clubs/clubs_screen.dart';
 
 class ClubsLocation extends BeamLocation {
-  ClubsLocation(BeamState state) : super(state);
+  ClubsLocation(BeamState state, this.rootContext) : super(state);
+  final BuildContext rootContext;
 
   @override
   List<String> get pathBlueprints => ['/clubs/:clubId'];
@@ -17,13 +18,14 @@ class ClubsLocation extends BeamLocation {
       key: const ValueKey('clubs'),
       title: 'Clubs - Shodana Reader',
       type: BeamPageType.noTransition,
-      child: const ClubsScreen(),
+      child: ClubsScreen(rootContext: rootContext),
     ),
     if (state.pathParameters.containsKey('clubId'))
       BeamPage(
         key: ValueKey('club-${state.pathParameters['clubId']}'),
         child: ClubRoomScreen(
           club: club,
+          rootContext: rootContext
         ),
       ),
   ];

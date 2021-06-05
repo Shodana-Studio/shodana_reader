@@ -1,11 +1,11 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:shodana_reader/l10n/tr.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../core/presentation/provider/dark_mode_provider.dart';
 import '../../../core/presentation/provider/follow_system_theme_provider.dart';
+import '../../../l10n/tr.dart';
 import '../../app_screen/provider/left_navigation_rail_provider.dart';
 import '../widgets/settings_section_header.dart';
 import 'starting_screen_item.dart';

@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:shodana_reader/l10n/tr.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 import '../../core/data/model/book_search_model.dart';
 import '../widgets/search_bar.dart';
 
 class ClubsScreenMobile extends HookWidget {
   const ClubsScreenMobile({
-    Key? key, required this.beamToClub,
+    Key? key, required this.beamToClub, required this.rootContext
   }) : super(key: key);
   final Function(BuildContext, String) beamToClub;
+  final BuildContext rootContext;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +23,7 @@ class ClubsScreenMobile extends HookWidget {
         body: buildClubs(context),
         hint: 'Search clubs...',
         model: searchModel,
+        rootContext: rootContext
       ),
     );
   }

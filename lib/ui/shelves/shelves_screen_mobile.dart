@@ -6,10 +6,11 @@ import '../widgets/search_bar.dart';
 
 class ShelvesScreenMobile extends HookWidget {
   const ShelvesScreenMobile({
-    Key? key, required this.beamToShelf, required this.beamToBook,
+    Key? key, required this.beamToShelf, required this.beamToBook, required this.rootContext,
   }) : super(key: key);
   final Function(BuildContext, String) beamToShelf;
   final Function(BuildContext, String, String) beamToBook;
+  final BuildContext rootContext;
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +22,7 @@ class ShelvesScreenMobile extends HookWidget {
         body: buildShelves(context),
         hint: 'Search shelves...',
         model: searchModel,
+        rootContext: rootContext
       ),
     );
   }

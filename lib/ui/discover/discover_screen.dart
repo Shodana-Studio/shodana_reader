@@ -5,7 +5,8 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'discover_screen_mobile.dart';
 
 class DiscoverScreen extends StatelessWidget {
-  const DiscoverScreen({Key? key}) : super(key: key);
+  const DiscoverScreen({Key? key, required this.rootContext}) : super(key: key);
+  final BuildContext rootContext;
 
   void beamToInternetBook(BuildContext context, String book) {
     context.beamToNamed('/discover/$book');
@@ -16,15 +17,19 @@ class DiscoverScreen extends StatelessWidget {
     return ScreenTypeLayout.builder(
       mobile: (BuildContext context) => DiscoverScreenMobile(
         beamToInternetBook: beamToInternetBook,
+        rootContext: rootContext
       ),
       tablet: (BuildContext context) => DiscoverScreenMobile(
         beamToInternetBook: beamToInternetBook,
+        rootContext: rootContext
       ),
       desktop: (BuildContext context) => DiscoverScreenMobile(
         beamToInternetBook: beamToInternetBook,
+        rootContext: rootContext
       ),
       watch: (BuildContext context) => DiscoverScreenMobile(
         beamToInternetBook: beamToInternetBook,
+        rootContext: rootContext
       ),
     );
   }

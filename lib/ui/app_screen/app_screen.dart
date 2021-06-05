@@ -3,7 +3,6 @@ import 'package:beamer/beamer.dart';
 import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:shodana_reader/l10n/tr.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
@@ -15,6 +14,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 import '../../core/data/model/book_search_model.dart';
 import '../../core/presentation/locations/locations.dart';
 import '../../core/res/constants.dart';
+import '../../l10n/tr.dart';
 import '../auth/login_screen.dart';
 import '../widgets/search_bar.dart';
 import 'app_screen_mobile.dart';
@@ -36,59 +36,62 @@ class _AppScreenState extends State<AppScreen> {
   Widget? bottomNavigationBar;
   late NavigationRail navigationRail;
   late int currentIndex;
+  late final List<BeamerDelegate<BeamState>> _routerDelegates;
 
   // These are all the location handlers. They handle the page stacks.
-  final routerDelegates = [
-    BeamerDelegate(
-      initialPath: '/home',
-      locationBuilder: (state) {
-      if (state.uri.path.contains('home')) {
-        return HomeLocation(state);
-      }
-        return NotFound(path: state.uri.toString());
-      },
-    ),
-    BeamerDelegate(
-      initialPath: '/shelves',
-      locationBuilder: (state) {
-        if (state.uri.path.contains('shelves')) {
-          return ShelvesLocation(state);
+  List<BeamerDelegate> getRouterDelegates(BuildContext rootContext) => [
+      BeamerDelegate(
+        initialPath: '/home',
+        locationBuilder: (state) {
+        if (state.uri.path.contains('home')) {
+          return HomeLocation(state, rootContext);
         }
-        return NotFound(path: state.uri.toString());
-      },
-    ),
-    BeamerDelegate(
-      initialPath: '/clubs',
-      locationBuilder: (state) {
-        if (state.uri.path.contains('clubs')) {
-          return ClubsLocation(state);
-        }
-        return NotFound(path: state.uri.toString());
-      },
-    ),
-    BeamerDelegate(
-      initialPath: '/discover',
-      locationBuilder: (state) {
-        if (state.uri.path.contains('discover')) {
-          return DiscoverLocation(state);
-        }
-        return NotFound(path: state.uri.toString());
-      },
-    ),
-    BeamerDelegate(
-      initialPath: '/more',
-      locationBuilder: (state) {
-        if (state.uri.path.contains('more')) {
-          return MoreLocation(state);
-        }
-        return NotFound(path: state.uri.toString());
-      },
-    ),
-  ];
+          return NotFound(path: state.uri.toString());
+        },
+      ),
+      BeamerDelegate(
+        initialPath: '/shelves',
+        locationBuilder: (state) {
+          if (state.uri.path.contains('shelves')) {
+            return ShelvesLocation(state, rootContext);
+          }
+          return NotFound(path: state.uri.toString());
+        },
+      ),
+      BeamerDelegate(
+        initialPath: '/clubs',
+        locationBuilder: (state) {
+          if (state.uri.path.contains('clubs')) {
+            return ClubsLocation(state, rootContext);
+          }
+          return NotFound(path: state.uri.toString());
+        },
+      ),
+      BeamerDelegate(
+        initialPath: '/discover',
+        locationBuilder: (state) {
+          if (state.uri.path.contains('discover')) {
+            return DiscoverLocation(state, rootContext);
+          }
+          return NotFound(path: state.uri.toString());
+        },
+      ),
+      // BeamerDelegate(
+      //   initialPath: '/more',
+      //   locationBuilder: (state) {
+      //     if (state.uri.path.contains('more')) {
+      //       return MoreLocation(state);
+      //     }
+      //     return NotFound(path: state.uri.toString());
+      //   },
+      // ),
+    ];
 
   @override
   void initState() {
     super.initState();
+    _routerDelegates = getRouterDelegates(context);
+
     SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
     final bool lastUsedEnabled = context.read(lastUsedEnabledProvider);
     final lastUsedIndexNotifier = context.read(lastUsedIndexProvider.notifier);
@@ -122,11 +125,11 @@ class _AppScreenState extends State<AppScreen> {
 
     // Set the current index to active, all others to not active
     int i = 0;
-    for ( i = 0; i < routerDelegates.length; i++ ) {
+    for ( i = 0; i < _routerDelegates.length; i++ ) {
       if (currentIndex == i) {
-        routerDelegates[i].active();
+        _routerDelegates[i].active();
       } else {
-        routerDelegates[i].active(false);
+        _routerDelegates[i].active(false);
       }
     }
 
@@ -134,17 +137,17 @@ class _AppScreenState extends State<AppScreen> {
 
   void onNavigationItemTap(int index, LastUsedIndex lastUsedIndex) {
     if (currentIndex == index) {
-      routerDelegates[currentIndex].beamToNamed
-        (routerDelegates[currentIndex].initialPath);
+      _routerDelegates[currentIndex].beamToNamed
+        (_routerDelegates[currentIndex].initialPath);
     } else {
       setState(() => currentIndex = index);
 
       int i = 0;
-      for ( i = 0; i < routerDelegates.length; i++ ) {
+      for ( i = 0; i < _routerDelegates.length; i++ ) {
         if (currentIndex == i) {
-          routerDelegates[i].active();
+          _routerDelegates[i].active();
         } else {
-          routerDelegates[i].active(false);
+          _routerDelegates[i].active(false);
         }
       }
 
@@ -153,12 +156,13 @@ class _AppScreenState extends State<AppScreen> {
         lastUsedIndex.setPage(currentIndex);
       }
 
-      routerDelegates[currentIndex].update(rebuild: false);
+      _routerDelegates[currentIndex].update(rebuild: false);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final rootContext = context;
     final authNotifier = context.authNotifier;
     // final StateController<bool> lastUsedEnabled = context.read
     //   (lastUsedEnabledProvider);
@@ -194,10 +198,10 @@ class _AppScreenState extends State<AppScreen> {
       key: const ValueKey('first'),
       index: currentIndex,
       children: [
-        Beamer(routerDelegate: routerDelegates[0]),
-        Beamer(routerDelegate: routerDelegates[1]),
-        Beamer(routerDelegate: routerDelegates[2]),
-        Beamer(routerDelegate: routerDelegates[3]),
+        Beamer(routerDelegate: _routerDelegates[0]),
+        Beamer(routerDelegate: _routerDelegates[1]),
+        Beamer(routerDelegate: _routerDelegates[2]),
+        Beamer(routerDelegate: _routerDelegates[3]),
         // Beamer(routerDelegate: routerDelegates[4]),
       ],
     );
@@ -304,7 +308,7 @@ class _AppScreenState extends State<AppScreen> {
                     indexedStack: indexedStack,
                   ),
                 )
-              : const WelcomePage()
+              : WelcomePage(rootContext: rootContext)
         );
         break;
       case AuthStatus.unauthenticated:
@@ -321,7 +325,8 @@ class _AppScreenState extends State<AppScreen> {
 }
 
 class WelcomePage extends HookWidget {
-  const WelcomePage({ Key? key }) : super(key: key);
+  const WelcomePage({ Key? key, required this.rootContext }) : super(key: key);
+  final BuildContext rootContext;
 
   @override
   Widget build(BuildContext context) {
@@ -340,12 +345,12 @@ class WelcomePage extends HookWidget {
                 },
                 child: const Text('Get Started'),
               ),
-
             ],
           ),
         ),
         hint: 'Welcome!',
         model: searchModel,
+        rootContext: rootContext
       ),
     );
   }

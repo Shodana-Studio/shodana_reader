@@ -13,7 +13,6 @@ import '../../core/data/model/book.dart';
 import '../../core/data/model/book_search_model.dart';
 import '../../core/data/repository/fake_data.dart';
 import '../../core/data/service/appwrite_service.dart';
-import '../app_screen/provider/bottom_navigation_provider.dart';
 import '../more/more_about/more_about_screen.dart';
 import '../more/more_settings/more_settings_screen.dart' show MoreSettingsScreen;
 
@@ -23,11 +22,13 @@ class SearchBar extends StatefulWidget {
     required this.body,
     required this.model,
     this.hint='Search...',
+    required this.rootContext,
   }) : super(key: key);
 
   final Widget body;
   final String? hint;
   final BookSearchModel model;
+  final BuildContext rootContext;
 
   @override
   _SearchState createState() => _SearchState();
@@ -101,12 +102,13 @@ class _SearchState extends State<SearchBar> {
               title: Text(user.name),
               subtitle: Text(user.email),
               onTap: () {
-                Navigator.of(context).pop();
-                // TODO: Move logout into account screen
-                showDialog(
-                  context: context,
-                  builder: buildLogOutAlertDialog,
-                );
+                
+                // Navigator.of(context).pop();
+                // // TODO: Move logout into account screen
+                // showDialog(
+                //   context: context,
+                //   builder: buildLogOutAlertDialog,
+                // );
               },
             );
           }
@@ -182,10 +184,8 @@ class _SearchState extends State<SearchBar> {
         ),
         title: const Text('Settings'),
         onTap: () {
-          context.read(shouldShowBottomNavigationProvider).state =
-          false;
           Navigator.of(context).pop();
-          Navigator.of(context).push(MaterialPageRoute(
+          Navigator.of(widget.rootContext).push(MaterialPageRoute(
               builder: (context) {
                 return const MoreSettingsScreen();
               })
@@ -216,10 +216,8 @@ class _SearchState extends State<SearchBar> {
         ),
         // subtitle: const Text('v0.0.2'),
         onTap: () {
-          context.read(shouldShowBottomNavigationProvider).state =
-              false;
           Navigator.of(context).pop();
-          Navigator.of(context).push(MaterialPageRoute(
+          Navigator.of(widget.rootContext).push(MaterialPageRoute(
               builder: (context) {
                 return const AboutScreen();
               })
@@ -326,7 +324,7 @@ class _SearchState extends State<SearchBar> {
 
     return FloatingSearchBar(
       hint: widget.hint,
-      isScrollControlled: true,
+      // isScrollControlled: true,
       backgroundColor: Theme.of(context).bottomAppBarTheme.color,
       automaticallyImplyBackButton: false,
       // scrollPadding: const EdgeInsets.only(/*top: 0, */bottom: 80),

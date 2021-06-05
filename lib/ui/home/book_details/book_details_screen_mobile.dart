@@ -4,10 +4,12 @@ class BookDetailsScreenMobile extends StatelessWidget {
   const BookDetailsScreenMobile({
     Key? key,
     required this.book,
-    required this.startReadingButtonPressed
+    required this.startReadingButtonPressed,
+    required this.rootContext,
   }) : super(key: key);
   final Map<String, String> book;
   final Function(BuildContext) startReadingButtonPressed;
+  final BuildContext rootContext;
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shodana_reader/l10n/tr.dart';
+import '../../../l10n/tr.dart';
 
 class SettingsList extends StatelessWidget {
   const SettingsList({

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shodana_reader/l10n/tr.dart';
+import '../../../l10n/tr.dart';
 
 class MoreSettingsScreenMobile extends StatelessWidget {
   const MoreSettingsScreenMobile({

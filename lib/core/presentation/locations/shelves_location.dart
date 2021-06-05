@@ -9,7 +9,8 @@ import '../../data/repository/fake_data.dart';
 import '../../res/constants.dart';
 
 class ShelvesLocation extends BeamLocation {
-  ShelvesLocation(BeamState state) : super(state);
+  ShelvesLocation(BeamState state, this.rootContext) : super(state);
+  final BuildContext rootContext;
 
   @override
   List<String> get pathBlueprints => ['/shelves/:shelfId/:bookId/:chapterId'];
@@ -20,7 +21,7 @@ class ShelvesLocation extends BeamLocation {
       key: const ValueKey('shelves'),
       title: 'Shelves - Shodana Reader',
       type: BeamPageType.noTransition,
-      child: const ShelvesScreen(),
+      child: ShelvesScreen(rootContext: rootContext),
     ),
 
     if (state.pathParameters.containsKey('shelfId'))
@@ -28,6 +29,7 @@ class ShelvesLocation extends BeamLocation {
         key: ValueKey('shelf-${state.pathParameters['shelfId']}'),
         child: ShelfDetailsScreen(
           shelf: shelf,
+          rootContext: rootContext
         ),
       ),
 
@@ -37,6 +39,7 @@ class ShelvesLocation extends BeamLocation {
             .pathParameters['bookId']}'),
         child: BookDetailsScreen(
           book: book,
+          rootContext: rootContext
         ),
       ),
 

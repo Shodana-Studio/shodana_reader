@@ -11,7 +11,8 @@ import 'home_screen_mobile.dart';
 
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({Key? key, required this.rootContext}) : super(key: key);
+  final BuildContext rootContext;
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -45,6 +46,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void bookOnPressed() {
     context.beamToNamed('/home/0');
+    // Navigator.of(widget.rootContext).push(MaterialPageRoute(
+    //   builder: (context) {
+    //     return const MoreSettingsScreen();
+    //   }
+    // ));
   }
 
   @override
@@ -53,18 +59,22 @@ class _HomeScreenState extends State<HomeScreen> {
       mobile: (BuildContext context) => HomeScreenMobile(
         fabOnPressed: fabOnPressed,
         bookOnPressed: bookOnPressed,
+        rootContext: widget.rootContext,
       ),
       tablet: (BuildContext context) => HomeScreenMobile(
         fabOnPressed: fabOnPressed,
         bookOnPressed: bookOnPressed,
+        rootContext: widget.rootContext,
       ),
       desktop: (BuildContext context) => HomeScreenMobile(
         fabOnPressed: fabOnPressed,
         bookOnPressed: bookOnPressed,
+        rootContext: widget.rootContext,
       ),
       watch: (BuildContext context) => HomeScreenMobile(
         fabOnPressed: fabOnPressed,
         bookOnPressed: bookOnPressed,
+        rootContext: widget.rootContext,
       ),
     );
   }

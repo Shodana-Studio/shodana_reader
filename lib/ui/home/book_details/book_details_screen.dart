@@ -6,8 +6,9 @@ import '../../app_screen/provider/bottom_navigation_provider.dart';
 import 'book_details_screen_mobile.dart';
 
 class BookDetailsScreen extends StatelessWidget {
-  const BookDetailsScreen({Key? key, required this.book}) : super(key: key);
+  const BookDetailsScreen({Key? key, required this.book, required this.rootContext}) : super(key: key);
   final Map<String, String> book;
+  final BuildContext rootContext;
 
   Future<void> startReadingButtonPressed(BuildContext context) async {
     context.read(shouldShowBottomNavigationProvider).state = false;
@@ -26,18 +27,22 @@ class BookDetailsScreen extends StatelessWidget {
       mobile: (BuildContext context) => BookDetailsScreenMobile(
         book: book,
         startReadingButtonPressed: startReadingButtonPressed,
+        rootContext: rootContext
       ),
       tablet: (BuildContext context) => BookDetailsScreenMobile(
         book: book,
         startReadingButtonPressed: startReadingButtonPressed,
+        rootContext: rootContext
       ),
       desktop: (BuildContext context) => BookDetailsScreenMobile(
         book: book,
         startReadingButtonPressed: startReadingButtonPressed,
+        rootContext: rootContext
       ),
       watch: (BuildContext context) => BookDetailsScreenMobile(
         book: book,
         startReadingButtonPressed: startReadingButtonPressed,
+        rootContext: rootContext
       ),
     );
   }

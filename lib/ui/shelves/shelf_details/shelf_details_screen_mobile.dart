@@ -5,9 +5,11 @@ class ShelfDetailsScreenMobile extends StatelessWidget {
     Key? key,
     required this.beamToBook,
     required this.shelf,
+    required this.rootContext
   }) : super(key: key);
   final Function(BuildContext, String, String) beamToBook;
   final Map<String, String> shelf;
+  final BuildContext rootContext;
 
   @override
   Widget build(BuildContext context) {

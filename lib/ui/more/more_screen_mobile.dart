@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shodana_reader/l10n/tr.dart';
+import '../../l10n/tr.dart';
 import 'widgets/settings_list.dart';
 
 class MoreScreenMobile extends StatelessWidget {
