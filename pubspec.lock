@@ -300,9 +300,11 @@ packages:
   flappwrite_account_kit:
     dependency: "direct main"
     description:
-      path: "../flappwrite_account_kit"
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: "4dfb3aa33baac9f21f01882c0ee311d1f580b887"
+      url: "https://github.com/getBoolean/flappwrite_account_kit"
+    source: git
     version: "0.0.1"
   flex_color_scheme:
     dependency: "direct main"
