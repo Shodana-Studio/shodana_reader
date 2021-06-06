@@ -29,8 +29,8 @@ dependencies:
       ref: feat-realtime
 
   flappwrite_account_kit:
-    # git: https://github.com/getBoolean/flappwrite_account_kit
-    path: ../flappwrite_account_kit
+    git: https://github.com/getBoolean/flappwrite_account_kit
+    # path: ../flappwrite_account_kit
 
   # For login
   email_validator: ^2.0.1
