@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../l10n/my.i18n.dart';
 
 class EBookReaderScreenMobile extends StatelessWidget {
   const EBookReaderScreenMobile({
@@ -14,11 +15,11 @@ class EBookReaderScreenMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Reading: ${chapter.first}'),
+        title: Text('Reading: %s'.i18n.fill([chapter.first])),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Text('Chapter Contents: ${chapter[1]}'),
+        child: Text('Chapter Contents: %s'.i18n.fill([chapter[1]])),
       ),
     );
   }

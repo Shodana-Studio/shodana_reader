@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../l10n/my.i18n.dart';
 
 class BookDetailsScreenMobile extends StatelessWidget {
   const BookDetailsScreenMobile({
@@ -22,11 +23,11 @@ class BookDetailsScreenMobile extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text('Author: ${book['author']}'),
+            child: Text('Author: %s'.i18n.fill([book['author']!])),
           ),
           TextButton(
             onPressed: () => startReadingButtonPressed(context),
-            child: const Text('Start Reading'),
+            child: Text('Start Reading'.i18n),
           ),
         ],
       ),

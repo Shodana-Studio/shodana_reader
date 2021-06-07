@@ -1,7 +1,7 @@
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter/material.dart';
 
-import '../../my.i18n.dart';
+import '../../l10n/my.i18n.dart';
 import 'more_about/more_about_screen.dart';
 import 'more_general_settings/more_general_settings_screen.dart';
 import 'more_settings/more_settings_screen.dart';

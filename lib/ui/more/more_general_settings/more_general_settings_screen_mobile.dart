@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../my.i18n.dart';
+import '../../../l10n/my.i18n.dart';
 import 'more_general_settings_list.dart';
 
 class MoreGeneralSettingsScreenMobile extends StatelessWidget {

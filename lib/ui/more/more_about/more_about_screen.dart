@@ -9,7 +9,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../my.i18n.dart';
+import '../../../l10n/my.i18n.dart';
 import 'more_about_screen_mobile.dart';
 
 class AboutScreen extends HookWidget {

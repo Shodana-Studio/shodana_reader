@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../my.i18n.dart';
+import '../../../l10n/my.i18n.dart';
 import '../../app_screen/provider/starting_screen_button_choice.dart';
 import '../../app_screen/provider/starting_screen_provider.dart';
 import 'simple_dialog_item.dart';
@@ -71,7 +71,7 @@ class StartingScreenWidget extends HookWidget {
     return showDialog(
       context: context,
       builder: (context) => SimpleDialog(
-        title: const Text('Starting screen'),
+        title: Text('Starting screen'.i18n),
         children: [
           for (final MapEntry<int, Map<String, String>> option in options.entries)
             SimpleDialogItem(

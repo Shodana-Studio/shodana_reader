@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../my.i18n.dart';
+import '../../../l10n/my.i18n.dart';
 
 class SettingsList extends StatelessWidget {
   const SettingsList({
@@ -19,8 +19,8 @@ class SettingsList extends StatelessWidget {
             Icons.history_toggle_off_outlined,
             color: Theme.of(context).primaryColor,
           ),
-          title: const Text('Turn on Incognito mode'),
-          // subtitle: const Text('Pauses reading history'),
+          title: Text('Turn on Incognito mode'.i18n),
+          // subtitle: Text('Pauses reading history'.i18n),
           onTap: () {},
         ),
         ListTile(

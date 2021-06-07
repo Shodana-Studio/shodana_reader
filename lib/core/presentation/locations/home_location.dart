@@ -1,6 +1,7 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 
+import '../../../l10n/my.i18n.dart';
 import '../../../ui/home/book_details/book_details_screen.dart';
 import '../../../ui/home/home_screen.dart';
 import '../../../ui/reader/reader_screen.dart';
@@ -20,7 +21,7 @@ class HomeLocation extends BeamLocation {
   List<BeamPage> buildPages(BuildContext context, BeamState state) => [
     BeamPage(
       key: const ValueKey('home'),
-      title: 'Shodana Reader Home',
+      title: 'Shodana Reader Home'.i18n,
       type: BeamPageType.noTransition,
       child: HomeScreen(rootContext: rootContext),
     ),

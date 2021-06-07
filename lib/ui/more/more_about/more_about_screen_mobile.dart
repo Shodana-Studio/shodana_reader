@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../my.i18n.dart';
+import '../../../l10n/my.i18n.dart';
 
 class MoreAboutScreenMobile extends StatelessWidget {
   const MoreAboutScreenMobile({

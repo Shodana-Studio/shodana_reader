@@ -14,7 +14,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 import '../../core/data/model/book_search_model.dart';
 import '../../core/presentation/locations/locations.dart';
 import '../../core/res/constants.dart';
-import '../../my.i18n.dart';
+import '../../l10n/my.i18n.dart';
 import '../auth/login_screen.dart';
 import '../widgets/search_bar.dart';
 import 'app_screen_mobile.dart';
@@ -215,22 +215,22 @@ class _AppScreenState extends State<AppScreen> {
           // backgroundColor: Theme.of(context).backgroundColor,
           elevation: 0.0,
           currentIndex: currentIndex,
-          items: const [
+          items: [
             BottomNavigationBarItem(
-                label: 'Home',
-                icon: Icon(Icons.menu_book_rounded)
+                label: 'Home'.i18n,
+                icon: const Icon(Icons.menu_book_rounded)
             ),
             BottomNavigationBarItem(
-                label: 'Shelves',
-                icon: Icon(Icons.collections_bookmark_rounded)
+                label: 'Shelves'.i18n,
+                icon: const Icon(Icons.collections_bookmark_rounded)
             ),
             BottomNavigationBarItem(
-                label: 'Clubs',
-                icon: Icon(Icons.group_rounded)
+                label: 'Clubs'.i18n,
+                icon: const Icon(Icons.group_rounded)
             ),
             BottomNavigationBarItem(
-                label: 'Discover',
-                icon: Icon(Icons.explore_rounded)
+                label: 'Discover'.i18n,
+                icon: const Icon(Icons.explore_rounded)
             ),
             // BottomNavigationBarItem(
             //     label: TR.of(context)!.moreBottomNavItemText,
@@ -337,18 +337,18 @@ class WelcomePage extends HookWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text('Welcome Page'),
+              Text('Welcome Page'.i18n),
               ElevatedButton(
                 onPressed: () async {
                   final box = Hive.box(AppConstant.settingsBoxKey);
                   unawaited(box.put(AppConstant.welcomeShown, true));
                 },
-                child: const Text('Get Started'),
+                child: Text('Get Started'.i18n),
               ),
             ],
           ),
         ),
-        hint: 'Welcome!',
+        hint: 'Welcome!'.i18n,
         model: searchModel,
         rootContext: rootContext
       ),

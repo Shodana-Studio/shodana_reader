@@ -1,6 +1,7 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 
+import '../../../l10n/my.i18n.dart';
 import '../../../ui/home/book_details/book_details_screen.dart';
 import '../../../ui/reader/reader_screen.dart';
 import '../../../ui/shelves/shelf_details/shelf_details_screen.dart';
@@ -19,7 +20,7 @@ class ShelvesLocation extends BeamLocation {
   List<BeamPage> buildPages(BuildContext context, BeamState state) => [
     BeamPage(
       key: const ValueKey('shelves'),
-      title: 'Shelves - Shodana Reader',
+      title: 'Shelves - Shodana Reader'.i18n,
       type: BeamPageType.noTransition,
       child: ShelvesScreen(rootContext: rootContext),
     ),

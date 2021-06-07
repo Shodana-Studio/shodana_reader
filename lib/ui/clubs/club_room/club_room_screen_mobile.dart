@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../l10n/my.i18n.dart';
 
 class ClubRoomScreenMobile extends StatelessWidget {
   const ClubRoomScreenMobile({
@@ -16,7 +17,7 @@ class ClubRoomScreenMobile extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Text('Last Message: ${club['last_message']}'),
+        child: Text('Last Message: %s'.i18n.fill([club['last_message']!])),
       ),
     );
   }

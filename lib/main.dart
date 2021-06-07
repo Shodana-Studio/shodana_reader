@@ -11,7 +11,7 @@ import 'package:beamer/beamer.dart';
 
 import 'app.dart';
 import 'core/data/service/storage_utils.dart';
-import 'my.i18n.dart';
+import 'l10n/my.i18n.dart';
 
 Future<AdaptiveThemeMode?> init() async {
   WidgetsFlutterBinding.ensureInitialized();
