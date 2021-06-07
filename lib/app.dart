@@ -1,14 +1,14 @@
 // APP
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:beamer/beamer.dart';
-import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
+import 'package:flappwrite_account_kit/flappwrite_account_kit.dart' as appwrite;
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
 import 'core/data/service/appwrite_service.dart';
 import 'core/presentation/locations/app_location.dart';
-import 'l10n/tr.dart';
 
 
 class App extends StatefulWidget {
@@ -56,7 +56,7 @@ class _AppState extends State<App> {
     ).toTheme;
 
 
-    return FlAppwriteAccountKit(
+    return appwrite.FlAppwriteAccountKit(
       client: AppwriteService.instance.client,
       child: AdaptiveTheme(
         light: light.copyWith(
@@ -83,8 +83,14 @@ class _AppState extends State<App> {
           darkTheme: darkTheme,
           routeInformationParser: BeamerParser(),
           routerDelegate: rootBeamerRouter,
-          localizationsDelegates: TR.localizationsDelegates,
-          supportedLocales: TR.supportedLocales,
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          // supportedLocales: const [
+          //    Locale('en', 'US'),
+          // ],
           debugShowCheckedModeBanner: false,
         ),
       ),

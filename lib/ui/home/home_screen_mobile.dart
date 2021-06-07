@@ -4,10 +4,10 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hive/hive.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 
 import '../../core/data/model/book_search_model.dart';
 import '../../core/res/constants.dart';
+import '../../l10n/my.i18n.dart';
 import '../widgets/custom_waterdrop_header.dart';
 import '../widgets/search_bar.dart';
 
@@ -52,16 +52,16 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
   Widget build(BuildContext context) {
     final BookSearchModel searchModel = useProvider(bookSearchProvider);
     return Scaffold(
-      // appBar: AppBar(title: Text(TR.of(context)!.appName)),
+      // appBar: AppBar(title: Text('appName'.i18n)),
       body: SearchBar(
         body: buildHome(context),
-        hint: 'Search recents...',
+        hint: 'Search recents...'.i18n,
         model: searchModel,
         rootContext: widget.rootContext,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: widget.fabOnPressed,
-        tooltip: 'Add an eBook',
+        tooltip: 'Add an eBook'.i18n,
         child: const Icon(Icons.add),
       ),
     );
@@ -113,7 +113,7 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
                         final box = Hive.box(AppConstant.settingsBoxKey);
                         await box.put(AppConstant.welcomeShown, false);
                       },
-                      child: const Text('Go to welcome screen'),
+                      child: Text('Go to welcome screen'.i18n),
                     ),
                   ),
                   // Temp button
@@ -125,13 +125,13 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
                   //         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                   //           backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,
                   //           content: Text(context.authNotifier?.error ??
-                  //               'Unknown error', style: Theme.of(context).snackBarTheme.contentTextStyle),
+                  //               'Unknown error'.i18n, style: Theme.of(context).snackBarTheme.contentTextStyle),
                   //         ));
                   //         debugPrint(context.authNotifier?.error ?? 'Unknown error');
                   //       } else {
                   //         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                   //           backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,
-                  //           content: const Text('Verification email sent'),
+                  //           content: const Text('Verification email sent'.i18n),
                   //         ));
                   //       }
                   //     },

@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
+import '../../l10n/my.i18n.dart';
 import 'widgets/form.dart';
 
 class SignupScreen extends HookWidget {
@@ -30,7 +31,7 @@ class SignupScreen extends HookWidget {
               children: [
                 const FlutterLogo(size: 128),
                 Text(
-                  'Signup',
+                  'Signup'.i18n,
                   style: Theme.of(context).textTheme.headline2,
                 ),
                 UsernameInput(controller: usernameController, focusNode: focusNode1,),

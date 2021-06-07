@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../l10n/tr.dart';
+import '../../../l10n/my.i18n.dart';
 import '../../app_screen/provider/starting_screen_button_choice.dart';
 import '../../app_screen/provider/starting_screen_provider.dart';
 import 'simple_dialog_item.dart';
@@ -18,36 +18,36 @@ class StartingScreenWidget extends HookWidget {
     final String screen = useProvider(startingPageProvider);
     final String subtitle;
     if (screen == 'last_used') {
-      subtitle = TR.of(context)!.startingScreenOptionLastUsedText;
+      subtitle = 'Last used'.i18n;
     } else if (screen == 'home') {
-      subtitle = TR.of(context)!.startingScreenOptionHomeText;
+      subtitle = 'Home'.i18n;
     } else if (screen == 'shelves') {
-      subtitle = TR.of(context)!.startingScreenOptionShelvesText;
+      subtitle = 'Shelves'.i18n;
     } else if (screen == 'clubs') {
-      subtitle = TR.of(context)!.startingScreenOptionClubsText;
+      subtitle = 'Clubs'.i18n;
       } else if (screen == 'discover') {
-      subtitle = TR.of(context)!.startingScreenOptionDiscoverText;
+      subtitle = 'Discover'.i18n;
     // } else if (screen == 'more') {
-    //   subtitle = TR.of(context)!.startingScreenOptionMoreText;//.setPage(4)
+    //   subtitle = 'More'.i18n;//.setPage(4)
     } else {
-      debugPrint('Error: Invalid screen id in StartingScreenWidget');
-      subtitle = 'Unknown screen';
+      debugPrint('Error: Invalid screen id in StartingScreenWidget'.i18n);
+      subtitle = 'Unknown screen'.i18n;
     }
     return ListTile(
-      title: const Text('Starting screen'),
+      title: Text('Starting screen'.i18n),
       subtitle: Text(subtitle),
       onTap: () async {
         return onStartingScreenTapped(context)
             .then((screen) {
           if (screen == null) {
-            debugPrint('Info: Starting Screen not chosen');
+            debugPrint('Info: Starting Screen not chosen'.i18n);
             return;
           }
           context.read(startingPageProvider.notifier)
               .setScreen(screen);
         })
             .onError((error, stackTrace) {
-          debugPrint('Starting screen not set');
+          debugPrint('Starting screen not set'.i18n);
         });
       },
     );
@@ -60,21 +60,18 @@ class StartingScreenWidget extends HookWidget {
       (startingScreenButtonChoiceProvider.notifier);
 
     final Map<int, Map<String, String>> options = {
-      0: {'last_used': TR.of(context)!
-          .startingScreenOptionLastUsedText},
-      1: {'home': TR.of(context)!.startingScreenOptionHomeText},
-      2: {'shelves': TR.of(context)!
-          .startingScreenOptionShelvesText},
-      3: {'clubs': TR.of(context)!.startingScreenOptionClubsText},
-      4: {'discover': TR.of(context)!
-          .startingScreenOptionDiscoverText},
-      // 5: {'more': TR.of(context)!.startingScreenOptionMoreText},
+      0: {'last_used': 'Last used'.i18n},
+      1: {'home': 'Home'.i18n},
+      2: {'shelves': 'Shelves'.i18n},
+      3: {'clubs': 'Clubs'.i18n},
+      4: {'discover': 'Discover'.i18n},
+      // 5: {'more': 'More'.i18n},
     };
 
     return showDialog(
       context: context,
       builder: (context) => SimpleDialog(
-        title: const Text('Starting screen'),
+        title: Text('Starting screen'.i18n),
         children: [
           for (final MapEntry<int, Map<String, String>> option in options.entries)
             SimpleDialogItem(

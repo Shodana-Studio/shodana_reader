@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import '../../l10n/my.i18n.dart';
 
 class ExtendableFab extends StatelessWidget {
   const ExtendableFab({Key? key}) : super(key: key);
@@ -29,7 +30,7 @@ class ExtendableFab extends StatelessWidget {
               padding: const EdgeInsetsDirectional.only(start: 8),
               child: FloatingActionButton.extended(
                 icon: const Icon(Icons.add),
-                label: const Text('UPLOAD'),
+                label: Text('UPLOAD'.i18n),
                 onPressed: () {},
               ),
             ),

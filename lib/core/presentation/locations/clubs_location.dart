@@ -2,9 +2,9 @@ import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/data/repository/fake_data.dart';
+import '../../../l10n/my.i18n.dart';
 import '../../../ui/clubs/club_room/club_room_screen.dart';
 import '../../../ui/clubs/clubs_screen.dart';
-
 class ClubsLocation extends BeamLocation {
   ClubsLocation(BeamState state, this.rootContext) : super(state);
   final BuildContext rootContext;
@@ -16,7 +16,7 @@ class ClubsLocation extends BeamLocation {
   List<BeamPage> buildPages(BuildContext context, BeamState state) => [
     BeamPage(
       key: const ValueKey('clubs'),
-      title: 'Clubs - Shodana Reader',
+      title: 'Clubs - Shodana Reader'.i18n,
       type: BeamPageType.noTransition,
       child: ClubsScreen(rootContext: rootContext),
     ),

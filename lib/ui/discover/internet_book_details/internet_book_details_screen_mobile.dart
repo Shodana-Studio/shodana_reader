@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../l10n/my.i18n.dart';
 
 class InternetBookDetailsScreenMobile extends StatelessWidget {
   const InternetBookDetailsScreenMobile({
@@ -16,7 +17,7 @@ class InternetBookDetailsScreenMobile extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Text('Author: ${internetBook['author']}'),
+        child: Text('Author: %s'.i18n.fill([internetBook['author']!])),
       ),
     );
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../l10n/tr.dart';
+import '../../../l10n/my.i18n.dart';
 
 class SettingsList extends StatelessWidget {
   const SettingsList({
@@ -19,12 +19,12 @@ class SettingsList extends StatelessWidget {
             Icons.history_toggle_off_outlined,
             color: Theme.of(context).primaryColor,
           ),
-          title: const Text('Turn on Incognito mode'),
-          // subtitle: const Text('Pauses reading history'),
+          title: Text('Turn on Incognito mode'.i18n),
+          // subtitle: Text('Pauses reading history'.i18n),
           onTap: () {},
         ),
         ListTile(
-          title: Text(TR.of(context)!.settingsButtonText),
+          title: Text('Settings'.i18n),
           leading: Icon(
             Icons.settings_outlined,
             color: Theme.of(context).primaryColor,
@@ -32,7 +32,7 @@ class SettingsList extends StatelessWidget {
           onTap: settingsOnPressed,
         ),
         ListTile(
-          title: Text(TR.of(context)!.aboutButtonText),
+          title: Text('About'.i18n),
           leading: Icon(
             Icons.info_outline,
             color: Theme.of(context).primaryColor,
@@ -40,7 +40,7 @@ class SettingsList extends StatelessWidget {
           onTap: aboutOnPressed,
         ),
         ListTile(
-          title: const Text('Help'),
+          title: Text('Help'.i18n),
           leading: Icon(
             Icons.help_outline,
             color: Theme.of(context).primaryColor,

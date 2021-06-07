@@ -5,7 +5,8 @@ import 'package:sign_button/sign_button.dart' as sign_button;
 import 'package:flutter_signin_button/flutter_signin_button.dart' as flutter_signin_button;
 import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 
-
+import '../../../core/data/service/authnotifier_extension.dart';
+import '../../../l10n/my.i18n.dart';
 import '../signup_screen.dart';
 
 class UsernameInput extends StatelessWidget {
@@ -22,9 +23,9 @@ class UsernameInput extends StatelessWidget {
       focusNode: focusNode,
       textInputAction: TextInputAction.next,
       controller: controller,
-      decoration: const InputDecoration(
-          labelText: 'Username',
-          border: OutlineInputBorder(),
+      decoration: InputDecoration(
+          labelText: 'Username'.i18n,
+          border: const OutlineInputBorder(),
           // hintText: 'beamer'
       ),
     );
@@ -49,9 +50,9 @@ class EmailInput extends StatelessWidget {
       focusNode: focusNode,
       textInputAction: TextInputAction.next,
       controller: controller,
-      decoration: const InputDecoration(
-          labelText: 'Email',
-          border: OutlineInputBorder(),
+      decoration: InputDecoration(
+          labelText: 'Email'.i18n,
+          border: const OutlineInputBorder(),
           // hintText: 'beamer'
       ),
     );
@@ -95,7 +96,7 @@ class _PasswordInputState extends State<PasswordInput> {
       obscureText: _isHidden,
       controller: widget.controller,
       decoration: InputDecoration(
-          labelText: 'Password',
+          labelText: 'Password'.i18n,
           border: const OutlineInputBorder(),
           suffixIcon: Padding(
             padding: const EdgeInsetsDirectional.only(end: 12.0),
@@ -122,14 +123,14 @@ class SignInWithGithub extends StatelessWidget {
     return sign_button.SignInButton(
       buttonType: sign_button.ButtonType.github,
       onPressed: () async {
-        if ( !(await context.authNotifier?.createOAuth2Session(provider: 'google') ?? false) ) {
+        if ( !(await context.authNotifier?.createOAuth2SessionFromEnum(provider: OAuth.github) ?? false) ) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,
             content: Text(context.authNotifier?.error ??
-                'Unknown error', style: Theme.of(context).snackBarTheme.contentTextStyle),
+                'Unknown error'.i18n, style: Theme.of(context).snackBarTheme.contentTextStyle),
           ));
           debugPrint(context.authNotifier?.error ??
-              'Unknown error');
+              'Unknown error'.i18n);
         }
       },
     );
@@ -146,16 +147,16 @@ class SignInWithDiscord extends StatelessWidget {
     return flutter_signin_button.SignInButtonBuilder(
       backgroundColor: const Color.fromRGBO(64, 78, 237, 1),
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.horizontal(left: Radius.circular(90.0), right: Radius.circular(90.0))),
-      text: 'Sign in with Discord',
+      text: 'Sign in with Discord'.i18n,
       onPressed: () async {
-        if ( !(await context.authNotifier?.createOAuth2Session(provider: 'google') ?? false) ) {
+        if ( !(await context.authNotifier?.createOAuth2SessionFromEnum(provider: OAuth.discord) ?? false) ) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,
             content: Text(context.authNotifier?.error ??
-                'Unknown error', style: Theme.of(context).snackBarTheme.contentTextStyle),
+                'Unknown error'.i18n, style: Theme.of(context).snackBarTheme.contentTextStyle),
           ));
           debugPrint(context.authNotifier?.error ??
-              'Unknown error');
+              'Unknown error'.i18n);
         }
       },
     );
@@ -186,13 +187,13 @@ class LoginButton extends StatelessWidget {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,
               content: Text(context.authNotifier?.error ??
-                  'Unknown error', style: Theme.of(context).snackBarTheme.contentTextStyle),
+                  'Unknown error'.i18n, style: Theme.of(context).snackBarTheme.contentTextStyle),
             ));
             debugPrint(context.authNotifier?.error ??
-                'Unknown error');
+                'Unknown error'.i18n);
           }
         },
-        child: const Text('Login'),
+        child: Text('Login'.i18n),
       ),
     );
   }
@@ -212,7 +213,7 @@ class GoToSignupButton extends StatelessWidget {
             builder: (_) => const SignupScreen(),
           ));
         },
-        child: const Text('Not registered? Sign up.'),
+        child: Text('Not registered? Sign up.'.i18n),
       ),
     );
   }
@@ -244,19 +245,19 @@ class SignupButton extends StatelessWidget {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,
               content: Text(context.authNotifier?.error ??
-                  'Unknown error', style: Theme.of(context).snackBarTheme.contentTextStyle),
+                  'Unknown error'.i18n, style: Theme.of(context).snackBarTheme.contentTextStyle),
             ));
             debugPrint(context.authNotifier?.error ??
-                'Unknown error');
+                'Unknown error'.i18n);
           } else {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,
-              content: const Text('Successfully signed up.'),
+              content: Text('Successfully signed up.'.i18n),
             ));
             Navigator.pop(context);
           }
         },
-        child: const Text('Signup'),
+        child: Text('Signup'.i18n),
       ),
     );
   }

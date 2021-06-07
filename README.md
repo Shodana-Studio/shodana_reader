@@ -1,5 +1,7 @@
 # shodana_reader
 
+[![Codemagic build status](https://api.codemagic.io/apps/60bdd48f362aacd018426ed3/60bdd48f362aacd018426ed2/status_badge.svg)](https://codemagic.io/apps/60bdd48f362aacd018426ed3/60bdd48f362aacd018426ed2/latest_build)
+
 A new Flutter application for reading ebooks.
 
 ## Getting Started

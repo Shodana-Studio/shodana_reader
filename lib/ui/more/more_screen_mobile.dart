@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../l10n/tr.dart';
+import '../../l10n/my.i18n.dart';
 import 'widgets/settings_list.dart';
 
 class MoreScreenMobile extends StatelessWidget {
@@ -22,7 +22,7 @@ class MoreScreenMobile extends StatelessWidget {
     final Avatars? avatars = (client == null) ? null : Avatars(client);
     
     return Scaffold(
-      appBar: AppBar(title: Text(TR.of(context)!.accountPageTitle)),
+      appBar: AppBar(title: Text('Account'.i18n)),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -44,7 +44,7 @@ class MoreScreenMobile extends StatelessWidget {
               ),
               title: Text(user!.name),
               subtitle: Text(user!.email),
-              // subtitle: const Text('Pauses reading history'),
+              // subtitle: const Text('Pauses reading history'.i18n),
             ),
             const Divider(height: 16,),
           ],
@@ -59,17 +59,17 @@ class MoreScreenMobile extends StatelessWidget {
 
   AlertDialog buildLogOutAlertDialog(BuildContext context) {
     return AlertDialog(
-      title: const Text('Log out'),
-      content: const Text("Are you sure? You won't be able "
+      title: Text('Log out'.i18n),
+      content: Text("Are you sure? You won't be able "
           'to access any online content without being '
-          'logged in.'),
+          'logged in.'.i18n),
       actions: [
         TextButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
           style: Theme.of(context).textButtonTheme.style,
-          child: const Text('CANCEL'),
+          child: Text('CANCEL'.i18n),
         ),
         TextButton(
           onPressed: () {
@@ -77,7 +77,7 @@ class MoreScreenMobile extends StatelessWidget {
             Navigator.of(context).pop();
           },
           style: Theme.of(context).textButtonTheme.style,
-          child: const Text('LOGOUT'),
+          child: Text('LOGOUT'.i18n),
         ),
       ],
     );

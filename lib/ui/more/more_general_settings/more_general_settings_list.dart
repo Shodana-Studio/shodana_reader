@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../core/presentation/provider/dark_mode_provider.dart';
 import '../../../core/presentation/provider/follow_system_theme_provider.dart';
-import '../../../l10n/tr.dart';
+import '../../../l10n/my.i18n.dart';
 import '../../app_screen/provider/left_navigation_rail_provider.dart';
 import '../widgets/settings_section_header.dart';
 import 'starting_screen_item.dart';
@@ -33,11 +33,8 @@ class GeneralSettingsList extends StatelessWidget {
 
           // Left handed navigation rail
           SwitchListTile(
-            title: Text(TR.of(context)!.leftHandedNavigationRailSwitchText),
-            // subtitle: Text(leftRail ? TR.of(context)!
-            //     .leftHandedNavigationRailSubtitleLeftText : TR
-            //     .of(context)!.leftHandedNavigationRailSubtitleRightText),
-            subtitle: Text(TR.of(context)!.leftHandedNavigationRailSubtitleLeftText),
+            title: Text('Left handed navigation rail'.i18n),
+            subtitle: Text('Show on left side'.i18n),
             onChanged: (bool value) {
               context.read(leftNavigationRailProvider.notifier).toggle();
             },
@@ -48,12 +45,12 @@ class GeneralSettingsList extends StatelessWidget {
           // Theme section
           const Divider(height: 1.0),
           SettingsSectionHeader(
-            title: TR.of(context)!.themeSectionText,
+            title: 'Theme'.i18n,
           ),
 
           // Dark mode toggle
           SwitchListTile(
-            title: Text(TR.of(context)!.darkModeSwitchText),
+            title: Text('Dark mode'.i18n),
             onChanged: (bool value) {
               context.read(darkModeSwitchProvider.notifier).toggle();
               if (!followSysTheme) {
@@ -89,8 +86,8 @@ class GeneralSettingsList extends StatelessWidget {
           
           // Follow systen theme switch
           SwitchListTile(
-            title: Text(TR.of(context)!.followSysThemeSwitchText),
-            subtitle: Text(TR.of(context)!.followSysThemeSwitchSubtitle),
+            title: Text('Follow system theme'.i18n),
+            subtitle: Text('Dark mode setting will be ignored'.i18n),
             onChanged: (bool value) {
               context.read(followSystemThemeSwitchProvider.notifier).toggle();
               if (value) {

@@ -1,6 +1,7 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 
+import '../../../l10n/my.i18n.dart';
 import '../../../ui/discover/discover_screen.dart';
 import '../../../ui/discover/internet_book_details/discover_details_screen.dart';
 import '../../data/repository/fake_data.dart';
@@ -16,7 +17,7 @@ class DiscoverLocation extends BeamLocation {
   List<BeamPage> buildPages(BuildContext context, BeamState state) => [
     BeamPage(
       key: const ValueKey('discover'),
-      title: 'Discover - Shodana Reader',
+      title: 'Discover - Shodana Reader'.i18n,
       type: BeamPageType.noTransition,
       child: DiscoverScreen(rootContext: rootContext),
     ),

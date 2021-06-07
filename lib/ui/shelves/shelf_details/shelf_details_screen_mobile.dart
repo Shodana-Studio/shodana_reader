@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../l10n/my.i18n.dart';
 
 class ShelfDetailsScreenMobile extends StatelessWidget {
   const ShelfDetailsScreenMobile({
@@ -22,12 +23,12 @@ class ShelfDetailsScreenMobile extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text('Author: ${shelf['author']}'),
+            child: Text('Author: %s'.i18n.fill([shelf['author']!])),
           ),
           const SizedBox(height: 8.0),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8.0),
-            child: Text('Books:', style: TextStyle(
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Text('Books:'.i18n, style: const TextStyle(
                 fontWeight: FontWeight.bold
             )),
           ),
