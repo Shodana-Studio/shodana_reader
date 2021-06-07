@@ -13,6 +13,7 @@ import '../../core/data/model/book.dart';
 import '../../core/data/model/book_search_model.dart';
 import '../../core/data/repository/fake_data.dart';
 import '../../core/data/service/appwrite_service.dart';
+import '../../l10n/my.i18n.dart';
 import '../more/more_about/more_about_screen.dart';
 import '../more/more_settings/more_settings_screen.dart' show MoreSettingsScreen;
 
@@ -70,7 +71,7 @@ class _SearchState extends State<SearchBar> {
                   ),
                 ],
               ),
-              title: const Text('Log in or Sign up'),
+              title: Text('Log in or Sign up'.i18n),
               onTap: () {
                 // TODO: Navigate to login screen
               },
@@ -158,11 +159,11 @@ class _SearchState extends State<SearchBar> {
             Icon(Icons.history_toggle_off_outlined),
           ],
         ),
-        title: const Text('Turn on Incognito mode'),
+        title: Text('Turn on Incognito mode'.i18n),
         onTap: () {
           Navigator.of(context).pop();
         },
-        // subtitle: const Text('Pauses reading history'),
+        // subtitle: const Text('Pauses reading history'.i18n),
       ),
     ),
     // Settings
@@ -177,7 +178,7 @@ class _SearchState extends State<SearchBar> {
             Icon(Icons.settings_outlined),
           ],
         ),
-        title: const Text('Settings'),
+        title: Text('Settings'.i18n),
         onTap: () {
           Navigator.of(context).pop();
           Navigator.of(widget.rootContext).push(MaterialPageRoute(
@@ -203,7 +204,7 @@ class _SearchState extends State<SearchBar> {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text('About', style: Theme.of(context).textTheme
+            Text('About'.i18n, style: Theme.of(context).textTheme
                 .bodyText1,),
             Text('v0.0.2', style: Theme.of(context).textTheme
                 .subtitle2,),
@@ -232,7 +233,7 @@ class _SearchState extends State<SearchBar> {
             Icon(Icons.help_outline),
           ],
         ),
-        title: const Text('Help'),
+        title: Text('Help'.i18n),
         onTap: () => Navigator.of(context).pop(),
       ),
     ),
@@ -380,17 +381,15 @@ class _SearchState extends State<SearchBar> {
 
   Widget buildLogOutAlertDialog(BuildContext context) {
     return AlertDialog(
-      title: const Text('Log out'),
-      content: const Text("Are you sure? You won't be able "
-          'to access any online content without being '
-          'logged in.'),
+      title: Text('Log out'.i18n),
+      content: Text("Are you sure? You won't be able to access any online content without being logged in.".i18n),
       actions: [
         TextButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
           style: Theme.of(context).textButtonTheme.style,
-          child: const Text('CANCEL'),
+          child: Text('CANCEL'.i18n),
         ),
         TextButton(
           onPressed: () {
@@ -398,7 +397,7 @@ class _SearchState extends State<SearchBar> {
             Navigator.of(context).pop();
           },
           style: Theme.of(context).textButtonTheme.style,
-          child: const Text('LOGOUT'),
+          child: Text('LOGOUT'.i18n),
         ),
       ],
     );
@@ -463,12 +462,12 @@ class SearchItem extends HookWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        book.title ?? 'No title',
+                        book.title ?? 'No title'.i18n,
                         style: textTheme.subtitle1,
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        book.author ?? 'No author',
+                        book.author ?? 'No author'.i18n,
                         style: textTheme.bodyText2?.copyWith(color: Colors.grey.shade600),
                       ),
                     ],

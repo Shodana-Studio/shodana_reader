@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../l10n/my.i18n.dart';
 import '../../core/data/model/book_search_model.dart';
 import '../widgets/search_bar.dart';
 
@@ -20,7 +21,7 @@ class DiscoverScreenMobile extends HookWidget {
       // appBar: AppBar(title: Text(TR.of(context)!.discoverPageTitle)),
       body: SearchBar(
         body: buildDiscover(context),
-        hint: 'Search online...',
+        hint: 'Search online...'.i18n,
         model: searchModel,
         rootContext: rootContext
       ),

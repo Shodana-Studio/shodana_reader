@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../core/data/model/book_search_model.dart';
+import '../../l10n/my.i18n.dart';
 import '../widgets/search_bar.dart';
 
 class ClubsScreenMobile extends HookWidget {
@@ -17,11 +18,11 @@ class ClubsScreenMobile extends HookWidget {
     // TODO: Implement search clubs and messages
     final BookSearchModel searchModel = useProvider(bookSearchProvider);
     return Scaffold(
-      // appBar: AppBar(title: Text(TR.of(context)?.clubsPageTitle
-      //     ?? 'No Title')),
+      // appBar: AppBar(title: 'Clubs'.i18n
+      //     ?? 'No Title'.i18n)),
       body: SearchBar(
         body: buildClubs(context),
-        hint: 'Search clubs...',
+        hint: 'Search clubs...'.i18n,
         model: searchModel,
         rootContext: rootContext
       ),

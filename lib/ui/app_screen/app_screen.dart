@@ -14,7 +14,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 import '../../core/data/model/book_search_model.dart';
 import '../../core/presentation/locations/locations.dart';
 import '../../core/res/constants.dart';
-import '../../l10n/tr.dart';
+import '../../l10n/my.i18n.dart';
 import '../auth/login_screen.dart';
 import '../widgets/search_bar.dart';
 import 'app_screen_mobile.dart';
@@ -217,19 +217,19 @@ class _AppScreenState extends State<AppScreen> {
           currentIndex: currentIndex,
           items: [
             BottomNavigationBarItem(
-                label: TR.of(context)!.homeBottomNavItemText,
+                label: 'Home'.i18n,
                 icon: const Icon(Icons.menu_book_rounded)
             ),
             BottomNavigationBarItem(
-                label: TR.of(context)!.shelvesBottomNavItemText,
+                label: 'Shelves'.i18n,
                 icon: const Icon(Icons.collections_bookmark_rounded)
             ),
             BottomNavigationBarItem(
-                label: TR.of(context)!.clubsBottomNavItemText,
+                label: 'Clubs'.i18n,
                 icon: const Icon(Icons.group_rounded)
             ),
             BottomNavigationBarItem(
-                label: TR.of(context)!.discoverBottomNavItemText,
+                label: 'Discover'.i18n,
                 icon: const Icon(Icons.explore_rounded)
             ),
             // BottomNavigationBarItem(
@@ -254,19 +254,19 @@ class _AppScreenState extends State<AppScreen> {
       labelType: NavigationRailLabelType.none,
       destinations: <NavigationRailDestination>[
         NavigationRailDestination(
-          label: Text(TR.of(context)!.homeBottomNavItemText),
+          label: Text('Home'.i18n),
           icon: const Icon(Icons.menu_book_rounded),
         ),
         NavigationRailDestination(
-          label: Text(TR.of(context)!.shelvesBottomNavItemText),
+          label: Text('Shelves'.i18n),
           icon: const Icon(Icons.collections_bookmark_rounded)
         ),
         NavigationRailDestination(
-          label: Text(TR.of(context)!.clubsBottomNavItemText),
+          label: Text('Clubs'.i18n),
           icon: const Icon(Icons.group_rounded)
         ),
         NavigationRailDestination(
-          label: Text(TR.of(context)!.discoverBottomNavItemText),
+          label: Text('Discover'.i18n),
           icon: const Icon(Icons.explore_rounded)
         ),
         // NavigationRailDestination(
@@ -337,18 +337,18 @@ class WelcomePage extends HookWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text('Welcome Page'),
+              Text('Welcome Page'.i18n),
               ElevatedButton(
                 onPressed: () async {
                   final box = Hive.box(AppConstant.settingsBoxKey);
                   unawaited(box.put(AppConstant.welcomeShown, true));
                 },
-                child: const Text('Get Started'),
+                child: Text('Get Started'.i18n),
               ),
             ],
           ),
         ),
-        hint: 'Welcome!',
+        hint: 'Welcome!'.i18n,
         model: searchModel,
         rootContext: rootContext
       ),
