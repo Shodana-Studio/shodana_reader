@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../l10n/tr.dart';
+import '../../../my.i18n.dart';
 
 class MoreAboutScreenMobile extends StatelessWidget {
   const MoreAboutScreenMobile({
@@ -14,7 +14,7 @@ class MoreAboutScreenMobile extends StatelessWidget {
         // Check for errors
         if (snapshot.hasError) {
           return Center(
-              child: Text(TR.of(context)!.errorText)
+              child: Text('Oops, there was an error'.i18n)
           );
         }
         // Once complete, show your application

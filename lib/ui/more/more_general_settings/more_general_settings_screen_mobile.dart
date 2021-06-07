@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../l10n/tr.dart';
-
+import '../../../my.i18n.dart';
 import 'more_general_settings_list.dart';
 
 class MoreGeneralSettingsScreenMobile extends StatelessWidget {
@@ -19,7 +18,7 @@ class MoreGeneralSettingsScreenMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(TR.of(context)!.generalPageTitle),
+        title: Text('General'.i18n),
       ),
       body: GeneralSettingsList(leftRail: leftRail, followSysTheme: followSysTheme, darkMode: darkMode),
     );

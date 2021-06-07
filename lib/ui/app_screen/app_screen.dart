@@ -14,7 +14,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 import '../../core/data/model/book_search_model.dart';
 import '../../core/presentation/locations/locations.dart';
 import '../../core/res/constants.dart';
-import '../../l10n/tr.dart';
+import '../../my.i18n.dart';
 import '../auth/login_screen.dart';
 import '../widgets/search_bar.dart';
 import 'app_screen_mobile.dart';
@@ -215,22 +215,22 @@ class _AppScreenState extends State<AppScreen> {
           // backgroundColor: Theme.of(context).backgroundColor,
           elevation: 0.0,
           currentIndex: currentIndex,
-          items: [
+          items: const [
             BottomNavigationBarItem(
-                label: TR.of(context)!.homeBottomNavItemText,
-                icon: const Icon(Icons.menu_book_rounded)
+                label: 'Home',
+                icon: Icon(Icons.menu_book_rounded)
             ),
             BottomNavigationBarItem(
-                label: TR.of(context)!.shelvesBottomNavItemText,
-                icon: const Icon(Icons.collections_bookmark_rounded)
+                label: 'Shelves',
+                icon: Icon(Icons.collections_bookmark_rounded)
             ),
             BottomNavigationBarItem(
-                label: TR.of(context)!.clubsBottomNavItemText,
-                icon: const Icon(Icons.group_rounded)
+                label: 'Clubs',
+                icon: Icon(Icons.group_rounded)
             ),
             BottomNavigationBarItem(
-                label: TR.of(context)!.discoverBottomNavItemText,
-                icon: const Icon(Icons.explore_rounded)
+                label: 'Discover',
+                icon: Icon(Icons.explore_rounded)
             ),
             // BottomNavigationBarItem(
             //     label: TR.of(context)!.moreBottomNavItemText,
@@ -254,19 +254,19 @@ class _AppScreenState extends State<AppScreen> {
       labelType: NavigationRailLabelType.none,
       destinations: <NavigationRailDestination>[
         NavigationRailDestination(
-          label: Text(TR.of(context)!.homeBottomNavItemText),
+          label: Text('Home'.i18n),
           icon: const Icon(Icons.menu_book_rounded),
         ),
         NavigationRailDestination(
-          label: Text(TR.of(context)!.shelvesBottomNavItemText),
+          label: Text('Shelves'.i18n),
           icon: const Icon(Icons.collections_bookmark_rounded)
         ),
         NavigationRailDestination(
-          label: Text(TR.of(context)!.clubsBottomNavItemText),
+          label: Text('Clubs'.i18n),
           icon: const Icon(Icons.group_rounded)
         ),
         NavigationRailDestination(
-          label: Text(TR.of(context)!.discoverBottomNavItemText),
+          label: Text('Discover'.i18n),
           icon: const Icon(Icons.explore_rounded)
         ),
         // NavigationRailDestination(

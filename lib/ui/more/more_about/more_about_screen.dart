@@ -9,7 +9,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../l10n/tr.dart';
+import '../../../my.i18n.dart';
 import 'more_about_screen_mobile.dart';
 
 class AboutScreen extends HookWidget {
@@ -46,7 +46,7 @@ class AboutScreen extends HookWidget {
 
     return Scaffold(
       appBar: AppBar(
-          title: Text(TR.of(context)!.aboutPageTitle)
+          title: Text('About'.i18n)
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -54,43 +54,39 @@ class AboutScreen extends HookWidget {
           children: [
             ListTile(
                 key: const ValueKey('version'),
-                title: Text(TR.of(context)!.versionButtonText),
+                title: Text('Version'.i18n),
                 subtitle: Text('Alpha $version+$buildNumber'),
                 onTap: () => versionOnPressed(context,
-                    deviceInfo, version, buildNumber)
+                    deviceInfo, version, buildNumber),
             ),
             const Divider(height: 1.0),
-            // SettingsSection(
-            //   title: '',
-            //   tiles: const [],
-            // ),
             ListTile(
                 key: const ValueKey('website'),
-                title: Text(TR.of(context)!.websiteButtonText),
+                title: Text('Website'.i18n),
                 subtitle: const Text(website),
-                onTap: () => _launchURL(website)
+                onTap: () => _launchURL(website),
             ),
             ListTile(
                 key: const ValueKey('discord'),
-                title: Text(TR.of(context)!.discordButtonText),
+                title: Text('Discord'.i18n),
                 subtitle: const Text(discord),
-                onTap: () => _launchURL(discord)
+                onTap: () => _launchURL(discord),
             ),
             ListTile(
                 key: const ValueKey('github'),
-                title: Text(TR.of(context)!.githubButtonText),
+                title: Text('Github'.i18n),
                 subtitle: const Text(github),
-                onTap: () => _launchURL(github)
+                onTap: () => _launchURL(github),
             ),
             ListTile(
                 key: const ValueKey('licenses'),
-                title: Text(TR.of(context)!.licensesButtonText),
+                title: Text('Open source licenses'.i18n),
                 onTap: () => showAboutDialog(
                   context: context,
-                  applicationName: TR.of(context)!.appName,
+                  applicationName: 'Shodana Reader'.i18n,
                   applicationVersion: version,
-                  applicationLegalese: TR.of(context)!.applicationLegalese
-                )
+                  applicationLegalese: legalese.i18n,
+                ),
             ),
           ],
         ),

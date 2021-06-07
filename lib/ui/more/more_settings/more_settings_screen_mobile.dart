@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../l10n/tr.dart';
+import '../../../my.i18n.dart';
 
 class MoreSettingsScreenMobile extends StatelessWidget {
   const MoreSettingsScreenMobile({
@@ -11,13 +11,13 @@ class MoreSettingsScreenMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text(TR.of(context)!.settingsPageTitle)
+          title: Text('Settings'.i18n)
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ListTile(
-            title: Text(TR.of(context)!.generalButtonText),
+            title: Text('General'.i18n),
             leading: Icon(
               Icons.tune,
               color: Theme.of(context).primaryColor,

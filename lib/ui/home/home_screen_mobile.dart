@@ -4,7 +4,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hive/hive.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 
 import '../../core/data/model/book_search_model.dart';
 import '../../core/res/constants.dart';
@@ -52,7 +51,7 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
   Widget build(BuildContext context) {
     final BookSearchModel searchModel = useProvider(bookSearchProvider);
     return Scaffold(
-      // appBar: AppBar(title: Text(TR.of(context)!.appName)),
+      // appBar: AppBar(title: Text('appName'.i18n)),
       body: SearchBar(
         body: buildHome(context),
         hint: 'Search recents...',

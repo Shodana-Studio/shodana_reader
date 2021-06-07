@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../l10n/tr.dart';
+import '../../../my.i18n.dart';
 
 class SettingsList extends StatelessWidget {
   const SettingsList({
@@ -24,7 +24,7 @@ class SettingsList extends StatelessWidget {
           onTap: () {},
         ),
         ListTile(
-          title: Text(TR.of(context)!.settingsButtonText),
+          title: Text('Settings'.i18n),
           leading: Icon(
             Icons.settings_outlined,
             color: Theme.of(context).primaryColor,
@@ -32,7 +32,7 @@ class SettingsList extends StatelessWidget {
           onTap: settingsOnPressed,
         ),
         ListTile(
-          title: Text(TR.of(context)!.aboutButtonText),
+          title: Text('About'.i18n),
           leading: Icon(
             Icons.info_outline,
             color: Theme.of(context).primaryColor,
@@ -40,7 +40,7 @@ class SettingsList extends StatelessWidget {
           onTap: aboutOnPressed,
         ),
         ListTile(
-          title: const Text('Help'),
+          title: Text('Help'.i18n),
           leading: Icon(
             Icons.help_outline,
             color: Theme.of(context).primaryColor,
