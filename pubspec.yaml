@@ -41,7 +41,11 @@ dependencies:
   # For books
   file_picker: ^3.0.1
   epubx: ^3.0.0-dev.3
-  path_provider: ^2.0.1
+  path_provider: ^2.0.1 
+
+  # For Database
+  flutter_persistent_queue:
+    git: https://github.com/getBoolean/flutter_persistent_queue
 
   # For Key-Value local storage
   shared_preferences: ^2.0.5
@@ -59,6 +63,7 @@ dependencies:
   cached_network_image: ^3.0.0
   implicitly_animated_reorderable_list: ^0.4.0
   pull_to_refresh: ^2.0.0
+  community_material_icon: ^5.9.55
 
   # For Utilities
   url_launcher: ^6.0.6
@@ -68,6 +73,10 @@ dependencies:
   permission_handler: ^8.0.0+2
   pedantic: ^1.11.0
   equatable: ^2.0.2
+
+  # For scripts
+  dart_appwrite: ^0.6.3
+  envify: ^2.0.0
 
 dev_dependencies:
   flutter_test:

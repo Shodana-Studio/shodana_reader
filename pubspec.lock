@@ -129,6 +129,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.0"
+  community_material_icon:
+    dependency: "direct main"
+    description:
+      name: community_material_icon
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "5.9.55"
   convert:
     dependency: transitive
     description:
@@ -164,6 +171,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.3"
+  dart_appwrite:
+    dependency: "direct main"
+    description:
+      name: dart_appwrite
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.6.3"
   dartx:
     dependency: transitive
     description:
@@ -255,6 +269,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"
+  envify:
+    dependency: "direct main"
+    description:
+      name: envify
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   epubx:
     dependency: "direct main"
     description:
@@ -302,7 +323,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "4dfb3aa33baac9f21f01882c0ee311d1f580b887"
+      resolved-ref: a6159e2453f15edc20651c98436301213d70bed4
       url: "https://github.com/getBoolean/flappwrite_account_kit"
     source: git
     version: "0.0.1"
@@ -372,6 +393,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.8+4"
+  flutter_persistent_queue:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "693d4fa0c600c4269ea1033e63bc4b2013c46122"
+      url: "https://github.com/getBoolean/flutter_persistent_queue"
+    source: git
+    version: "6.2.0"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -522,6 +552,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.1"
+  localstorage:
+    dependency: transitive
+    description:
+      name: localstorage
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.0+1"
   logging:
     dependency: transitive
     description:
