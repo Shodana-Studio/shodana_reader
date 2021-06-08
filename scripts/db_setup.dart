@@ -29,18 +29,21 @@ Future<bool> setupDatabase() async {
   bool bookCollectionExists = false;
   bool shelvesCollectionExists = false;
   bool usersCollectionExists = false;
-  if (collections != null) {
-    collections.forEach((element) {
-      if (element['name'] == readingStatsCollectionName) {
-        readingStatsCollectionExists = true;
-      } else if (element['name'] == booksCollectionName) {
-        bookCollectionExists = true;
-      } else if (element['name'] == shelvesCollectionName) {
-        shelvesCollectionExists = true;
-      } else if (element['name'] == usersCollectionName) {
-        usersCollectionExists = true;
-      }
-    });
+
+  if (collections == null) {
+    return false;
+  }
+
+  for (final collection in collections) {
+    if (collection['name'] == readingStatsCollectionName) {
+      readingStatsCollectionExists = true;
+    } else if (collection['name'] == booksCollectionName) {
+      bookCollectionExists = true;
+    } else if (collection['name'] == shelvesCollectionName) {
+      shelvesCollectionExists = true;
+    } else if (collection['name'] == usersCollectionName) {
+      usersCollectionExists = true;
+    }
   }
 
   if (readingStatsCollectionExists) {
