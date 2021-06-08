@@ -122,8 +122,8 @@ Future<bool> setupDatabase() async {
       'required': true,
     },
     {
-      'key': 'filename',
-      'label': 'Filename',
+      'key': 'fileId',
+      'label': 'File ID',
       'type': 'text',
       'default': '',
       'array': false,
