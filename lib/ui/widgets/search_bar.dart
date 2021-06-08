@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -156,7 +157,7 @@ class _SearchState extends State<SearchBar> {
         leading: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const <Widget>[
-            Icon(Icons.history_toggle_off_outlined),
+            Icon(CommunityMaterialIcons.incognito),
           ],
         ),
         title: Text('Turn on Incognito mode'.i18n),
