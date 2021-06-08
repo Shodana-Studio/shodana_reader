@@ -151,7 +151,6 @@ Future<void> getAntiVirus() async {
 
   await result
     .then((response) {
-      print(response);
       print('AntiVirus:');
       print('  Status : ${response.data['status']}');
       print('  Version : ${response.data['version']}');
