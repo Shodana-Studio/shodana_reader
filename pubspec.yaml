@@ -24,9 +24,10 @@ dependencies:
   hive_flutter: ^1.0.0
 
   # For backend
-  appwrite: ^0.6.2
+  appwrite:
+    git: https://github.com/getBoolean/sdk-for-flutter
   flappwrite_account_kit:
-    git: https://github.com/lohanidamodar/flappwrite_account_kit
+    git: https://github.com/getBoolean/flappwrite_account_kit
 
   # For login
   email_validator: ^2.0.1
