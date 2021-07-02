@@ -23,11 +23,13 @@ packages:
     source: hosted
     version: "1.7.1"
   appwrite:
-    dependency: "direct main"
+    dependency: transitive
     description:
-      name: appwrite
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "."
+      ref: HEAD
+      resolved-ref: "3579314d288e4a640a5afe777d235bd16ae2e966"
+      url: "https://github.com/appwrite/sdk-for-flutter"
+    source: git
     version: "0.6.4"
   archive:
     dependency: transitive
@@ -376,9 +378,9 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: HEAD
-      resolved-ref: "6c5053490f9a39c234add5f25c81a7447a8a83d2"
-      url: "https://github.com/lohanidamodar/flappwrite_account_kit"
+      ref: normal
+      resolved-ref: "0783883206a718b76c82e87e453a1cf27dbc0d19"
+      url: "https://github.com/getBoolean/flappwrite_account_kit"
     source: git
     version: "0.0.1"
   flex_color_scheme:
@@ -689,12 +691,12 @@ packages:
     source: hosted
     version: "2.0.0"
   package_info_plus:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: package_info_plus
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.1"
+    version: "1.0.3"
   package_info_plus_linux:
     dependency: transitive
     description:
@@ -722,7 +724,7 @@ packages:
       name: package_info_plus_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.1"
+    version: "1.0.2"
   package_info_plus_windows:
     dependency: transitive
     description:
