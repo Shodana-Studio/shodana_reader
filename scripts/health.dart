@@ -2,6 +2,7 @@
 // Add appwrite url, endpoint, and project id in "lib/core/res/constants.dart"
 // Add api key with permissions for health read in file "scripts/.env" with format:
 // HEALTH_KEY={key}
+// Then run "flutter pub run build_runner build"
 
 // ignore_for_file: avoid_print
 import 'package:dart_appwrite/dart_appwrite.dart';
