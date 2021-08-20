@@ -71,7 +71,7 @@ dependencies:
   community_material_icon: ^5.9.55
 
   # For Utilities
-  url_launcher: ^6.0.6
+  url_launcher: ^6.0.9
   package_info_plus: ^1.0.1
   device_info: ^2.0.0
   clipboard: ^0.1.3
