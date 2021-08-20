@@ -63,6 +63,7 @@ class _SearchState extends State<SearchBar> {
         future: context.authNotifier.account.get(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
+            // Menu items for when not logged in
             return ListTile(
               contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
               leading: Column(
@@ -82,6 +83,7 @@ class _SearchState extends State<SearchBar> {
           }
 
           else if (snapshot.hasData) {
+            // Menu items for when logged in
             final User user = User.fromMap((snapshot.data! as Response<dynamic>).data);
             return ListTile(
               contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -118,6 +120,7 @@ class _SearchState extends State<SearchBar> {
           }
 
           else {
+            // Menu items for while loading
             return ListTile(
               contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
               leading: Column(
