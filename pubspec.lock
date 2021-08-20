@@ -42,7 +42,7 @@ packages:
       name: args
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
+    version: "2.2.0"
   async:
     dependency: transitive
     description:
@@ -70,7 +70,7 @@ packages:
       name: build
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.2"
+    version: "2.1.0"
   build_config:
     dependency: transitive
     description:
@@ -98,14 +98,14 @@ packages:
       name: build_runner
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.6"
+    version: "2.1.1"
   build_runner_core:
     dependency: transitive
     description:
       name: build_runner_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "7.0.1"
+    version: "7.1.0"
   built_collection:
     dependency: transitive
     description:
@@ -126,7 +126,21 @@ packages:
       name: cached_network_image
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.0"
+    version: "3.1.0"
+  cached_network_image_platform_interface:
+    dependency: transitive
+    description:
+      name: cached_network_image_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
+  cached_network_image_web:
+    dependency: transitive
+    description:
+      name: cached_network_image_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
   characters:
     dependency: transitive
     description:
@@ -238,7 +252,7 @@ packages:
       name: dart_appwrite
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.6.3"
+    version: "0.7.0"
   dart_style:
     dependency: transitive
     description:
@@ -350,7 +364,7 @@ packages:
       name: envify
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
+    version: "2.0.2"
   envify_generator:
     dependency: "direct dev"
     description:
@@ -371,7 +385,7 @@ packages:
       name: equatable
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.2"
+    version: "2.0.3"
   fake_async:
     dependency: transitive
     description:
@@ -385,7 +399,7 @@ packages:
       name: ffi
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.1"
+    version: "1.1.2"
   file:
     dependency: transitive
     description:
@@ -399,7 +413,7 @@ packages:
       name: file_picker
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.2+2"
+    version: "4.0.0"
   fixnum:
     dependency: transitive
     description:
@@ -422,7 +436,7 @@ packages:
       name: flex_color_scheme
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.1"
+    version: "3.0.1"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -457,7 +471,7 @@ packages:
     source: hosted
     version: "3.1.1"
   flutter_hooks:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: flutter_hooks
       url: "https://pub.dartlang.org"
@@ -469,7 +483,14 @@ packages:
       name: flutter_launcher_icons
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.9.0"
+    version: "0.9.1"
+  flutter_lints:
+    dependency: "direct main"
+    description:
+      name: flutter_lints
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.4"
   flutter_localizations:
     dependency: "direct main"
     description: flutter
@@ -481,7 +502,7 @@ packages:
       name: flutter_native_splash
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.8+4"
+    version: "1.2.1"
   flutter_persistent_queue:
     dependency: "direct main"
     description:
@@ -584,7 +605,7 @@ packages:
       name: hive_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0"
+    version: "1.1.0"
   hive_generator:
     dependency: "direct dev"
     description:
@@ -676,6 +697,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.1"
+  lints:
+    dependency: transitive
+    description:
+      name: lints
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
   localstorage:
     dependency: transitive
     description:
@@ -824,7 +852,7 @@ packages:
     source: hosted
     version: "2.0.1"
   pedantic:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: pedantic
       url: "https://pub.dartlang.org"
@@ -836,14 +864,14 @@ packages:
       name: permission_handler
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "8.0.0+2"
+    version: "8.1.4+2"
   permission_handler_platform_interface:
     dependency: transitive
     description:
       name: permission_handler_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.5.0"
+    version: "3.6.1"
   petitparser:
     dependency: transitive
     description:
@@ -990,7 +1018,7 @@ packages:
       name: sign_button
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
+    version: "2.0.1"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -1226,7 +1254,7 @@ packages:
       name: xml
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.1.1"
+    version: "5.1.2"
   yaml:
     dependency: transitive
     description:
