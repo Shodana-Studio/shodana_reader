@@ -27,6 +27,7 @@ extension Localization on String {
         'Dark mode setting will be ignored': 'Dark mode setting will be ignored',
         'Login': 'Login',
         'Sign up': 'Sign up',
+        'Signup': 'Signup',
         'Continue with Google': 'Continue with Google',
         'Email': 'Email',
         'Password': 'Password',

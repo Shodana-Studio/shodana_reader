@@ -15,7 +15,7 @@ class ClubsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final authStatus = context.authNotifier?.status ?? AuthStatus.uninitialized;
+    final authStatus = context.authNotifier.status;
     if (authStatus != AuthStatus.authenticated) {
       return const Center(child: CircularProgressIndicator(),);
     }

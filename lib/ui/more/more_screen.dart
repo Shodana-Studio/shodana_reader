@@ -33,7 +33,7 @@ class MoreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = context.authNotifier?.user;
+    final user = context.authNotifier.user;
     return WillPopScope(
       onWillPop: () async {
         context.read(shouldShowBottomNavigationProvider).state = true;
