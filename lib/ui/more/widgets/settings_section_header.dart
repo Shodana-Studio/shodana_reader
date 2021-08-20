@@ -44,7 +44,7 @@ class SettingsSectionHeader extends StatelessWidget {
                 title!,
                 style: titleTextStyle ??
                     TextStyle(
-                      color: Theme.of(context).accentColor,
+                      color: Theme.of(context).primaryColor,
                       fontWeight: FontWeight.bold,
                     ),
                 maxLines: maxLines,
