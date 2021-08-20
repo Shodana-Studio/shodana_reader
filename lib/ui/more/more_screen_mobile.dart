@@ -18,20 +18,20 @@ class MoreScreenMobile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Client client = context.authNotifier.client;
-    // final Avatars avatars = Avatars(client);
+    final Client? client = context.authNotifier.client;
+    final Avatars? avatars = (client == null) ? null : Avatars(client);
     
     return Scaffold(
       appBar: AppBar(title: Text('Account'.i18n)),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-           ...[
+          if (user != null && avatars != null) ...[
             ListTile(
               onTap: () {},
               leading: ClipRRect(
                 borderRadius: BorderRadius.circular(90.0),
-                child: buildProfileImage(client),
+                child: buildProfileImage(client!),
               ),
               trailing: IconButton(
                 onPressed: () {

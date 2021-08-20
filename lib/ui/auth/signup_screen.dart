@@ -42,8 +42,9 @@ class SignupScreen extends HookWidget {
                   emailController: emailController,
                   passwordController: passwordController,
                 ),
-                // Text('STATE: ${authNotifier.status}'),
-                // if ((authNotifier.status)
+                // Text('STATE: ${authNotifier?.status ?? AuthStatus
+                //     .uninitialized}'),
+                // if ((authNotifier?.status ?? AuthStatus.uninitialized)
                 // == AuthStatus.authenticating)
                 //   const CircularProgressIndicator()
               ],

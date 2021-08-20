@@ -5,7 +5,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../core/data/model/book_search_model.dart';
-import '../../core/res/constants.dart';
 import '../../l10n/my.i18n.dart';
 import '../widgets/custom_waterdrop_header.dart';
 import '../widgets/search_bar.dart';
@@ -109,13 +108,13 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
                   //   padding: const EdgeInsets.all(8.0),
                   //   child: ElevatedButton(
                   //     onPressed: () async {
-                  //       if (!(await context.authNotifier.createVerification(url: 'http://192.168.1.204:5500/complete_verify.html') ?? false)) {
+                  //       if (!(await context.authNotifier?.createVerification(url: 'http://192.168.1.204:5500/complete_verify.html') ?? false)) {
                   //         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                   //           backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,
-                  //           content: Text(context.authNotifier.error ??
+                  //           content: Text(context.authNotifier?.error ??
                   //               'Unknown error'.i18n, style: Theme.of(context).snackBarTheme.contentTextStyle),
                   //         ));
-                  //         debugPrint(context.authNotifier.error ?? 'Unknown error');
+                  //         debugPrint(context.authNotifier?.error ?? 'Unknown error');
                   //       } else {
                   //         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                   //           backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,

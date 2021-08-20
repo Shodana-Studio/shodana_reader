@@ -169,37 +169,6 @@ class _SearchState extends State<SearchBar> {
         // subtitle: const Text('Pauses reading history'.i18n),
       ),
     ),
-    // Go to welcome screen
-    // Padding(
-    //   padding: const EdgeInsets.all(8.0),
-    //   child: ElevatedButton(
-    //     onPressed: () async {
-    //       final box = Hive.box(AppConstant.settingsBoxKey);
-    //       await box.put(AppConstant.welcomeShown, false);
-    //     },
-    //     child: Text('Go to welcome screen'.i18n),
-    //   ),
-    // ),
-    PopupMenuItem(
-      padding: EdgeInsets.zero,
-      child: ListTile(
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
-        minLeadingWidth: 0.0,
-        leading: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const <Widget>[
-            Icon(CommunityMaterialIcons.incognito),
-          ],
-        ),
-        title: Text('Go to welcome screen'.i18n),
-        onTap: () async {
-          Navigator.of(context).pop();
-          final box = Hive.box(AppConstant.settingsBoxKey);
-          await box.put(AppConstant.welcomeShown, false);
-        },
-        // subtitle: const Text('Pauses reading history'.i18n),
-      ),
-    ),
     // Settings
     PopupMenuItem(
       padding: EdgeInsets.zero,
@@ -269,6 +238,37 @@ class _SearchState extends State<SearchBar> {
         ),
         title: Text('Help'.i18n),
         onTap: () => Navigator.of(context).pop(),
+      ),
+    ),
+    // Go to welcome screen
+    // Padding(
+    //   padding: const EdgeInsets.all(8.0),
+    //   child: ElevatedButton(
+    //     onPressed: () async {
+    //       final box = Hive.box(AppConstant.settingsBoxKey);
+    //       await box.put(AppConstant.welcomeShown, false);
+    //     },
+    //     child: Text('Go to welcome screen'.i18n),
+    //   ),
+    // ),
+    PopupMenuItem(
+      padding: EdgeInsets.zero,
+      child: ListTile(
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
+        minLeadingWidth: 0.0,
+        leading: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const <Widget>[
+            Icon(CommunityMaterialIcons.ab_testing),
+          ],
+        ),
+        title: Text('Go to welcome screen'.i18n),
+        onTap: () async {
+          Navigator.of(context).pop();
+          final box = Hive.box(AppConstant.settingsBoxKey);
+          await box.put(AppConstant.welcomeShown, false);
+        },
+        // subtitle: const Text('Pauses reading history'.i18n),
       ),
     ),
   ];

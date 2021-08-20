@@ -36,9 +36,9 @@ class ClubsLocation extends BeamLocation {
   //   BeamGuard(
   //     pathBlueprints: ['/clubs', 'clubs/*'],
   //     check: (context, location) =>
-  //       (context.authNotifier.status)
+  //       (context.authNotifier?.status ?? AuthStatus.uninitialized)
   //           == AuthStatus.authenticated || 
-  //       (context.authNotifier.status)
+  //       (context.authNotifier?.status ?? AuthStatus.uninitialized)
   //           == AuthStatus.uninitialized,
   //     showPage: BeamPage(
   //       key: const ValueKey('login'),

@@ -182,7 +182,8 @@ class LoginButton extends StatelessWidget {
           final email = emailController.text;
           final password = passwordController.text;
 
-          if ( !(await context.authNotifier.createSession(email: email, password: password)) ) {
+          if ( !(await context.authNotifier.createSession(
+              email: email, password: password)) ) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,
               content: Text(context.authNotifier.error ??
