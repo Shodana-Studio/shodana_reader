@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:hive/hive.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -103,17 +102,6 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
                     child: TextButton(
                       onPressed: widget.bookOnPressed,
                       child: const Text('Beam to Test Book 0 Details'),
-                    ),
-                  ),
-                  // Temp button
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ElevatedButton(
-                      onPressed: () async {
-                        final box = Hive.box(AppConstant.settingsBoxKey);
-                        await box.put(AppConstant.welcomeShown, false);
-                      },
-                      child: Text('Go to welcome screen'.i18n),
                     ),
                   ),
                   // Temp button

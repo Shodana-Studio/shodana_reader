@@ -5,6 +5,7 @@ import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hive/hive.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:implicitly_animated_reorderable_list/implicitly_animated_reorderable_list.dart';
 import 'package:implicitly_animated_reorderable_list/transitions.dart';
@@ -14,6 +15,7 @@ import '../../core/data/model/book.dart';
 import '../../core/data/model/book_search_model.dart';
 import '../../core/data/repository/fake_data.dart';
 import '../../core/data/service/appwrite_service.dart';
+import '../../core/res/constants.dart';
 import '../../l10n/my.i18n.dart';
 import '../more/more_about/more_about_screen.dart';
 import '../more/more_settings/more_settings_screen.dart' show MoreSettingsScreen;
@@ -163,6 +165,37 @@ class _SearchState extends State<SearchBar> {
         title: Text('Turn on Incognito mode'.i18n),
         onTap: () {
           Navigator.of(context).pop();
+        },
+        // subtitle: const Text('Pauses reading history'.i18n),
+      ),
+    ),
+    // Go to welcome screen
+    // Padding(
+    //   padding: const EdgeInsets.all(8.0),
+    //   child: ElevatedButton(
+    //     onPressed: () async {
+    //       final box = Hive.box(AppConstant.settingsBoxKey);
+    //       await box.put(AppConstant.welcomeShown, false);
+    //     },
+    //     child: Text('Go to welcome screen'.i18n),
+    //   ),
+    // ),
+    PopupMenuItem(
+      padding: EdgeInsets.zero,
+      child: ListTile(
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
+        minLeadingWidth: 0.0,
+        leading: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const <Widget>[
+            Icon(CommunityMaterialIcons.incognito),
+          ],
+        ),
+        title: Text('Go to welcome screen'.i18n),
+        onTap: () async {
+          Navigator.of(context).pop();
+          final box = Hive.box(AppConstant.settingsBoxKey);
+          await box.put(AppConstant.welcomeShown, false);
         },
         // subtitle: const Text('Pauses reading history'.i18n),
       ),
