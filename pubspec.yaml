@@ -24,19 +24,14 @@ dependencies:
   hive_flutter: ^1.0.0
 
   # For backend
-  appwrite: ^0.7.1
+  appwrite:
+    git:
+      url: https://github.com/appwrite/sdk-for-flutter
+      ref: feat-realtime
+
   flappwrite_account_kit:
-    git: https://github.com/lohanidamodar/flappwrite_account_kit
-
-  # For realtime:
-  # appwrite:
-  #   git:
-  #     url: https://github.com/appwrite/sdk-for-flutter
-  #     ref: feat-realtime
-
-  # flappwrite_account_kit:
-  #   git: https://github.com/getBoolean/flappwrite_account_kit
-  #   # path: ../flappwrite_account_kit
+    git: https://github.com/getBoolean/flappwrite_account_kit
+    # path: ../flappwrite_account_kit
 
   # For login
   email_validator: ^2.0.1
@@ -86,11 +81,11 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  envify_generator: any
-  build_runner: ^2.0.4
+#  envify_generator: any
+#  build_runner: ^2.0.4
   flutter_gen_runner: ^3.1.1
   flutter_launcher_icons: ^0.9.0
-  hive_generator: ^1.1.0
+  # hive_generator: ^1.1.0
 
 # Uncomment the flutter_icons section when adding an icon, then run
 # flutter pub run flutter_launcher_icons:main
