@@ -123,13 +123,13 @@ class SignInWithGithub extends StatelessWidget {
     return sign_button.SignInButton(
       buttonType: sign_button.ButtonType.github,
       onPressed: () async {
-        if ( !(await context.authNotifier?.createOAuth2SessionFromEnum(provider: OAuth.github) ?? false) ) {
+        if ( !(await context.authNotifier.createOAuth2SessionFromEnum(provider: OAuth.github)) ) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,
-            content: Text(context.authNotifier?.error ??
+            content: Text(context.authNotifier.error ??
                 'Unknown error'.i18n, style: Theme.of(context).snackBarTheme.contentTextStyle),
           ));
-          debugPrint(context.authNotifier?.error ??
+          debugPrint(context.authNotifier.error ??
               'Unknown error'.i18n);
         }
       },
@@ -149,13 +149,13 @@ class SignInWithDiscord extends StatelessWidget {
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.horizontal(left: Radius.circular(90.0), right: Radius.circular(90.0))),
       text: 'Sign in with Discord'.i18n,
       onPressed: () async {
-        if ( !(await context.authNotifier?.createOAuth2SessionFromEnum(provider: OAuth.discord) ?? false) ) {
+        if ( !(await context.authNotifier.createOAuth2SessionFromEnum(provider: OAuth.discord)) ) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,
-            content: Text(context.authNotifier?.error ??
+            content: Text(context.authNotifier.error ??
                 'Unknown error'.i18n, style: Theme.of(context).snackBarTheme.contentTextStyle),
           ));
-          debugPrint(context.authNotifier?.error ??
+          debugPrint(context.authNotifier.error ??
               'Unknown error'.i18n);
         }
       },
@@ -182,14 +182,13 @@ class LoginButton extends StatelessWidget {
           final email = emailController.text;
           final password = passwordController.text;
 
-          if ( !(await context.authNotifier?.createSession(
-              email: email, password: password) ?? false) ) {
+          if ( !(await context.authNotifier.createSession(email: email, password: password)) ) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,
-              content: Text(context.authNotifier?.error ??
+              content: Text(context.authNotifier.error ??
                   'Unknown error'.i18n, style: Theme.of(context).snackBarTheme.contentTextStyle),
             ));
-            debugPrint(context.authNotifier?.error ??
+            debugPrint(context.authNotifier.error ??
                 'Unknown error'.i18n);
           }
         },
@@ -241,13 +240,13 @@ class SignupButton extends StatelessWidget {
           final email = emailController.text;
           final password = passwordController.text;
 
-          if ( !(await context.authNotifier?.create(name: username, email: email, password: password) ?? false) ) {
+          if ( !(await context.authNotifier.create(name: username, email: email, password: password)) ) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,
-              content: Text(context.authNotifier?.error ??
+              content: Text(context.authNotifier.error ??
                   'Unknown error'.i18n, style: Theme.of(context).snackBarTheme.contentTextStyle),
             ));
-            debugPrint(context.authNotifier?.error ??
+            debugPrint(context.authNotifier.error ??
                 'Unknown error'.i18n);
           } else {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(

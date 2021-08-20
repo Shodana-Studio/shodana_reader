@@ -280,7 +280,7 @@ class _AppScreenState extends State<AppScreen> {
 
 
     Widget widget;
-    switch(authNotifier?.status ?? AuthStatus.uninitialized) {
+    switch(authNotifier.status) {
       case AuthStatus.authenticated:
         widget = ValueListenableBuilder(
           valueListenable: Hive.box(AppConstant.settingsBoxKey).listenable(),

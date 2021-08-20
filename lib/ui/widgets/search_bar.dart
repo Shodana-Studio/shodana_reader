@@ -58,7 +58,7 @@ class _SearchState extends State<SearchBar> {
     PopupMenuItem(
       padding: EdgeInsets.zero,
       child: FutureBuilder(
-        future: context.authNotifier?.account.get(),
+        future: context.authNotifier.account.get(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return ListTile(
@@ -255,7 +255,7 @@ class _SearchState extends State<SearchBar> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(90.0),
               child: FutureBuilder(
-                future: context.authNotifier?.account.get(),
+                future: context.authNotifier.account.get(),
                 builder: (context, snapshot) {
                   if (snapshot.hasError) {
                     return const CircleAvatar(
@@ -394,7 +394,7 @@ class _SearchState extends State<SearchBar> {
         ),
         TextButton(
           onPressed: () {
-            context.authNotifier?.deleteSession();
+            context.authNotifier.deleteSession();
             Navigator.of(context).pop();
           },
           style: Theme.of(context).textButtonTheme.style,
