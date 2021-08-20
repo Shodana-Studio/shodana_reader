@@ -1,3 +1,8 @@
+// Run in terminal with "dart scripts/db_setup.dart"
+// Add appwrite url, endpoint, and project id in "lib/core/res/constants.dart"
+// Add api key with permissions for collections and documents read/write in file "scripts/.env" with format:
+// DATABASE_KEY={key}
+
 // ignore_for_file: avoid_print
 import 'package:dart_appwrite/dart_appwrite.dart';
 import 'package:shodana_reader/core/res/constants.dart';
