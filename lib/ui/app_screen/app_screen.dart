@@ -127,9 +127,9 @@ class _AppScreenState extends State<AppScreen> {
     int i = 0;
     for ( i = 0; i < _routerDelegates.length; i++ ) {
       if (currentIndex == i) {
-        _routerDelegates[i].active();
+        _routerDelegates[i].active = true;
       } else {
-        _routerDelegates[i].active(false);
+        _routerDelegates[i].active = false;
       }
     }
 
@@ -145,9 +145,9 @@ class _AppScreenState extends State<AppScreen> {
       int i = 0;
       for ( i = 0; i < _routerDelegates.length; i++ ) {
         if (currentIndex == i) {
-          _routerDelegates[i].active();
+          _routerDelegates[i].active = true;
         } else {
-          _routerDelegates[i].active(false);
+          _routerDelegates[i].active = false;
         }
       }
 
