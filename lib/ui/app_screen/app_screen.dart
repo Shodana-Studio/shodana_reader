@@ -38,136 +38,38 @@ class _AppScreenState extends State<AppScreen> {
   late int currentIndex;
   late final List<BeamerDelegate<BeamState>> _routerDelegates;
 
-  // These are all the location handlers. They handle the page stacks.
-  List<BeamerDelegate> getRouterDelegates(BuildContext rootContext) => [
-      BeamerDelegate(
-        initialPath: '/home',
-        locationBuilder: (state) {
-        if (state.uri.path.contains('home')) {
-          return HomeLocation(state, rootContext);
-        }
-          return NotFound(path: state.uri.toString());
-        },
-      ),
-      BeamerDelegate(
-        initialPath: '/shelves',
-        locationBuilder: (state) {
-          if (state.uri.path.contains('shelves')) {
-            return ShelvesLocation(state, rootContext);
-          }
-          return NotFound(path: state.uri.toString());
-        },
-      ),
-      BeamerDelegate(
-        initialPath: '/clubs',
-        locationBuilder: (state) {
-          if (state.uri.path.contains('clubs')) {
-            return ClubsLocation(state, rootContext);
-          }
-          return NotFound(path: state.uri.toString());
-        },
-      ),
-      BeamerDelegate(
-        initialPath: '/discover',
-        locationBuilder: (state) {
-          if (state.uri.path.contains('discover')) {
-            return DiscoverLocation(state, rootContext);
-          }
-          return NotFound(path: state.uri.toString());
-        },
-      ),
-      // BeamerDelegate(
-      //   initialPath: '/more',
-      //   locationBuilder: (state) {
-      //     if (state.uri.path.contains('more')) {
-      //       return MoreLocation(state);
-      //     }
-      //     return NotFound(path: state.uri.toString());
-      //   },
-      // ),
-    ];
-
   @override
   void initState() {
     super.initState();
-    _routerDelegates = getRouterDelegates(context);
-
     SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
-    final bool lastUsedEnabled = context.read(lastUsedEnabledProvider);
-    final lastUsedIndexNotifier = context.read(lastUsedIndexProvider.notifier);
-    final int defaultStartingPage = context.read(defaultStartingPageProvider);
-
-    if (widget.beamState.uri.path.contains('home')) {
-      currentIndex = 0;
-    } else if (widget.beamState.uri.path.contains('shelves')) {
-      currentIndex = 1;
-    } else if (widget.beamState.uri.path.contains('clubs')) {
-      currentIndex = 2;
-    } else if (widget.beamState.uri.path.contains('discover')) {
-      currentIndex = 3;
-    // } else if (widget.beamState.uri.path.contains('more')) {
-    //   currentIndex = 4;
-    } else {
-      // If the user has the default screen set to last used, launch the screen
-      // to the last used screen. Otherwise launch to the default screen
-      // selected by the user
-      if (lastUsedEnabled) {
-        currentIndex = lastUsedIndexNotifier.getPage();
-      } else {
-        currentIndex = defaultStartingPage;
-      }
-    }
-
-    lastUsedIndexNotifier.setPage(currentIndex);
-    // if (currentIndex != 4) {
-    //   lastUsedIndexNotifier.setPage(currentIndex);
-    // }
-
-    // Set the current index to active, all others to not active
-    int i = 0;
-    for ( i = 0; i < _routerDelegates.length; i++ ) {
-      if (currentIndex == i) {
-        _routerDelegates[i].active = true;
-      } else {
-        _routerDelegates[i].active = false;
-      }
-    }
-
+    _routerDelegates = getRouterDelegates(context);
   }
 
-  void onNavigationItemTap(int index, LastUsedIndex lastUsedIndex) {
-    if (currentIndex == index) {
-      _routerDelegates[currentIndex].beamToNamed
-        (_routerDelegates[currentIndex].initialPath);
-    } else {
-      setState(() => currentIndex = index);
+  void _setStateListener() => setState(() {});
 
-      int i = 0;
-      for ( i = 0; i < _routerDelegates.length; i++ ) {
-        if (currentIndex == i) {
-          _routerDelegates[i].active = true;
-        } else {
-          _routerDelegates[i].active = false;
-        }
-      }
-
-      // Always keep track of the last used index unless its the 'more' page
-      if (index != 4) {
-        lastUsedIndex.setPage(currentIndex);
-      }
-
-      _routerDelegates[currentIndex].update(rebuild: false);
-    }
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    Beamer.of(context).addListener(_setStateListener);
   }
 
   @override
   Widget build(BuildContext context) {
     final rootContext = context;
     final authNotifier = context.authNotifier;
-    // final StateController<bool> lastUsedEnabled = context.read
-    //   (lastUsedEnabledProvider);
     final LastUsedIndex lastUsedIndex = context.read
       (lastUsedIndexProvider.notifier);
+
+    final beamState = Beamer.of(context).state;
+    currentIndex = getCurrentIndex();
+
+    // Set the current index to active, all others to not active
+    setActiveIndex();
+
+    _routerDelegates[currentIndex].update(
+      state: beamState,
+      rebuild: false,
+    );
 
     final brightness = Theme.of(context).brightness;
     if (brightness == Brightness.dark) {
@@ -321,6 +223,129 @@ class _AppScreenState extends State<AppScreen> {
     }
 
     return widget;
+  }
+
+  @override
+  void dispose() {
+    Beamer.of(context).removeListener(_setStateListener);
+    super.dispose();
+  }
+
+  // These are all the location handlers. They handle the page stacks.
+  List<BeamerDelegate> getRouterDelegates(BuildContext rootContext) => [
+      BeamerDelegate(
+        initialPath: '/home',
+        locationBuilder: (state) {
+        if (state.uri.path.contains('home')) {
+          return HomeLocation(state, rootContext);
+        }
+          return NotFound(path: state.uri.toString());
+        },
+      ),
+      BeamerDelegate(
+        initialPath: '/shelves',
+        locationBuilder: (state) {
+          if (state.uri.path.contains('shelves')) {
+            return ShelvesLocation(state, rootContext);
+          }
+          return NotFound(path: state.uri.toString());
+        },
+      ),
+      BeamerDelegate(
+        initialPath: '/clubs',
+        locationBuilder: (state) {
+          if (state.uri.path.contains('clubs')) {
+            return ClubsLocation(state, rootContext);
+          }
+          return NotFound(path: state.uri.toString());
+        },
+      ),
+      BeamerDelegate(
+        initialPath: '/discover',
+        locationBuilder: (state) {
+          if (state.uri.path.contains('discover')) {
+            return DiscoverLocation(state, rootContext);
+          }
+          return NotFound(path: state.uri.toString());
+        },
+      ),
+      // BeamerDelegate(
+      //   initialPath: '/more',
+      //   locationBuilder: (state) {
+      //     if (state.uri.path.contains('more')) {
+      //       return MoreLocation(state);
+      //     }
+      //     return NotFound(path: state.uri.toString());
+      //   },
+      // ),
+    ];
+
+  int getCurrentIndex() {
+    final bool lastUsedEnabled = context.read(lastUsedEnabledProvider);
+    final lastUsedIndexNotifier = context.read(lastUsedIndexProvider.notifier);
+    final int defaultStartingPage = context.read(defaultStartingPageProvider);
+
+    if (widget.beamState.uri.path.contains('home')) {
+      currentIndex = 0;
+    } else if (widget.beamState.uri.path.contains('shelves')) {
+      currentIndex = 1;
+    } else if (widget.beamState.uri.path.contains('clubs')) {
+      currentIndex = 2;
+    } else if (widget.beamState.uri.path.contains('discover')) {
+      currentIndex = 3;
+    // } else if (widget.beamState.uri.path.contains('more')) {
+    //   currentIndex = 4;
+    } else {
+      // If the user has the default screen set to last used, launch the screen
+      // to the last used screen. Otherwise launch to the default screen
+      // selected by the user
+      if (lastUsedEnabled) {
+        currentIndex = lastUsedIndexNotifier.getPage();
+      } else {
+        currentIndex = defaultStartingPage;
+      }
+    }
+    lastUsedIndexNotifier.setPage(currentIndex);
+    // if (currentIndex != 4) {
+    //   lastUsedIndexNotifier.setPage(currentIndex);
+    // }
+    return currentIndex;
+  }
+
+  void setActiveIndex() {
+    int i = 0;
+    for ( i = 0; i < _routerDelegates.length; i++ ) {
+      if (currentIndex == i) {
+        _routerDelegates[i].active = true;
+      } else {
+        _routerDelegates[i].active = false;
+      }
+    }
+  }
+
+  void onNavigationItemTap(int index, LastUsedIndex lastUsedIndex) {
+    if (currentIndex == index) {
+      _routerDelegates[currentIndex].beamToNamed
+        (_routerDelegates[currentIndex].initialPath);
+    } else {
+      setState(() => currentIndex = index);
+
+      int i = 0;
+      for ( i = 0; i < _routerDelegates.length; i++ ) {
+        if (currentIndex == i) {
+          _routerDelegates[i].active = true;
+        } else {
+          _routerDelegates[i].active = false;
+        }
+      }
+
+      // Always keep track of the last used index unless its the 'more' page
+      if (index != 4) {
+        lastUsedIndex.setPage(currentIndex);
+      }
+
+      _routerDelegates[currentIndex].update(rebuild: false);
+    }
   }
 }
 

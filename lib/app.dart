@@ -92,6 +92,9 @@ class _AppState extends State<App> {
           //    Locale('en', 'US'),
           // ],
           debugShowCheckedModeBanner: false,
+          backButtonDispatcher: BeamerBackButtonDispatcher(
+            delegate: rootBeamerRouter,
+          ),
         ),
       ),
     );
