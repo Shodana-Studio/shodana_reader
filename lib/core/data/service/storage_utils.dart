@@ -68,13 +68,22 @@ class StorageUtil {
     return _booksBox!.values;
   }
 
-  /// put a book in Hive 'books' box.
-  static Future<void> putBook({required String key, required Book book}) {
+  /// Get a book from Hive 'books' box.
+  static dynamic getBook({required int key, dynamic defValue}) {
     if (_booksBox == null) {
       debugPrint('_booksBox is null');
-      return Future.value(null);
+      return defValue;
     }
-    return _booksBox!.put(key, book);
+    return _booksBox!.get(key, defaultValue: defValue);
+  }
+
+  /// put a book in Hive 'books' box.
+  static Future<int> addBook({required Book book}) {
+    if (_booksBox == null) {
+      debugPrint('_booksBox is null');
+      return Future.value(-1);
+    }
+    return _booksBox!.add(book);
   }
 
   /// TODO: delete book from 'books' box

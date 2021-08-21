@@ -7,6 +7,7 @@ import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:shodana_reader/core/data/service/storage_utils.dart';
 
 import '../../core/data/model/book.dart';
 import '../../core/data/model/book_type.dart';
@@ -79,8 +80,9 @@ class _HomeScreenState extends State<HomeScreen> {
         );
 
         // TODO: Add book to hive database
-
-
+        final key = await StorageUtil.addBook(book: book);
+        final Book savedBook = StorageUtil.getBook(key: key);
+        debugPrint(savedBook.toString());
       }
     } on Exception catch (e, _) {
       // TODO: Add proper ui feedback on error
