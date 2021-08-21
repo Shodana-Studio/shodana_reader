@@ -327,7 +327,7 @@ Future<bool> setupDatabase() async {
       'type': 'numeric',
       'default': '',
       'array': false,
-      'required': false,
+      'required': true,
     },
     {
       'key': 'description',
