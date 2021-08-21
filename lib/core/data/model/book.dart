@@ -89,6 +89,7 @@ class Book extends Equatable {
   final DateTime? publishedDate;
   final DateTime? publishedDateLastModDate;
 
+  /// Date and time the file was uploaded to the app
   final DateTime createdDate;
 
   final DateTime? startReadingDate;

@@ -4,14 +4,16 @@ List<Book> books = [
   Book(
     title: "Didn't I Say to Make My Abilities Average in the Next Life?! Vol. 12",
     author: 'FUNA',
-    filename: 'Didnt%20I%20Say%20To%20Make%20My%20Abilities%20Average%20In%20The%20Next%20Life!%20Vol.%2012.epub',
+    fileId: 'Didnt%20I%20Say%20To%20Make%20My%20Abilities%20Average%20In%20The%20Next%20Life!%20Vol.%2012.epub',
+    bookType: BookType.epub,
     createdDate: DateTime.parse('2020-07-02'),
     userId: '60b02ca26af41',
   ),
   Book(
     title: 'I Shall Survive Using Potions',
     author: 'FUNA',
-    filename: 'I%20Shall%20Survive%20Using%20Potions.epub',
+    fileId: 'I%20Shall%20Survive%20Using%20Potions.epub',
+    bookType: BookType.epub,
     createdDate: DateTime.parse('2020-07-02'),
     userId: '60b02ca26af41',
   ),
@@ -21,7 +23,8 @@ List<Book> history = [
   Book(
     title: "Didn't I Say to Make My Abilities Average in the Next Life?! Vol. 12",
     author: 'FUNA',
-    filename: 'Didnt%20I%20Say%20To%20Make%20My%20Abilities%20Average%20In%20The%20Next%20Life!%20Vol.%2012.epub',
+    fileId: 'Didnt%20I%20Say%20To%20Make%20My%20Abilities%20Average%20In%20The%20Next%20Life!%20Vol.%2012.epub',
+    bookType: BookType.epub,
     createdDate: DateTime.parse('2020-07-02'),
     userId: '60b02ca26af41',
   ),
