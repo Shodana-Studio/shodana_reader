@@ -69,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
         // Add to Hive database
         final userId = authNotifier.user!.id;
         // TODO: Change fileId to id given by appwrite storage
-        final String fileId = 'ext-${file.extension!}-size-${file.size}';
+        final String fileId = 'ext-${file.extension!}-size-${file.size}-name-${file.name}';
         debugPrint('File id: ${fileId}');
         final book = Book(
           bookType: BookType.epub,
