@@ -24,30 +24,30 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int? selectedItem;
 
-  Future<void> fabOnPressed() async {
-    try {
-      final PlatformFile file = await fetchFile();
-      final io.File newFile = await copyFile(file);
-      if (file.extension == 'epub') {
-        final List<int> bytes = await newFile.readAsBytes();
-        final epubx.EpubBookRef epub = await epubx.EpubReader.openBook(bytes);
+  // Future<void> fabOnPressed() async {
+  //   try {
+  //     final PlatformFile file = await fetchFile();
+  //     final io.File newFile = await copyFile(file);
+  //     if (file.extension == 'epub') {
+  //       final List<int> bytes = await newFile.readAsBytes();
+  //       final epubx.EpubBookRef epub = await epubx.EpubReader.openBook(bytes);
+  //       print(newFile.path);
+  //       print(newFile.uri);
+  //       print(epub.Title);
+  //       print(epub.Author);
+  //     }
+  //     // print(file.name);
+  //     // print(file.bytes);
+  //     // print(file.size);
+  //     // print(file.extension);
+  //     // print(file.path);
+  //   } on Exception catch (e, _) {
+  //     print(e);
+  //   }
+  // }
 
-        print(newFile.path);
-        print(newFile.uri);
-        print(epub.Title);
-        print(epub.Author);
-      }
-      // print(file.name);
-      // print(file.bytes);
-      // print(file.size);
-      // print(file.extension);
-      // print(file.path);
-    } on Exception catch (e, _) {
-      print(e);
-    }
-  }
-
-  Future<void> fabOnPressedHiveDb() async {
+  // Pick a book from storage
+  Future<void> addBook() async {
     final authNotifier = context.authNotifier;
     if (authNotifier.user == null) {
       return;
@@ -105,19 +105,19 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return ScreenTypeLayout.builder(
       mobile: (BuildContext context) => HomeScreenMobile(
-        fabOnPressed: fabOnPressedHiveDb,
+        fabOnPressed: addBook,
         bookOnPressed: bookOnPressed,
       ),
       tablet: (BuildContext context) => HomeScreenMobile(
-        fabOnPressed: fabOnPressedHiveDb,
+        fabOnPressed: addBook,
         bookOnPressed: bookOnPressed,
       ),
       desktop: (BuildContext context) => HomeScreenMobile(
-        fabOnPressed: fabOnPressedHiveDb,
+        fabOnPressed: addBook,
         bookOnPressed: bookOnPressed,
       ),
       watch: (BuildContext context) => HomeScreenMobile(
-        fabOnPressed: fabOnPressedHiveDb,
+        fabOnPressed: addBook,
         bookOnPressed: bookOnPressed,
       ),
     );
