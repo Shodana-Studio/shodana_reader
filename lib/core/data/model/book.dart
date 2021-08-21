@@ -95,7 +95,6 @@ class Book extends Equatable {
 
   final List<ReadingStats>? readingTimes;
 
-  // Utility Functions
   Map<String, dynamic> toMap() {
     return {
       'userId': userId,
@@ -175,6 +174,7 @@ class Book extends Equatable {
 
   String toJson() => json.encode(toMap());
 
+  // Overrides
   @override
   bool get stringify => true;
 
@@ -182,13 +182,10 @@ class Book extends Equatable {
   List<Object> get props {
     return [
       userId,
+      // fileId should be unique to the book and determined by contents of the file metadata
       fileId,
-      title ?? '',
-      author ?? '',
-      description ?? '',
-      readingProgress ?? 0,
-      publisher ?? '',
-      createdDate,
+      // Commented out createdDate so that if a book is uploaded twice, it will recognize it as a duplicate
+      // createdDate,
     ];
   }
 }
