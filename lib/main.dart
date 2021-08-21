@@ -1,24 +1,35 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:beamer/beamer.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:i18n_extension/io/import.dart';
-import 'package:i18n_extension/i18n_extension.dart';
-import 'package:beamer/beamer.dart';
 
 import 'app.dart';
+import 'core/data/model/book.dart';
+import 'core/data/model/book_type.dart';
+import 'core/data/model/shelf.dart';
 import 'core/data/service/storage_utils.dart';
-import 'l10n/my.i18n.dart';
 
 Future<AdaptiveThemeMode?> init() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Get rid of # in url
   Beamer.setPathUrlStrategy();
+
   EquatableConfig.stringify = true;
+
+  // Hive setup
   await Hive.initFlutter('hive_database');
+  Hive.registerAdapter(BookTypeAdapter());
+  Hive.registerAdapter(BookAdapter());
+  Hive.registerAdapter(ShelfAdapter());
+
   await StorageUtil.getInstance();
+
+  // Themes
   final savedThemeMode = await AdaptiveTheme.getThemeMode();
   if (savedThemeMode == AdaptiveThemeMode.dark) {
     SystemChrome.setSystemUIOverlayStyle(
