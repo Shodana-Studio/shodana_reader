@@ -31,6 +31,7 @@ class AppwriteService {
   late final Avatars _avatars;
 
   Client get client => _client;
+  Account get account => _account;
 
   // Account functions in flappwrite_account_kit
 
