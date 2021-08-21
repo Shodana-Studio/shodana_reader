@@ -1,7 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../../res/constants.dart';
+import '../model/book.dart';
 
 class StorageUtil {
   StorageUtil._();
@@ -9,6 +11,7 @@ class StorageUtil {
   static StorageUtil? _storageUtil;
   static SharedPreferences? _preferences;
   static Box? _settingsBox;
+  static Box? _booksBox;
 
   static Future<StorageUtil?> getInstance() async {
     if (_storageUtil == null) {
@@ -22,10 +25,8 @@ class StorageUtil {
   Future _init() async {
     _preferences = await SharedPreferences.getInstance();
     _settingsBox = await Hive.openBox(AppConstant.settingsBoxKey);
+    _booksBox = await Hive.openBox(AppConstant.booksBoxKey);
   }
-
-
-
 
 
   /// Get a dymanic variable from Hive 'settings' box.
@@ -56,7 +57,27 @@ class StorageUtil {
     return settings.clear();
   }
 
+  /// Get all books from Hive 'books' box.
+  /// 
+  /// Returns booksBox.values, of type Iterable<dynamic>
+  static dynamic getAllBooks() {
+    if (_booksBox == null) {
+      debugPrint('_booksBox is null');
+      return [];
+    }
+    return _booksBox!.values;
+  }
 
+  /// put a book in Hive 'books' box.
+  static Future<void> putBook({required String key, required Book book}) {
+    if (_booksBox == null) {
+      debugPrint('_booksBox is null');
+      return Future.value(null);
+    }
+    return _booksBox!.put(key, book);
+  }
+
+  /// TODO: delete book from 'books' box
 
 
 
