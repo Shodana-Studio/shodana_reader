@@ -1,14 +1,18 @@
 import 'dart:convert';
 
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:equatable/equatable.dart';
 
 import 'reading_stats.dart';
+
+enum BookType{epub, pdf, unknown}
 
 class Book extends Equatable {
   // Constructors
   const Book({
     required this.userId,
     required this.fileId,
+    required this.bookType,
     this.title,
     this.titleLastModDate,
     this.author,
@@ -35,6 +39,7 @@ class Book extends Equatable {
     return Book(
       userId: map['userId'],
       fileId: map['fileId'],
+      bookType: EnumToString.fromString(BookType.values, map['bookType']) ?? BookType.unknown,
       title: map['title'],
       titleLastModDate: DateTime.fromMillisecondsSinceEpoch(map['titleLastModDate']),
       author: map['author'],
@@ -63,6 +68,8 @@ class Book extends Equatable {
   // Variables
   final String userId;
   final String fileId;
+
+  final BookType bookType;
 
   final String? title;
   final DateTime? titleLastModDate;
@@ -99,6 +106,7 @@ class Book extends Equatable {
     return {
       'userId': userId,
       'fileId': fileId,
+      'bookType': EnumToString.convertToString(bookType),
       'title': title,
       'titleLastModDate': titleLastModDate?.millisecondsSinceEpoch,
       'author': author,
@@ -122,9 +130,11 @@ class Book extends Equatable {
     };
   }
 
+  String toJson() => json.encode(toMap());
+
   Book copyWith({
-    String? userId,
     String? fileId,
+    BookType? bookType,
     String? title,
     DateTime? titleLastModDate,
     String? author,
@@ -147,8 +157,9 @@ class Book extends Equatable {
     List<ReadingStats>? readingTimes,
   }) {
     return Book(
-      userId: userId ?? this.userId,
+      userId: userId,
       fileId: fileId ?? this.fileId,
+      bookType: bookType ?? this.bookType,
       title: title ?? this.title,
       titleLastModDate: titleLastModDate ?? this.titleLastModDate,
       author: author ?? this.author,
@@ -172,8 +183,6 @@ class Book extends Equatable {
     );
   }
 
-  String toJson() => json.encode(toMap());
-
   // Overrides
   @override
   bool get stringify => true;
@@ -182,6 +191,7 @@ class Book extends Equatable {
   List<Object> get props {
     return [
       userId,
+      bookType,
       // fileId should be unique to the book and determined by contents of the file metadata
       fileId,
       // Commented out createdDate so that if a book is uploaded twice, it will recognize it as a duplicate

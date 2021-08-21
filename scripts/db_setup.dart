@@ -136,6 +136,14 @@ Future<bool> setupDatabase() async {
       'required': true,
     },
     {
+      'key': 'bookType',
+      'label': 'Book Type',
+      'type': 'text',
+      'default': '',
+      'array': false,
+      'required': true,
+    },
+    {
       'key': 'title',
       'label': 'Title',
       'type': 'text',
