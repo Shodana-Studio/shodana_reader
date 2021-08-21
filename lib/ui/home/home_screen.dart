@@ -71,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
         final userId = authNotifier.user!.id;
         // TODO: Change fileId to id given by appwrite storage
         final String fileId = 'ext-${file.extension!}-size-${file.size}-name-${file.name}';
-        debugPrint('File id: ${fileId}');
+        debugPrint('File id: $fileId');
         final book = Book(
           bookType: BookType.epub,
           fileId: fileId,
