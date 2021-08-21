@@ -68,6 +68,7 @@ class Shelf extends Equatable {
   @HiveField(9)
   final DateTime? finishReadingDateLastModDate;
 
+    // TODO: Remove from database, instead replace it with reference to shelf id in each book document. This is because duplicate data will be stored locally with hive
   @HiveField(10)
   final List<Book>? books;
 

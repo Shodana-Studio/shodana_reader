@@ -125,6 +125,7 @@ class Book extends Equatable {
   @HiveField(21)
   final DateTime? metadataLastModDate;
 
+  // TODO: Remove from database, instead replace it with reference to book id in each readingTimes document. This is because duplicate data will be stored locally with hive
   @HiveField(22)
   final List<ReadingStats>? readingTimes;
 
