@@ -8,10 +8,9 @@ import '../widgets/search_bar.dart';
 
 class DiscoverScreenMobile extends HookWidget {
   const DiscoverScreenMobile({
-    Key? key, required this.beamToInternetBook, required this.rootContext
+    Key? key, required this.beamToInternetBook
   }) : super(key: key);
   final Function(BuildContext, String) beamToInternetBook;
-  final BuildContext rootContext;
 
   @override
   Widget build(BuildContext context) {

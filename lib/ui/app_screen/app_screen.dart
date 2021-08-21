@@ -42,7 +42,7 @@ class _AppScreenState extends State<AppScreen> {
   void initState() {
     super.initState();
     SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
-    _routerDelegates = getRouterDelegates(context);
+    _routerDelegates = getRouterDelegates();
   }
 
   void _setStateListener() => setState(() {});
@@ -55,7 +55,6 @@ class _AppScreenState extends State<AppScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final rootContext = context;
     final authNotifier = context.authNotifier;
     final LastUsedIndex lastUsedIndex = context.read
       (lastUsedIndexProvider.notifier);
@@ -210,7 +209,7 @@ class _AppScreenState extends State<AppScreen> {
                     indexedStack: indexedStack,
                   ),
                 )
-              : WelcomePage(rootContext: rootContext)
+              : const WelcomePage()
         );
         break;
       case AuthStatus.unauthenticated:
@@ -232,12 +231,12 @@ class _AppScreenState extends State<AppScreen> {
   }
 
   // These are all the location handlers. They handle the page stacks.
-  List<BeamerDelegate> getRouterDelegates(BuildContext rootContext) => [
+  List<BeamerDelegate> getRouterDelegates() => [
       BeamerDelegate(
         initialPath: '/home',
         locationBuilder: (state) {
         if (state.uri.path.contains('home')) {
-          return HomeLocation(state, rootContext);
+          return HomeLocation(state);
         }
           return NotFound(path: state.uri.toString());
         },
@@ -246,7 +245,7 @@ class _AppScreenState extends State<AppScreen> {
         initialPath: '/shelves',
         locationBuilder: (state) {
           if (state.uri.path.contains('shelves')) {
-            return ShelvesLocation(state, rootContext);
+            return ShelvesLocation(state);
           }
           return NotFound(path: state.uri.toString());
         },
@@ -255,7 +254,7 @@ class _AppScreenState extends State<AppScreen> {
         initialPath: '/clubs',
         locationBuilder: (state) {
           if (state.uri.path.contains('clubs')) {
-            return ClubsLocation(state, rootContext);
+            return ClubsLocation(state);
           }
           return NotFound(path: state.uri.toString());
         },
@@ -264,7 +263,7 @@ class _AppScreenState extends State<AppScreen> {
         initialPath: '/discover',
         locationBuilder: (state) {
           if (state.uri.path.contains('discover')) {
-            return DiscoverLocation(state, rootContext);
+            return DiscoverLocation(state);
           }
           return NotFound(path: state.uri.toString());
         },
@@ -350,8 +349,7 @@ class _AppScreenState extends State<AppScreen> {
 }
 
 class WelcomePage extends HookWidget {
-  const WelcomePage({ Key? key, required this.rootContext }) : super(key: key);
-  final BuildContext rootContext;
+  const WelcomePage({ Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

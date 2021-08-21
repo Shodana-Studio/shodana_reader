@@ -11,8 +11,7 @@ import '../../res/constants.dart';
 /// The home tab will contain recent books, books that haven't been started,
 /// reading stats, and reading goals.
 class HomeLocation extends BeamLocation {
-  HomeLocation(BeamState state, this.rootContext) : super(state);
-  final BuildContext rootContext;
+  HomeLocation(BeamState state) : super(state);
 
   @override
   List<String> get pathBlueprints => ['/home/:bookId/:chapterId'];
@@ -23,7 +22,7 @@ class HomeLocation extends BeamLocation {
       key: const ValueKey('home'),
       title: 'Shodana Reader Home'.i18n,
       type: BeamPageType.noTransition,
-      child: HomeScreen(rootContext: rootContext),
+      child: const HomeScreen(),
     ),
 
     if (state.pathParameters.containsKey('bookId'))
@@ -31,7 +30,6 @@ class HomeLocation extends BeamLocation {
         key: ValueKey('book-${state.pathParameters['bookId']}'),
         child: BookDetailsScreen(
           book: book,
-          rootContext: rootContext
         ),
       ),
 

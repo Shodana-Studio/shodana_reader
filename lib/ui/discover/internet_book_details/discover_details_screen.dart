@@ -4,9 +4,8 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'internet_book_details_screen_mobile.dart';
 
 class InternetBookDetailsScreen extends StatelessWidget {
-  const InternetBookDetailsScreen({Key? key, required this.internetBook, required this.rootContext}) : super(key: key);
+  const InternetBookDetailsScreen({Key? key, required this.internetBook}) : super(key: key);
   final Map<String, String> internetBook;
-  final BuildContext rootContext;
 
   @override
   Widget build(BuildContext context) {

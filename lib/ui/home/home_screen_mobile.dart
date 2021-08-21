@@ -15,11 +15,9 @@ class HomeScreenMobile extends StatefulHookWidget {
     Key? key,
     required this.fabOnPressed,
     required this.bookOnPressed,
-    required this.rootContext,
   }) : super(key: key);
   final VoidCallback fabOnPressed;
   final VoidCallback bookOnPressed;
-  final BuildContext rootContext;
 
   @override
   _HomeScreenMobileState createState() => _HomeScreenMobileState();

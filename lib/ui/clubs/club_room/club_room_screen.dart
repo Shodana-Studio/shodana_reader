@@ -4,9 +4,8 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'club_room_screen_mobile.dart';
 
 class ClubRoomScreen extends StatelessWidget {
-  const ClubRoomScreen({Key? key, required this.club, required this.rootContext}) : super(key: key);
+  const ClubRoomScreen({Key? key, required this.club}) : super(key: key);
   final Map<String, String> club;
-  final BuildContext rootContext;
 
   @override
   Widget build(BuildContext context) {

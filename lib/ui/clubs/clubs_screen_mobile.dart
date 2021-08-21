@@ -8,10 +8,8 @@ import '../widgets/search_bar.dart';
 
 class ClubsScreenMobile extends HookWidget {
   const ClubsScreenMobile({
-    Key? key, required this.beamToClub, required this.rootContext
-  }) : super(key: key);
+    Key? key, required this.beamToClub}) : super(key: key);
   final Function(BuildContext, String) beamToClub;
-  final BuildContext rootContext;
 
   @override
   Widget build(BuildContext context) {
