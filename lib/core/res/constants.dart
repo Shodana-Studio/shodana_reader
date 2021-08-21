@@ -27,6 +27,11 @@ class AppConstant {
   static const String endpoint = 'http://192.168.1.191/v1';
   static const String project = '611ffbae6bdd9';
 
+  // Appwrite Database
+  static const String readingStatsCollection = '61205e62f3bc5';
+  static const String booksCollection = '61205e630fbcb';
+  static const String shelvesCollection = '61205e636767b';
+
   // static const String url = 'https://192.168.1.32';
   // static const String endpoint = 'https://192.168.1.32/v1';
   // static const String project = '60bbd81b5aee6';

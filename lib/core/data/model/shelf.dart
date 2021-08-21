@@ -3,13 +3,13 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import 'book.dart';
 part 'shelf.g.dart';
 
 @HiveType(typeId : 3)
 class Shelf extends Equatable {
   // Constructors
   const Shelf({
+    this.id,
     required this.userId,
     required this.title,
     required this.titleLastModDate,
@@ -20,11 +20,12 @@ class Shelf extends Equatable {
     this.startReadingDateLastModDate,
     this.finishReadingDate,
     this.finishReadingDateLastModDate,
-    this.books,
+    // this.books,
   });
 
   factory Shelf.fromMap(Map<String, dynamic> map) {
     return Shelf(
+      id: map[r'$id'],
       userId: map['userId'],
       title: map['title'],
       titleLastModDate: DateTime.fromMillisecondsSinceEpoch(map['titleLastModDate']),
@@ -35,13 +36,15 @@ class Shelf extends Equatable {
       startReadingDateLastModDate: DateTime.fromMillisecondsSinceEpoch(map['startReadingDateLastModDate']),
       finishReadingDate: DateTime.fromMillisecondsSinceEpoch(map['finishReadingDate']),
       finishReadingDateLastModDate: DateTime.fromMillisecondsSinceEpoch(map['finishReadingDateLastModDate']),
-      books: List<Book>.from((map['books'] as List<Map<String, Book>>).map((x) => Book.fromMap(x))),
+      // books: List<Book>.from((map['books'] as List<Map<String, Book>>).map((x) => Book.fromMap(x))),
     );
   }
 
   factory Shelf.fromJson(String source) => Shelf.fromMap(json.decode(source));
 
   // Variables
+  @HiveField(10)
+  final String? id;
   @HiveField(0)
   final String userId;
 
@@ -68,9 +71,9 @@ class Shelf extends Equatable {
   @HiveField(9)
   final DateTime? finishReadingDateLastModDate;
 
-    // TODO: Remove from database, instead replace it with reference to shelf id in each book document. This is because duplicate data will be stored locally with hive
-  @HiveField(10)
-  final List<Book>? books;
+  // Removed from database, instead replaced with reference to shelf id in each book document. This is because duplicate data will be stored locally with hive
+  // @HiveField(10)
+  // final List<Book>? books;
 
   // Utility Functions
   Shelf copyWith({
@@ -84,9 +87,10 @@ class Shelf extends Equatable {
     DateTime? startReadingDateLastModDate,
     DateTime? finishReadingDate,
     DateTime? finishReadingDateLastModDate,
-    List<Book>? books,
+    // List<Book>? books,
   }) {
     return Shelf(
+      id: id,
       userId: userId ?? this.userId,
       title: title ?? this.title,
       titleLastModDate: titleLastModDate ?? this.titleLastModDate,
@@ -97,7 +101,7 @@ class Shelf extends Equatable {
       startReadingDateLastModDate: startReadingDateLastModDate ?? this.startReadingDateLastModDate,
       finishReadingDate: finishReadingDate ?? this.finishReadingDate,
       finishReadingDateLastModDate: finishReadingDateLastModDate ?? this.finishReadingDateLastModDate,
-      books: books ?? this.books,
+      // books: books ?? this.books,
     );
   }
 
@@ -113,7 +117,7 @@ class Shelf extends Equatable {
       'startReadingDateLastModDate': startReadingDateLastModDate?.millisecondsSinceEpoch,
       'finishReadingDate': finishReadingDate?.millisecondsSinceEpoch,
       'finishReadingDateLastModDate': finishReadingDateLastModDate?.millisecondsSinceEpoch,
-      'books': books?.map((x) => x.toMap()).toList(),
+      // 'books': books?.map((x) => x.toMap()).toList(),
     };
   }
 
@@ -126,6 +130,7 @@ class Shelf extends Equatable {
   @override
   List<Object> get props {
     return [
+      id ?? '',
       userId,
       title,
       // Allows shelves with the same title

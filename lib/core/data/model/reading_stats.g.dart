@@ -20,19 +20,22 @@ class ReadingStatsAdapter extends TypeAdapter<ReadingStats> {
       date: fields[0] as DateTime,
       timeRead: fields[1] as int,
       userId: fields[2] as String,
+      bookId: fields[3] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, ReadingStats obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.date)
       ..writeByte(1)
       ..write(obj.timeRead)
       ..writeByte(2)
-      ..write(obj.userId);
+      ..write(obj.userId)
+      ..writeByte(3)
+      ..write(obj.bookId);
   }
 
   @override

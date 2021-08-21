@@ -27,14 +27,13 @@ class ShelfAdapter extends TypeAdapter<Shelf> {
       startReadingDateLastModDate: fields[7] as DateTime?,
       finishReadingDate: fields[8] as DateTime?,
       finishReadingDateLastModDate: fields[9] as DateTime?,
-      books: (fields[10] as List?)?.cast<Book>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, Shelf obj) {
     writer
-      ..writeByte(11)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.userId)
       ..writeByte(1)
@@ -54,9 +53,7 @@ class ShelfAdapter extends TypeAdapter<Shelf> {
       ..writeByte(8)
       ..write(obj.finishReadingDate)
       ..writeByte(9)
-      ..write(obj.finishReadingDateLastModDate)
-      ..writeByte(10)
-      ..write(obj.books);
+      ..write(obj.finishReadingDateLastModDate);
   }
 
   @override

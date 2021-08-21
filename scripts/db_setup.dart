@@ -102,6 +102,14 @@ Future<bool> setupDatabase() async {
       'array': false,
       'required': true,
     },
+    {
+      'key': 'bookId',
+      'label': 'Book ID',
+      'type': 'text',
+      'default': '',
+      'array': false,
+      'required': true,
+    },
   ]);
   
   if (readingStatsCollectionRes == null) {
@@ -272,15 +280,6 @@ Future<bool> setupDatabase() async {
       'required': false,
     },
     {
-      'key': 'readingTimes',
-      'label': 'Reading Times',
-      'type': 'document',
-      'default': '',
-      'array': true,
-      'required': false,
-      'list': [readingStatsCollectionRes[r'$id']]
-    },
-    {
       'key': 'metadata',
       'label': 'Metadata',
       'type': 'text',
@@ -295,6 +294,31 @@ Future<bool> setupDatabase() async {
       'default': '',
       'array': false,
       'required': false,
+    },
+    // {
+    //   'key': 'readingTimes',
+    //   'label': 'Reading Times',
+    //   'type': 'document',
+    //   'default': '',
+    //   'array': true,
+    //   'required': false,
+    //   'list': [readingStatsCollectionRes[r'$id']]
+    // },
+    {
+      'key': 'shelfIds',
+      'label': 'Shelf Ids',
+      'type': 'text',
+      'default': [],
+      'array': true,
+      'required': true,
+    },
+    {
+      'key': 'shelfIdsLastModDate',
+      'label': 'Shelf Ids Last Modified Date',
+      'type': 'numeric',
+      'default': '',
+      'array': false,
+      'required': true,
     },
   ]);
   
@@ -385,15 +409,15 @@ Future<bool> setupDatabase() async {
       'array': false,
       'required': false,
     },
-    {
-      'key': 'books',
-      'label': 'Books',
-      'type': 'document',
-      'default': '',
-      'array': true,
-      'required': false,
-      'list': [booksCollectionRes[r'$id']]
-    },
+    // {
+    //   'key': 'books',
+    //   'label': 'Books',
+    //   'type': 'document',
+    //   'default': '',
+    //   'array': true,
+    //   'required': false,
+    //   'list': [booksCollectionRes[r'$id']]
+    // },
   ]);
 
   if (shelvesCollectionRes == null) {

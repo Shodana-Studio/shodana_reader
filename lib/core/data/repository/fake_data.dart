@@ -9,6 +9,8 @@ List<Book> books = [
     bookType: BookType.epub,
     createdDate: DateTime.parse('2020-07-02'),
     userId: '60b02ca26af41',
+    shelfIds: const [],
+    shelfIdsLastModDate: DateTime.now(),
   ),
   Book(
     title: 'I Shall Survive Using Potions',
@@ -17,6 +19,8 @@ List<Book> books = [
     bookType: BookType.epub,
     createdDate: DateTime.parse('2020-07-02'),
     userId: '60b02ca26af41',
+    shelfIds: const [],
+    shelfIdsLastModDate: DateTime.now(),
   ),
 ];
 
@@ -28,6 +32,8 @@ List<Book> history = [
     bookType: BookType.epub,
     createdDate: DateTime.parse('2020-07-02'),
     userId: '60b02ca26af41',
+    shelfIds: const [],
+    shelfIdsLastModDate: DateTime.now(),
   ),
 ];
 

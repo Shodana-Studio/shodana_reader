@@ -5,13 +5,13 @@ import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'book_type.dart';
-import 'reading_stats.dart';
 part 'book.g.dart';
 
 @HiveType(typeId : 2)
 class Book extends Equatable {
   // Constructors
-  Book({
+  const Book({
+    this.id,
     required this.userId,
     required this.fileId,
     required this.bookType,
@@ -34,11 +34,15 @@ class Book extends Equatable {
     this.finishReadingDateLastModDate,
     this.metadata,
     this.metadataLastModDate,
-    this.readingTimes,
+    // Replaced with shelfIds
+    // this.readingTimes,
+    required this.shelfIds,
+    required this.shelfIdsLastModDate
   });
 
   factory Book.fromMap(Map<String, dynamic> map) {
     return Book(
+      id: map[r'$id'],
       userId: map['userId'],
       fileId: map['fileId'],
       bookType: EnumToString.fromString(BookType.values, map['bookType']) ?? BookType.unknown,
@@ -61,13 +65,17 @@ class Book extends Equatable {
       finishReadingDateLastModDate: DateTime.fromMillisecondsSinceEpoch(map['finishReadingDateLastModDate']),
       metadata: map['metadata'],
       metadataLastModDate: DateTime.fromMillisecondsSinceEpoch(map['metadataLastModDate']),
-      readingTimes: List<ReadingStats>.from((map['readingTimes'] as List<Map<String, ReadingStats>>).map((x) => ReadingStats.fromMap(x))),
+      // readingTimes: List<ReadingStats>.from((map['readingTimes'] as List<Map<String, ReadingStats>>).map((x) => ReadingStats.fromMap(x))),
+      shelfIds: map['shelfIds'],
+      shelfIdsLastModDate: map['shelfIdsLastModDate'],
     );
   }
 
   factory Book.fromJson(String source) => Book.fromMap(json.decode(source));
   
   // Variables
+  @HiveField(25)
+  final String? id;
   @HiveField(0)
   final String userId;
   @HiveField(1)
@@ -77,57 +85,63 @@ class Book extends Equatable {
   final BookType bookType;
 
   @HiveField(3)
-  String? title;
+  final String? title;
   @HiveField(4)
-  DateTime? titleLastModDate;
+  final DateTime? titleLastModDate;
 
   @HiveField(5)
-  String? author;
+  final String? author;
   @HiveField(6)
-  DateTime? authorLastModDate;
+  final DateTime? authorLastModDate;
 
   @HiveField(7)
-  String? description;
+  final String? description;
   @HiveField(8)
-  DateTime? descriptionLastModDate;
+  final DateTime? descriptionLastModDate;
 
   @HiveField(9)
-  int? readingProgress;
+  final int? readingProgress;
   @HiveField(10)
-  DateTime? readingProgressLastModDate;
+  final DateTime? readingProgressLastModDate;
 
   @HiveField(11)
-  String? publisher;
+  final String? publisher;
   @HiveField(12)
-  DateTime? publisherLastModDate;
+  final DateTime? publisherLastModDate;
 
   @HiveField(13)
-  DateTime? publishedDate;
+  final DateTime? publishedDate;
   @HiveField(14)
-  DateTime? publishedDateLastModDate;
+  final DateTime? publishedDateLastModDate;
 
   /// Date and time the file was uploaded to the app
   @HiveField(15)
   final DateTime createdDate;
 
   @HiveField(16)
-  DateTime? startReadingDate;
+  final DateTime? startReadingDate;
   @HiveField(17)
-  DateTime? startReadingDateLastModDate;
+  final DateTime? startReadingDateLastModDate;
 
   @HiveField(18)
-  DateTime? finishReadingDate;
+  final DateTime? finishReadingDate;
   @HiveField(19)
-  DateTime? finishReadingDateLastModDate;
+  final DateTime? finishReadingDateLastModDate;
 
   @HiveField(20)
-  dynamic metadata;
+  final dynamic metadata;
   @HiveField(21)
-  DateTime? metadataLastModDate;
+  final DateTime? metadataLastModDate;
 
-  // TODO: Remove from database, instead replace it with reference to book id in each readingTimes document. This is because duplicate data will be stored locally with hive
-  @HiveField(22)
-  final List<ReadingStats>? readingTimes;
+  // Removed from database, instead replaced with reference to book id in each ReadingStats document. This is because duplicate data will be stored locally with hive
+  // Replaced with shelfIds, do not reuse HiveField 22
+  // @HiveField(22)
+  // final List<ReadingStats>? readingTimes;
+
+  @HiveField(23)
+  final List<String> shelfIds;
+  @HiveField(24)
+  final DateTime shelfIdsLastModDate;
 
   Map<String, dynamic> toMap() {
     return {
@@ -153,7 +167,10 @@ class Book extends Equatable {
       'finishReadingDateLastModDate': finishReadingDateLastModDate?.millisecondsSinceEpoch,
       'metadata': metadata,
       'metadataLastModDate': metadataLastModDate?.millisecondsSinceEpoch,
-      'readingTimes': readingTimes?.map((x) => x.toMap()).toList(),
+      // Replaced with shelfIds
+      // 'readingTimes': readingTimes?.map((x) => x.toMap()).toList(),
+      'shelfIds': shelfIds,
+      'shelfIdsLastModDate': shelfIdsLastModDate.millisecondsSinceEpoch,
     };
   }
 
@@ -181,9 +198,14 @@ class Book extends Equatable {
     DateTime? finishReadingDateLastModDate,
     dynamic metadata,
     DateTime? metadataLastModDate,
-    List<ReadingStats>? readingTimes,
+    // Replaced with shelfIds
+    // List<ReadingStats>? readingTimes,
+    // TODO: When deleting a shelf, all books must be removed from it first
+    List<String>? shelfIds,
+    DateTime? shelfIdsLastModDate,
   }) {
     return Book(
+      id: id,
       userId: userId,
       fileId: fileId ?? this.fileId,
       bookType: bookType ?? this.bookType,
@@ -206,7 +228,10 @@ class Book extends Equatable {
       finishReadingDateLastModDate: finishReadingDateLastModDate ?? this.finishReadingDateLastModDate,
       metadata: metadata ?? this.metadata,
       metadataLastModDate: metadataLastModDate ?? this.metadataLastModDate,
-      readingTimes: readingTimes ?? this.readingTimes,
+      // Replaced with shelfIds
+      // readingTimes: readingTimes ?? this.readingTimes,
+      shelfIds: shelfIds ?? this.shelfIds,
+      shelfIdsLastModDate: shelfIdsLastModDate ?? this.shelfIdsLastModDate,
     );
   }
 
@@ -217,12 +242,14 @@ class Book extends Equatable {
   @override
   List<Object> get props {
     return [
+      id ?? '',
       userId,
       bookType,
       // fileId should be unique to the book and determined by contents of the file metadata
       fileId,
       // Commented out createdDate so that if a book is uploaded twice, it will recognize it as a duplicate
       // createdDate,
+      shelfIds,
     ];
   }
 }

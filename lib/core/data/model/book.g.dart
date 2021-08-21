@@ -19,7 +19,7 @@ class BookAdapter extends TypeAdapter<Book> {
     return Book(
       userId: fields[0] as String,
       fileId: fields[1] as String,
-      bookType: fields[2] as dynamic,
+      bookType: fields[2] as BookType,
       title: fields[3] as String?,
       titleLastModDate: fields[4] as DateTime?,
       author: fields[5] as String?,
@@ -39,14 +39,15 @@ class BookAdapter extends TypeAdapter<Book> {
       finishReadingDateLastModDate: fields[19] as DateTime?,
       metadata: fields[20] as dynamic,
       metadataLastModDate: fields[21] as DateTime?,
-      readingTimes: (fields[22] as List?)?.cast<ReadingStats>(),
+      shelfIds: (fields[23] as List).cast<String>(),
+      shelfIdsLastModDate: fields[24] as DateTime,
     );
   }
 
   @override
   void write(BinaryWriter writer, Book obj) {
     writer
-      ..writeByte(23)
+      ..writeByte(24)
       ..writeByte(0)
       ..write(obj.userId)
       ..writeByte(1)
@@ -91,8 +92,10 @@ class BookAdapter extends TypeAdapter<Book> {
       ..write(obj.metadata)
       ..writeByte(21)
       ..write(obj.metadataLastModDate)
-      ..writeByte(22)
-      ..write(obj.readingTimes);
+      ..writeByte(23)
+      ..write(obj.shelfIds)
+      ..writeByte(24)
+      ..write(obj.shelfIdsLastModDate);
   }
 
   @override
