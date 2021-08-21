@@ -1,4 +1,5 @@
 import '../model/book.dart';
+import '../model/book_type.dart';
 
 List<Book> books = [
   Book(

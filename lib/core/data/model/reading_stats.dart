@@ -1,7 +1,10 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+part 'reading_stats.g.dart';
 
+@HiveType(typeId : 1)
 class ReadingStats extends Equatable {
   const ReadingStats({
     required this.date,
@@ -19,8 +22,11 @@ class ReadingStats extends Equatable {
 
   factory ReadingStats.fromJson(String source) => ReadingStats.fromMap(json.decode(source));
 
+  @HiveField(0)
   final DateTime date;
+  @HiveField(1)
   final int timeRead;
+  @HiveField(2)
   final String userId;
 
   Map<String, dynamic> toMap() {

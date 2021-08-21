@@ -1,9 +1,12 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import 'book.dart';
+part 'shelf.g.dart';
 
+@HiveType(typeId : 3)
 class Shelf extends Equatable {
   // Constructors
   const Shelf({
@@ -39,22 +42,33 @@ class Shelf extends Equatable {
   factory Shelf.fromJson(String source) => Shelf.fromMap(json.decode(source));
 
   // Variables
+  @HiveField(0)
   final String userId;
 
+  @HiveField(1)
   final String title;
+  @HiveField(2)
   final DateTime titleLastModDate;
 
+  @HiveField(3)
   final DateTime createdDate;
 
+  @HiveField(4)
   final String? description;
+  @HiveField(5)
   final DateTime? descriptionLastModDate;
 
+  @HiveField(6)
   final DateTime? startReadingDate;
+  @HiveField(7)
   final DateTime? startReadingDateLastModDate;
   
+  @HiveField(8)
   final DateTime? finishReadingDate;
+  @HiveField(9)
   final DateTime? finishReadingDateLastModDate;
 
+  @HiveField(10)
   final List<Book>? books;
 
   // Utility Functions

@@ -2,11 +2,13 @@ import 'dart:convert';
 
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:equatable/equatable.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
+import 'book_type.dart';
 import 'reading_stats.dart';
+part 'book.g.dart';
 
-enum BookType{epub, pdf, unknown}
-
+@HiveType(typeId : 2)
 class Book extends Equatable {
   // Constructors
   const Book({
@@ -66,41 +68,64 @@ class Book extends Equatable {
   factory Book.fromJson(String source) => Book.fromMap(json.decode(source));
   
   // Variables
+  @HiveField(0)
   final String userId;
+  @HiveField(1)
   final String fileId;
 
+  @HiveField(2)
   final BookType bookType;
 
+  @HiveField(3)
   final String? title;
+  @HiveField(4)
   final DateTime? titleLastModDate;
 
+  @HiveField(5)
   final String? author;
+  @HiveField(6)
   final DateTime? authorLastModDate;
 
+  @HiveField(7)
   final String? description;
+  @HiveField(8)
   final DateTime? descriptionLastModDate;
 
+  @HiveField(9)
   final int? readingProgress;
+  @HiveField(10)
   final DateTime? readingProgressLastModDate;
 
+  @HiveField(11)
   final String? publisher;
+  @HiveField(12)
   final DateTime? publisherLastModDate;
 
+  @HiveField(13)
   final DateTime? publishedDate;
+  @HiveField(14)
   final DateTime? publishedDateLastModDate;
 
   /// Date and time the file was uploaded to the app
+  @HiveField(15)
   final DateTime createdDate;
 
+  @HiveField(16)
   final DateTime? startReadingDate;
+  @HiveField(17)
   final DateTime? startReadingDateLastModDate;
 
+  @HiveField(18)
   final DateTime? finishReadingDate;
+  @HiveField(19)
   final DateTime? finishReadingDateLastModDate;
 
+  @HiveField(20)
   final dynamic metadata;
+  @HiveField(21)
   final DateTime? metadataLastModDate;
 
+  @HiveField(22)
   final List<ReadingStats>? readingTimes;
 
   Map<String, dynamic> toMap() {
