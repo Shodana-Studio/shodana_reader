@@ -56,7 +56,6 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
         body: buildHome(context),
         hint: 'Search recents...'.i18n,
         model: searchModel,
-        rootContext: widget.rootContext,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: widget.fabOnPressed,

@@ -23,7 +23,6 @@ class DiscoverScreenMobile extends HookWidget {
         body: buildDiscover(context),
         hint: 'Search online...'.i18n,
         model: searchModel,
-        rootContext: rootContext
       ),
     );
   }

@@ -24,7 +24,6 @@ class ClubsScreenMobile extends HookWidget {
         body: buildClubs(context),
         hint: 'Search clubs...'.i18n,
         model: searchModel,
-        rootContext: rootContext
       ),
     );
   }

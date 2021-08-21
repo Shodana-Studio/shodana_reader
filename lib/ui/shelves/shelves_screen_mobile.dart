@@ -23,7 +23,6 @@ class ShelvesScreenMobile extends HookWidget {
         body: buildShelves(context),
         hint: 'Search shelves...'.i18n,
         model: searchModel,
-        rootContext: rootContext
       ),
     );
   }

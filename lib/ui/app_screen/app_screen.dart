@@ -375,7 +375,6 @@ class WelcomePage extends HookWidget {
         ),
         hint: 'Welcome!'.i18n,
         model: searchModel,
-        rootContext: rootContext
       ),
     );
   }

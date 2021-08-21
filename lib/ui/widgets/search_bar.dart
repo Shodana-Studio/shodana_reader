@@ -26,13 +26,11 @@ class SearchBar extends StatefulWidget {
     required this.body,
     required this.model,
     this.hint='Search...',
-    required this.rootContext,
   }) : super(key: key);
 
   final Widget body;
   final String? hint;
   final BookSearchModel model;
-  final BuildContext rootContext;
 
   @override
   _SearchState createState() => _SearchState();
@@ -187,7 +185,7 @@ class _SearchState extends State<SearchBar> {
         title: Text('Settings'.i18n),
         onTap: () {
           Navigator.of(context).pop();
-          Navigator.of(widget.rootContext).push(MaterialPageRoute(
+          Navigator.of(context).push(MaterialPageRoute(
               builder: (context) {
                 return const MoreSettingsScreen();
               })
@@ -219,7 +217,7 @@ class _SearchState extends State<SearchBar> {
         // subtitle: const Text('v0.0.2'),
         onTap: () {
           Navigator.of(context).pop();
-          Navigator.of(widget.rootContext).push(MaterialPageRoute(
+          Navigator.of(context).push(MaterialPageRoute(
               builder: (context) {
                 return const AboutScreen();
               })
