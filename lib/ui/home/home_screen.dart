@@ -78,6 +78,8 @@ class _HomeScreenState extends State<HomeScreen> {
           userId: userId,
         );
 
+        // TODO: Add book to hive database
+
 
       }
     } on Exception catch (e, _) {
