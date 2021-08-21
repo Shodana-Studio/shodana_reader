@@ -11,7 +11,7 @@ part 'book.g.dart';
 @HiveType(typeId : 2)
 class Book extends Equatable {
   // Constructors
-  const Book({
+  Book({
     required this.userId,
     required this.fileId,
     required this.bookType,
@@ -77,53 +77,53 @@ class Book extends Equatable {
   final BookType bookType;
 
   @HiveField(3)
-  final String? title;
+  String? title;
   @HiveField(4)
-  final DateTime? titleLastModDate;
+  DateTime? titleLastModDate;
 
   @HiveField(5)
-  final String? author;
+  String? author;
   @HiveField(6)
-  final DateTime? authorLastModDate;
+  DateTime? authorLastModDate;
 
   @HiveField(7)
-  final String? description;
+  String? description;
   @HiveField(8)
-  final DateTime? descriptionLastModDate;
+  DateTime? descriptionLastModDate;
 
   @HiveField(9)
-  final int? readingProgress;
+  int? readingProgress;
   @HiveField(10)
-  final DateTime? readingProgressLastModDate;
+  DateTime? readingProgressLastModDate;
 
   @HiveField(11)
-  final String? publisher;
+  String? publisher;
   @HiveField(12)
-  final DateTime? publisherLastModDate;
+  DateTime? publisherLastModDate;
 
   @HiveField(13)
-  final DateTime? publishedDate;
+  DateTime? publishedDate;
   @HiveField(14)
-  final DateTime? publishedDateLastModDate;
+  DateTime? publishedDateLastModDate;
 
   /// Date and time the file was uploaded to the app
   @HiveField(15)
   final DateTime createdDate;
 
   @HiveField(16)
-  final DateTime? startReadingDate;
+  DateTime? startReadingDate;
   @HiveField(17)
-  final DateTime? startReadingDateLastModDate;
+  DateTime? startReadingDateLastModDate;
 
   @HiveField(18)
-  final DateTime? finishReadingDate;
+  DateTime? finishReadingDate;
   @HiveField(19)
-  final DateTime? finishReadingDateLastModDate;
+  DateTime? finishReadingDateLastModDate;
 
   @HiveField(20)
-  final dynamic metadata;
+  dynamic metadata;
   @HiveField(21)
-  final DateTime? metadataLastModDate;
+  DateTime? metadataLastModDate;
 
   // TODO: Remove from database, instead replace it with reference to book id in each readingTimes document. This is because duplicate data will be stored locally with hive
   @HiveField(22)
