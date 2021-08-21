@@ -1,4 +1,5 @@
 // Run in terminal with "dart scripts/db_setup.dart"
+// Before running, do the following:
 // Add appwrite url, endpoint, and project id in "lib/core/res/constants.dart"
 // Add api key with permissions for collections and documents read/write in file "scripts/.env" with format:
 // DATABASE_KEY={key}
@@ -151,6 +152,22 @@ Future<bool> setupDatabase() async {
       'required': false,
     },
     {
+      'key': 'author',
+      'label': 'Author',
+      'type': 'text',
+      'default': '',
+      'array': false,
+      'required': false,
+    },
+    {
+      'key': 'authorLastModDate',
+      'label': 'Author Last Modified Date',
+      'type': 'numeric',
+      'default': '',
+      'array': false,
+      'required': false,
+    },
+    {
       'key': 'description',
       'label': 'Description',
       'type': 'text',
@@ -161,6 +178,22 @@ Future<bool> setupDatabase() async {
     {
       'key': 'descriptionLastModDate',
       'label': 'Description Last Modified Date',
+      'type': 'numeric',
+      'default': '',
+      'array': false,
+      'required': false,
+    },
+    {
+      'key': 'readingProgress',
+      'label': 'Reading Progress',
+      'type': 'numeric',
+      'default': '',
+      'array': false,
+      'required': false,
+    },
+    {
+      'key': 'readingProgressLastModDate',
+      'label': 'Reading Progress Last Modified Date',
       'type': 'numeric',
       'default': '',
       'array': false,
