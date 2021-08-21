@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
+import 'package:shodana_reader/core/data/service/appwrite_file.dart';
 import '../../res/constants.dart';
 
 class AppwriteService {
@@ -74,14 +75,15 @@ class AppwriteService {
     return res.data;
   }
 
-  Future<Map<String, dynamic>> uploadFile(MultipartFile file, List<String> permission) async {
+  // TODO: test
+  Future<AppwriteFile> uploadFile(MultipartFile file, List<String> readPermission, List<String> writePermission) async {
     final res = await _storage.createFile(
       file: file,
-      read: permission,
-      write: permission,
+      read: readPermission,
+      write: writePermission,
     );
 
-    return res.data;
+    return AppwriteFile.fromJson(res.data);
   }
 
   // Future<Uint8List> getFile(String fileId) async {
