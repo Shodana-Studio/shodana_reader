@@ -43,6 +43,13 @@ class _AppScreenState extends State<AppScreen> {
     super.initState();
     SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
     _routerDelegates = getRouterDelegates();
+    currentIndex = getCurrentIndex();
+    // Set the current index to active, all others to not active
+    setActiveIndex();
+    _routerDelegates[currentIndex].update(
+      state: widget.beamState,
+      rebuild: false,
+    );
   }
 
   void _setStateListener() => setState(() {});
@@ -58,17 +65,6 @@ class _AppScreenState extends State<AppScreen> {
     final authNotifier = context.authNotifier;
     final LastUsedIndex lastUsedIndex = context.read
       (lastUsedIndexProvider.notifier);
-
-    final beamState = Beamer.of(context).state;
-    currentIndex = getCurrentIndex();
-
-    // Set the current index to active, all others to not active
-    setActiveIndex();
-
-    _routerDelegates[currentIndex].update(
-      state: beamState,
-      rebuild: false,
-    );
 
     final brightness = Theme.of(context).brightness;
     if (brightness == Brightness.dark) {
