@@ -9,6 +9,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../core/data/model/book.dart';
+import '../../core/data/model/book_type.dart';
 import 'home_screen_mobile.dart';
 
 
