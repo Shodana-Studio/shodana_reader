@@ -8,7 +8,7 @@ class ShelvesScreen extends StatelessWidget {
   const ShelvesScreen({Key? key,}) : super(key: key);
 
   void beamToShelf(BuildContext context, String shelf) {
-    context.beamToNamed('/shelves/$shelf}');
+    context.beamToNamed('/shelves/$shelf');
   }
 
   void beamToBook(BuildContext context, String shelf, String book) {

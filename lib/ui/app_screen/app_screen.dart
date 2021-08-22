@@ -326,20 +326,12 @@ class _AppScreenState extends State<AppScreen> {
         (_routerDelegates[currentIndex].initialPath);
     } else {
       setState(() => currentIndex = index);
-
-      int i = 0;
-      for ( i = 0; i < _routerDelegates.length; i++ ) {
-        if (currentIndex == i) {
-          _routerDelegates[i].active = true;
-        } else {
-          _routerDelegates[i].active = false;
-        }
-      }
+      setActiveIndex();
 
       // Always keep track of the last used index unless its the 'more' page
-      if (index != 4) {
-        lastUsedIndex.setPage(currentIndex);
-      }
+      // if (index != 4) {
+      //   lastUsedIndex.setPage(currentIndex);
+      // }
 
       _routerDelegates[currentIndex].update(rebuild: false);
     }
