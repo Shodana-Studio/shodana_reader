@@ -9,7 +9,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'core/data/service/appwrite_service.dart';
 import 'core/presentation/locations/app_location.dart';
-import 'ui/app_screen/app_screen.dart';
 
 
 class App extends StatefulWidget {

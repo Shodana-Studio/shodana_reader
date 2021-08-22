@@ -1,5 +1,4 @@
 import 'dart:io' as io;
-import 'package:flutter/foundation.dart';
 import 'package:image/image.dart' as img;
 import 'package:epubx/epubx.dart' as epubx;
 import '../service/storage_util.dart';
@@ -62,7 +61,7 @@ class EPUB extends Book {
     final img.Image? cover = epubBook.CoverImage;
     final io.Directory dir = await StorageUtil.getAppDirectory();
     if (cover != null) {
-      final io.File coverImage = await io.File('${dir.path}/$bookId/cover.png').writeAsBytes(img.encodePng(cover));
+      /*final io.File coverImage = */await io.File('${dir.path}/$bookId/cover.png').writeAsBytes(img.encodePng(cover));
       return 0;
     } else {
       // If the cover image is null, use the first image
@@ -82,7 +81,7 @@ class EPUB extends Book {
         final img.Image? cover = img.decodeImage(imageContent);
         if (cover != null) {
           // Convert the image to png, copy the file to the book's folder with the name 'cover.png'
-          final io.File coverImage = await io.File('${dir.path}/$bookId/cover.png').writeAsBytes(img.encodePng(cover));
+          /*final io.File coverImage = */await io.File('${dir.path}/$bookId/cover.png').writeAsBytes(img.encodePng(cover));
           // debugPrint('Image cover saved to: ${coverImage.path}');
           return 1;
         } else {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:shodana_reader/ui/widgets/grid_tile_widget.dart';
-import '../../core/data/repository/fake_data.dart';
+
+import 'grid_tile_widget.dart';
 
 class StaggeredGrid extends StatelessWidget {
   const StaggeredGrid({ Key? key, required this.controller }) : super(key: key);

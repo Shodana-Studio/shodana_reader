@@ -5,14 +5,11 @@ import 'package:epubx/epubx.dart' as epubx;
 import 'package:file_picker/file_picker.dart';
 import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:shodana_reader/core/data/model/epub.dart';
 import 'package:uuid/uuid.dart';
-import 'package:image/image.dart' as img;
 
-import '../../core/data/model/book.dart';
 import '../../core/data/model/book_type.dart';
+import '../../core/data/model/epub.dart';
 import '../../core/data/service/storage_util.dart';
 import 'home_screen_mobile.dart';
 
@@ -87,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
         );
 
         // Copy file to device storage
-        final io.File newFile = await StorageUtil.copyPlatformFile(file: file, folder: bookId, filename: bookId);
+        /*final io.File newFile = */await StorageUtil.copyPlatformFile(file: file, folder: bookId, filename: bookId);
         
         // Save image to app directory
         final int success = await book.saveCoverImage(epubBook: epubBook);
@@ -107,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
         }
 
         // Add book to hive database
-        final key = await StorageUtil.addBook(book: book);
+        /*final key = */await StorageUtil.addBook(book: book);
       }
     } on Exception catch (e, _) {
       // TODO: Add proper ui feedback on error
