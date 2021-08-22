@@ -1,8 +1,9 @@
 import 'dart:typed_data';
 
 import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
-import 'package:shodana_reader/core/data/service/appwrite_file.dart';
+
 import '../../res/constants.dart';
+import 'appwrite_file.dart';
 
 class AppwriteService {
   AppwriteService._internal() {

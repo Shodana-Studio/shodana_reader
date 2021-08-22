@@ -1,8 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:shodana_reader/core/data/model/book.dart';
+import 'package:shodana_reader/core/data/service/storage_utils.dart';
 import 'package:shodana_reader/ui/widgets/list_tile_widget.dart';
 
 import '../../core/data/model/book_search_model.dart';
@@ -25,12 +29,16 @@ class HomeScreenMobile extends StatefulHookWidget {
 }
 
 class _HomeScreenMobileState extends State<HomeScreenMobile> {
-  // List<String> items = ['1', '2', '3', '4', '5', '6', '7', '8'];
   final RefreshController _refreshController = RefreshController();
+  late List<Book> books;
+  late Box booksBox;
 
   Future<void> _onRefresh() async {
-    // monitor network fetch
+    books = StorageUtil.getAllBooks();
+    print(books);
+    // temp delay
     await Future.delayed(const Duration(milliseconds: 1000));
+    // TODO: Get latest books from server database and update hive box
     // if failed,use refreshFailed()
     _refreshController.refreshCompleted();
   }
@@ -47,6 +55,14 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    books = StorageUtil.getAllBooks();
+    booksBox =  StorageUtil.getBooksBox();
+    print(books);
+  }
+
+  @override
   Widget build(BuildContext context) {
     final BookSearchModel searchModel = useProvider(bookSearchProvider);
     final scrollController = useScrollController();
@@ -57,69 +73,122 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
         hint: 'Search recents...'.i18n,
         model: searchModel,
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: widget.fabOnPressed,
-        tooltip: 'Add an eBook'.i18n,
-        child: const Icon(Icons.add),
-      ),
-    );
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: widget.fabOnPressed,
+      //   tooltip: 'Add an eBook'.i18n,
+      //   child: const Icon(Icons.add),
+      // ),
+    ) ;
   }
 
   Widget buildHome(ScrollController scrollController) {
     return SafeArea(
       child: Scrollbar(
-        child: SmartRefresher(
-          // TODO: Disable pull to refresh on desktop and web, use refresh icon instead
-          // enablePullDown: !kIsWeb,
-          // enablePullUp: false,
-          header: const	CustomWaterDropHeader(
-            offset: kToolbarHeight + 8.0,
-          ),
-          controller: _refreshController,
-          scrollController: scrollController,
-          footer: const ClassicFooter(),
-          onRefresh: _onRefresh,
-          onLoading: _onLoading,
-          // TODO: Get list of books from hive 'books' box
-          child: ListView.builder(
-            padding: const EdgeInsets.only(top: kToolbarHeight + 8.0, left: 8.0, right: 8.0),
-            controller: scrollController,
-            itemBuilder: (context, index) {
-              return ListTileWidget(index: index, title: 'Text', subtitle: 'Subtitle', context: context,);
-            },
-            // itemExtent: 120.0,
-            itemCount: 100,
-          ),
+        child: ValueListenableBuilder(
+          valueListenable: booksBox.listenable(),
+          builder: (context, Box box, _) {
+            books = box.values.map((e) => e as Book).toList();
+            return SmartRefresher(
+              // TODO: Disable pull to refresh on desktop and web, use refresh icon instead
+              // enablePullDown: !kIsWeb,
+              // enablePullUp: true,
+              header: const	CustomWaterDropHeader(
+                offset: kToolbarHeight + 8.0,
+              ),
+              controller: _refreshController,
+              scrollController: scrollController,
+              // footer: const ClassicFooter(),
+              // footer: CustomFooter(
+              //   builder: (BuildContext context, LoadStatus? mode) {
+              //     Widget body;
+              //     if (mode == LoadStatus.idle) {
+              //       body = const Text('Pull up to load more');
+              //     }
+              //     else if (mode == LoadStatus.loading) {
+              //       body = const CircularProgressIndicator();
+              //     }
+              //     else if (mode == LoadStatus.failed) {
+              //       body = const Text('Load Failed! Try again!');
+              //     }
+              //     else if (mode == LoadStatus.canLoading) {
+              //       body = const Text('Release to load more');
+              //     }
+              //     else {
+              //       body = const Text('No more Data');
+              //     }
+              //     return const SizedBox(
+              //       height: 55.0,
+              //       // child: Center(child: body),
+              //     );
+              //   },
+              // ),
+              onRefresh: _onRefresh,
+              onLoading: _onLoading,
+              // TODO: Get list of books from hive 'books' box
+              child: ListView.builder(
+                padding: const EdgeInsets.only(
+                  top: kToolbarHeight + 8.0,
+                  bottom: 8.0,
+                  left: 4.0,
+                  right: 4.0,
+                ),
+                controller: scrollController,
+                itemBuilder: (context, index) {
+                  // Add a book button at the top of the listview
+                  if (index == 0) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                      child: OutlinedButton(
+                        onPressed: widget.fabOnPressed,
+                        child: const Text('Add a book'),
+                      ),
+                    );
+                  }
 
-          // TODO: Add support for staggered grid view and normal grid view
-          // StaggeredGrid(controller: scrollController,),
-          
-          // SingleChildScrollView(
-          //   child: Padding(
-          //     padding: const EdgeInsets.only(top: kToolbarHeight + 8.0),
-          //     child: Column(
-          //       mainAxisSize: MainAxisSize.min,
-          //       crossAxisAlignment: CrossAxisAlignment.stretch,
-          //       children: [
-          //         // const SizedBox(height: kToolbarHeight + 8,),
-          //         // ListTile(
-          //         //   title: const Text('Beam to Test Book 0 Details'),
-          //         //   onTap: bookOnPressed,
-          //         // ),
-          //         Align(
-          //           alignment: Alignment.centerLeft,
-          //           child: TextButton(
-          //             onPressed: widget.bookOnPressed,
-          //             child: const Text('Beam to Test Book 0 Details'),
-          //           ),
-          //         ),
-                  
-          //         // Tile(title: 'Average Abilities', subtitle: 'FUNA'),
-          //         const SizedBox(height: 1200,),
-          //       ],
-          //     ),
-          //   ),
-          // ),
+                  // List tile
+                  final book = books[index - 1];
+                  return ListTileWidget(
+                    index: index - 1,
+                    title: book.title,
+                    subtitle: book.author,
+                    context: context,
+                  );
+                },
+                // itemExtent: 120.0,
+                itemCount: books.length + 1,
+              ),
+
+              // TODO: Add support for staggered grid view and normal grid view
+              // StaggeredGrid(controller: scrollController,),
+
+              // SingleChildScrollView(
+              //   child: Padding(
+              //     padding: const EdgeInsets.only(top: kToolbarHeight + 8.0),
+              //     child: Column(
+              //       mainAxisSize: MainAxisSize.min,
+              //       crossAxisAlignment: CrossAxisAlignment.stretch,
+              //       children: [
+              //         // const SizedBox(height: kToolbarHeight + 8,),
+              //         // ListTile(
+              //         //   title: const Text('Beam to Test Book 0 Details'),
+              //         //   onTap: bookOnPressed,
+              //         // ),
+              //         Align(
+              //           alignment: Alignment.centerLeft,
+              //           child: TextButton(
+              //             onPressed: widget.bookOnPressed,
+              //             child: const Text('Beam to Test Book 0 Details'),
+              //           ),
+              //         ),
+
+              //         // Tile(title: 'Average Abilities', subtitle: 'FUNA'),
+              //         const SizedBox(height: 1200,),
+              //       ],
+              //     ),
+              //   ),
+              // ),
+            );
+          }
         ),
       ),
     );

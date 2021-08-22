@@ -57,19 +57,24 @@ class StorageUtil {
     return settings.clear();
   }
 
+  /// Get the books box
+  static Box getBooksBox() {
+    return Hive.box(AppConstant.booksBoxKey);
+  }
+
   /// Get all books from Hive 'books' box.
   /// 
   /// Returns booksBox.values, of type Iterable<dynamic>
-  static dynamic getAllBooks() {
+  static List<Book> getAllBooks() {
     if (_booksBox == null) {
       debugPrint('_booksBox is null');
       return [];
     }
-    return _booksBox!.values;
+    return _booksBox!.values.map((e) => e as Book).toList();
   }
 
   /// Get a book from Hive 'books' box.
-  static dynamic getBook({required int key, dynamic defValue}) {
+  static Book? getBook({required int key, dynamic defValue}) {
     if (_booksBox == null) {
       debugPrint('_booksBox is null');
       return defValue;

@@ -59,13 +59,15 @@ class _HomeScreenState extends State<HomeScreen> {
       if (file.extension == 'epub') {
         final List<int> bytes = await newFile.readAsBytes();
         final fileStats = newFile.statSync();
-        final epubx.EpubBookRef epubRef = await epubx.EpubReader.openBook(bytes);
+        // final epubx.EpubBookRef epubRef = await epubx.EpubReader.openBook(bytes);
+        final epubx.EpubBook epub = await epubx.EpubReader.readBook(bytes);
+        final cover = epub.CoverImage;
 
         // TODO: Remove temp printing
         debugPrint('File path: ${newFile.path}');
         debugPrint('File Uri: ${newFile.uri}');
-        debugPrint('Epub title: ${epubRef.Title ?? ''}');
-        debugPrint('Epub author: ${epubRef.Author ?? ''}');
+        debugPrint('Epub title: ${epub.Title ?? ''}');
+        debugPrint('Epub author: ${epub.Author ?? ''}');
         debugPrint('File changed: ${fileStats.changed.toLocal().toString()}');
         // Add to Hive database
         final userId = authNotifier.user!.id;
@@ -79,12 +81,12 @@ class _HomeScreenState extends State<HomeScreen> {
           userId: userId,
           shelfIds: const [],
           shelfIdsLastModDate: DateTime.now(),
+          title: epub.Title,
+          author: epub.Author,
         );
 
         // TODO: Add book to hive database
         final key = await StorageUtil.addBook(book: book);
-        final Book savedBook = StorageUtil.getBook(key: key);
-        debugPrint(savedBook.toString());
       }
     } on Exception catch (e, _) {
       // TODO: Add proper ui feedback on error

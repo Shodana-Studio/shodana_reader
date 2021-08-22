@@ -36,14 +36,16 @@ class ListTileWidget extends Tile {
               ),
             ),
             const SizedBox(width: 8,),
-            Column(
-              // mainAxisSize: MainAxisSize.max,
-              // mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('$title $index', style: textTheme.bodyText1,),
-                if (subtitle.isNotEmpty) Text(subtitle, style: textTheme.subtitle1,),
-              ],
+            Expanded(
+              child: Column(
+                // mainAxisSize: MainAxisSize.max,
+                // mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(title, style: textTheme.bodyText1,),
+                  if (subtitle.isNotEmpty) Text(subtitle, style: textTheme.subtitle1,),
+                ],
+              ),
             ),
           ],
         ),
