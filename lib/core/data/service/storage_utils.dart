@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../res/constants.dart';
+import '../../res/app_constants.dart';
 import '../model/book.dart';
 
 class StorageUtil {

@@ -6,7 +6,7 @@
 
 // ignore_for_file: avoid_print
 import 'package:dart_appwrite/dart_appwrite.dart';
-import 'package:shodana_reader/core/res/constants.dart';
+import 'package:shodana_reader/core/res/app_constants.dart';
 import 'package:shodana_reader/env/env.dart';
 
 Client client = Client(endPoint: AppConstant.endpoint)

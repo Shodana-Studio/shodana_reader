@@ -15,7 +15,7 @@ import '../../core/data/model/book.dart';
 import '../../core/data/model/book_search_model.dart';
 import '../../core/data/repository/fake_data.dart';
 import '../../core/data/service/appwrite_service.dart';
-import '../../core/res/constants.dart';
+import '../../core/res/app_constants.dart';
 import '../../l10n/my.i18n.dart';
 import '../more/more_about/more_about_screen.dart';
 import '../more/more_settings/more_settings_screen.dart' show MoreSettingsScreen;

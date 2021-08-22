@@ -13,7 +13,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../core/data/model/book_search_model.dart';
 import '../../core/presentation/locations/locations.dart';
-import '../../core/res/constants.dart';
+import '../../core/res/app_constants.dart';
 import '../../l10n/my.i18n.dart';
 import '../auth/login_screen.dart';
 import '../widgets/search_bar.dart';

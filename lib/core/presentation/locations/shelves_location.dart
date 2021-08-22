@@ -7,7 +7,7 @@ import '../../../ui/reader/reader_screen.dart';
 import '../../../ui/shelves/shelf_details/shelf_details_screen.dart';
 import '../../../ui/shelves/shelves_screen.dart';
 import '../../data/repository/fake_data.dart';
-import '../../res/constants.dart';
+import '../../res/app_constants.dart';
 
 class ShelvesLocation extends BeamLocation {
   ShelvesLocation(BeamState state) : super(state);

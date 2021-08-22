@@ -1,7 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../data/service/storage_utils.dart';
-import '../../res/constants.dart';
+import '../../res/app_constants.dart';
 
 final followSystemThemeSwitchProvider =
 StateNotifierProvider<FollowSystemThemeSwitch, bool>((ref) {
