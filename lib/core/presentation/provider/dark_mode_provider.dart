@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../data/service/storage_utils.dart';
+import '../../data/service/storage_util.dart';
 import '../../res/app_constants.dart';
 
 final darkModeSwitchProvider =

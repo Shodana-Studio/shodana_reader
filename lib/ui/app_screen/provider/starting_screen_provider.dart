@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../core/data/service/storage_utils.dart';
+import '../../../core/data/service/storage_util.dart';
 import '../../../core/res/app_constants.dart';
 import 'default_starting_page_provider.dart';
 import 'last_used_enabled_provider.dart';

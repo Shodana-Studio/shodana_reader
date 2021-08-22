@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../core/data/service/storage_utils.dart';
+import '../../../core/data/service/storage_util.dart';
 import '../../../core/res/app_constants.dart';
 
 final leftNavigationRailProvider =

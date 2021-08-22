@@ -6,7 +6,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shodana_reader/core/data/model/book.dart';
-import 'package:shodana_reader/core/data/service/storage_utils.dart';
+import 'package:shodana_reader/core/data/service/storage_util.dart';
 import 'package:shodana_reader/ui/widgets/list_tile_widget.dart';
 
 import '../../core/data/model/book_search_model.dart';
