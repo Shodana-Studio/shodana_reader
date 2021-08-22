@@ -36,13 +36,59 @@ class _AppScreenState extends State<AppScreen> {
   Widget? bottomNavigationBar;
   late NavigationRail navigationRail;
   late int currentIndex;
-  late final List<BeamerDelegate<BeamState>> _routerDelegates;
+  // These are all the location handlers. They handle the page stacks.
+  final List<BeamerDelegate<BeamState>> _routerDelegates = [
+    BeamerDelegate(
+      initialPath: '/home',
+      locationBuilder: (state) {
+        if (state.uri.path.contains('home')) {
+          return HomeLocation(state);
+        }
+        return NotFound(path: state.uri.toString());
+      },
+    ),
+    BeamerDelegate(
+      initialPath: '/shelves',
+      locationBuilder: (state) {
+        if (state.uri.path.contains('shelves')) {
+          return ShelvesLocation(state);
+        }
+        return NotFound(path: state.uri.toString());
+      },
+    ),
+    BeamerDelegate(
+      initialPath: '/clubs',
+      locationBuilder: (state) {
+        if (state.uri.path.contains('clubs')) {
+          return ClubsLocation(state);
+        }
+        return NotFound(path: state.uri.toString());
+      },
+    ),
+    BeamerDelegate(
+      initialPath: '/discover',
+      locationBuilder: (state) {
+        if (state.uri.path.contains('discover')) {
+          return DiscoverLocation(state);
+        }
+        return NotFound(path: state.uri.toString());
+      },
+    ),
+    // BeamerDelegate(
+    //   initialPath: '/more',
+    //   locationBuilder: (state) {
+    //     if (state.uri.path.contains('more')) {
+    //       return MoreLocation(state);
+    //     }
+    //     return NotFound(path: state.uri.toString());
+    //   },
+    // ),
+  ];
 
   @override
   void initState() {
     super.initState();
     SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
-    _routerDelegates = getRouterDelegates();
     currentIndex = getCurrentIndex();
     // Set the current index to active, all others to not active
     setActiveIndex();
@@ -226,57 +272,6 @@ class _AppScreenState extends State<AppScreen> {
     super.dispose();
   }
 
-  // These are all the location handlers. They handle the page stacks.
-  List<BeamerDelegate> getRouterDelegates() {
-    return [
-      BeamerDelegate(
-        initialPath: '/home',
-        locationBuilder: (state) {
-        if (state.uri.path.contains('home')) {
-          return HomeLocation(state);
-        }
-          return NotFound(path: state.uri.toString());
-        },
-      ),
-      BeamerDelegate(
-        initialPath: '/shelves',
-        locationBuilder: (state) {
-          if (state.uri.path.contains('shelves')) {
-            return ShelvesLocation(state);
-          }
-          return NotFound(path: state.uri.toString());
-        },
-      ),
-      BeamerDelegate(
-        initialPath: '/clubs',
-        locationBuilder: (state) {
-          if (state.uri.path.contains('clubs')) {
-            return ClubsLocation(state);
-          }
-          return NotFound(path: state.uri.toString());
-        },
-      ),
-      BeamerDelegate(
-        initialPath: '/discover',
-        locationBuilder: (state) {
-          if (state.uri.path.contains('discover')) {
-            return DiscoverLocation(state);
-          }
-          return NotFound(path: state.uri.toString());
-        },
-      ),
-      // BeamerDelegate(
-      //   initialPath: '/more',
-      //   locationBuilder: (state) {
-      //     if (state.uri.path.contains('more')) {
-      //       return MoreLocation(state);
-      //     }
-      //     return NotFound(path: state.uri.toString());
-      //   },
-      // ),
-    ];
-  }
-
   int getCurrentIndex() {
     final bool lastUsedEnabled = context.read(lastUsedEnabledProvider);
     final lastUsedIndexNotifier = context.read(lastUsedIndexProvider.notifier);
@@ -322,8 +317,9 @@ class _AppScreenState extends State<AppScreen> {
 
   void onNavigationItemTap(int index, LastUsedIndex lastUsedIndex) {
     if (currentIndex == index) {
-      _routerDelegates[currentIndex].beamToNamed
-        (_routerDelegates[currentIndex].initialPath);
+      _routerDelegates[currentIndex].beamToNamed(
+        _routerDelegates[currentIndex].initialPath,
+      );
     } else {
       setState(() => currentIndex = index);
       setActiveIndex();
