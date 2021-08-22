@@ -1,3 +1,4 @@
+import 'dart:io' as io;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -147,11 +148,24 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
 
                   // List tile
                   final book = books[index - 1];
-                  return ListTileWidget(
-                    index: index - 1,
-                    title: book.title,
-                    subtitle: book.author,
-                    context: context,
+                  return FutureBuilder(
+                    future: StorageUtil.getAppDirectory(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        final io.Directory dir = snapshot.data! as io.Directory;
+                        
+                        final imagePath = '${dir.path}/${book.bookId}/cover.png';
+                        return ListTileWidget(
+                        index: index - 1,
+                        title: book.title,
+                        subtitle: book.author,
+                        context: context,
+                        image: imagePath,
+                      );
+                      }
+                      
+                      return const CircularProgressIndicator();
+                    }
                   );
                 },
                 // itemExtent: 120.0,

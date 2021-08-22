@@ -1,3 +1,4 @@
+import 'dart:io' as io;
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -30,8 +31,8 @@ class ListTileWidget extends Tile {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
-              child: CachedNetworkImage(
-                imageUrl: 'https://i.imgur.com/DRLR1sN.png',
+              child: Image.file(
+                io.File.fromUri(Uri(path: image)),
                 height: 120,
               ),
             ),
