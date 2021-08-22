@@ -1,6 +1,5 @@
 import 'dart:io' as io;
 import 'package:adaptive_theme/adaptive_theme.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'tile.dart';
@@ -28,12 +27,14 @@ class ListTileWidget extends Tile {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
+          // mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: Image.file(
                 io.File.fromUri(Uri(path: image)),
-                height: 120,
+                height: 70,
               ),
             ),
             const SizedBox(width: 8,),
