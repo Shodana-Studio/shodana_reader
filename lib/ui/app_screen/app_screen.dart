@@ -227,7 +227,8 @@ class _AppScreenState extends State<AppScreen> {
   }
 
   // These are all the location handlers. They handle the page stacks.
-  List<BeamerDelegate> getRouterDelegates() => [
+  List<BeamerDelegate> getRouterDelegates() {
+    return [
       BeamerDelegate(
         initialPath: '/home',
         locationBuilder: (state) {
@@ -274,6 +275,7 @@ class _AppScreenState extends State<AppScreen> {
       //   },
       // ),
     ];
+  }
 
   int getCurrentIndex() {
     final bool lastUsedEnabled = context.read(lastUsedEnabledProvider);
