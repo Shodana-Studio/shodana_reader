@@ -17,6 +17,7 @@ class ReadingStatsAdapter extends TypeAdapter<ReadingStats> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ReadingStats(
+      readingStatsId: fields[4] as String,
       date: fields[0] as DateTime,
       timeRead: fields[1] as int,
       userId: fields[2] as String,
@@ -27,7 +28,9 @@ class ReadingStatsAdapter extends TypeAdapter<ReadingStats> {
   @override
   void write(BinaryWriter writer, ReadingStats obj) {
     writer
+      ..writeByte(5)
       ..writeByte(4)
+      ..write(obj.readingStatsId)
       ..writeByte(0)
       ..write(obj.date)
       ..writeByte(1)

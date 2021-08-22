@@ -51,7 +51,9 @@ Future<bool> setupDatabase() async {
       usersCollectionExists = true;
     }
   }
-
+  
+  // TODO: Add required id attribute to each collection
+  // TODO: Add the id to each model
   if (readingStatsCollectionExists) {
     print('Collection $readingStatsCollectionName already exists, aborting...');
     return false;
@@ -78,6 +80,14 @@ Future<bool> setupDatabase() async {
   final dynamic usersCollectionRes;
   
   readingStatsCollectionRes = await createCollection(name: readingStatsCollectionName, read: ['role:member'], write: ['role:member'], rules: [
+    {
+      'key': 'readingStatsId',
+      'label': 'Reading Stats ID',
+      'type': 'text',
+      'default': '',
+      'array': false,
+      'required': true,
+    },
     {
       'key': 'userId',
       'label': 'User ID',
@@ -119,6 +129,14 @@ Future<bool> setupDatabase() async {
   print('Collection $readingStatsCollectionName created');
 
   booksCollectionRes = await createCollection(name: booksCollectionName, read: ['role:member'], write: ['role:member'], rules: [
+    {
+      'key': 'bookId',
+      'label': 'Book ID',
+      'type': 'text',
+      'default': '',
+      'array': false,
+      'required': true,
+    },
     {
       'key': 'userId',
       'label': 'User ID',
@@ -330,6 +348,14 @@ Future<bool> setupDatabase() async {
   
   shelvesCollectionRes = await createCollection(name: shelvesCollectionName, read: ['role:member'], write: ['role:member'], rules: [
     {
+      'key': 'shelfId',
+      'label': 'Shelf ID',
+      'type': 'text',
+      'default': '',
+      'array': false,
+      'required': true,
+    },
+    {
       'key': 'userId',
       'label': 'User ID',
       'type': 'text',
@@ -450,7 +476,16 @@ Future<bool> setupDatabase() async {
       'default': '',
       'array': true,
       'required': false,
-      'list': [shelvesCollectionRes[r'$id'], booksCollectionRes[r'$id']],
+      'list': [booksCollectionRes[r'$id']],
+    },
+    {
+      'key': 'shelves',
+      'label': 'Shelves',
+      'type': 'document',
+      'default': '',
+      'array': true,
+      'required': false,
+      'list': [shelvesCollectionRes[r'$id']],
     },
   ]);
 

@@ -11,9 +11,9 @@ part 'book.g.dart';
 class Book extends Equatable {
   // Constructors
   const Book({
-    this.id,
+    required this.bookId,
     required this.userId,
-    required this.fileId,
+    this.fileId,
     required this.bookType,
     this.title,
     this.titleLastModDate,
@@ -42,7 +42,7 @@ class Book extends Equatable {
 
   factory Book.fromMap(Map<String, dynamic> map) {
     return Book(
-      id: map[r'$id'],
+      bookId: map['bookId'],
       userId: map['userId'],
       fileId: map['fileId'],
       bookType: EnumToString.fromString(BookType.values, map['bookType']) ?? BookType.unknown,
@@ -75,11 +75,11 @@ class Book extends Equatable {
   
   // Variables
   @HiveField(25)
-  final String? id;
+  final String bookId;
   @HiveField(0)
   final String userId;
   @HiveField(1)
-  final String fileId;
+  final String? fileId;
 
   @HiveField(2)
   final BookType bookType;
@@ -145,6 +145,7 @@ class Book extends Equatable {
 
   Map<String, dynamic> toMap() {
     return {
+      'bookId': bookId,
       'userId': userId,
       'fileId': fileId,
       'bookType': EnumToString.convertToString(bookType),
@@ -177,6 +178,7 @@ class Book extends Equatable {
   String toJson() => json.encode(toMap());
 
   Book copyWith({
+    String? bookId,
     String? fileId,
     BookType? bookType,
     String? title,
@@ -205,7 +207,7 @@ class Book extends Equatable {
     DateTime? shelfIdsLastModDate,
   }) {
     return Book(
-      id: id,
+      bookId: bookId ?? this.bookId,
       userId: userId,
       fileId: fileId ?? this.fileId,
       bookType: bookType ?? this.bookType,
@@ -242,14 +244,14 @@ class Book extends Equatable {
   @override
   List<Object> get props {
     return [
-      id ?? '',
+      // bookId is generated client side and is unique
+      bookId,
       userId,
       bookType,
-      // fileId should be unique to the book and determined by contents of the file metadata
-      fileId,
+      // fileId should be unique to the book and given by appwrite storage
+      fileId ?? '',
       // Commented out createdDate so that if a book is uploaded twice, it will recognize it as a duplicate
       // createdDate,
-      shelfIds,
     ];
   }
 }

@@ -7,6 +7,7 @@ import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../core/data/model/book.dart';
 import '../../core/data/model/book_type.dart';
@@ -50,8 +51,21 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> addBook() async {
     final authNotifier = context.authNotifier;
     if (authNotifier.user == null) {
+      print('User is not logged in');
       return;
     }
+
+    // TODO: User is not logged in (Run in offline mode)
+    // Add book to upload queue for when logged-in/online
+    // Check the local db if the book exists
+    //    if it exists, display the already existing book and ask the user for confirmation before adding it
+    //    else add the book to the Hive db
+
+    // TODO: User is logged in (Upload book to server)
+    // Check if book already exists on server
+    //    if it exists, display the already existing book and ask the user for confirmation before uploading it
+    //    else, upload the book
+    // Add the book to the Hive db
 
     try {
       final PlatformFile file = await fetchFile();
@@ -69,14 +83,16 @@ class _HomeScreenState extends State<HomeScreen> {
         debugPrint('Epub title: ${epub.Title ?? ''}');
         debugPrint('Epub author: ${epub.Author ?? ''}');
         debugPrint('File changed: ${fileStats.changed.toLocal().toString()}');
+
         // Add to Hive database
         final userId = authNotifier.user!.id;
-        // TODO: Change fileId to id given by appwrite storage
-        final String fileId = 'ext-${file.extension!}-size-${file.size}-name-${file.name}';
-        debugPrint('File id: $fileId');
+        // TODO: Add fileId to id given by appwrite storage
+        const uuid = Uuid();
+        final String bookId = uuid.v4();
+        debugPrint('Book id: $bookId');
         final book = Book(
+          bookId: bookId,
           bookType: BookType.epub,
-          fileId: fileId,
           createdDate: DateTime.now(),
           userId: userId,
           shelfIds: const [],

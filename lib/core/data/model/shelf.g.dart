@@ -17,6 +17,7 @@ class ShelfAdapter extends TypeAdapter<Shelf> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Shelf(
+      shelfId: fields[10] as String,
       userId: fields[0] as String,
       title: fields[1] as String,
       titleLastModDate: fields[2] as DateTime,
@@ -33,7 +34,9 @@ class ShelfAdapter extends TypeAdapter<Shelf> {
   @override
   void write(BinaryWriter writer, Shelf obj) {
     writer
+      ..writeByte(11)
       ..writeByte(10)
+      ..write(obj.shelfId)
       ..writeByte(0)
       ..write(obj.userId)
       ..writeByte(1)
