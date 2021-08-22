@@ -24,7 +24,9 @@ import 'provider/last_used_enabled_provider.dart';
 import 'provider/last_used_index_provider.dart';
 
 class AppScreen extends StatefulHookWidget {
-  const AppScreen({Key? key}) : super(key: key);
+  const AppScreen({Key? key, required this.beamState}) : super(key: key);
+
+  final BeamState beamState;
 
   @override
   _AppScreenState createState() => _AppScreenState();
@@ -34,59 +36,20 @@ class _AppScreenState extends State<AppScreen> {
   Widget? bottomNavigationBar;
   late NavigationRail navigationRail;
   late int currentIndex;
-
-  final _routerDelegates = [
-    BeamerDelegate(
-      initialPath: '/home',
-      locationBuilder: (routeInformation) {
-        if (routeInformation.uri.path.contains('home')) {
-          return HomeLocation(routeInformation);
-        }
-        return NotFound(path: routeInformation.uri.toString());
-      },
-    ),
-    BeamerDelegate(
-      initialPath: '/shelves',
-      locationBuilder: (routeInformation) {
-        if (routeInformation.uri.path.contains('shelves')) {
-          return ShelvesLocation(routeInformation);
-        }
-        return NotFound(path: routeInformation.uri.toString());
-      },
-    ),
-    BeamerDelegate(
-      initialPath: '/clubs',
-      locationBuilder: (routeInformation) {
-        if (routeInformation.uri.path.contains('clubs')) {
-          return ClubsLocation(routeInformation);
-        }
-        return NotFound(path: routeInformation.uri.toString());
-      },
-    ),
-    BeamerDelegate(
-      initialPath: '/discover',
-      locationBuilder: (routeInformation) {
-        if (routeInformation.uri.path.contains('discover')) {
-          return DiscoverLocation(routeInformation);
-        }
-        return NotFound(path: routeInformation.uri.toString());
-      },
-    ),
-    // BeamerDelegate(
-    //   initialPath: '/more',
-    //   locationBuilder: (routeInformation) {
-    //     if (routeInformation.uri.path.contains('more')) {
-    //       return MoreLocation(routeInformation);
-    //     }
-    //     return NotFound(path: routeInformation.uri.toString());
-    //   },
-    // ),
-  ];
+  late final List<BeamerDelegate<BeamState>> _routerDelegates;
 
   @override
   void initState() {
     super.initState();
     SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
+    _routerDelegates = getRouterDelegates();
+    currentIndex = getCurrentIndex();
+    // Set the current index to active, all others to not active
+    setActiveIndex();
+    _routerDelegates[currentIndex].update(
+      state: widget.beamState,
+      rebuild: false,
+    );
   }
 
   void _setStateListener() => setState(() {});
@@ -99,14 +62,6 @@ class _AppScreenState extends State<AppScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final beamState = Beamer.of(context).state;
-    currentIndex = getCurrentIndex(beamState);
-    setActiveIndex();
-    _routerDelegates[currentIndex].update(
-      state: beamState,
-      rebuild: false,
-    );
-
     final authNotifier = context.authNotifier;
     final LastUsedIndex lastUsedIndex = context.read
       (lastUsedIndexProvider.notifier);
@@ -271,18 +226,69 @@ class _AppScreenState extends State<AppScreen> {
     super.dispose();
   }
 
-  int getCurrentIndex(BeamState beamState) {
+  // These are all the location handlers. They handle the page stacks.
+  List<BeamerDelegate> getRouterDelegates() {
+    return [
+      BeamerDelegate(
+        initialPath: '/home',
+        locationBuilder: (state) {
+        if (state.uri.path.contains('home')) {
+          return HomeLocation(state);
+        }
+          return NotFound(path: state.uri.toString());
+        },
+      ),
+      BeamerDelegate(
+        initialPath: '/shelves',
+        locationBuilder: (state) {
+          if (state.uri.path.contains('shelves')) {
+            return ShelvesLocation(state);
+          }
+          return NotFound(path: state.uri.toString());
+        },
+      ),
+      BeamerDelegate(
+        initialPath: '/clubs',
+        locationBuilder: (state) {
+          if (state.uri.path.contains('clubs')) {
+            return ClubsLocation(state);
+          }
+          return NotFound(path: state.uri.toString());
+        },
+      ),
+      BeamerDelegate(
+        initialPath: '/discover',
+        locationBuilder: (state) {
+          if (state.uri.path.contains('discover')) {
+            return DiscoverLocation(state);
+          }
+          return NotFound(path: state.uri.toString());
+        },
+      ),
+      // BeamerDelegate(
+      //   initialPath: '/more',
+      //   locationBuilder: (state) {
+      //     if (state.uri.path.contains('more')) {
+      //       return MoreLocation(state);
+      //     }
+      //     return NotFound(path: state.uri.toString());
+      //   },
+      // ),
+    ];
+  }
+
+  int getCurrentIndex() {
     final bool lastUsedEnabled = context.read(lastUsedEnabledProvider);
     final lastUsedIndexNotifier = context.read(lastUsedIndexProvider.notifier);
     final int defaultStartingPage = context.read(defaultStartingPageProvider);
 
-    if (beamState.uri.path.contains('home')) {
+    if (widget.beamState.uri.path.contains('home')) {
       currentIndex = 0;
-    } else if (beamState.uri.path.contains('shelves')) {
+    } else if (widget.beamState.uri.path.contains('shelves')) {
       currentIndex = 1;
-    } else if (beamState.uri.path.contains('clubs')) {
+    } else if (widget.beamState.uri.path.contains('clubs')) {
       currentIndex = 2;
-    } else if (beamState.uri.path.contains('discover')) {
+    } else if (widget.beamState.uri.path.contains('discover')) {
       currentIndex = 3;
     // } else if (widget.beamState.uri.path.contains('more')) {
     //   currentIndex = 4;
@@ -320,12 +326,20 @@ class _AppScreenState extends State<AppScreen> {
         (_routerDelegates[currentIndex].initialPath);
     } else {
       setState(() => currentIndex = index);
-      setActiveIndex();
 
-      // // Always keep track of the last used index unless its the 'more' page
-      // if (index != 4) {
-      //   lastUsedIndex.setPage(currentIndex);
-      // }
+      int i = 0;
+      for ( i = 0; i < _routerDelegates.length; i++ ) {
+        if (currentIndex == i) {
+          _routerDelegates[i].active = true;
+        } else {
+          _routerDelegates[i].active = false;
+        }
+      }
+
+      // Always keep track of the last used index unless its the 'more' page
+      if (index != 4) {
+        lastUsedIndex.setPage(currentIndex);
+      }
 
       _routerDelegates[currentIndex].update(rebuild: false);
     }
