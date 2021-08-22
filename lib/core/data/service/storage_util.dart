@@ -1,6 +1,7 @@
-import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:io' as io;
 
 import '../../res/app_constants.dart';
 import '../model/book.dart';
@@ -26,6 +27,31 @@ class StorageUtil {
     _preferences = await SharedPreferences.getInstance();
     _settingsBox = await Hive.openBox(AppConstant.settingsBoxKey);
     _booksBox = await Hive.openBox(AppConstant.booksBoxKey);
+  }
+
+  static Future<io.Directory> getAppDirectory() async {
+    io.Directory dir;
+    if (io.Platform.isAndroid) {
+      dir = (await getExternalStorageDirectory())!;
+    } else {
+      dir = await getApplicationDocumentsDirectory();
+    }
+
+    // Any OS
+    // getApplicationDocumentsDirectory();
+
+    // Use for cover images
+    // getApplicationSupportDirectory();
+
+    // No android support
+    // getLibraryDirectory();
+
+    // Android only
+    // getExternalStorageDirectory();
+    // getExternalStorageDirectories(type: StorageDirectory.documents);
+    // getExternalCacheDirectories();
+
+    return dir;
   }
 
 

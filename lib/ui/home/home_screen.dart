@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:uuid/uuid.dart';
+import 'package:image/image.dart' as img;
 
 import '../../core/data/model/book.dart';
 import '../../core/data/model/book_type.dart';
@@ -24,28 +25,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int? selectedItem;
-
-  // Future<void> fabOnPressed() async {
-  //   try {
-  //     final PlatformFile file = await fetchFile();
-  //     final io.File newFile = await copyFile(file);
-  //     if (file.extension == 'epub') {
-  //       final List<int> bytes = await newFile.readAsBytes();
-  //       final epubx.EpubBookRef epub = await epubx.EpubReader.openBook(bytes);
-  //       print(newFile.path);
-  //       print(newFile.uri);
-  //       print(epub.Title);
-  //       print(epub.Author);
-  //     }
-  //     // print(file.name);
-  //     // print(file.bytes);
-  //     // print(file.size);
-  //     // print(file.extension);
-  //     // print(file.path);
-  //   } on Exception catch (e, _) {
-  //     print(e);
-  //   }
-  // }
 
   // Pick a book from storage
   Future<void> addBook() async {
@@ -69,27 +48,27 @@ class _HomeScreenState extends State<HomeScreen> {
 
     try {
       final PlatformFile file = await fetchFile();
-      final io.File newFile = await copyFile(file);
       if (file.extension == 'epub') {
-        final List<int> bytes = await newFile.readAsBytes();
-        final fileStats = newFile.statSync();
-        // final epubx.EpubBookRef epubRef = await epubx.EpubReader.openBook(bytes);
-        final epubx.EpubBook epub = await epubx.EpubReader.readBook(bytes);
-        final cover = epub.CoverImage;
+        final List<int> fileBytes = file.bytes!.toList();
+        final epubx.EpubBook epubBook = await epubx.EpubReader.readBook(fileBytes);
 
         // TODO: Remove temp printing
-        debugPrint('File path: ${newFile.path}');
-        debugPrint('File Uri: ${newFile.uri}');
-        debugPrint('Epub title: ${epub.Title ?? ''}');
-        debugPrint('Epub author: ${epub.Author ?? ''}');
-        debugPrint('File changed: ${fileStats.changed.toLocal().toString()}');
+        // debugPrint('File path: ${newFile.path}');
+        // debugPrint('File Uri: ${newFile.uri}');
+        debugPrint('Epub title: ${epubBook.Title ?? ''}');
+        debugPrint('Epub author: ${epubBook.Author ?? ''}');
+        // debugPrint('File changed: ${fileStats.changed.toLocal().toString()}');
 
         // Add to Hive database
-        final userId = authNotifier.user!.id;
-        // TODO: Add fileId to id given by appwrite storage
+        // TODO: Add fileId from id given by appwrite storage
+
+        // Create unique book ID with Uuid v4
         const uuid = Uuid();
         final String bookId = uuid.v4();
         debugPrint('Book id: $bookId');
+
+        // Put data into Book object
+        final userId = authNotifier.user!.id;
         final book = Book(
           bookId: bookId,
           bookType: BookType.epub,
@@ -97,9 +76,46 @@ class _HomeScreenState extends State<HomeScreen> {
           userId: userId,
           shelfIds: const [],
           shelfIdsLastModDate: DateTime.now(),
-          title: epub.Title,
-          author: epub.Author,
+          title: epubBook.Title,
+          author: epubBook.Author,
         );
+
+        // Copy file to device storage
+        final io.File newFile = await copyPlatformFile(file: file, folder: bookId, filename: bookId);
+        
+        // Save image to app directory
+        final img.Image? cover = epubBook.CoverImage;
+        final io.Directory dir = await StorageUtil.getAppDirectory();
+        if (cover != null) {
+          final io.File coverImage = await io.File('${dir.path}/$bookId/cover.png').writeAsBytes(img.encodePng(cover));
+          debugPrint(coverImage.path);
+        } else {
+          // If the cover image is null, use the first image
+          debugPrint('No cover image was found, using the first image in the book instead...');
+
+          // Book's content (HTML files, stylesheets, images, fonts, etc.)
+          final epubx.EpubContent bookContent = epubBook.Content!;
+
+          // All images in the book (file name is the key)
+          final Map<String?, epubx.EpubByteContentFile> images = bookContent.Images!;
+          final epubx.EpubByteContentFile firstImage = images.values.first;
+
+          // Get the first image content
+          final List<int>? imageContent = firstImage.Content;
+          if (imageContent != null) {
+            // Convert the image content into an img.Image object
+            final img.Image? cover = img.decodeImage(imageContent);
+            if (cover != null) {
+              // Convert the image to png, copy the file to the book's folder with the name 'cover.png'
+              final io.File coverImage = await io.File('${dir.path}/$bookId/cover.png').writeAsBytes(img.encodePng(cover));
+              debugPrint('Image cover saved to: ${coverImage.path}');
+            } else {
+              debugPrint('Could not decode image from epub');
+            }
+          } else {
+            debugPrint('imageContent of image from epub is null');
+          }
+        }
 
         // TODO: Add book to hive database
         final key = await StorageUtil.addBook(book: book);
@@ -145,6 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: ['epub'],
+      withData: true
     );
 
     if(result != null) {
@@ -157,20 +174,17 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  // TODO: Add support for desktop
-  Future<io.File> copyFile(PlatformFile file) async {
+  Future<io.File> copyPlatformFile({required PlatformFile file, required String folder, required String filename}) async {
     // Save files in directory accessible to the user on android
-    io.Directory dir;
-    if (io.Platform.isAndroid) {
-      dir = (await getExternalStorageDirectory())!;
-    } else {
-      dir = await getApplicationDocumentsDirectory();
-    }
+    final io.Directory dir = await StorageUtil.getAppDirectory();
 
-    final io.File cachedFile = io.File(file.path ?? '');
-    final io.File newFile = await cachedFile.copy('${dir
-        .path}/${file.name}');
-
+    // Get the reference to the file
+    final io.File fileRef = io.File(file.path!);
+    // Create the folder
+    await io.Directory('${dir.path}/$folder').create();
+    // Copy the file to the app directory
+    final io.File newFile = await fileRef.copy('${dir
+        .path}/$folder/$filename');
     return newFile;
   }
 }
