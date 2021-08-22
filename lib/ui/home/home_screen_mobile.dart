@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:shodana_reader/ui/widgets/list_tile_widget.dart';
 
 import '../../core/data/model/book_search_model.dart';
 import '../../l10n/my.i18n.dart';
 import '../widgets/custom_waterdrop_header.dart';
 import '../widgets/search_bar.dart';
+import '../widgets/staggered_grid.dart';
 
 class HomeScreenMobile extends StatefulHookWidget {
   const HomeScreenMobile({
@@ -47,10 +49,11 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
   @override
   Widget build(BuildContext context) {
     final BookSearchModel searchModel = useProvider(bookSearchProvider);
+    final scrollController = useScrollController();
     return Scaffold(
       // appBar: AppBar(title: Text('appName'.i18n)),
       body: SearchBar(
-        body: buildHome(context),
+        body: buildHome(scrollController),
         hint: 'Search recents...'.i18n,
         model: searchModel,
       ),
@@ -62,7 +65,7 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
     );
   }
 
-  Widget buildHome(BuildContext context) {
+  Widget buildHome(ScrollController scrollController) {
     return SafeArea(
       child: Scrollbar(
         child: SmartRefresher(
@@ -73,60 +76,50 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
             offset: kToolbarHeight + 8.0,
           ),
           controller: _refreshController,
+          scrollController: scrollController,
           footer: const ClassicFooter(),
           onRefresh: _onRefresh,
           onLoading: _onLoading,
-          child: 
-          // ListView.builder(
-          //   itemBuilder: (c, i) => Card(child: Center(child: Text(items[i]))),
-          //   itemExtent: 100.0,
-          //   itemCount: items.length,
-          SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.only(top: kToolbarHeight + 8.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  // const SizedBox(height: kToolbarHeight + 8,),
-                  // ListTile(
-                  //   title: const Text('Beam to Test Book 0 Details'),
-                  //   onTap: bookOnPressed,
-                  // ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: TextButton(
-                      onPressed: widget.bookOnPressed,
-                      child: const Text('Beam to Test Book 0 Details'),
-                    ),
-                  ),
-                  // Temp button
-                  // Padding(
-                  //   padding: const EdgeInsets.all(8.0),
-                  //   child: ElevatedButton(
-                  //     onPressed: () async {
-                  //       if (!(await context.authNotifier?.createVerification(url: 'http://192.168.1.204:5500/complete_verify.html') ?? false)) {
-                  //         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  //           backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,
-                  //           content: Text(context.authNotifier?.error ??
-                  //               'Unknown error'.i18n, style: Theme.of(context).snackBarTheme.contentTextStyle),
-                  //         ));
-                  //         debugPrint(context.authNotifier?.error ?? 'Unknown error');
-                  //       } else {
-                  //         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  //           backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,
-                  //           content: const Text('Verification email sent'.i18n),
-                  //         ));
-                  //       }
-                  //     },
-                  //     child: const Text('Verify email'),
-                  //   ),
-                  // ),
-                  const SizedBox(height: 1200,),
-                ],
-              ),
-            ),
+          // TODO: Get list of books from hive 'books' box
+          child: ListView.builder(
+            padding: const EdgeInsets.only(top: kToolbarHeight + 8.0, left: 8.0, right: 8.0),
+            controller: scrollController,
+            itemBuilder: (context, index) {
+              return ListTileWidget(index: index, title: 'Text', subtitle: 'Subtitle', context: context,);
+            },
+            // itemExtent: 120.0,
+            itemCount: 100,
           ),
+
+          // TODO: Add support for staggered grid view and normal grid view
+          // StaggeredGrid(controller: scrollController,),
+          
+          // SingleChildScrollView(
+          //   child: Padding(
+          //     padding: const EdgeInsets.only(top: kToolbarHeight + 8.0),
+          //     child: Column(
+          //       mainAxisSize: MainAxisSize.min,
+          //       crossAxisAlignment: CrossAxisAlignment.stretch,
+          //       children: [
+          //         // const SizedBox(height: kToolbarHeight + 8,),
+          //         // ListTile(
+          //         //   title: const Text('Beam to Test Book 0 Details'),
+          //         //   onTap: bookOnPressed,
+          //         // ),
+          //         Align(
+          //           alignment: Alignment.centerLeft,
+          //           child: TextButton(
+          //             onPressed: widget.bookOnPressed,
+          //             child: const Text('Beam to Test Book 0 Details'),
+          //           ),
+          //         ),
+                  
+          //         // Tile(title: 'Average Abilities', subtitle: 'FUNA'),
+          //         const SizedBox(height: 1200,),
+          //       ],
+          //     ),
+          //   ),
+          // ),
         ),
       ),
     );
