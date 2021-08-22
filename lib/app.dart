@@ -9,6 +9,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'core/data/service/appwrite_service.dart';
 import 'core/presentation/locations/app_location.dart';
+import 'ui/app_screen/app_screen.dart';
 
 
 class App extends StatefulWidget {
@@ -30,10 +31,11 @@ class _AppState extends State<App> {
     //   initialPath: '/home',
     //   locationBuilder: SimpleLocationBuilder(
     //     routes: {
-    //       '/*': (context) => AppScreen(beamState: Beamer.of(context).state),
+    //       '*': (context, state) => AppScreen(beamState: state,),
     //     },
     //   ),
-    // ) :
+    // );
+    // :
     BeamerDelegate(
       locationBuilder: (state) => AppLocation(state),
     );
@@ -94,6 +96,7 @@ class _AppState extends State<App> {
           debugShowCheckedModeBanner: false,
           backButtonDispatcher: BeamerBackButtonDispatcher(
             delegate: rootBeamerRouter,
+            // onBack: (defaultValue) => Future.value(true)
           ),
         ),
       ),
