@@ -23,18 +23,19 @@ class AppConstant {
   static const String welcomeShown = 'welcome_shown';
 
   // Appwrite
-  static const String url = 'http://192.168.1.191';
-  static const String endpoint = 'http://192.168.1.191/v1';
-  static const String project = '611ffbae6bdd9';
+  // Mac
+  static const String url = 'http://169.254.203.26/';
+  static const String endpoint = 'http://169.254.203.26/v1';
+  static const String project = '60bbe0b4363f5';
+  // Desktop
+  // static const String url = 'http://192.168.1.191';
+  // static const String endpoint = 'http://192.168.1.191/v1';
+  // static const String project = '611ffbae6bdd9';
 
   // Appwrite Database
   static const String readingStatsCollection = '61205e62f3bc5';
   static const String booksCollection = '61205e630fbcb';
   static const String shelvesCollection = '61205e636767b';
-
-  // static const String url = 'https://192.168.1.32';
-  // static const String endpoint = 'https://192.168.1.32/v1';
-  // static const String project = '60bbd81b5aee6';
 
 }
 
