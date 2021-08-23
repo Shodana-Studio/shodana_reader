@@ -22,7 +22,7 @@ class ListTileWidget extends Tile {
   }
 
   Widget buildStack() {
-    final textTheme = AdaptiveTheme.of(context).theme.textTheme;
+    final textTheme = Theme.of(context).textTheme;
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -44,8 +44,8 @@ class ListTileWidget extends Tile {
                 // mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title, style: textTheme.bodyText1,),
-                  if (subtitle.isNotEmpty) Text(subtitle, style: textTheme.subtitle1,),
+                  Text(title, style: textTheme.bodyText2,),
+                  if (subtitle.isNotEmpty) Text(subtitle, style: textTheme.subtitle2),
                 ],
               ),
             ),
