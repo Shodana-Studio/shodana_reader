@@ -1,5 +1,4 @@
 import 'dart:io' as io;
-import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 
 import 'tile.dart';
@@ -30,15 +29,18 @@ class ListTileWidget extends Tile {
           // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: Image.file(
-                io.File.fromUri(Uri(path: image)),
-                height: 70,
+            Flexible(
+              flex: 1,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.file(
+                  io.File.fromUri(Uri(path: image)),
+                ),
               ),
             ),
             const SizedBox(width: 8,),
-            Expanded(
+            Flexible(
+              flex: 6,
               child: Column(
                 // mainAxisSize: MainAxisSize.max,
                 // mainAxisAlignment: MainAxisAlignment.start,
