@@ -28,6 +28,8 @@ Future<AdaptiveThemeMode?> init() async {
   Hive.registerAdapter(ShelfAdapter());
 
   await StorageUtil.getInstance();
+  // Uncomment to clear previous books database. Book files and images must be deleted manually
+  // await StorageUtil.clearBooksBox();
   // Themes
   final savedThemeMode = await AdaptiveTheme.getThemeMode();
   if (savedThemeMode == AdaptiveThemeMode.dark) {

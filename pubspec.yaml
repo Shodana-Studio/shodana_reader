@@ -46,6 +46,10 @@ dependencies:
   file_picker: ^4.0.0
   epubx: ^3.0.0-dev.3
   path_provider: ^2.0.1 
+  file_selector: ^0.8.2
+  file_selector_windows: ^0.0.2+1
+  file_selector_linux: ^0.0.2+1
+  # TODO: Add file_selector_macos https://pub.dev/packages/file_selector_macos
 
   # For Database
   flutter_persistent_queue:

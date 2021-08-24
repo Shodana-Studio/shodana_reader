@@ -56,12 +56,12 @@ class StorageUtil {
   }
 
   /// Copy the file on the device from file picker to the app director
-  static Future<io.File> copyPlatformFile({required PlatformFile file, required String folder, required String filename}) async {
+  static Future<io.File> copyPlatformFile({required io.File fileRef, required String folder, required String filename}) async {
     // Save files in directory accessible to the user on android
     final io.Directory dir = await getAppDirectory();
 
     // Get the reference to the file
-    final io.File fileRef = io.File(file.path!);
+    // final io.File fileRef = io.File(file.path!);
     // Create the folder
     await io.Directory('${dir.path}/ShodanaReader').create();
     await io.Directory('${dir.path}/ShodanaReader/$folder').create();

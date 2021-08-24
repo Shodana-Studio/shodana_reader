@@ -1,8 +1,10 @@
 import 'dart:io' as io;
+import 'dart:typed_data';
 
 import 'package:beamer/beamer.dart';
 import 'package:epubx/epubx.dart' as epubx;
 import 'package:file_picker/file_picker.dart';
+import 'package:file_selector/file_selector.dart';
 import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -45,16 +47,41 @@ class _HomeScreenState extends State<HomeScreen> {
     // Add the book to the Hive db
 
     try {
-      final PlatformFile file = await StorageUtil.fetchFile(
-        dialogTitle: 'Choose an epub file',
-        type: FileType.custom,
-        allowedExtensions: ['epub'],
-        withData: true
-      );
-      debugPrint('File path: ${file.path}');
+      final String? fileExtension;
+      final Uint8List bytes;
+      final io.File fileRef;
+      if (io.Platform.isWindows) {
+        const String epubExtension = 'epub';
+        final typeGroup = XTypeGroup(label: 'ebooks', extensions: [epubExtension]);
+        final XFile? file = await openFile(acceptedTypeGroups: [typeGroup]);
+        fileExtension = epubExtension;
+        if (file == null) {
+          debugPrint('File not chosen');
+          return;
+        }
+        bytes = await file.readAsBytes();
+        fileRef = io.File(file.path);
+      } else {
+        final PlatformFile file = await StorageUtil.fetchFile(
+          dialogTitle: 'Choose an epub file',
+          type: FileType.custom,
+          allowedExtensions: ['epub'],
+          withData: true,
+          allowCompression: false,
+        );
+        fileExtension = file.extension;
 
-      if (file.extension == 'epub') {
-        final List<int> fileBytes = file.bytes!.toList();
+        if (file.bytes == null) {
+          return;
+        }
+        bytes = file.bytes!;
+        fileRef = io.File(file.path!);
+      }
+      
+      // debugPrint('File path: ${file.path}');
+
+      if (fileExtension == 'epub') {
+        final List<int> fileBytes = bytes.toList();
         final epubx.EpubBookRef epubBook = await epubx.EpubReader.openBook(fileBytes);
 
         // TODO: Remove temp printing
@@ -85,7 +112,8 @@ class _HomeScreenState extends State<HomeScreen> {
         );
 
         // Copy file to device storage
-        /*final io.File newFile = */await StorageUtil.copyPlatformFile(file: file, folder: bookId, filename: bookId);
+        // ignore: unused_local_variable
+        final io.File newFile = await StorageUtil.copyPlatformFile(fileRef: fileRef, folder: bookId, filename: bookId);
         debugPrint('Successfully saved the book');
         // Save image to app directory
         final int success = await book.saveCoverImage(epubBookRef: epubBook);
@@ -109,6 +137,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
         // Add book to hive database
         /*final key = */await StorageUtil.addBook(book: book);
+        if (io.Platform.isAndroid || io.Platform.isIOS) {
+          await FilePicker.platform.clearTemporaryFiles();
+        }
       }
     } on Exception catch (e, _) {
       // TODO: Add proper ui feedback on error

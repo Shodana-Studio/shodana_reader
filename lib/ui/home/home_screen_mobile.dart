@@ -62,7 +62,6 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
   @override
   void initState() {
     super.initState();
-    // Uncomment to clear previous books database. Book files and images must be deleted manually
     
     books = StorageUtil.getAllBooks();
     booksBox =  StorageUtil.getBooksBox();
