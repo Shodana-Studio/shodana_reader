@@ -50,6 +50,9 @@ class _HomeScreenState extends State<HomeScreen> {
       final String? fileExtension;
       final Uint8List bytes;
       final io.File fileRef;
+
+      // Get the file from the user
+      // Uses a different package on windows due to instability with FilePicker
       if (io.Platform.isWindows) {
         const String epubExtension = 'epub';
         final typeGroup = XTypeGroup(label: 'ebooks', extensions: [epubExtension]);
