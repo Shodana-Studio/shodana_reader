@@ -161,19 +161,19 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return ScreenTypeLayout.builder(
       mobile: (BuildContext context) => HomeScreenMobile(
-        fabOnPressed: addBook,
+        addBookAction: addBook,
         bookOnPressed: bookOnPressed,
       ),
       tablet: (BuildContext context) => HomeScreenMobile(
-        fabOnPressed: addBook,
+        addBookAction: addBook,
         bookOnPressed: bookOnPressed,
       ),
       desktop: (BuildContext context) => HomeScreenMobile(
-        fabOnPressed: addBook,
+        addBookAction: addBook,
         bookOnPressed: bookOnPressed,
       ),
       watch: (BuildContext context) => HomeScreenMobile(
-        fabOnPressed: addBook,
+        addBookAction: addBook,
         bookOnPressed: bookOnPressed,
       ),
     );

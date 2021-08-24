@@ -23,10 +23,10 @@ import '../widgets/search_bar.dart';
 class HomeScreenMobile extends StatefulHookWidget {
   const HomeScreenMobile({
     Key? key,
-    required this.fabOnPressed,
+    required this.addBookAction,
     required this.bookOnPressed,
   }) : super(key: key);
-  final VoidCallback fabOnPressed;
+  final VoidCallback addBookAction;
   final VoidCallback bookOnPressed;
 
   @override
@@ -198,7 +198,7 @@ class _ListWidget extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5.0),
             child: OutlinedButton(
-              onPressed: widget.fabOnPressed,
+              onPressed: widget.addBookAction,
               child: const Text('Add a book'),
             ),
           );
@@ -278,7 +278,7 @@ class _GridWidget extends StatelessWidget {
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5.0),
         child: OutlinedButton(
-          onPressed: widget.fabOnPressed,
+          onPressed: widget.addBookAction,
           child: const Text('Add a book'),
         ),
       );
