@@ -56,7 +56,7 @@ class StorageUtil {
   }
 
   /// Copy the file on the device from file picker to the app director
-  static Future<io.File> copyPlatformFile({required io.File fileRef, required String folder, required String filename}) async {
+  static Future<io.File> copyFile({required io.File fileRef, required String folder, required String filename}) async {
     // Save files in directory accessible to the user on android
     final io.Directory dir = await getAppDirectory();
 

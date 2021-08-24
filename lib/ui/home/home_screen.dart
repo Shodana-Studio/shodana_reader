@@ -114,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
         // Copy file to device storage
         // ignore: unused_local_variable
-        final io.File newFile = await StorageUtil.copyPlatformFile(fileRef: fileRef, folder: bookId, filename: bookId);
+        final io.File newFile = await StorageUtil.copyFile(fileRef: fileRef, folder: bookId, filename: bookId);
         debugPrint('Successfully saved the book');
         // Save image to app directory
         final int success = await book.saveCoverImage(epubBookRef: epubBook);
