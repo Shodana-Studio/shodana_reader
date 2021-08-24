@@ -4,6 +4,8 @@
 
 A new Flutter application for reading ebooks.
 
+Requires at least iOS 11 or MacOS 10.15
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
