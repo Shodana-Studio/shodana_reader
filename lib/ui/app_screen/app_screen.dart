@@ -1,3 +1,5 @@
+import 'dart:io' as io;
+
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:beamer/beamer.dart';
 import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
@@ -16,6 +18,7 @@ import '../../core/presentation/locations/locations.dart';
 import '../../core/res/app_constants.dart';
 import '../../l10n/my.i18n.dart';
 import '../auth/login_screen.dart';
+import '../native_view.dart';
 import '../widgets/search_bar.dart';
 import 'app_screen_mobile.dart';
 import 'app_screen_tablet.dart';
@@ -36,6 +39,27 @@ class _AppScreenState extends State<AppScreen> {
   Widget? bottomNavigationBar;
   late NavigationRail navigationRail;
   late int currentIndex;
+
+
+  // Only used on iOS to add support for drag and drop
+  static const platform = MethodChannel('app.shodana.shodanaReader/Reader');
+  String _fileReceived = 'File not yet received';
+
+  Future<void> _getBooks() async {
+    String fileReceived;
+    try {
+      final int result = await platform.invokeMethod('getBooks');
+      fileReceived = 'File received';
+    } on PlatformException catch (e) {
+      fileReceived = 'Failed to get book: ${e.message}.';
+    }
+
+    setState(() {
+      _fileReceived = fileReceived;
+      print(_fileReceived);
+    });
+  }
+
   // These are all the location handlers. They handle the page stacks.
   final List<BeamerDelegate<BeamState>> _routerDelegates = [
     BeamerDelegate(
@@ -225,34 +249,7 @@ class _AppScreenState extends State<AppScreen> {
     Widget widget;
     switch(authNotifier.status) {
       case AuthStatus.authenticated:
-        widget = ValueListenableBuilder(
-          valueListenable: Hive.box(AppConstant.settingsBoxKey).listenable(),
-          builder: (context, Box box, child) =>
-            box.get(AppConstant.welcomeShown, defaultValue: false)
-              ? ScreenTypeLayout.builder(
-                  mobile: (BuildContext context) => AppScreenMobile(
-                    bottomNavigationBar: bottomNavigationBar,
-                    navigationRail: navigationRail,
-                    indexedStack: indexedStack,
-                  ),
-                  tablet: (BuildContext context) => AppScreenTablet(
-                    bottomNavigationBar: bottomNavigationBar,
-                    navigationRail: navigationRail,
-                    indexedStack: indexedStack,
-                  ),
-                  desktop: (BuildContext context) => AppScreenMobile(
-                    bottomNavigationBar: bottomNavigationBar,
-                    navigationRail: navigationRail,
-                    indexedStack: indexedStack,
-                  ),
-                  watch: (BuildContext context) => AppScreenMobile(
-                    bottomNavigationBar: bottomNavigationBar,
-                    navigationRail: navigationRail,
-                    indexedStack: indexedStack,
-                  ),
-                )
-              : const WelcomePage()
-        );
+        widget = _buildIsAuthenticatedWidget(indexedStack);
         break;
       case AuthStatus.unauthenticated:
       case AuthStatus.authenticating:
@@ -264,6 +261,43 @@ class _AppScreenState extends State<AppScreen> {
     }
 
     return widget;
+  }
+
+  Widget _buildIsAuthenticatedWidget(IndexedStack indexedStack) {
+    return Stack(
+      children: [
+        ValueListenableBuilder(
+            valueListenable: Hive.box(AppConstant.settingsBoxKey).listenable(),
+            builder: (context, Box box, child) =>
+              box.get(AppConstant.welcomeShown, defaultValue: false)
+                ? ScreenTypeLayout.builder(
+                    mobile: (BuildContext context) => AppScreenMobile(
+                      bottomNavigationBar: bottomNavigationBar,
+                      navigationRail: navigationRail,
+                      indexedStack: indexedStack,
+                    ),
+                    tablet: (BuildContext context) => AppScreenTablet(
+                      bottomNavigationBar: bottomNavigationBar,
+                      navigationRail: navigationRail,
+                      indexedStack: indexedStack,
+                    ),
+                    desktop: (BuildContext context) => AppScreenMobile(
+                      bottomNavigationBar: bottomNavigationBar,
+                      navigationRail: navigationRail,
+                      indexedStack: indexedStack,
+                    ),
+                    watch: (BuildContext context) => AppScreenMobile(
+                      bottomNavigationBar: bottomNavigationBar,
+                      navigationRail: navigationRail,
+                      indexedStack: indexedStack,
+                    ),
+                  )
+                : const WelcomePage()
+          ),
+        if (io.Platform.isIOS) const NativeView(),
+        // Text(_fileReceived),
+      ],
+    );
   }
 
   @override
