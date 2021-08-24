@@ -8,7 +8,7 @@ import Flutter
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
     let controller : FlutterViewController = window?.rootViewController as! FlutterViewController
-//
+    
     let channel = FlutterMethodChannel(name: "app.shodana.shodanaReader/Reader", binaryMessenger: controller.binaryMessenger)
     channel.setMethodCallHandler({
         (call: FlutterMethodCall, result: @escaping FlutterResult) -> Void in
@@ -35,5 +35,8 @@ import Flutter
     
   private func receiveBooks(result: FlutterResult) {
     // TODO: Figure out how to return the books from Drag and Drop
+//    let receivedBooks: [UIDragItem] = FLNativeView.getBooks()
+    
+    
   }
 }

@@ -32,6 +32,7 @@ class FLNativeViewFactory: NSObject, FlutterPlatformViewFactory {
 
 class FLNativeView: NSObject, FlutterPlatformView, UIDropInteractionDelegate {
     private var _view: UIView
+    var books: [UIDragItem] = []
     
     init(
         frame: CGRect,
@@ -43,6 +44,10 @@ class FLNativeView: NSObject, FlutterPlatformView, UIDropInteractionDelegate {
         super.init()
         // iOS views can be created here
         createNativeView(view: _view)
+    }
+    
+    func getBooks() -> [UIDragItem] {
+        return books
     }
     
     func view() -> UIView {
@@ -62,33 +67,16 @@ class FLNativeView: NSObject, FlutterPlatformView, UIDropInteractionDelegate {
     }
     
     func dropInteraction(_ interaction: UIDropInteraction, performDrop session: UIDropSession) {
-        print(session.items)
         for dragItem in session.items {
-//            dragItem.itemProvider.loadFileRepresentation(forTypeIdentifier: <#T##String#>, completionHandler: <#T##(URL?, Error?) -> Void#>)
-            dragItem.itemProvider.loadObject(ofClass: UIImage.self) { (obj, err) in
-                if let err = err {
-                    print("Failed to load the dragged item: ", err)
-                    return
-                }
-                
-                guard let draggedImage = obj as? UIImage else { return }
-                
-                let imageView = UIImageView(image: draggedImage)
-                
-                DispatchQueue.main.async {
-                    self._view.addSubview(imageView)
-                    imageView.frame = CGRect(x: 0, y: 0, width: draggedImage.size.width, height: draggedImage.size.height)
-                }
-                
-            }
+            books.append(dragItem)
         }
     }
     
-    func dropInteraction(_ interaction: UIDropInteraction, sessionDidUpdate session: UIDropSession) -> UIDropProposal {
+    open func dropInteraction(_ interaction: UIDropInteraction, sessionDidUpdate session: UIDropSession) -> UIDropProposal {
         return UIDropProposal(operation: .copy)
     }
     
-    func dropInteraction(_ interaction: UIDropInteraction, canHandle session: UIDropSession) -> Bool {
+    open func dropInteraction(_ interaction: UIDropInteraction, canHandle session: UIDropSession) -> Bool {
         // return session.canLoadObjects(ofClass: UIImage.self)
         return true;
     }
