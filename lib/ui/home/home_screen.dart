@@ -93,14 +93,12 @@ class _HomeScreenState extends State<HomeScreen> {
         debugPrint('Epub author: ${epubBook.Author ?? ''}');
         // debugPrint('File changed: ${fileStats.changed.toLocal().toString()}');
 
-        // Add to Hive database
-        // TODO: Add fileId from id given by appwrite storage
-
         // Create unique book ID with Uuid v4
         const uuid = Uuid();
         final String bookId = uuid.v4();
         debugPrint('Book id: $bookId');
 
+        // TODO: Add fileId from id given by appwrite storage
         // Put data into Book object
         final userId = authNotifier.user!.id;
         final book = EPUB(
