@@ -24,13 +24,13 @@ class AppConstant {
 
   // Appwrite
   // Mac
-  static const String url = 'http://169.254.203.26/';
-  static const String endpoint = 'http://169.254.203.26/v1';
-  static const String project = '60bbe0b4363f5';
+  // static const String url = 'http://169.254.203.26/';
+  // static const String endpoint = 'http://169.254.203.26/v1';
+  // static const String project = '60bbe0b4363f5';
   // Desktop
-  // static const String url = 'http://192.168.1.191';
-  // static const String endpoint = 'http://192.168.1.191/v1';
-  // static const String project = '611ffbae6bdd9';
+  static const String url = 'http://192.168.1.191';
+  static const String endpoint = 'http://192.168.1.191/v1';
+  static const String project = '611ffbae6bdd9';
 
   // Appwrite Database
   static const String readingStatsCollection = '61205e62f3bc5';

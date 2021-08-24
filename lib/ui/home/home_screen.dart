@@ -49,14 +49,15 @@ class _HomeScreenState extends State<HomeScreen> {
         dialogTitle: 'Choose an epub file',
         type: FileType.custom,
         allowedExtensions: ['epub'],
-        withData: true);
+        withData: true
+      );
+      debugPrint('File path: ${file.path}');
 
       if (file.extension == 'epub') {
         final List<int> fileBytes = file.bytes!.toList();
-        final epubx.EpubBook epubBook = await epubx.EpubReader.readBook(fileBytes);
+        final epubx.EpubBookRef epubBook = await epubx.EpubReader.openBook(fileBytes);
 
         // TODO: Remove temp printing
-        // debugPrint('File path: ${newFile.path}');
         // debugPrint('File Uri: ${newFile.uri}');
         debugPrint('Epub title: ${epubBook.Title ?? ''}');
         debugPrint('Epub author: ${epubBook.Author ?? ''}');
@@ -85,9 +86,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
         // Copy file to device storage
         /*final io.File newFile = */await StorageUtil.copyPlatformFile(file: file, folder: bookId, filename: bookId);
-        
+        debugPrint('Successfully saved the book');
         // Save image to app directory
-        final int success = await book.saveCoverImage(epubBook: epubBook);
+        final int success = await book.saveCoverImage(epubBookRef: epubBook);
         switch (success) {
           case 0:
             debugPrint('Success, saved the cover image to device');
@@ -99,7 +100,10 @@ class _HomeScreenState extends State<HomeScreen> {
             debugPrint('Failed, Could not decode image from epub');
             break;
           case -2:
-            debugPrint('Failed, imageContent of the image from epub is null (Should never happen)');
+            debugPrint('Failed, bookContent from epub is null');
+            break;
+          case -3:
+            debugPrint('Failed, no images in epub');
             break;
         }
 

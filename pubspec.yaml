@@ -83,6 +83,7 @@ dependencies:
   dart_appwrite: ^0.7.0
   envify: ^2.0.2
   uuid: ^3.0.4
+  path: ^1.8.0
   # mockito: ^5.0.14
 
 dev_dependencies:

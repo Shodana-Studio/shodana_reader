@@ -1,5 +1,8 @@
+import 'dart:async';
 import 'dart:io' as io;
+
 import 'package:flutter/material.dart';
+import 'package:image/image.dart' as img;
 
 import 'tile.dart';
 
@@ -10,7 +13,7 @@ class GridTileWidget extends Tile {
     required title, 
     subtitle = '', 
     unread = 0, 
-    image,
+    required image,
     required this.context,
   }) : super(key: key, index: index, title: title, subtitle: subtitle, unread: unread, image: image);
   final BuildContext context;
@@ -22,6 +25,7 @@ class GridTileWidget extends Tile {
 
   Widget buildStack() {
     final textTheme = Theme.of(context).textTheme;
+    final io.File imageFile = io.File(image);
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -29,12 +33,20 @@ class GridTileWidget extends Tile {
           // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: Image.file(
-                io.File.fromUri(Uri(path: image)),
-              ),
-            ),
+            // FutureBuilder(
+            //   future: imageFile.readAsBytes(),
+            //   builder: (BuildContext context, AsyncSnapshot snapshot) {
+            //     if (snapshot.hasData) {
+            //       return ClipRRect(
+            //         borderRadius: BorderRadius.circular(8),
+            //         child: Image.file(imageFile),
+            //       );
+            //     }
+
+            //     return const Placeholder();
+            //   },
+            // ),
+            Image.file(imageFile),
             const SizedBox(height: 8,),
             Text(title, style: textTheme.bodyText2),
             if (subtitle.isNotEmpty) ... [

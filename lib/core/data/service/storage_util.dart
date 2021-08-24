@@ -63,10 +63,11 @@ class StorageUtil {
     // Get the reference to the file
     final io.File fileRef = io.File(file.path!);
     // Create the folder
-    await io.Directory('${dir.path}/$folder').create();
+    await io.Directory('${dir.path}/ShodanaReader').create();
+    await io.Directory('${dir.path}/ShodanaReader/$folder').create();
     // Copy the file to the app directory
     final io.File newFile = await fileRef.copy('${dir
-        .path}/$folder/$filename');
+        .path}/ShodanaReader/$folder/$filename');
     return newFile;
   }
 
@@ -143,6 +144,11 @@ class StorageUtil {
   static Future<int> clrSettings() {
     final Box settings = _settingsBox;
     return settings.clear();
+  }
+
+  /// Get the books box
+  static Future<int> clearBooksBox() {
+    return _booksBox.clear();
   }
 
   /// Get the books box

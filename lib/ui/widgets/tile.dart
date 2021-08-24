@@ -14,7 +14,7 @@ abstract class Tile extends StatelessWidget{
   final String title;
   final String subtitle;
   final int unread;
-  final String? image;
+  final String image;
 
   @override
   Widget build(BuildContext context);

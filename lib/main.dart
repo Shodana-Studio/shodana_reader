@@ -28,7 +28,6 @@ Future<AdaptiveThemeMode?> init() async {
   Hive.registerAdapter(ShelfAdapter());
 
   await StorageUtil.getInstance();
-
   // Themes
   final savedThemeMode = await AdaptiveTheme.getThemeMode();
   if (savedThemeMode == AdaptiveThemeMode.dark) {

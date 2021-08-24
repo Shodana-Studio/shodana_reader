@@ -8,13 +8,14 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:shodana_reader/ui/widgets/grid_tile_widget.dart';
+import 'package:path/path.dart' as p;
 
 import '../../core/data/model/book.dart';
 import '../../core/data/model/book_search_model.dart';
 import '../../core/data/service/storage_util.dart';
 import '../../l10n/my.i18n.dart';
 import '../widgets/custom_waterdrop_header.dart';
+import '../widgets/grid_tile_widget.dart';
 import '../widgets/list_tile_widget.dart';
 import '../widgets/search_bar.dart';
 
@@ -60,6 +61,8 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
   @override
   void initState() {
     super.initState();
+    // Uncomment to clear previous books database. Book files and images must be deleted manually
+    
     books = StorageUtil.getAllBooks();
     booksBox =  StorageUtil.getBooksBox();
     print(books);
@@ -209,7 +212,7 @@ class _ListWidget extends StatelessWidget {
             if (snapshot.hasData) {
               final io.Directory dir = snapshot.data! as io.Directory;
               
-              final imagePath = '${dir.path}/${book.bookId}/cover.png';
+              final String imagePath =  p.join(dir.path, 'ShodanaReader', book.bookId, 'cover.png');
               return ListTileWidget(
                 index: index - 1,
                 title: book.title,
@@ -276,15 +279,15 @@ class _GridWidget extends StatelessWidget {
       );
     }
 
-    // List tile
+    // Grid tile
     final book = books[index - 1];
     return FutureBuilder(
       future: StorageUtil.getAppDirectory(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           final io.Directory dir = snapshot.data! as io.Directory;
-          
-          final imagePath = '${dir.path}/${book.bookId}/cover.png';
+          final String imagePath = p.join(dir.path, 'ShodanaReader', book.bookId, 'cover.png');
+          // final String imagePath = '${dir.path}/ShodanaReader/${book.bookId}/cover.png';
           return GridTileWidget(
             index: index - 1,
             title: book.title,
