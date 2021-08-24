@@ -266,6 +266,7 @@ class _AppScreenState extends State<AppScreen> {
   Widget _buildIsAuthenticatedWidget(IndexedStack indexedStack) {
     return Stack(
       children: [
+        if (io.Platform.isIOS) const NativeView(),
         ValueListenableBuilder(
             valueListenable: Hive.box(AppConstant.settingsBoxKey).listenable(),
             builder: (context, Box box, child) =>
@@ -294,7 +295,6 @@ class _AppScreenState extends State<AppScreen> {
                   )
                 : const WelcomePage()
           ),
-        if (io.Platform.isIOS) const NativeView(),
         // Text(_fileReceived),
       ],
     );
