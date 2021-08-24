@@ -40,5 +40,6 @@ class AppConstant {
 }
 
 enum NavigationTabs{home, shelves, clubs, discover, more}
+enum AppStates{loggedInAndOnline, loggedInAndOffline, notLoggedInAndOnline, notLoggedInAndOffline}
 enum TileType{series, book}
 enum BookFileType{epub, pdf, mobi, html}
