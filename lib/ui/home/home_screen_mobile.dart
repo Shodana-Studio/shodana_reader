@@ -9,6 +9,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:path/path.dart' as p;
+import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../core/data/model/book.dart';
 import '../../core/data/model/book_search_model.dart';
@@ -246,7 +247,12 @@ class _GridWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const int crossAxisCount = 3;
+    final int crossAxisCount = getValueForScreenType<int>(
+      context: context,
+      mobile: 3,
+      tablet: 6,
+      desktop: 12,
+    );
     return StaggeredGridView.countBuilder(
       crossAxisCount: crossAxisCount,
       itemCount: books.length + 1,
@@ -259,7 +265,7 @@ class _GridWidget extends StatelessWidget {
       ),
       staggeredTileBuilder: (index) {
         if (index == 0) {
-          return const StaggeredTile.fit(crossAxisCount);
+          return StaggeredTile.fit(crossAxisCount);
         }
         return const StaggeredTile.fit(1);
       },
