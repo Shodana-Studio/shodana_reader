@@ -1,8 +1,11 @@
 import 'dart:convert';
+import 'dart:io' as io;
 
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:path/path.dart' as p;
+import 'package:shodana_reader/core/data/service/storage_util.dart';
 
 import 'book_type.dart';
 part 'book.g.dart';
@@ -235,6 +238,20 @@ class Book extends Equatable {
       shelfIds: shelfIds ?? this.shelfIds,
       shelfIdsLastModDate: shelfIdsLastModDate ?? this.shelfIdsLastModDate,
     );
+  }
+
+  /// Gets the path to the epub file.
+  /// Ex: Documents/ShodanaReader/123456789/123456789
+  Future<String> get bookPath async {
+    io.Directory dir = await StorageUtil.getAppDirectory();
+    return p.join(dir.path, 'ShodanaReader', bookId, bookId);
+  }
+
+  /// Gets the path to the directory the epub and cover image is in.
+  /// Ex: Documents/ShodanaReader/123456789
+  Future<String> get bookDirectoryPath async {
+    io.Directory dir = await StorageUtil.getAppDirectory();
+    return p.join(dir.path, 'ShodanaReader', bookId);
   }
 
   // Overrides

@@ -64,9 +64,9 @@ class EPUB extends Book {
   Future<int> saveCoverImage({required epubx.EpubBookRef epubBookRef}) async {
     // Save image to app directory
     final img.Image? cover = await epubBookRef.readCover();
-    final io.Directory dir = await StorageUtil.getAppDirectory();
     if (cover != null) {
-      /*final io.File coverImage = */await io.File('${dir.path}/ShodanaReader/$bookId/cover.png').writeAsBytes(img.encodePng(cover));
+      final String path = await bookDirectoryPath;
+      /*final io.File coverImage = */await io.File('$path/cover.png').writeAsBytes(img.encodePng(cover));
       return 0;
     } else {
       // If the cover image is null, use the first image
@@ -98,7 +98,8 @@ class EPUB extends Book {
       final img.Image? cover = img.decodeImage(imageContent);
       if (cover != null) {
         // Convert the image to png, copy the file to the book's folder with the name 'cover.png'
-        /*final io.File coverImage = */await io.File('${dir.path}/ShodanaReader/$bookId/cover.png').writeAsBytes(img.encodePng(cover));
+        final String path = await bookDirectoryPath;
+        /*final io.File coverImage = */await io.File('$path/cover.png').writeAsBytes(img.encodePng(cover));
         // debugPrint('Image cover saved to: ${coverImage.path}');
         return 1;
       } else {

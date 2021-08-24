@@ -207,12 +207,11 @@ class _ListWidget extends StatelessWidget {
         // List tile
         final book = books[index - 1];
         return FutureBuilder(
-          future: StorageUtil.getAppDirectory(),
+          future: book.bookDirectoryPath,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              final io.Directory dir = snapshot.data! as io.Directory;
-              
-              final String imagePath =  p.join(dir.path, 'ShodanaReader', book.bookId, 'cover.png');
+              final String bookDirPath = snapshot.data! as String;
+              final String imagePath = p.join(bookDirPath, 'cover.png');
               return ListTileWidget(
                 index: index - 1,
                 title: book.title,
@@ -287,11 +286,11 @@ class _GridWidget extends StatelessWidget {
     // Grid tile
     final book = books[index - 1];
     return FutureBuilder(
-      future: StorageUtil.getAppDirectory(),
+      future: book.bookDirectoryPath,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          final io.Directory dir = snapshot.data! as io.Directory;
-          final String imagePath = p.join(dir.path, 'ShodanaReader', book.bookId, 'cover.png');
+          final String bookDirPath = snapshot.data! as String;
+          final String imagePath = p.join(bookDirPath, 'cover.png');
           // final String imagePath = '${dir.path}/ShodanaReader/${book.bookId}/cover.png';
           return GridTileWidget(
             index: index - 1,
