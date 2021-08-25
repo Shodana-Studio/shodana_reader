@@ -10,7 +10,7 @@ List<Book> books = [
     createdDate: DateTime.parse('2020-07-02'),
     userId: '60b02ca26af41',
     shelfIds: const [],
-    shelfIdsLastModDate: DateTime.now(),
+    shelfIdsLastModDate: DateTime.now().toUtc(),
   ),
   Book(
     title: 'I Shall Survive Using Potions',
@@ -20,7 +20,7 @@ List<Book> books = [
     createdDate: DateTime.parse('2020-07-02'),
     userId: '60b02ca26af41',
     shelfIds: const [],
-    shelfIdsLastModDate: DateTime.now(),
+    shelfIdsLastModDate: DateTime.now().toUtc(),
   ),
 ];
 
@@ -33,7 +33,7 @@ List<Book> history = [
     createdDate: DateTime.parse('2020-07-02'),
     userId: '60b02ca26af41',
     shelfIds: const [],
-    shelfIdsLastModDate: DateTime.now(),
+    shelfIdsLastModDate: DateTime.now().toUtc(),
   ),
 ];
 

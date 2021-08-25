@@ -5,7 +5,7 @@ import 'package:shodana_reader/core/data/model/book_type.dart';
 void main() {
   test('book ...', () async {
     // // Given a book of type epub
-    // final book = Book(userId: "00000000", fileId: "dsbafjhsaddfka", bookType: BookType.epub, createdDate: DateTime.now());
+    // final book = Book(userId: "00000000", fileId: "dsbafjhsaddfka", bookType: BookType.epub, createdDate: DateTime.now().toUtc());
 
     // // ACT
     // book.title = 'New title'; 

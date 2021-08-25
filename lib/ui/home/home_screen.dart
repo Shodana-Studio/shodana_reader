@@ -104,10 +104,10 @@ class _HomeScreenState extends State<HomeScreen> {
         final book = EPUB(
           bookId: bookId,
           bookType: BookType.epub,
-          createdDate: DateTime.now(),
+          createdDate: DateTime.now().toUtc(),
           userId: userId,
           shelfIds: const [],
-          shelfIdsLastModDate: DateTime.now(),
+          shelfIdsLastModDate: DateTime.now().toUtc(),
           title: epubBook.Title,
           author: epubBook.Author,
         );
@@ -139,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
         // Add book to hive database
         /*final key = */await StorageUtil.addBook(book: book);
         if (io.Platform.isAndroid || io.Platform.isIOS) {
-          await FilePicker.platform.clearTemporaryFiles();
+          final bool? success = await FilePicker.platform.clearTemporaryFiles();
         }
       }
     } on Exception catch (e, _) {

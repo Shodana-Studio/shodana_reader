@@ -37,9 +37,9 @@ Future<void> main() async {
   //     userId: '4354635432',
   //     fileId: '5646544465', 
   //     bookType: BookType.epub, 
-  //     createdDate: DateTime.now(), 
+  //     createdDate: DateTime.now().toUtc(), 
   //     shelfIds: const [], 
-  //     shelfIdsLastModDate: DateTime.now()
+  //     shelfIdsLastModDate: DateTime.now().toUtc()
   //   );
 
   // final Future result = db.createDocument(
