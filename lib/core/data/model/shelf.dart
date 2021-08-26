@@ -9,7 +9,7 @@ part 'shelf.g.dart';
 class Shelf extends Equatable {
   // Constructors
   const Shelf({
-    required this.shelfId,
+    this.id,
     required this.userId,
     required this.title,
     required this.titleLastModDate,
@@ -25,7 +25,7 @@ class Shelf extends Equatable {
 
   factory Shelf.fromMap(Map<String, dynamic> map) {
     return Shelf(
-      shelfId: map['shelfId'],
+      id: map[r'$id'],
       userId: map['userId'],
       title: map['title'],
       titleLastModDate: DateTime.fromMillisecondsSinceEpoch(map['titleLastModDate']),
@@ -44,7 +44,7 @@ class Shelf extends Equatable {
 
   // Variables
   @HiveField(10)
-  final String shelfId;
+  final String? id;
   @HiveField(0)
   final String userId;
 
@@ -77,7 +77,7 @@ class Shelf extends Equatable {
 
   // Utility Functions
   Shelf copyWith({
-    String? shelfId,
+    String? id,
     String? userId,
     String? title,
     DateTime? titleLastModDate,
@@ -91,7 +91,7 @@ class Shelf extends Equatable {
     // List<Book>? books,
   }) {
     return Shelf(
-      shelfId: shelfId ?? this.shelfId,
+      id: id ?? this.id,
       userId: userId ?? this.userId,
       title: title ?? this.title,
       titleLastModDate: titleLastModDate ?? this.titleLastModDate,
@@ -108,7 +108,7 @@ class Shelf extends Equatable {
 
   Map<String, dynamic> toMap() {
     return {
-      'shelfId': shelfId,
+      r'$id': id,
       'userId': userId,
       'title': title,
       'titleLastModDate': titleLastModDate.millisecondsSinceEpoch,
@@ -132,7 +132,7 @@ class Shelf extends Equatable {
   @override
   List<Object> get props {
     return [
-      shelfId,
+      id,
       userId,
       title,
       // Allows shelves with the same title

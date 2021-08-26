@@ -3,13 +3,12 @@ import 'package:image/image.dart' as img;
 import 'package:epubx/epubx.dart' as epubx;
 import 'package:epubx/src/ref_entities/epub_content_ref.dart' as epubx;
 import 'package:epubx/src/ref_entities/epub_byte_content_file_ref.dart' as epubx;
-import '../service/storage_util.dart';
 
 import 'book.dart';
 
 class EPUB extends Book {
   const EPUB({
-    required bookId,
+    id,
     required userId,
     fileId,
     required bookType,
@@ -34,7 +33,7 @@ class EPUB extends Book {
     metadataLastModDate,
     required List<String> shelfIds,
     required shelfIdsLastModDate
-  }) : super(bookId: bookId, userId: userId, fileId: fileId, bookType: bookType, title: title,
+  }) : super(id: id, userId: userId, fileId: fileId, bookType: bookType, title: title,
               titleLastModDate: titleLastModDate, author: author, authorLastModDate: authorLastModDate,
               description: description, descriptionLastModDate: descriptionLastModDate,
               readingProgress: readingProgress, readingProgressLastModDate: readingProgressLastModDate,

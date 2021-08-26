@@ -7,7 +7,7 @@ part 'reading_stats.g.dart';
 @HiveType(typeId : 1)
 class ReadingStats extends Equatable {
   const ReadingStats({
-    required this.readingStatsId,
+    this.id,
     required this.date,
     required this.timeRead,
     required this.userId,
@@ -16,7 +16,7 @@ class ReadingStats extends Equatable {
 
   factory ReadingStats.fromMap(Map<String, dynamic> map) {
     return ReadingStats(
-      readingStatsId: map['readingStatsId'],
+      id: map[r'$id'],
       date: DateTime.fromMillisecondsSinceEpoch(map['date']),
       timeRead: map['timeRead'],
       userId: map['userId'],
@@ -27,7 +27,7 @@ class ReadingStats extends Equatable {
   factory ReadingStats.fromJson(String source) => ReadingStats.fromMap(json.decode(source));
 
   @HiveField(4)
-  final String readingStatsId;
+  final String? id;
   @HiveField(0)
   final DateTime date;
   @HiveField(1)
@@ -39,7 +39,7 @@ class ReadingStats extends Equatable {
 
   Map<String, dynamic> toMap() {
     return {
-      'readingStatsId': readingStatsId,
+      r'$id': id,
       'date': date.millisecondsSinceEpoch,
       'timeRead': timeRead,
       'userId': userId,
@@ -57,7 +57,7 @@ class ReadingStats extends Equatable {
     String? bookId,
   }) {
     return ReadingStats(
-      readingStatsId: readingStatsId ?? this.readingStatsId,
+      id: readingStatsId ?? this.id,
       date: date ?? this.date,
       timeRead: timeRead ?? this.timeRead,
       userId: userId ?? this.userId,
@@ -66,5 +66,5 @@ class ReadingStats extends Equatable {
   }
 
   @override
-  List<Object> get props => [readingStatsId, date, timeRead, userId, bookId];
+  List<Object> get props => [id, date, timeRead, userId, bookId];
 }

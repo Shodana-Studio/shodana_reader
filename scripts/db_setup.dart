@@ -81,14 +81,6 @@ Future<bool> setupDatabase() async {
   
   readingStatsCollectionRes = await createCollection(name: readingStatsCollectionName, read: ['role:member'], write: ['role:member'], rules: [
     {
-      'key': 'readingStatsId',
-      'label': 'Reading Stats ID',
-      'type': 'text',
-      'default': '',
-      'array': false,
-      'required': true,
-    },
-    {
       'key': 'userId',
       'label': 'User ID',
       'type': 'text',
@@ -129,14 +121,6 @@ Future<bool> setupDatabase() async {
   print('Collection $readingStatsCollectionName created');
 
   booksCollectionRes = await createCollection(name: booksCollectionName, read: ['role:member'], write: ['role:member'], rules: [
-    {
-      'key': 'bookId',
-      'label': 'Book ID',
-      'type': 'text',
-      'default': '',
-      'array': false,
-      'required': true,
-    },
     {
       'key': 'userId',
       'label': 'User ID',
@@ -313,15 +297,6 @@ Future<bool> setupDatabase() async {
       'array': false,
       'required': false,
     },
-    // {
-    //   'key': 'readingTimes',
-    //   'label': 'Reading Times',
-    //   'type': 'document',
-    //   'default': '',
-    //   'array': true,
-    //   'required': false,
-    //   'list': [readingStatsCollectionRes[r'$id']]
-    // },
     {
       'key': 'shelfIds',
       'label': 'Shelf Ids',
@@ -347,14 +322,6 @@ Future<bool> setupDatabase() async {
   print('Collection $booksCollectionName created');
   
   shelvesCollectionRes = await createCollection(name: shelvesCollectionName, read: ['role:member'], write: ['role:member'], rules: [
-    {
-      'key': 'shelfId',
-      'label': 'Shelf ID',
-      'type': 'text',
-      'default': '',
-      'array': false,
-      'required': true,
-    },
     {
       'key': 'userId',
       'label': 'User ID',
