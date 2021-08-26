@@ -24,8 +24,8 @@ class AppConstant {
 
   // Appwrite
   // Mac
-  static const String url = 'http://129.107.98.212/';
-  static const String endpoint = 'http://129.107.98.212/v1';
+  static const String url = 'http://129.107.97.163/';
+  static const String endpoint = 'http://129.107.97.163/v1';
   static const String project = '60bbe0b4363f5';
   // Desktop
   // static const String url = 'http://192.168.1.191';
