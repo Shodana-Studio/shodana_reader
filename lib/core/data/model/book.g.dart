@@ -17,7 +17,7 @@ class BookAdapter extends TypeAdapter<Book> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Book(
-      bookId: fields[25] as String,
+      id: fields[25] as String?,
       userId: fields[0] as String,
       fileId: fields[1] as String?,
       bookType: fields[2] as BookType,
@@ -50,7 +50,7 @@ class BookAdapter extends TypeAdapter<Book> {
     writer
       ..writeByte(25)
       ..writeByte(25)
-      ..write(obj.bookId)
+      ..write(obj.id)
       ..writeByte(0)
       ..write(obj.userId)
       ..writeByte(1)
