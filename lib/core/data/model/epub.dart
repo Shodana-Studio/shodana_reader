@@ -64,18 +64,18 @@ class EPUB extends Book {
     // Save image to app directory
     final img.Image? cover = await epubBookRef.readCover();
     if (cover != null) {
-      final String path = await bookDirectoryPath;
-      /*final io.File coverImage = */await io.File('$path/cover.png').writeAsBytes(img.encodePng(cover));
+      final io.Directory dir = await bookDirectoryPath;
+      final String coverImagePath = '${dir.path}/cover.png';
+      /*final io.File coverImage = */await io.File(coverImagePath).writeAsBytes(img.encodePng(cover));
       return 0;
     } else {
       // If the cover image is null, use the first image
-      // debugPrint('No cover image was found, using the first image in the book instead...');
 
       // Reference to the book's content (HTML files, stylesheets, images, fonts, etc.)
       final epubx.EpubContentRef? bookContentRef = epubBookRef.Content;
 
       if (bookContentRef == null) {
-        // debugPrint('bookContent from epub is null');
+        // bookContent from epub is null
         return -2;
       }
 
@@ -83,7 +83,7 @@ class EPUB extends Book {
       final Map<String?, epubx.EpubByteContentFileRef>? images = bookContentRef.Images;
 
       if (images == null) {
-        // debugPrint('images from epub is null');
+        // images from epub is null
         return -3;
       }
       
@@ -97,12 +97,13 @@ class EPUB extends Book {
       final img.Image? cover = img.decodeImage(imageContent);
       if (cover != null) {
         // Convert the image to png, copy the file to the book's folder with the name 'cover.png'
-        final String path = await bookDirectoryPath;
-        /*final io.File coverImage = */await io.File('$path/cover.png').writeAsBytes(img.encodePng(cover));
-        // debugPrint('Image cover saved to: ${coverImage.path}');
+        final io.Directory dir = await bookDirectoryPath;
+        final String coverImagePath = '${dir.path}/cover.png';
+        /*final io.File coverImage = */await io.File(coverImagePath).writeAsBytes(img.encodePng(cover));
+        // Image cover saved to: ${coverImage.path}
         return 1;
       } else {
-        // debugPrint('Could not decode image from epub');
+        // Could not decode image from epub
         return -1;
       }
     }

@@ -242,16 +242,16 @@ class Book extends Equatable {
 
   /// Gets the path to the epub file.
   /// Ex: Documents/ShodanaReader/123456789/123456789
-  Future<String> get bookPath async {
+  Future<io.Directory> get bookPath async {
     final io.Directory dir = await StorageUtil.getAppDirectory();
-    return p.join(dir.path, 'ShodanaReader', id, id);
+    return io.Directory('${dir.path}/ShodanaReader/$id/$id');
   }
 
   /// Gets the path to the directory the epub and cover image is in.
   /// Ex: Documents/ShodanaReader/123456789
-  Future<String> get bookDirectoryPath async {
+  Future<io.Directory> get bookDirectoryPath async {
     final io.Directory dir = await StorageUtil.getAppDirectory();
-    return p.join(dir.path, 'ShodanaReader', id);
+    return io.Directory('${dir.path}/ShodanaReader/$id');
   }
 
   // Overrides

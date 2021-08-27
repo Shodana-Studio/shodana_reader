@@ -54,6 +54,7 @@ dependencies:
   # For Database
   flutter_persistent_queue:
     git: https://github.com/getBoolean/flutter_persistent_queue
+  uuid: ^3.0.4
 
   # For Key-Value local storage
   shared_preferences: ^2.0.5
@@ -73,6 +74,7 @@ dependencies:
   pull_to_refresh: ^2.0.0
   community_material_icon: ^5.9.55
   flutter_staggered_grid_view: ^0.4.0
+  reorderable_grid_view: ^1.1.0
 
   # For Utilities
   url_launcher: ^6.0.9
@@ -86,9 +88,6 @@ dependencies:
   # For scripts
   dart_appwrite: ^0.7.0
   envify: ^2.0.2
-  uuid: ^3.0.4
-  path: ^1.8.0
-  reorderable_grid_view: ^1.1.0
   # mockito: ^5.0.14
 
 dev_dependencies:

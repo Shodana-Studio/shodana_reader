@@ -8,7 +8,6 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:path/path.dart' as p;
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:reorderable_grid_view/reorderable_grid_view.dart';
 
@@ -132,7 +131,7 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
               onRefresh: _onRefresh,
               onLoading: _onLoading,
               // TODO: Get list of books from hive 'books' box
-              child: _ListWidget(widget: widget, books: books, scrollController: scrollController),
+              child: _GridWidget(widget: widget, books: books, scrollController: scrollController),
 
               // TODO: Add support for staggered grid view and normal grid view
               // StaggeredGrid(controller: scrollController,),
@@ -211,14 +210,14 @@ class _ListWidget extends StatelessWidget {
           future: book.bookDirectoryPath,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              final String bookDirPath = snapshot.data! as String;
-              final String imagePath = p.join(bookDirPath, 'cover.png');
+              final io.Directory bookDir = snapshot.data! as io.Directory;
+              final io.Directory imageDir = io.Directory('${bookDir.path}/cover.png');
               return ListTileWidget(
                 index: index - 1,
                 title: book.title,
                 subtitle: book.author,
                 context: context,
-                image: imagePath,
+                image: imageDir.path,
               );
             }
             
@@ -290,15 +289,14 @@ class _GridWidget extends StatelessWidget {
       future: book.bookDirectoryPath,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          final String bookDirPath = snapshot.data! as String;
-          final String imagePath = p.join(bookDirPath, 'cover.png');
-          // final String imagePath = '${dir.path}/ShodanaReader/${book.bookId}/cover.png';
+          final io.Directory bookDir = snapshot.data! as io.Directory;
+          final io.Directory imageDir = io.Directory('${bookDir.path}/cover.png');
           return GridTileWidget(
             index: index - 1,
             title: book.title,
             subtitle: book.author,
             context: context,
-            image: imagePath,
+            image: imageDir.path,
           );
         }
         
@@ -364,15 +362,14 @@ class _ReorderableGridWidget extends StatelessWidget {
       future: book.bookDirectoryPath,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          final String bookDirPath = snapshot.data! as String;
-          final String imagePath = p.join(bookDirPath, 'cover.png');
-          // final String imagePath = '${dir.path}/ShodanaReader/${book.bookId}/cover.png';
+        final io.Directory bookDir = snapshot.data! as io.Directory;
+        final io.Directory imageDir = io.Directory('${bookDir.path}/cover.png');
           return GridTileWidget(
             index: index - 1,
             title: book.title,
             subtitle: book.author,
             context: context,
-            image: imagePath,
+            image: imageDir.path,
           );
         }
         
