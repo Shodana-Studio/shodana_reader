@@ -10,6 +10,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:path/path.dart' as p;
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:reorderable_grid_view/reorderable_grid_view.dart';
 
 import '../../core/data/model/book.dart';
 import '../../core/data/model/book_search_model.dart';
@@ -131,7 +132,7 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
               onRefresh: _onRefresh,
               onLoading: _onLoading,
               // TODO: Get list of books from hive 'books' box
-              child: _GridWidget(widget: widget, books: books, scrollController: scrollController),
+              child: _ListWidget(widget: widget, books: books, scrollController: scrollController),
 
               // TODO: Add support for staggered grid view and normal grid view
               // StaggeredGrid(controller: scrollController,),
@@ -268,6 +269,80 @@ class _GridWidget extends StatelessWidget {
         return const StaggeredTile.fit(1);
       },
       itemBuilder: _buildGridItem,
+    );
+  }
+
+  Widget _buildGridItem(BuildContext context, int index) {
+    // Add a book button at the top of the listview
+    if (index == 0) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5.0),
+        child: OutlinedButton(
+          onPressed: widget.addBookAction,
+          child: const Text('Add a book'),
+        ),
+      );
+    }
+
+    // Grid tile
+    final book = books[index - 1];
+    return FutureBuilder(
+      future: book.bookDirectoryPath,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          final String bookDirPath = snapshot.data! as String;
+          final String imagePath = p.join(bookDirPath, 'cover.png');
+          // final String imagePath = '${dir.path}/ShodanaReader/${book.bookId}/cover.png';
+          return GridTileWidget(
+            index: index - 1,
+            title: book.title,
+            subtitle: book.author,
+            context: context,
+            image: imagePath,
+          );
+        }
+        
+        return const CircularProgressIndicator();
+      }
+    );
+  }
+}
+
+class _ReorderableGridWidget extends StatelessWidget {
+  const _ReorderableGridWidget({
+    Key? key,
+    required this.widget,
+    required this.books,
+    required this.scrollController,
+  }) : super(key: key);
+
+  final HomeScreenMobile widget;
+  final List<Book> books;
+  final ScrollController scrollController;
+
+  @override
+  Widget build(BuildContext context) {
+    final int crossAxisCount = getValueForScreenType<int>(
+      context: context,
+      mobile: 3,
+      tablet: 6,
+      desktop: 12,
+    );
+    final bookWidgets = [
+      for (var i = 0; i < books.length + 1; i++)
+        _buildGridItem(context, i)
+    ];
+    
+    return ReorderableGridView(
+      crossAxisCount: crossAxisCount,
+      padding: const EdgeInsets.only(
+        top: kToolbarHeight + 8.0,
+        bottom: 8.0,
+        left: 4.0,
+        right: 4.0,
+      ),
+      onReorder: (int oldIndex, int newIndex) {  },
+      children: bookWidgets,
     );
   }
 
