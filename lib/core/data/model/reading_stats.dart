@@ -50,14 +50,14 @@ class ReadingStats extends Equatable {
   String toJson() => json.encode(toMap());
 
   ReadingStats copyWith({
-    String? readingStatsId,
+    String? id,
     DateTime? date,
     int? timeRead,
     String? userId,
     String? bookId,
   }) {
     return ReadingStats(
-      id: readingStatsId ?? this.id,
+      id: id ?? this.id,
       date: date ?? this.date,
       timeRead: timeRead ?? this.timeRead,
       userId: userId ?? this.userId,
@@ -66,5 +66,5 @@ class ReadingStats extends Equatable {
   }
 
   @override
-  List<Object> get props => [id, date, timeRead, userId, bookId];
+  List<Object> get props => [id ?? '', date, timeRead, userId, bookId];
 }

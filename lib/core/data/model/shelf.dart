@@ -132,7 +132,7 @@ class Shelf extends Equatable {
   @override
   List<Object> get props {
     return [
-      id,
+      id ?? '',
       userId,
       title,
       // Allows shelves with the same title

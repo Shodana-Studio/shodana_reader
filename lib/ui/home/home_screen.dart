@@ -102,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
         // Put data into Book object
         final userId = authNotifier.user!.id;
         final book = EPUB(
-          bookId: bookId,
+          id: bookId,
           bookType: BookType.epub,
           createdDate: DateTime.now().toUtc(),
           userId: userId,
