@@ -131,7 +131,7 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
               onRefresh: _onRefresh,
               onLoading: _onLoading,
               // TODO: Get list of books from hive 'books' box
-              child: _GridWidget(widget: widget, books: books, scrollController: scrollController),
+              child: _ReorderableGridWidget(widget: widget, books: books, scrollController: scrollController),
 
               // TODO: Add support for staggered grid view and normal grid view
               // StaggeredGrid(controller: scrollController,),
@@ -213,7 +213,7 @@ class _ListWidget extends StatelessWidget {
               final io.Directory bookDir = snapshot.data! as io.Directory;
               final io.Directory imageDir = io.Directory('${bookDir.path}/cover.png');
               return ListTileWidget(
-                index: index - 1,
+                key: ValueKey(index - 1),
                 title: book.title,
                 subtitle: book.author,
                 context: context,
@@ -292,7 +292,6 @@ class _GridWidget extends StatelessWidget {
           final io.Directory bookDir = snapshot.data! as io.Directory;
           final io.Directory imageDir = io.Directory('${bookDir.path}/cover.png');
           return GridTileWidget(
-            index: index - 1,
             title: book.title,
             subtitle: book.author,
             context: context,
@@ -366,6 +365,7 @@ class _ReorderableGridWidget extends StatelessWidget {
         final io.Directory imageDir = io.Directory('${bookDir.path}/cover.png');
           return GridTileWidget(
             index: index - 1,
+            key: ValueKey(index - 1),
             title: book.title,
             subtitle: book.author,
             context: context,

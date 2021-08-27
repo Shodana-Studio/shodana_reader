@@ -8,14 +8,13 @@ import 'tile.dart';
 
 class GridTileWidget extends Tile {
   const GridTileWidget({ 
-    Key? key, 
-    required index,
+    Key? key,
     required title, 
     subtitle = '', 
     unread = 0, 
     required image,
     required this.context,
-  }) : super(key: key, index: index, title: title, subtitle: subtitle, unread: unread, image: image);
+  }) : super(key: key, title: title, subtitle: subtitle, unread: unread, image: image);
   final BuildContext context;
 
   @override

@@ -6,13 +6,12 @@ import 'tile.dart';
 class ListTileWidget extends Tile {
   const ListTileWidget({ 
     Key? key, 
-    required index,
     required title, 
     subtitle = '', 
     unread = 0, 
     image,
     required this.context,
-  }) : super(key: key, index: index, title: title, subtitle: subtitle, unread: unread, image: image);
+  }) : super(key: key, title: title, subtitle: subtitle, unread: unread, image: image);
   final BuildContext context;
 
   @override
