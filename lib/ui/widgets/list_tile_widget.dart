@@ -32,7 +32,7 @@ class ListTileWidget extends Tile {
               flex: 1,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Image.file(io.File(image)),
+                child: Image.file(io.File(image), filterQuality: FilterQuality.medium),
               ),
             ),
             const SizedBox(width: 8,),

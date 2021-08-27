@@ -9,7 +9,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:reorderable_grid_view/reorderable_grid_view.dart';
 
 import '../../core/data/model/book.dart';
 import '../../core/data/model/book_search_model.dart';
@@ -131,7 +130,7 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
               onRefresh: _onRefresh,
               onLoading: _onLoading,
               // TODO: Get list of books from hive 'books' box
-              child: _ReorderableGridWidget(widget: widget, books: books, scrollController: scrollController),
+              child: _ListWidget(widget: widget, books: books, scrollController: scrollController),
 
               // TODO: Add support for staggered grid view and normal grid view
               // StaggeredGrid(controller: scrollController,),
