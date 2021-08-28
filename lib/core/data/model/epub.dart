@@ -1,7 +1,9 @@
 import 'dart:io' as io;
 import 'package:image/image.dart' as img;
 import 'package:epubx/epubx.dart' as epubx;
+// ignore: implementation_imports
 import 'package:epubx/src/ref_entities/epub_content_ref.dart' as epubx;
+// ignore: implementation_imports
 import 'package:epubx/src/ref_entities/epub_byte_content_file_ref.dart' as epubx;
 
 import 'book.dart';

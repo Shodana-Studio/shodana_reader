@@ -39,7 +39,7 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
 
   Future<void> _onRefresh() async {
     books = StorageUtil.getAllBooks();
-    print(books);
+    debugPrint(books.toString());
     // temp delay
     await Future.delayed(const Duration(milliseconds: 1000));
     // TODO: Get latest books from server database and update hive box
@@ -64,7 +64,7 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
     
     books = StorageUtil.getAllBooks();
     booksBox =  StorageUtil.getBooksBox();
-    print(books);
+    debugPrint(books.toString());
   }
 
   @override
@@ -230,6 +230,7 @@ class _ListWidget extends StatelessWidget {
   }
 }
 
+// ignore: unused_element
 class _GridWidget extends StatelessWidget {
   const _GridWidget({
     Key? key,

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 
 class AppwriteFile extends Equatable {
-  AppwriteFile({
+  const AppwriteFile({
     required this.id,
     required this.permissions,
     required this.name,

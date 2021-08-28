@@ -45,13 +45,13 @@ class _ReaderScreenState extends State<ReaderScreen> {
             IncrementIntent: CallbackAction<IncrementIntent>(
                 onInvoke: (IncrementIntent intent) => setState(() {
                   count = count + 1;
-                  print(count);
+                  debugPrint(count.toString());
                 })
             ),
             DecrementIntent: CallbackAction<DecrementIntent>(
                 onInvoke: (DecrementIntent intent) => setState(() {
                   count = count - 1;
-                  print(count);
+                  debugPrint(count.toString());
                 })
             ),
           },

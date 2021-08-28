@@ -4,7 +4,7 @@ import 'dart:io' as io;
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:shodana_reader/core/data/service/storage_util.dart';
+import '../service/storage_util.dart';
 
 import 'book_type.dart';
 part 'book.g.dart';

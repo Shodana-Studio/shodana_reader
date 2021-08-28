@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:shodana_reader/app.dart';
+// import 'package:shodana_reader/app.dart';
 import 'package:shodana_reader/ui/home/home_screen.dart';
 // Temp test file, will be updated once the library is functional
 void main() {

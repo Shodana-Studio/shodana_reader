@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> addBook() async {
     final authNotifier = context.authNotifier;
     if (authNotifier.user == null) {
-      print('User is not logged in');
+      debugPrint('User is not logged in');
       return;
     }
 
@@ -147,7 +147,7 @@ class _HomeScreenState extends State<HomeScreen> {
           // I clear it anyway because there is no point to uploading the same book twice.
 
           // success should not be null since this is only run on android and ios platforms
-          final bool? success = await FilePicker.platform.clearTemporaryFiles();
+          /*final bool? success = */await FilePicker.platform.clearTemporaryFiles();
         }
       }
     } on Exception catch (e, _) {

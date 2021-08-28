@@ -1,9 +1,5 @@
-import 'dart:async';
 import 'dart:io' as io;
-
 import 'package:flutter/material.dart';
-import 'package:image/image.dart' as img;
-
 import 'tile.dart';
 
 class GridTileWidget extends Tile {

@@ -29,7 +29,7 @@ class ListTileWidget extends Tile {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Flexible(
-              flex: 1,
+              // flex: 1,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: Image.file(io.File(image), filterQuality: FilterQuality.medium),

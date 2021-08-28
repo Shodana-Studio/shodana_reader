@@ -3,7 +3,7 @@ import 'package:test/test.dart';
 // Temp test file, will be updated once the app is more functional
 void main() {
   group('Reader app', () {
-    final button = find.byType('FloatingActionButton');
+    /*final button = */find.byType('FloatingActionButton');
 
     FlutterDriver? driver;
 
