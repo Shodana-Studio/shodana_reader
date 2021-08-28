@@ -92,3 +92,24 @@ jobs:
         with:
           name: app
           path: build/app/outputs/bundle/release/app-release.aab
+
+  build_windows:
+    name: Build Flutter (Windows)
+    needs: [flutter_test]
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v1
+        with:
+          java-version: "12.x"
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: "stable"
+      - run: flutter pub get
+      - run: flutter clean
+      - run: flutter build windows --release
+      - name: Upload msix
+        uses: actions/upload-artifact@v2
+        with:
+          name: app
+          path: build/windows/runner/Release/shodana_reader.msix
