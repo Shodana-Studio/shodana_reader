@@ -5,13 +5,10 @@ import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:i18n_extension/io/import.dart';
-import 'package:i18n_extension/i18n_extension.dart';
 import 'package:beamer/beamer.dart';
 
 import 'app.dart';
 import 'core/data/service/storage_utils.dart';
-import 'l10n/my.i18n.dart';
 
 Future<AdaptiveThemeMode?> init() async {
   WidgetsFlutterBinding.ensureInitialized();

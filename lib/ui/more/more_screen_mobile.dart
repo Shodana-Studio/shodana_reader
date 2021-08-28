@@ -18,6 +18,7 @@ class MoreScreenMobile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unnecessary_nullable_for_final_variable_declarations
     final Client? client = context.authNotifier.client;
     final Avatars? avatars = (client == null) ? null : Avatars(client);
     

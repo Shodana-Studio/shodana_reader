@@ -30,10 +30,10 @@ class _HomeScreenState extends State<HomeScreen> {
         final List<int> bytes = await newFile.readAsBytes();
         final epubx.EpubBookRef epub = await epubx.EpubReader.openBook(bytes);
 
-        print(newFile.path);
-        print(newFile.uri);
-        print(epub.Title);
-        print(epub.Author);
+        debugPrint(newFile.path);
+        debugPrint(newFile.uri.toString());
+        debugPrint(epub.Title);
+        debugPrint(epub.Author);
       }
       // print(file.name);
       // print(file.bytes);
