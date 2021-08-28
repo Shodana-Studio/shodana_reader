@@ -11,7 +11,7 @@ class EPUB extends Book {
     id,
     required userId,
     fileId,
-    localStorageId,
+    required localStorageId,
     required bookType,
     title,
     titleLastModDate,

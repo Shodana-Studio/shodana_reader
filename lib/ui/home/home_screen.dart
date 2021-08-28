@@ -105,6 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
           bookType: BookType.epub,
           createdDate: DateTime.now().toUtc(),
           userId: userId,
+          localStorageId: localStorageId,
           shelfIds: const [],
           shelfIdsLastModDate: DateTime.now().toUtc(),
           title: epubBook.Title,

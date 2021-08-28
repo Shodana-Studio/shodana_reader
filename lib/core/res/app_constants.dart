@@ -1,7 +1,7 @@
 class AppConstant {
   // Settings
   static const String settingsBoxKey = 'settings';
-  static const String booksBoxKey = 'books';
+  static const String booksBoxKey = 'booksBox';
   static const String darkModeKey = 'darkMode';
   static const String followSystemThemeKey = 'followSystemTheme';
   static const String defaultStartingPageKey = 'defaultStartingPage';
