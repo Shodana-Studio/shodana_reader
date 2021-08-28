@@ -120,3 +120,17 @@ flutter:
   # assets:
   #   - assets/images/
   #   - assets/svgs/
+
+# For building for windows
+# flutter build windows
+# flutter pub run msix:create
+msix_config:
+  display_name: Shodana Reader
+  publisher_display_name: Shodana Studio
+  identity_name: app.ShodanaStudio.ShodanaReader
+  msix_version: 0.1.0.0
+  languages: en-us
+  architecture: x64
+  file_extension: .epub
+  capabilities: internetClient,documentsLibrary
+  store: false
