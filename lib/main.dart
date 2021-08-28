@@ -29,6 +29,9 @@ Future<AdaptiveThemeMode?> init() async {
 
   await StorageUtil.getInstance();
   // Uncomment to clear previous books database. Book files and images must be deleted manually
+  // also delete the folder "windows" in the build folder, and
+  // Desktop: ShodanaReader in your documents folder
+  // Mobile: Delete the app
   // await StorageUtil.clearBooksBox();
   // Themes
   final savedThemeMode = await AdaptiveTheme.getThemeMode();
