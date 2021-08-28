@@ -34,7 +34,7 @@ jobs:
           channel: "stable"
       - run: flutter pub get
       - run: flutter clean
-      - run: flutter build ios
+      - run: flutter build ios --release
   build_appbundle:
     name: Build Flutter (Android)
     needs: [flutter_test]
@@ -49,4 +49,4 @@ jobs:
           channel: "stable"
       - run: flutter pub get
       - run: flutter clean
-      - run: flutter build appbundle
+      - run: flutter build appbundle --release
