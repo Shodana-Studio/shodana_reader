@@ -11,6 +11,7 @@ class EPUB extends Book {
     id,
     required userId,
     fileId,
+    localStorageId,
     required bookType,
     title,
     titleLastModDate,
@@ -33,7 +34,7 @@ class EPUB extends Book {
     metadataLastModDate,
     required List<String> shelfIds,
     required shelfIdsLastModDate
-  }) : super(id: id, userId: userId, fileId: fileId, bookType: bookType, title: title,
+  }) : super(id: id, userId: userId, fileId: fileId, localStorageId: localStorageId, bookType: bookType, title: title,
               titleLastModDate: titleLastModDate, author: author, authorLastModDate: authorLastModDate,
               description: description, descriptionLastModDate: descriptionLastModDate,
               readingProgress: readingProgress, readingProgressLastModDate: readingProgressLastModDate,
