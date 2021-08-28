@@ -87,7 +87,6 @@ dependencies:
 
   # For scripts
   dart_appwrite: ^0.7.0
-  envify: ^2.0.2
   # mockito: ^5.0.14
 
 dev_dependencies:
