@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import 'app.dart';
 import 'core/data/model/book.dart';
 import 'core/data/model/book_type.dart';

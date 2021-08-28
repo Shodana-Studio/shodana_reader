@@ -351,13 +351,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.0"
-  dotenv:
-    dependency: transitive
-    description:
-      name: dotenv
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.0.0-nullsafety.0"
   email_validator:
     dependency: "direct main"
     description:
@@ -372,20 +365,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"
-  envify:
-    dependency: transitive
-    description:
-      name: envify
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.2"
-  envify_generator:
-    dependency: "direct dev"
-    description:
-      name: envify_generator
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0"
   epubx:
     dependency: "direct main"
     description:
