@@ -31,7 +31,7 @@ class BookSearchModel extends ChangeNotifier implements SearchModel {
       
       // Fake database of books
       suggestions = books.where((book) {
-        print(book.toString());
+        debugPrint(book.toString());
         return book.toString().toLowerCase().contains(query.toLowerCase());
       }).toSet().toList();
       // _suggestions = features.map((e) => BookModel.fromJson(e)).toSet().toList();
