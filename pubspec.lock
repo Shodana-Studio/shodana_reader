@@ -373,7 +373,7 @@ packages:
     source: hosted
     version: "2.0.1"
   envify:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: envify
       url: "https://pub.dartlang.org"
