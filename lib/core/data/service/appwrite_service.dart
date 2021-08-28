@@ -10,7 +10,7 @@ class AppwriteService {
         .setSelfSigned() // TODO: Remove in production
         ;
     _account = Account(_client);
-    _db = Database(_client);
+    // _db = Database(_client);
     _teams = Teams(_client);
     _storage = Storage(_client);
     _avatars = Avatars(_client);
@@ -25,7 +25,7 @@ class AppwriteService {
   static AppwriteService? _instance;
   late final Client _client;
   late final Account _account;
-  late final Database _db;
+  // late final Database _db;
   late final Teams _teams;
   late final Storage _storage;
   late final Avatars _avatars;

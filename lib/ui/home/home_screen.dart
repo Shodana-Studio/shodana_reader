@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
       // print(file.extension);
       // print(file.path);
     } on Exception catch (e, _) {
-      print(e);
+      debugPrint(e.toString());
     }
   }
 
@@ -69,13 +69,13 @@ class _HomeScreenState extends State<HomeScreen> {
         final userId = authNotifier.user!.id;
         // TODO: Change fileId to id given by appwrite storage
         final String fileId = 'ext-${file.extension!}-size-${file.size}';
-        debugPrint('File id: ${fileId}');
-        final book = Book(
-          bookType: BookType.epub,
-          fileId: fileId,
-          createdDate: DateTime.now(),
-          userId: userId,
-        );
+        debugPrint('File id: $fileId');
+        // final book = Book(
+        //   bookType: BookType.epub,
+        //   fileId: fileId,
+        //   createdDate: DateTime.now(),
+        //   userId: userId,
+        // );
 
         // TODO: Add book to hive database
 
