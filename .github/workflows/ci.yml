@@ -66,6 +66,11 @@ jobs:
       - run: flutter pub get
       - run: flutter clean
       - run: flutter build ios --release
+      - name: Upload IPA
+        uses: actions/upload-artifact@v2
+        with:
+          name: app
+          path: build/ios/archive/Runner.xcarchive
 
   build_appbundle:
     name: Build Flutter (Android)
@@ -82,3 +87,8 @@ jobs:
       - run: flutter pub get
       - run: flutter clean
       - run: flutter build appbundle --release
+      - name: Upload appbundle
+        uses: actions/upload-artifact@v2
+        with:
+          name: app
+          path: build/app/outputs/bundle/release/app-release.aab
