@@ -5,6 +5,8 @@ class EnvironmentConfig {
   // We add the api key by running `flutter run --dart-define=apiKey=MYKEY`
   static const appwriteEndpoint = String.fromEnvironment('appwriteEndpoint');
   static const appwriteProjectId = String.fromEnvironment('appwriteProjectId');
-  static const appwriteApiKey = String.fromEnvironment('appwriteApiKey');
+  static const appwriteDatabaseApiKey = String.fromEnvironment('appwriteDatabaseApiKey');
+  static const appwriteStorageApiKey = String.fromEnvironment('appwriteStorageApiKey');
+  static const appwriteHealthApiKey = String.fromEnvironment('appwriteHealthApiKey');
 
 }
