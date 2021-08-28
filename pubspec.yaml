@@ -105,6 +105,6 @@ flutter:
   generate: true
   uses-material-design: true
 
-  assets:
-    - assets/images/
-    - assets/svgs/
+  # assets:
+  #   - assets/images/
+  #   - assets/svgs/
