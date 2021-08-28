@@ -1,11 +1,8 @@
 // Run in terminal with "dart scripts/health.dart"
-
-// Before running the program, get the appwrite endpoint,
-// project id, and an api key with access to health read
-// Run the following:
-// flutter run --dart-define=appwriteEndpoint={ENDPOINT}
-// flutter run --dart-define=appwriteProjectId={PROJECT_ID}
-// flutter run --dart-define=appwriteHealthApiKey={KEY}
+// Before running, do the following:
+// Add appwrite url, endpoint, and project id in "lib/core/res/constants.dart"
+// Add api key with permissions for health read in file "scripts/.env" with format:
+// HEALTH_KEY={key}
 
 // ignore_for_file: avoid_print
 import 'package:dart_appwrite/dart_appwrite.dart';

@@ -1,19 +1,19 @@
 // Run in terminal with "dart scripts/db_tests.dart"
-
-// Before running the program, get the appwrite endpoint,
-// project id, and an api key with access to collections and documents read/write
-// Run the following:
-// flutter run --dart-define=appwriteEndpoint={ENDPOINT}
-// flutter run --dart-define=appwriteProjectId={PROJECT_ID}
-// flutter run --dart-define=appwriteDatabaseApiKey={KEY}
+// Before running, do the following:
+// Add appwrite url, endpoint, and project id in "lib/core/res/constants.dart"
+// Add api key with permissions for collections and documents read/write in file "scripts/.env" with format:
+// DATABASE_KEY={key}
 
 // ignore_for_file: avoid_print
 import 'package:dart_appwrite/dart_appwrite.dart';
-import 'package:shodana_reader/core/res/environment_config.dart';
+import 'package:shodana_reader/core/data/model/book.dart';
+import 'package:shodana_reader/core/data/model/book_type.dart';
+import 'package:shodana_reader/core/res/app_constants.dart';
+import 'package:shodana_reader/env/env.dart';
 
-Client client = Client(endPoint: EnvironmentConfig.appwriteEndpoint)
-  .setProject(EnvironmentConfig.appwriteProjectId)
-  .setKey(EnvironmentConfig.appwriteDatabaseApiKey);
+Client client = Client(endPoint: AppConstant.endpoint)
+  .setProject(AppConstant.project)
+  .setKey(ScriptEnv.databaseKey);
 Database db = Database(client);
 
 Future<void> main() async {
