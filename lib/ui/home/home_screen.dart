@@ -138,7 +138,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
         // Add book to hive database
         /*final key = */await StorageUtil.addBook(book: book);
+
+        // Clear the cached file (Android/iOS)
         if (io.Platform.isAndroid || io.Platform.isIOS) {
+          // clearTemporaryFiles is only available on iOS and Android.
+          // This is run to keep the storage used to a minimum. This is not required,
+          // as the platform will clear the cache if it needs more space.
+          // I clear it anyway because there is no point to uploading the same book twice.
+
+          // success should not be null since this is only run on android and ios platforms
           final bool? success = await FilePicker.platform.clearTemporaryFiles();
         }
       }
