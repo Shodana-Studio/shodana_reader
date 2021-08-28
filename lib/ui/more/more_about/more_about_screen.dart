@@ -95,7 +95,7 @@ class AboutScreen extends HookWidget {
   }
 
   Future<void> _launchURL(String url) async =>
-      await canLaunch(url) ? await launch(url) : print('Could not launch $url');
+      await canLaunch(url) ? await launch(url) : debugPrint('Could not launch $url');
 
   Future<void> versionOnPressed(
       BuildContext context, DeviceInfoPlugin
