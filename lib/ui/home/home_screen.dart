@@ -95,14 +95,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
         // Create unique book ID with Uuid v4
         const uuid = Uuid();
-        final String bookId = uuid.v4();
-        debugPrint('Book id: $bookId');
+        final String localStorageId = uuid.v4();
+        debugPrint('Local Storage Id: $localStorageId');
 
         // TODO: Add fileId from id given by appwrite storage
         // Put data into Book object
         final userId = authNotifier.user!.id;
         final book = EPUB(
-          id: bookId,
           bookType: BookType.epub,
           createdDate: DateTime.now().toUtc(),
           userId: userId,
@@ -114,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
         // Copy file to device storage
         // ignore: unused_local_variable
-        final io.File newFile = await StorageUtil.copyFile(fileRef: fileRef, folder: bookId, filename: bookId);
+        final io.File newFile = await StorageUtil.copyFile(fileRef: fileRef, folder: localStorageId, filename: localStorageId);
         debugPrint('Successfully saved the book');
         // Save image to app directory
         final int success = await book.saveCoverImage(epubBookRef: epubBook);

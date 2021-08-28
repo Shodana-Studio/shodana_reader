@@ -16,6 +16,7 @@ class Book extends Equatable {
     this.id,
     required this.userId,
     this.fileId,
+    required this.localStorageId,
     required this.bookType,
     this.title,
     this.titleLastModDate,
@@ -36,8 +37,6 @@ class Book extends Equatable {
     this.finishReadingDateLastModDate,
     this.metadata,
     this.metadataLastModDate,
-    // Replaced with shelfIds
-    // this.readingTimes,
     required this.shelfIds,
     required this.shelfIdsLastModDate
   });
@@ -47,6 +46,7 @@ class Book extends Equatable {
       id: map[r'$id'],
       userId: map['userId'],
       fileId: map['fileId'],
+      localStorageId: map['localStorageId'],
       bookType: EnumToString.fromString(BookType.values, map['bookType']) ?? BookType.unknown,
       title: map['title'],
       titleLastModDate: DateTime.fromMillisecondsSinceEpoch(map['titleLastModDate']),
@@ -82,6 +82,8 @@ class Book extends Equatable {
   final String userId;
   @HiveField(1)
   final String? fileId;
+  @HiveField(26)
+  final String localStorageId;
 
   @HiveField(2)
   final BookType bookType;
@@ -150,6 +152,7 @@ class Book extends Equatable {
       r'$id': id,
       'userId': userId,
       'fileId': fileId,
+      'localStorageId': localStorageId,
       'bookType': EnumToString.convertToString(bookType),
       'title': title,
       'titleLastModDate': titleLastModDate?.millisecondsSinceEpoch,
@@ -182,6 +185,7 @@ class Book extends Equatable {
   Book copyWith({
     String? id,
     String? fileId,
+    String? localStorageId,
     BookType? bookType,
     String? title,
     DateTime? titleLastModDate,
@@ -212,6 +216,7 @@ class Book extends Equatable {
       id: id ?? this.id,
       userId: userId,
       fileId: fileId ?? this.fileId,
+      localStorageId: localStorageId ?? this.localStorageId,
       bookType: bookType ?? this.bookType,
       title: title ?? this.title,
       titleLastModDate: titleLastModDate ?? this.titleLastModDate,
@@ -243,14 +248,14 @@ class Book extends Equatable {
   /// Ex: Documents/ShodanaReader/123456789/123456789
   Future<io.Directory> get bookPath async {
     final io.Directory dir = await StorageUtil.getAppDirectory();
-    return io.Directory('${dir.path}/ShodanaReader/$id/$id');
+    return io.Directory('${dir.path}/ShodanaReader/$localStorageId/$localStorageId');
   }
 
   /// Gets the path to the directory the epub and cover image is in.
   /// Ex: Documents/ShodanaReader/123456789
   Future<io.Directory> get bookDirectoryPath async {
     final io.Directory dir = await StorageUtil.getAppDirectory();
-    return io.Directory('${dir.path}/ShodanaReader/$id');
+    return io.Directory('${dir.path}/ShodanaReader/$localStorageId');
   }
 
   // Overrides
@@ -268,6 +273,8 @@ class Book extends Equatable {
       bookType,
       // fileId should be unique to the book and given by appwrite storage
       fileId ?? '',
+      // The id used to identify what folder the book is stored in
+      localStorageId,
       // Commented out createdDate so that if a book is uploaded twice, it will recognize it as a duplicate
       // createdDate,
     ];

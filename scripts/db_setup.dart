@@ -138,6 +138,14 @@ Future<bool> setupDatabase() async {
       'required': true,
     },
     {
+      'key': 'localStorageId',
+      'label': 'Local Storage ID',
+      'type': 'text',
+      'default': '',
+      'array': false,
+      'required': true,
+    },
+    {
       'key': 'fileId',
       'label': 'File ID',
       'type': 'text',
