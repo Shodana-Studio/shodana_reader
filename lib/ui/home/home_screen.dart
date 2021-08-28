@@ -70,12 +70,12 @@ class _HomeScreenState extends State<HomeScreen> {
         // TODO: Change fileId to id given by appwrite storage
         final String fileId = 'ext-${file.extension!}-size-${file.size}';
         debugPrint('File id: $fileId');
-        // final book = Book(
-        //   bookType: BookType.epub,
-        //   fileId: fileId,
-        //   createdDate: DateTime.now(),
-        //   userId: userId,
-        // );
+        /*final book = */Book(
+          bookType: BookType.epub,
+          fileId: fileId,
+          createdDate: DateTime.now(),
+          userId: userId,
+        );
 
         // TODO: Add book to hive database
 
