@@ -1,10 +1,11 @@
 // Before running the program, get the appwrite endpoint,
 // project id, and an api key with access to collections and documents read/write
 // Run the following:
-// dart scripts/db_tests.dart --dart-define=appwriteEndpoint={ENDPOINT}
-//   --dart-define=appwriteProjectId={PROJECT_ID}
-//   --dart-define=appwriteApiKey={KEY}
-
+/*
+ dart scripts/db_tests.dart --dart-define=appwriteEndpoint={ENDPOINT}
+   --dart-define=appwriteProjectId={PROJECT_ID}
+   --dart-define=appwriteApiKey={KEY}
+*/
 // ignore_for_file: avoid_print
 import 'package:dart_appwrite/dart_appwrite.dart';
 import 'package:shodana_reader/core/res/environment_config.dart';

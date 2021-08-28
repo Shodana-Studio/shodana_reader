@@ -2,10 +2,11 @@
 // project id, and an api key with access to health read
 // 
 // Run the following all on the same line:
-// dart scripts/db_setup.dart --dart-define=appwriteEndpoint={ENDPOINT}
-//   --dart-define=appwriteProjectId={PROJECT_ID}
-//   --dart-define=appwriteApiKey={KEY}
-
+/*
+ dart scripts/db_setup.dart --dart-define=appwriteEndpoint={ENDPOINT}
+   --dart-define=appwriteProjectId={PROJECT_ID}
+   --dart-define=appwriteApiKey={KEY}
+*/
 // ignore_for_file: avoid_print
 import 'package:dart_appwrite/dart_appwrite.dart';
 import 'package:shodana_reader/core/res/environment_config.dart';
