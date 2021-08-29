@@ -3,6 +3,10 @@
 [![Codemagic build status](https://api.codemagic.io/apps/60bdd48f362aacd018426ed3/60bdd48f362aacd018426ed2/status_badge.svg)](https://codemagic.io/apps/60bdd48f362aacd018426ed3/60bdd48f362aacd018426ed2/latest_build)
 
 A new Flutter application for reading ebooks.
+The latest branch is library-sync, main does not have anything functional
+
+## Building
+For signing the app for iOS using github actions, [follow this guide](https://docs.github.com/en/actions/guides/installing-an-apple-certificate-on-macos-runners-for-xcode-development)
 
 Requires at least iOS 11 or MacOS 10.15
 
