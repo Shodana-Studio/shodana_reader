@@ -108,7 +108,7 @@ jobs:
       - run: flutter pub get
       - run: flutter clean
       - run: flutter build apk --release
-      - name: Upload appbundle
+      - name: Upload apk
         uses: actions/upload-artifact@v2
         with:
           name: android_apk
