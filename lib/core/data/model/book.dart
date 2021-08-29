@@ -251,6 +251,13 @@ class Book extends Equatable {
     return io.Directory('${dir.path}/ShodanaReader/$localStorageId/$localStorageId');
   }
 
+  /// Gets the path to the cover image.
+  /// Ex: Documents/ShodanaReader/123456789/123456789
+  Future<io.Directory> get imagePath async {
+    final io.Directory dir = await StorageUtil.getAppDirectory();
+    return io.Directory('${dir.path}/ShodanaReader/$localStorageId/cover.png');
+  }
+
   /// Gets the path to the directory the epub and cover image is in.
   /// Ex: Documents/ShodanaReader/123456789
   Future<io.Directory> get bookDirectoryPath async {

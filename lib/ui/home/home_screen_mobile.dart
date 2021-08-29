@@ -1,4 +1,5 @@
 import 'dart:io' as io;
+import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -6,6 +7,8 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:implicitly_animated_reorderable_list/implicitly_animated_reorderable_list.dart';
+import 'package:implicitly_animated_reorderable_list/transitions.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -129,37 +132,10 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
               onRefresh: _onRefresh,
               onLoading: _onLoading,
               // TODO: Get list of books from hive 'books' box
-              child: _ListWidget(widget: widget, books: books, scrollController: scrollController),
+              // child: _GridWidget(widget: widget, books: books, scrollController: scrollController),
+              child: _ReorderableListWidget(widget: widget, books: books, scrollController: scrollController),
 
               // TODO: Add support for staggered grid view and normal grid view
-              // StaggeredGrid(controller: scrollController,),
-
-              // SingleChildScrollView(
-              //   child: Padding(
-              //     padding: const EdgeInsets.only(top: kToolbarHeight + 8.0),
-              //     child: Column(
-              //       mainAxisSize: MainAxisSize.min,
-              //       crossAxisAlignment: CrossAxisAlignment.stretch,
-              //       children: [
-              //         // const SizedBox(height: kToolbarHeight + 8,),
-              //         // ListTile(
-              //         //   title: const Text('Beam to Test Book 0 Details'),
-              //         //   onTap: bookOnPressed,
-              //         // ),
-              //         Align(
-              //           alignment: Alignment.centerLeft,
-              //           child: TextButton(
-              //             onPressed: widget.bookOnPressed,
-              //             child: const Text('Beam to Test Book 0 Details'),
-              //           ),
-              //         ),
-
-              //         // Tile(title: 'Average Abilities', subtitle: 'FUNA'),
-              //         const SizedBox(height: 1200,),
-              //       ],
-              //     ),
-              //   ),
-              // ),
             );
           }
         ),
@@ -167,9 +143,8 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
     );
   }
 }
-
-class _ListWidget extends StatelessWidget {
-  const _ListWidget({
+class _ReorderableListWidget extends StatefulWidget {
+  const _ReorderableListWidget({
     Key? key,
     required this.widget,
     required this.books,
@@ -181,50 +156,107 @@ class _ListWidget extends StatelessWidget {
   final ScrollController scrollController;
 
   @override
+  _ReorderableListWidgetState createState() => _ReorderableListWidgetState();
+}
+
+class _ReorderableListWidgetState extends State<_ReorderableListWidget> {
+  @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return ImplicitlyAnimatedReorderableList<Book>(
       padding: const EdgeInsets.only(
-        top: kToolbarHeight + 8.0,
         bottom: 8.0,
         left: 4.0,
         right: 4.0,
       ),
-      controller: scrollController,
-      itemBuilder: (context, index) {
-        // Add a book button at the top of the listview
-        if (index == 0) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 5.0),
-            child: OutlinedButton(
-              onPressed: widget.addBookAction,
-              child: const Text('Add a book'),
+      items: widget.books,
+      areItemsTheSame: (oldItem, newItem) => oldItem.id == newItem.id,
+      onReorderFinished: (item, from, to, newItems) {
+        // Remember to update the underlying data when the list has been
+        // reordered.
+        // TODO: Change order of data in hive box
+        setState(() {
+          widget.books
+            ..clear()
+            ..addAll(newItems);
+        });
+      },
+      itemBuilder: (context, itemAnimation, item, index) {
+        // Each item must be wrapped in a Reorderable widget.
+        return Reorderable(
+          // Each item must have an unique key.
+          key: ValueKey(item),
+          // The animation of the Reorderable builder can be used to
+          // change to appearance of the item between dragged and normal
+          // state. For example to add elevation when the item is being dragged.
+          // This is not to be confused with the animation of the itemBuilder.
+          // Implicit animations (like AnimatedContainer) are sadly not yet supported.
+          builder: (context, dragAnimation, inDrag) {
+            final t = dragAnimation.value;
+            final elevation = lerpDouble(0, 8, t);
+            final color = Color.lerp(Colors.white, Colors.white.withOpacity(0.8), t);
+
+            return SizeFadeTransition(
+              sizeFraction: 0.7,
+              curve: Curves.easeInOut,
+              animation: itemAnimation,
+              child: Material(
+                color: color,
+                elevation: elevation ?? 0,
+                type: MaterialType.transparency,
+                child: _BookReorderableListTile(book: item),
+              ),
+            );
+          },
+        );
+      },
+      // Since version 0.2.0 you can also display a widget
+      // before the reorderable items...
+      header: Padding(
+        padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: kToolbarHeight + 8.0, bottom: 4.0),
+        child: OutlinedButton(
+          onPressed: widget.widget.addBookAction,
+          child: const Text('Add a book'),
+        ),
+      ),
+      // If you want to use headers or footers, you should set shrinkWrap to true
+      shrinkWrap: true,
+    );
+  }
+}
+
+class _BookReorderableListTile extends StatelessWidget {
+  const _BookReorderableListTile({
+    Key? key,
+    required this.book,
+  }) : super(key: key);
+
+  final Book book;
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: book.bookDirectoryPath,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          final io.Directory bookDir = snapshot.data! as io.Directory;
+          final io.Directory imageDir = io.Directory('${bookDir.path}/cover.png');
+          return ListTileWidget(
+            title: book.title,
+            subtitle: book.author,
+            image: imageDir.path,
+            trailing: const Handle(
+              delay: Duration(milliseconds: 50),
+              // TODO: Get icon color from context theme
+              child: Icon(
+                Icons.list,
+                color: Colors.grey,
+              ),
             ),
           );
         }
-
-        // List tile
-        final book = books[index - 1];
-        return FutureBuilder(
-          future: book.bookDirectoryPath,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              final io.Directory bookDir = snapshot.data! as io.Directory;
-              final io.Directory imageDir = io.Directory('${bookDir.path}/cover.png');
-              return ListTileWidget(
-                key: ValueKey(index - 1),
-                title: book.title,
-                subtitle: book.author,
-                context: context,
-                image: imageDir.path,
-              );
-            }
-            
-            return const CircularProgressIndicator();
-          }
-        );
-      },
-      // itemExtent: 120.0,
-      itemCount: books.length + 1,
+        
+        return const CircularProgressIndicator();
+      }
     );
   }
 }

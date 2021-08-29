@@ -1,5 +1,6 @@
 import 'dart:io' as io;
 import 'package:flutter/material.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 import 'tile.dart';
 
@@ -10,36 +11,44 @@ class ListTileWidget extends Tile {
     subtitle = '', 
     unread = 0, 
     image,
-    required this.context,
+    this.trailing,
   }) : super(key: key, title: title, subtitle: subtitle, unread: unread, image: image);
-  final BuildContext context;
+  final Widget? trailing;
 
   @override
   Widget build(BuildContext context) {
-    return buildStack();
+    return buildStack(context);
   }
 
-  Widget buildStack() {
+  Widget buildStack(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final double imageSizeMultiplier = getValueForScreenType<double>(
+      context: context,
+      mobile: 0.28,
+      tablet: 0.08,
+      desktop: 0.06,
+    );
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
-          // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Flexible(
-              // flex: 1,
+            // TODO: Add fade in
+            ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth: MediaQuery.of(context).size.width * imageSizeMultiplier,
+                maxHeight: MediaQuery.of(context).size.width * imageSizeMultiplier,
+              ),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.file(io.File(image), filterQuality: FilterQuality.medium),
+                borderRadius: BorderRadius.circular(4),
+                child: Image.file(io.File(image), fit: BoxFit.cover, filterQuality: FilterQuality.medium),
               ),
             ),
             const SizedBox(width: 8,),
-            Flexible(
-              flex: 6,
+            Expanded(
               child: Column(
-                // mainAxisSize: MainAxisSize.max,
+                mainAxisSize: MainAxisSize.min,
                 // mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -47,6 +56,10 @@ class ListTileWidget extends Tile {
                   if (subtitle.isNotEmpty) Text(subtitle, style: textTheme.subtitle2),
                 ],
               ),
+            ),
+            // TODO: Add feedback when able to drag
+            Container(
+              child: trailing,
             ),
           ],
         ),
