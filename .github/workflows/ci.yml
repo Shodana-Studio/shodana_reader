@@ -70,7 +70,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: app
-          path: build/ios/archive/Runner.xcarchive
+          path: Users/runner/work/shodana_reader/shodana_reader/build/ios/iphoneos/
 
   build_appbundle:
     name: Build Flutter (Android)
