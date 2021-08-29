@@ -65,12 +65,19 @@ jobs:
           channel: "stable"
       - run: flutter pub get
       - run: flutter clean
-      - run: flutter build ios --release
+      - run: |
+          flutter build ios --release
+          cd build/ios/iphoneos
+          mkdir Payload
+          cd Payload
+          ln -s ../Runner.app
+          cd ..
+          zip -r app.ipa Payload
       - name: Upload IPA
         uses: actions/upload-artifact@v2
         with:
           name: ios_output
-          path: build/ios/iphoneos/
+          path: build/ios/iphoneos/app.ipa
 
   build_appbundle:
     name: Build Flutter (Android)
