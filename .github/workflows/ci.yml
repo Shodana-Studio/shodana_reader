@@ -69,7 +69,7 @@ jobs:
       - name: Upload IPA
         uses: actions/upload-artifact@v2
         with:
-          name: app
+          name: ios_output
           path: Users/runner/work/shodana_reader/shodana_reader/build/ios/iphoneos/
 
   build_appbundle:
@@ -90,8 +90,29 @@ jobs:
       - name: Upload appbundle
         uses: actions/upload-artifact@v2
         with:
-          name: app
+          name: android_appbundle
           path: build/app/outputs/bundle/release/app-release.aab
+
+  build_apk:
+    name: Build Flutter (Android APK)
+    needs: [flutter_test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v1
+        with:
+          java-version: "12.x"
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: "stable"
+      - run: flutter pub get
+      - run: flutter clean
+      - run: flutter build apk --release
+      - name: Upload appbundle
+        uses: actions/upload-artifact@v2
+        with:
+          name: android_apk
+          path: build/app/outputs/flutter-apk/app-release.apk
 
   # Disabled, not currently supported with Github
   # build_windows:
