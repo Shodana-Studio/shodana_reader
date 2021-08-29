@@ -4,6 +4,9 @@
 
 A new Flutter application for reading ebooks.
 
+## Building
+For signing the app for iOS using github actions, [follow this guide](https://docs.github.com/en/actions/guides/installing-an-apple-certificate-on-macos-runners-for-xcode-development)
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
