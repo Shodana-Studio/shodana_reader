@@ -107,7 +107,7 @@ jobs:
           channel: "stable"
       - run: flutter pub get
       - run: flutter clean
-      - run: flutter build windows --release
+      - run: flutter build windows
       - run: flutter pub run msix:create
       - name: Upload msix
         uses: actions/upload-artifact@v2
