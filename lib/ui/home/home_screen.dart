@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:beamer/beamer.dart';
 import 'package:epubx/epubx.dart' as epubx;
+import 'package:http/http.dart' as http;
 import 'package:file_picker/file_picker.dart';
 import 'package:file_selector/file_selector.dart';
 import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
@@ -49,7 +50,6 @@ class _HomeScreenState extends State<HomeScreen> {
     try {
       final String? fileExtension;
       final Uint8List bytes;
-      final io.File fileRef;
 
       // Get the file from the user
       // Uses a different package on windows due to instability with FilePicker
@@ -62,23 +62,27 @@ class _HomeScreenState extends State<HomeScreen> {
           debugPrint('File not chosen');
           return;
         }
-        bytes = await file.readAsBytes();
-        fileRef = io.File(file.path);
+        // Read in the file as a stream to not lock up the ui
+        final stream = http.ByteStream(file.openRead());
+        bytes = await stream.toBytes();
       } else {
-        final PlatformFile file = await StorageUtil.fetchFile(
+        const bool readAsStream = true;
+        final List<PlatformFile> files = await StorageUtil.fetchFile(
           dialogTitle: 'Choose an epub file',
           type: FileType.custom,
           allowedExtensions: ['epub'],
-          withData: true,
+          // Must be false when withReadStream is true
+          // withData: !readAsStream,
           allowCompression: false,
+          withReadStream: readAsStream
         );
+        final PlatformFile file = files.first;
+
         fileExtension = file.extension;
 
-        if (file.bytes == null) {
-          return;
-        }
-        bytes = file.bytes!;
-        fileRef = io.File(file.path!);
+       // Read in the file as a stream to not lock up the ui
+        final stream = http.ByteStream(file.readStream!);
+        bytes = await stream.toBytes();
       }
       
       // debugPrint('File path: ${file.path}');
@@ -114,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
         // Copy file to device storage
         // ignore: unused_local_variable
-        final io.File newFile = await StorageUtil.copyFile(fileRef: fileRef, folder: localStorageId, filename: localStorageId);
+        final io.File newFile = await StorageUtil.copyFile(bytes: bytes, folder: localStorageId, filename: localStorageId);
         debugPrint('Successfully saved the book');
         // Save image to app directory
         final int success = await book.saveCoverImage(epubBookRef: epubBook);

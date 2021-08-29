@@ -1,4 +1,5 @@
 import 'dart:io' as io;
+import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
@@ -56,7 +57,7 @@ class StorageUtil {
   }
 
   /// Copy the file on the device from file picker to the app director
-  static Future<io.File> copyFile({required io.File fileRef, required String folder, required String filename}) async {
+  static Future<io.File> copyFile({required Uint8List bytes, required String folder, required String filename}) async {
     // Save files in directory accessible to the user on android
     final io.Directory dir = await getAppDirectory();
 
@@ -66,8 +67,7 @@ class StorageUtil {
     await io.Directory('${dir.path}/ShodanaReader').create();
     await io.Directory('${dir.path}/ShodanaReader/$folder').create();
     // Copy the file to the app directory
-    final io.File newFile = await fileRef.copy('${dir
-        .path}/ShodanaReader/$folder/$filename');
+    final io.File newFile = await io.File('${dir.path}/ShodanaReader/$folder/$filename').writeAsBytes(bytes);
     return newFile;
   }
 
@@ -99,7 +99,7 @@ class StorageUtil {
   /// with useful information regarding the picked `List<PlatformFile>`.
   ///
   /// For more information, check the [API documentation](https://github.com/miguelpruivo/flutter_file_picker/wiki/api).
-  static Future<PlatformFile> fetchFile({String? dialogTitle,
+  static Future<List<PlatformFile>> fetchFile({String? dialogTitle,
     FileType type = FileType.any, List<String>? allowedExtensions,
     dynamic Function(FilePickerStatus)? onFileLoading, bool allowCompression = true,
     bool allowMultiple = false, bool withData = false, bool withReadStream = false
@@ -116,9 +116,7 @@ class StorageUtil {
     );
 
     if(result != null) {
-      final PlatformFile file = result.files.first;
-
-      return file;
+      return result.files;
     } else {
       // User canceled the picker
       throw Exception('Failed to load book');
