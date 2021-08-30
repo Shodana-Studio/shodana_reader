@@ -16,7 +16,6 @@ class AppwriteController extends StateNotifier<AsyncValue<String>> {
 
   Future<Either<Failure, Response<dynamic>>> createBook(Book book) async {
     state = const AsyncValue.loading();
-
     final result = await _appwriteRepository.createDocument(collectionId: AppConstant.booksCollection, data: book.toMap());
 
     result.fold(
