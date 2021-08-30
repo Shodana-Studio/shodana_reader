@@ -2,7 +2,7 @@ import 'dart:typed_data';
 
 import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 
-import '../../res/app_constants.dart';
+import '../res/app_constants.dart';
 import 'appwrite_file.dart';
 
 class AppwriteService {

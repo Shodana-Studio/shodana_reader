@@ -11,9 +11,9 @@ import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../core/data/model/book_type.dart';
-import '../../core/data/model/epub.dart';
-import '../../core/data/service/storage_util.dart';
+import '../../core/model/book_type.dart';
+import '../../core/model/epub.dart';
+import '../../core/service/storage_util.dart';
 import 'home_screen_mobile.dart';
 
 

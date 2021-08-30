@@ -1,13 +1,13 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/repository/fake_data.dart';
+import '../../../core/res/app_constants.dart';
 import '../../../l10n/my.i18n.dart';
 import '../../home/book_details/book_details_screen.dart';
 import '../../reader/reader_screen.dart';
 import '../../shelves/shelf_details/shelf_details_screen.dart';
 import '../../shelves/shelves_screen.dart';
-import '../../../core/data/repository/fake_data.dart';
-import '../../../core/res/app_constants.dart';
 
 class ShelvesLocation extends BeamLocation {
   ShelvesLocation(BeamState state) : super(state);

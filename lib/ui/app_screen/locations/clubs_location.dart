@@ -1,7 +1,7 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 
-import '../../../core/data/repository/fake_data.dart';
+import '../../../core/repository/fake_data.dart';
 import '../../../l10n/my.i18n.dart';
 import '../../clubs/club_room/club_room_screen.dart';
 import '../../clubs/clubs_screen.dart';

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../core/data/model/book_search_model.dart';
+import '../../core/model/book_search_model.dart';
 import '../../l10n/my.i18n.dart';
 import '../widgets/search_bar.dart';
 

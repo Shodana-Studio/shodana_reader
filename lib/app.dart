@@ -7,7 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'core/data/service/appwrite_service.dart';
+import 'core/service/appwrite_service.dart';
 import 'ui/app_screen/locations/app_location.dart';
 
 

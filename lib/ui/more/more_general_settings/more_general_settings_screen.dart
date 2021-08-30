@@ -3,9 +3,9 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
+import '../../app_screen/provider/left_navigation_rail_provider.dart';
 import '../more_settings/provider/dark_mode_provider.dart';
 import '../more_settings/provider/follow_system_theme_provider.dart';
-import '../../app_screen/provider/left_navigation_rail_provider.dart';
 import 'more_general_settings_screen_mobile.dart';
 
 class GeneralSettings extends HookWidget {

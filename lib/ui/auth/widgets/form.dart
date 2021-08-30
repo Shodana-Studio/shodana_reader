@@ -5,7 +5,7 @@ import 'package:sign_button/sign_button.dart' as sign_button;
 import 'package:flutter_signin_button/flutter_signin_button.dart' as flutter_signin_button;
 import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 
-import '../../../core/data/service/authnotifier_extension.dart';
+import '../../../core/service/authnotifier_extension.dart';
 import '../../../l10n/my.i18n.dart';
 import '../signup_screen.dart';
 
