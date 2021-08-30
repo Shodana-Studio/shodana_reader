@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'core/data/service/appwrite_service.dart';
-import 'core/presentation/locations/app_location.dart';
+import 'ui/app_screen/locations/app_location.dart';
 
 
 class App extends StatefulWidget {

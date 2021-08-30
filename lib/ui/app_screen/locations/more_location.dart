@@ -2,8 +2,8 @@ import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 
 import '../../../l10n/my.i18n.dart';
-import '../../../ui/more/more_details_screen.dart';
-import '../../../ui/more/more_screen.dart';
+import '../../more/more_details_screen.dart';
+import '../../more/more_screen.dart';
 
 class MoreLocation extends BeamLocation {
   MoreLocation(BeamState state) : super(state);
