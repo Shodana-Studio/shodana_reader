@@ -6,18 +6,29 @@ import '../../res/app_constants.dart';
 import 'appwrite_file.dart';
 
 class AppwriteService {
+  AppwriteService({required Client client}) {
+    _client = client;
+    _account = Account(_client);
+    _db = Database(_client);
+    _teams = Teams(_client);
+    _storage = Storage(_client);
+    _avatars = Avatars(_client);
+  }
+
+  // TODO: Remove
   AppwriteService._internal() {
     _client = Client(endPoint: AppConstant.endpoint,)
         .setProject(AppConstant.project)
         .setSelfSigned() // TODO: Remove in production
         ;
     _account = Account(_client);
-    // _db = Database(_client);
+    _db = Database(_client);
     _teams = Teams(_client);
     _storage = Storage(_client);
     _avatars = Avatars(_client);
   }
 
+  // TODO: Remove
   // ignore: prefer_constructors_over_static_methods
   static AppwriteService get instance {
     _instance??= AppwriteService._internal();
@@ -27,13 +38,14 @@ class AppwriteService {
   static AppwriteService? _instance;
   late final Client _client;
   late final Account _account;
-  // late final Database _db;
+  late final Database _db;
   late final Teams _teams;
   late final Storage _storage;
   late final Avatars _avatars;
 
   Client get client => _client;
   Account get account => _account;
+  Database get db => _db;
 
   // Account functions in flappwrite_account_kit
 
