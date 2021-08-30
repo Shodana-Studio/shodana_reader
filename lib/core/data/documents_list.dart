@@ -15,15 +15,4 @@ class DocumentsList {
   final int sum;
   final List<dynamic> documents;
 
-
-  Map<String, dynamic> toMap() {
-    return {
-      'sum': sum,
-      'documents': documents,
-    };
-  }
-
-
-  String toJson() => json.encode(toMap());
-
 }
