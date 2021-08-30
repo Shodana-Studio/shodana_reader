@@ -1,9 +1,21 @@
 import 'dart:typed_data';
 
 import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:shodana_reader/core/model/book.dart';
 
 import '../res/app_constants.dart';
 import 'appwrite_file.dart';
+
+final appwriteServiceProvider = Provider<AppwriteService>((ref) {
+  final appwriteService = AppwriteService(
+    client: Client(endPoint: AppConstant.endpoint,)
+        .setProject(AppConstant.project)
+        .setSelfSigned() // TODO: Remove in production
+  );
+
+  return appwriteService;
+});
 
 class AppwriteService {
   AppwriteService({required Client client}) {
@@ -49,6 +61,24 @@ class AppwriteService {
 
   // Account functions in flappwrite_account_kit
 
+  // Database functions
+  
+  Future<Book> addBook({required Book book, required List<String> read, required List<String> write}) async {
+    final Response res = await _db.createDocument(
+      collectionId: AppConstant.booksCollection,
+      data: book.toMap(),
+      read: read,
+      write: write,
+    );
+    return Book.fromMap(res.data);
+  }
+  
+  Future<List<Book>> getBooks() async {
+    final Response res = await _db.listDocuments(collectionId: AppConstant.booksCollection);
+    // https://appwrite.io/docs/models/documentList
+    return (res.data['documents'] as List).map((e) => Book.fromMap(e)).toList();
+  }
+
   // Teams functions
 
   Future listTeams() {
@@ -79,8 +109,6 @@ class AppwriteService {
     return _teams.deleteMembership(teamId: teamId, membershipId: membershipId);
   }
 
-  // TODO: Db functions
-
   // Storage functions
 
   Future<Uint8List> getProfilePicture(String fileId) async {
@@ -99,6 +127,7 @@ class AppwriteService {
     return AppwriteFile.fromJson(res.data);
   }
 
+  // TODO: Figure out return type
   // Future<Uint8List> getFile(String fileId) async {
   //   final res = await _storage.getFileDownload(fileId: fileId);
 
