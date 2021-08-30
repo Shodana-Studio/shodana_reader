@@ -2,10 +2,11 @@ import 'dart:typed_data';
 
 import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:shodana_reader/core/model/book.dart';
 
+import '../data/appwrite_file.dart';
+import '../data/documents_list.dart';
+import '../model/book.dart';
 import '../res/app_constants.dart';
-import 'appwrite_file.dart';
 
 final appwriteServiceProvider = Provider<AppwriteService>((ref) {
   final appwriteService = AppwriteService(
@@ -76,7 +77,8 @@ class AppwriteService {
   Future<List<Book>> getBooks() async {
     final Response res = await _db.listDocuments(collectionId: AppConstant.booksCollection);
     // https://appwrite.io/docs/models/documentList
-    return (res.data['documents'] as List).map((e) => Book.fromMap(e)).toList();
+    final List documents = (res.data as DocumentsList).documents;
+    return documents.map((e) => Book.fromMap(e)).toList();
   }
 
   // Teams functions

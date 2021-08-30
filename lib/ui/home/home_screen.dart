@@ -3,19 +3,19 @@ import 'dart:typed_data';
 
 import 'package:beamer/beamer.dart';
 import 'package:epubx/epubx.dart' as epubx;
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:http/http.dart' as http;
 import 'package:file_picker/file_picker.dart';
 import 'package:file_selector/file_selector.dart';
 import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:http/http.dart' as http;
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:shodana_reader/core/model/book.dart';
-import 'package:shodana_reader/core/service/appwrite_service.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../core/model/book.dart';
 import '../../core/model/book_type.dart';
 import '../../core/model/epub.dart';
+import '../../core/service/appwrite_service.dart';
 import '../../core/service/storage_util.dart';
 import 'home_screen_mobile.dart';
 
