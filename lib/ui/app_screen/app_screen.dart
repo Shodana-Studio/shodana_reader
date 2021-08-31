@@ -11,8 +11,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pedantic/pedantic.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-import '../../core/model/book_search_model.dart';
 import '../../app_constants.dart';
+import '../../core/model/book_search_model.dart';
 import '../../l10n/my.i18n.dart';
 import '../auth/login_screen.dart';
 import '../widgets/search_bar.dart';

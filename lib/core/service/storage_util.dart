@@ -6,8 +6,8 @@ import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../model/book.dart';
 import '../../app_constants.dart';
+import '../model/book.dart';
 
 class StorageUtil {
   StorageUtil._();

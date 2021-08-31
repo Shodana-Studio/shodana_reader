@@ -1,8 +1,8 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 
-import '../../../core/repository/fake_data.dart';
 import '../../../app_constants.dart';
+import '../../../core/repository/fake_data.dart';
 import '../../../l10n/my.i18n.dart';
 import '../../home/book_details/book_details_screen.dart';
 import '../../home/home_screen.dart';
