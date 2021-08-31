@@ -1,5 +1,4 @@
 import 'dart:io' as io;
-import 'dart:typed_data';
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
@@ -16,7 +15,6 @@ import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../core/model/book.dart';
 import '../../core/model/book_search_model.dart';
-import '../../core/service/appwrite_service.dart';
 import '../../core/service/storage_util.dart';
 import '../../l10n/my.i18n.dart';
 import '../widgets/custom_waterdrop_header.dart';
