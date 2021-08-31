@@ -42,12 +42,14 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
   late List<Book> books;
   late Box booksBox;
 
-  Future<io.File> _downloadFile() async {
-    final Uint8List data = await AppwriteService.instance.getFileDownload('612e5e93b5068');
-    final io.Directory dir = await StorageUtil.getAppDirectory();
-    final io.File file = await io.File(dir.path).writeAsBytes(data.toList());
-    return file;
-  }
+  // Test downloading file to a location
+  // Future<io.File> _downloadFile() async {
+  //   final Uint8List data = await AppwriteService.instance.getFileDownload('612e5e93b5068');
+  //   final io.Directory dir = await StorageUtil.getAppDirectory();
+  //   // print(dir.path);
+  //   final io.File file = await io.File('${dir.path}/download1.epub').writeAsBytes(data.toList());
+  //   return file;
+  // }
 
   Future<void> _onRefresh() async {
     books = StorageUtil.getAllBooks();
@@ -90,11 +92,11 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
         hint: 'Search recents...'.i18n,
         model: searchModel,
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _downloadFile,
-        tooltip: 'Download'.i18n,
-        child: const Icon(Icons.download),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: _downloadFile,
+      //   tooltip: 'Download'.i18n,
+      //   child: const Icon(Icons.download),
+      // ),
     ) ;
   }
 
