@@ -1,5 +1,7 @@
 import 'dart:io' as io;
+import 'dart:typed_data';
 import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -14,6 +16,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../core/model/book.dart';
 import '../../core/model/book_search_model.dart';
+import '../../core/service/appwrite_service.dart';
 import '../../core/service/storage_util.dart';
 import '../../l10n/my.i18n.dart';
 import '../widgets/custom_waterdrop_header.dart';
@@ -38,6 +41,13 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
   final RefreshController _refreshController = RefreshController();
   late List<Book> books;
   late Box booksBox;
+
+  Future<io.File> _downloadFile() async {
+    final Uint8List data = await AppwriteService.instance.getFileDownload('612e5e93b5068');
+    final io.Directory dir = await StorageUtil.getAppDirectory();
+    final io.File file = await io.File(dir.path).writeAsBytes(data.toList());
+    return file;
+  }
 
   Future<void> _onRefresh() async {
     books = StorageUtil.getAllBooks();
@@ -80,11 +90,11 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
         hint: 'Search recents...'.i18n,
         model: searchModel,
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: widget.fabOnPressed,
-      //   tooltip: 'Add an eBook'.i18n,
-      //   child: const Icon(Icons.add),
-      // ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _downloadFile,
+        tooltip: 'Download'.i18n,
+        child: const Icon(Icons.download),
+      ),
     ) ;
   }
 

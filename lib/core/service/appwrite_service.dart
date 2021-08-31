@@ -131,12 +131,11 @@ class AppwriteService {
     return AppwriteFile.fromJson(res.data);
   }
 
-  // TODO: Figure out return type
-  // Future<Uint8List> getFile(String fileId) async {
-  //   final res = await _storage.getFileDownload(fileId: fileId);
+  Future<Uint8List> getFileDownload(String fileId) async {
+    final res = await _storage.getFileDownload(fileId: fileId);
 
-  //   return res.data;
-  // }
+    return res.data;
+  }
 
   // Avatars functions
 
