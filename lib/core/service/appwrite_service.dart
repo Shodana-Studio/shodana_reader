@@ -6,7 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../data/appwrite_file.dart';
 import '../data/documents_list.dart';
 import '../model/book.dart';
-import '../res/app_constants.dart';
+import '../../app_constants.dart';
 
 final appwriteServiceProvider = Provider<AppwriteService>((ref) {
   final appwriteService = AppwriteService(
@@ -80,6 +80,8 @@ class AppwriteService {
     final List documents = (res.data as DocumentsList).documents;
     return documents.map((e) => Book.fromMap(e)).toList();
   }
+
+  // TODO: Modify and delete books using cloud function
 
   // Teams functions
 

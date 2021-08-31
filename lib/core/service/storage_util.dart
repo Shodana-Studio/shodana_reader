@@ -7,7 +7,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../model/book.dart';
-import '../res/app_constants.dart';
+import '../../app_constants.dart';
 
 class StorageUtil {
   StorageUtil._();

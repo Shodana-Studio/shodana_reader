@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../core/res/app_constants.dart';
+import '../../../../app_constants.dart';
 import '../../../../core/service/storage_util.dart';
 
 final followSystemThemeSwitchProvider =

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../core/res/app_constants.dart';
+import '../../app_constants.dart';
 import '../app_screen/provider/bottom_navigation_provider.dart';
 import 'ebook_reader/ebook_reader_screen.dart';
 import 'html_reader/html_reader_screen.dart';
