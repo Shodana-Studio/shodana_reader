@@ -28,7 +28,6 @@ class AppwriteService {
     _avatars = Avatars(_client);
   }
 
-  // TODO: Remove
   AppwriteService._internal() {
     _client = Client(endPoint: AppConstant.endpoint,)
         .setProject(AppConstant.project)
@@ -41,7 +40,6 @@ class AppwriteService {
     _avatars = Avatars(_client);
   }
 
-  // TODO: Remove
   // ignore: prefer_constructors_over_static_methods
   static AppwriteService get instance {
     _instance??= AppwriteService._internal();
