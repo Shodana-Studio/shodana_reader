@@ -75,8 +75,10 @@ dependencies:
   flutter_staggered_grid_view: ^0.4.0
   reorderable_grid_view: ^1.1.0
   transparent_image: ^2.0.0
-  native_draggable:
-    git: https://github.com/rodydavis/native_draggable
+  # TODO: Add ability to drag files into app
+  # native_draggable:
+  #   # git: https://github.com/getBoolean/native_draggable
+  #   path: ../native_draggable
 
   # For Utilities
   url_launcher: ^6.0.9

@@ -819,15 +819,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.0"
-  native_draggable:
-    dependency: "direct main"
-    description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "15c9e8412d313c904395039d055d88f4521de828"
-      url: "https://github.com/rodydavis/native_draggable"
-    source: git
-    version: "0.0.1"
   node_preamble:
     dependency: transitive
     description:
