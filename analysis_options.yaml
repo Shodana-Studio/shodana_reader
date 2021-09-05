@@ -87,3 +87,6 @@ linter:
 
     # Breaks FutureBuilder with widgets
     avoid_types_on_closure_parameters: false
+
+    # Disabled to better distinquish commands
+    library_prefixes: false

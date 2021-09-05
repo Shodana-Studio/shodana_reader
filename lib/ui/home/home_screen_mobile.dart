@@ -10,9 +10,11 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:implicitly_animated_reorderable_list/implicitly_animated_reorderable_list.dart';
 import 'package:implicitly_animated_reorderable_list/transitions.dart';
+import 'package:logger/logger.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
+import '../../core/commands/refresh_books_command.dart';
 import '../../core/data/book.dart';
 import '../../core/model/book_search_model.dart';
 import '../../core/service/storage_util.dart';
@@ -39,6 +41,7 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
   final RefreshController _refreshController = RefreshController();
   late List<Book> books;
   late Box booksBox;
+  final log = Logger();
 
   // Test downloading file to a location
   // Future<io.File> _downloadFile() async {
@@ -50,6 +53,11 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
   // }
 
   Future<void> _onRefresh() async {
+    final resp = await RefreshBooksCommand().run();
+    resp.fold(
+      (l) => log.e(l.message),
+      (r) => log.i('Books refreshed successfully'),
+    );
     books = StorageUtil.getAllBooks();
     debugPrint(books.toString());
     // temp delay

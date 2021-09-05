@@ -1,7 +1,7 @@
 class AppConstant {
   // Settings
   static const String settingsBoxKey = 'settings';
-  static const String booksBoxKey = 'booksBox';
+  static const String booksBoxKey = 'bookBox';
   static const String darkModeKey = 'darkMode';
   static const String followSystemThemeKey = 'followSystemTheme';
   static const String defaultStartingPageKey = 'defaultStartingPage';
@@ -24,18 +24,18 @@ class AppConstant {
 
   // Appwrite
   // Mac
-  static const String url = 'http://localhost/';
-  static const String endpoint = 'http://localhost/v1';
-  static const String project = '60bbe0b4363f5';
+  // static const String url = 'http://localhost/';
+  // static const String endpoint = 'http://localhost/v1';
+  // static const String project = '60bbe0b4363f5';
   // Desktop
-  // static const String url = 'http://192.168.1.191';
-  // static const String endpoint = 'http://192.168.1.191/v1';
-  // static const String project = '611ffbae6bdd9';
+  static const String url = 'http://192.168.1.191';
+  static const String endpoint = 'http://192.168.1.191/v1';
+  static const String project = '611ffbae6bdd9';
 
   // Appwrite Database
-  static const String readingStatsCollection = '61205e62f3bc5';
-  static const String booksCollection = '61205e630fbcb';
-  static const String shelvesCollection = '61205e636767b';
+  static const String readingStatsCollection = '613435387a69b';
+  static const String booksCollection = '6134353890dd5';
+  static const String shelvesCollection = '61343538cfeba';
 
 }
 

@@ -4,19 +4,8 @@ import 'package:dartz/dartz.dart';
 import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../app_constants.dart';
 import '../data/failure.dart';
 import '../service/appwrite_service.dart';
-
-final appwriteServiceProvider = Provider<AppwriteService>((ref) {
-  final appwriteService = AppwriteService(
-    client: Client(endPoint: AppConstant.endpoint,)
-        .setProject(AppConstant.project)
-        .setSelfSigned() // TODO: Remove in production
-  );
-
-  return appwriteService;
-});
 
 final appwriteRepositoryProvider = Provider<AppwriteRepository>((ref) {
   final appwriteService = ref.watch(appwriteServiceProvider);

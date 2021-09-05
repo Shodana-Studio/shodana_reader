@@ -1,10 +1,14 @@
+import 'package:dartz/dartz.dart' as dz;
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:sign_button/sign_button.dart' as sign_button;
 import 'package:flutter_signin_button/flutter_signin_button.dart' as flutter_signin_button;
-import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
+import 'package:sign_button/sign_button.dart' as sign_button;
 
+import '../../../core/commands/account/login_command.dart';
+import '../../../core/commands/account/oauth_login_command.dart';
+import '../../../core/commands/account/signup_command.dart';
+import '../../../core/data/failure.dart';
 import '../../../core/service/authnotifier_extension.dart';
 import '../../../l10n/my.i18n.dart';
 import '../signup_screen.dart';
@@ -122,16 +126,21 @@ class SignInWithGithub extends StatelessWidget {
   Widget build(BuildContext context) {
     return sign_button.SignInButton(
       buttonType: sign_button.ButtonType.github,
-      onPressed: () async {
-        if ( !(await context.authNotifier.createOAuth2SessionFromEnum(provider: OAuth.github)) ) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,
-            content: Text(context.authNotifier.error ??
-                'Unknown error'.i18n, style: Theme.of(context).snackBarTheme.contentTextStyle),
-          ));
-          debugPrint(context.authNotifier.error ??
-              'Unknown error'.i18n);
-        }
+      onPressed: () async {    
+        final dz.Either<Failure, bool> result = await OAuthLoginCommand().run(provider: OAuth.github);
+
+        result.fold(
+          (failure) {
+            // If login fails, notify the user
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,
+              content: Text(failure.message, style: Theme.of(context).snackBarTheme.contentTextStyle),
+            ));
+
+            debugPrint(failure.message);
+          },
+          (success) => null
+        );
       },
     );
   }
@@ -149,15 +158,20 @@ class SignInWithDiscord extends StatelessWidget {
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.horizontal(left: Radius.circular(90.0), right: Radius.circular(90.0))),
       text: 'Sign in with Discord'.i18n,
       onPressed: () async {
-        if ( !(await context.authNotifier.createOAuth2SessionFromEnum(provider: OAuth.discord)) ) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,
-            content: Text(context.authNotifier.error ??
-                'Unknown error'.i18n, style: Theme.of(context).snackBarTheme.contentTextStyle),
-          ));
-          debugPrint(context.authNotifier.error ??
-              'Unknown error'.i18n);
-        }
+        final dz.Either<Failure, bool> result = await OAuthLoginCommand().run(provider: OAuth.discord);
+
+        result.fold(
+          (failure) {
+            // If login fails, notify the user
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,
+              content: Text(failure.message, style: Theme.of(context).snackBarTheme.contentTextStyle),
+            ));
+
+            debugPrint(failure.message);
+          },
+          (success) => null
+        );
       },
     );
   }
@@ -181,17 +195,20 @@ class LoginButton extends StatelessWidget {
         onPressed: () async {
           final email = emailController.text;
           final password = passwordController.text;
+          final dz.Either<Failure, bool> result = await LoginCommand().run(context: context, email: email, password: password);
 
-          if ( !(await context.authNotifier.createSession(
-              email: email, password: password)) ) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,
-              content: Text(context.authNotifier.error ??
-                  'Unknown error'.i18n, style: Theme.of(context).snackBarTheme.contentTextStyle),
-            ));
-            debugPrint(context.authNotifier.error ??
-                'Unknown error'.i18n);
-          }
+          result.fold(
+            (failure) {
+              // If login fails, notify the user
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,
+                content: Text(failure.message, style: Theme.of(context).snackBarTheme.contentTextStyle),
+              ));
+
+              debugPrint(failure.message);
+            },
+            (success) => null
+          );
         },
         child: Text('Login'.i18n),
       ),
@@ -241,21 +258,28 @@ class SignupButton extends StatelessWidget {
           final email = emailController.text;
           final password = passwordController.text;
 
-          if ( !(await context.authNotifier.create(name: username, email: email, password: password)) ) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,
-              content: Text(context.authNotifier.error ??
-                  'Unknown error'.i18n, style: Theme.of(context).snackBarTheme.contentTextStyle),
-            ));
-            debugPrint(context.authNotifier.error ??
-                'Unknown error'.i18n);
-          } else {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,
-              content: Text('Successfully signed up.'.i18n),
-            ));
-            Navigator.pop(context);
-          }
+          
+          final dz.Either<Failure, bool> result = await SignupCommand().run(context: context, username: username, email: email, password: password);
+
+          result.fold(
+            (failure) {
+              // If login fails, notify the user
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,
+                content: Text(failure.message, style: Theme.of(context).snackBarTheme.contentTextStyle),
+              ));
+
+              debugPrint(failure.message);
+            },
+            (success) {
+              // Signup successful
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,
+                content: Text('Successfully signed up.'.i18n),
+              ));
+              Navigator.pop(context);
+            }
+          );
         },
         child: Text('Signup'.i18n),
       ),

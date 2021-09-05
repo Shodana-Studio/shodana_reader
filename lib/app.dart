@@ -1,13 +1,13 @@
 // APP
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:beamer/beamer.dart';
-import 'package:flappwrite_account_kit/flappwrite_account_kit.dart' as appwrite;
+import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'core/service/appwrite_service.dart';
+import 'core/commands/base_command.dart' as Commands;
 import 'ui/app_screen/locations/app_location.dart';
 
 
@@ -56,9 +56,10 @@ class _AppState extends State<App> {
       visualDensity: FlexColorScheme.comfortablePlatformDensity,
     ).toTheme;
 
-
-    return appwrite.FlAppwriteAccountKit(
-      client: AppwriteService.instance.client,
+    
+    Commands.init(context);
+    return FlAppwriteAccountKit(
+      client: Commands.BaseCommand().appwriteService.client,
       child: AdaptiveTheme(
         light: light.copyWith(
           snackBarTheme: dark.snackBarTheme.copyWith(

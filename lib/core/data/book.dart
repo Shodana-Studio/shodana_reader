@@ -127,7 +127,7 @@ class Book extends Equatable {
       lastModifiedDate,
       startReadingDate ?? 'No Started Reading Date',
       finishReadingDate ?? 'No Finished Reading Date',
-      metadata,
+      metadata ?? 'No metadata',
       shelfIds ?? 'Not associated with any shelves',
     ];
   }

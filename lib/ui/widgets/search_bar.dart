@@ -12,10 +12,12 @@ import 'package:implicitly_animated_reorderable_list/transitions.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 
 import '../../app_constants.dart';
+import '../../core/commands/account/get_account_command.dart';
+import '../../core/commands/account/logout_command.dart';
+import '../../core/commands/account/profile_image_url.dart';
 import '../../core/data/book.dart';
 import '../../core/model/book_search_model.dart';
 import '../../core/repository/fake_data.dart';
-import '../../core/service/appwrite_service.dart';
 import '../../l10n/my.i18n.dart';
 import '../more/more_about/more_about_screen.dart';
 import '../more/more_settings/more_settings_screen.dart' show MoreSettingsScreen;
@@ -58,7 +60,7 @@ class _SearchState extends State<SearchBar> {
     PopupMenuItem(
       padding: EdgeInsets.zero,
       child: FutureBuilder(
-        future: context.authNotifier.account.get(),
+        future: GetAccountCommand().run(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             // Menu items for when not logged in
@@ -289,7 +291,7 @@ class _SearchState extends State<SearchBar> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(90.0),
               child: FutureBuilder(
-                future: context.authNotifier.account.get(),
+                future: GetAccountCommand().run(),
                 builder: (context, snapshot) {
                   if (snapshot.hasError) {
                     return const CircleAvatar(
@@ -428,7 +430,7 @@ class _SearchState extends State<SearchBar> {
         ),
         TextButton(
           onPressed: () {
-            context.authNotifier.deleteSession();
+            LogoutCommand().run(context);
             Navigator.of(context).pop();
           },
           style: Theme.of(context).textButtonTheme.style,
@@ -440,7 +442,7 @@ class _SearchState extends State<SearchBar> {
 
   Widget buildProfileImage(String name) {
     return CachedNetworkImage(
-      imageUrl: AppwriteService.instance.getInitialsLink(name),
+      imageUrl: ProfileImageCommand().run(name),
       progressIndicatorBuilder: (context, url, downloadProgress) =>
           CircularProgressIndicator(value: downloadProgress.progress),
       errorWidget: (context, url, error) => const Icon(Icons.error),
