@@ -8,7 +8,7 @@ part of 'shelf.dart';
 
 class ShelfAdapter extends TypeAdapter<Shelf> {
   @override
-  final int typeId = 3;
+  final int typeId = 20;
 
   @override
   Shelf read(BinaryReader reader) {
@@ -17,46 +17,37 @@ class ShelfAdapter extends TypeAdapter<Shelf> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Shelf(
-      id: fields[10] as String?,
-      userId: fields[0] as String,
-      title: fields[1] as String,
-      titleLastModDate: fields[2] as DateTime,
-      createdDate: fields[3] as DateTime,
-      description: fields[4] as String?,
-      descriptionLastModDate: fields[5] as DateTime?,
+      id: fields[0] as String?,
+      userId: fields[1] as String?,
+      title: fields[2] as String?,
+      createdDate: fields[3] as DateTime?,
+      lastModifiedDate: fields[4] as DateTime,
+      description: fields[5] as String?,
       startReadingDate: fields[6] as DateTime?,
-      startReadingDateLastModDate: fields[7] as DateTime?,
-      finishReadingDate: fields[8] as DateTime?,
-      finishReadingDateLastModDate: fields[9] as DateTime?,
+      finishReadingDate: fields[7] as DateTime?,
     );
   }
 
   @override
   void write(BinaryWriter writer, Shelf obj) {
     writer
-      ..writeByte(11)
-      ..writeByte(10)
-      ..write(obj.id)
+      ..writeByte(8)
       ..writeByte(0)
-      ..write(obj.userId)
+      ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.title)
+      ..write(obj.userId)
       ..writeByte(2)
-      ..write(obj.titleLastModDate)
+      ..write(obj.title)
       ..writeByte(3)
       ..write(obj.createdDate)
       ..writeByte(4)
-      ..write(obj.description)
+      ..write(obj.lastModifiedDate)
       ..writeByte(5)
-      ..write(obj.descriptionLastModDate)
+      ..write(obj.description)
       ..writeByte(6)
       ..write(obj.startReadingDate)
       ..writeByte(7)
-      ..write(obj.startReadingDateLastModDate)
-      ..writeByte(8)
-      ..write(obj.finishReadingDate)
-      ..writeByte(9)
-      ..write(obj.finishReadingDateLastModDate);
+      ..write(obj.finishReadingDate);
   }
 
   @override
