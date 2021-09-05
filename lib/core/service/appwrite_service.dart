@@ -75,7 +75,7 @@ class AppwriteService {
   Future<List<Book>> getBooks() async {
     final Response res = await _db.listDocuments(collectionId: AppConstant.booksCollection);
     // https://appwrite.io/docs/models/documentList
-    final List documents = (res.data as DocumentsList).documents;
+    final List documents = DocumentsList.fromMap(res.data).documents;
     return documents.map((e) => Book.fromMap(e)).toList();
   }
 
