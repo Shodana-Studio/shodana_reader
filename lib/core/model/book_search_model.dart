@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../data/book.dart';
 import '../repository/fake_data.dart';
-import 'book.dart';
 import 'search_model.dart';
 
 final bookSearchProvider =

@@ -13,7 +13,7 @@ import 'package:implicitly_animated_reorderable_list/transitions.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-import '../../core/model/book.dart';
+import '../../core/data/book.dart';
 import '../../core/model/book_search_model.dart';
 import '../../core/service/storage_util.dart';
 import '../../l10n/my.i18n.dart';

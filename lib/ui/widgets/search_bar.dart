@@ -12,7 +12,7 @@ import 'package:implicitly_animated_reorderable_list/transitions.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 
 import '../../app_constants.dart';
-import '../../core/model/book.dart';
+import '../../core/data/book.dart';
 import '../../core/model/book_search_model.dart';
 import '../../core/repository/fake_data.dart';
 import '../../core/service/appwrite_service.dart';

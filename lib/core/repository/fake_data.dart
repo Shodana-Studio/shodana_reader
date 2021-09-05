@@ -1,5 +1,5 @@
-import '../model/book.dart';
-import '../model/book_type.dart';
+import '../data/book.dart';
+import '../data/book_type.dart';
 
 List<Book> books = [
   Book(
@@ -11,7 +11,7 @@ List<Book> books = [
     createdDate: DateTime.parse('2020-07-02'),
     userId: '60b02ca26af41',
     shelfIds: const [],
-    shelfIdsLastModDate: DateTime.now().toUtc(),
+    lastModifiedDate: DateTime.now().toUtc(),
   ),
   Book(
     title: 'I Shall Survive Using Potions',
@@ -22,7 +22,7 @@ List<Book> books = [
     createdDate: DateTime.parse('2020-07-02'),
     userId: '60b02ca26af41',
     shelfIds: const [],
-    shelfIdsLastModDate: DateTime.now().toUtc(),
+    lastModifiedDate: DateTime.now().toUtc(),
   ),
 ];
 
@@ -36,7 +36,7 @@ List<Book> history = [
     createdDate: DateTime.parse('2020-07-02'),
     userId: '60b02ca26af41',
     shelfIds: const [],
-    shelfIdsLastModDate: DateTime.now().toUtc(),
+    lastModifiedDate: DateTime.now().toUtc(),
   ),
 ];
 

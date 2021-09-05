@@ -12,9 +12,9 @@ import 'package:http/http.dart' as http;
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../core/model/book.dart';
-import '../../core/model/book_type.dart';
-import '../../core/model/epub.dart';
+import '../../core/data/book.dart';
+import '../../core/data/book_type.dart';
+import '../../core/data/epub.dart';
 import '../../core/service/appwrite_service.dart';
 import '../../core/service/storage_util.dart';
 import 'home_screen_mobile.dart';
@@ -121,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
           userId: userId,
           localStorageId: localStorageId,
           shelfIds: const [],
-          shelfIdsLastModDate: DateTime.now().toUtc(),
+          lastModifiedDate: DateTime.now().toUtc(),
           title: epubBook.Title,
           author: epubBook.Author,
         );

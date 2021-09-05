@@ -5,7 +5,7 @@ import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../app_constants.dart';
-import '../model/failure.dart';
+import '../data/failure.dart';
 import '../service/appwrite_service.dart';
 
 final appwriteServiceProvider = Provider<AppwriteService>((ref) {

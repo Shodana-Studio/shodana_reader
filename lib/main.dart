@@ -7,9 +7,9 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'app.dart';
-import 'core/model/book.dart';
-import 'core/model/book_type.dart';
-import 'core/model/shelf.dart';
+import 'core/data/book.dart';
+import 'core/data/book_type.dart';
+import 'core/data/shelf.dart';
 import 'core/service/storage_util.dart';
 
 Future<AdaptiveThemeMode?> init() async {

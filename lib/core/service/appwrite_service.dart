@@ -5,8 +5,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../app_constants.dart';
 import '../data/appwrite_file.dart';
+import '../data/book.dart';
 import '../data/documents_list.dart';
-import '../model/book.dart';
 
 final appwriteServiceProvider = Provider<AppwriteService>((ref) {
   final appwriteService = AppwriteService(

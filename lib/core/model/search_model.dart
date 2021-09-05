@@ -1,9 +1,8 @@
 // import 'dart:convert';
 
+import '../data/book.dart';
 // import 'package:http/http.dart' as http;
 import '../repository/fake_data.dart';
-
-import 'book.dart';
 
 abstract class SearchModel {
   bool isLoading = false;
