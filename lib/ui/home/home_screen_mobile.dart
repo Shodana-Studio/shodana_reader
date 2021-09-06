@@ -252,11 +252,11 @@ class _BookReorderableListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
+    return FutureBuilder<io.Directory>(
       future: book.bookDirectoryPath,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          final io.Directory bookDir = snapshot.data! as io.Directory;
+          final io.Directory bookDir = snapshot.data!;
           final io.Directory imageDir = io.Directory('${bookDir.path}/cover.png');
           return ListTileWidget(
             title: book.title,
@@ -334,11 +334,11 @@ class _GridWidget extends StatelessWidget {
 
     // Grid tile
     final book = books[index - 1];
-    return FutureBuilder(
+    return FutureBuilder<io.Directory>(
       future: book.bookDirectoryPath,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          final io.Directory bookDir = snapshot.data! as io.Directory;
+          final io.Directory bookDir = snapshot.data!;
           final io.Directory imageDir = io.Directory('${bookDir.path}/cover.png');
           return GridTileWidget(
             key: ValueKey(index - 1),

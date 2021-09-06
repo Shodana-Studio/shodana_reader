@@ -59,7 +59,7 @@ class _SearchState extends State<SearchBar> {
   List<PopupMenuEntry> buildProfileMenuItems(BuildContext context) => [
     PopupMenuItem(
       padding: EdgeInsets.zero,
-      child: FutureBuilder(
+      child: FutureBuilder<Response>(
         future: GetAccountCommand().run(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
@@ -84,7 +84,7 @@ class _SearchState extends State<SearchBar> {
 
           else if (snapshot.hasData) {
             // Menu items for when logged in
-            final User user = User.fromMap((snapshot.data! as Response<dynamic>).data);
+            final User user = User.fromMap((snapshot.data!).data);
             return ListTile(
               contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
               leading: Column(
@@ -290,7 +290,7 @@ class _SearchState extends State<SearchBar> {
             radius: 16.0,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(90.0),
-              child: FutureBuilder(
+              child: FutureBuilder<Response>(
                 future: GetAccountCommand().run(),
                 builder: (context, snapshot) {
                   if (snapshot.hasError) {
@@ -301,7 +301,7 @@ class _SearchState extends State<SearchBar> {
                   }
 
                   else if (snapshot.hasData) {
-                    final User user = User.fromMap((snapshot.data! as Response<dynamic>).data);
+                    final User user = User.fromMap((snapshot.data!).data);
                     return buildProfileImage(user.name);
                   }
                   
