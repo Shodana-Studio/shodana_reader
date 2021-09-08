@@ -1,11 +1,18 @@
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:shodana_reader/core/data/app_data.dart';
 
-final appModelProvider = Provider<AppModel>((ref) {
-  final appModel = AppModel();
+final appModelProvider = StateProvider<AppModel>((ref) => AppModel());
 
-  return appModel;
+final appModelNotifierProvider = StateNotifierProvider<AppModelNotifier, AppData>((ref) {
+  return AppModelNotifier();
 });
+class AppModelNotifier extends StateNotifier<AppData> {
+  AppModelNotifier() : super(const AppData());
+  
+}
+
+
 
 class AppModel extends ChangeNotifier {
   String? _currentUser;

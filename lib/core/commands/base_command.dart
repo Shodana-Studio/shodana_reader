@@ -14,7 +14,7 @@ void init(BuildContext c) => _mainContext = c;
 class BaseCommand {
   // Models
   UserModel userModel = _mainContext.read(userModelProvider);
-  AppModel appModel = _mainContext.read(appModelProvider);
+  AppModel appModel = _mainContext.read(appModelProvider).state;
   // Services
   AppwriteService appwriteService = _mainContext.read(appwriteServiceProvider);
 }
