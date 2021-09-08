@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:shodana_reader/core/data/app_data.dart';
 
 
 import '../model/app_model.dart';
