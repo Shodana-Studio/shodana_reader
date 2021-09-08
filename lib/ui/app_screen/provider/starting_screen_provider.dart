@@ -54,9 +54,6 @@ class StartingPage extends StateNotifier<String>{
     } else if (screen == AppConstant.discoverScreen) {
       lastUsedEnabled.setDisabled();
       defaultStartingPageProvider.setPage(3);
-    // } else if (screen == moreScreen) {
-    //   lastUsedEnabled.setDisabled();
-    //   defaultStartingPageProvider.setPage(4);
     } else {
       debugPrint('Error: Invalid screen passed into setScreen');
     }
