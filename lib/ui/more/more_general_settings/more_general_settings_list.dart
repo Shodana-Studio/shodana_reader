@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../core/model/app_model.dart';
 import '../../../l10n/my.i18n.dart';
 import '../../app_screen/provider/left_navigation_rail_provider.dart';
-import '../more_settings/provider/dark_mode_provider.dart';
 import '../more_settings/provider/follow_system_theme_provider.dart';
 import '../widgets/settings_section_header.dart';
 import 'starting_screen_item.dart';
@@ -52,7 +52,7 @@ class GeneralSettingsList extends StatelessWidget {
           SwitchListTile(
             title: Text('Dark mode'.i18n),
             onChanged: (bool value) {
-              context.read(darkModeSwitchProvider.notifier).toggle();
+              context.read(appModelNotifierProvider.notifier).toggleDarkMode();
               if (!followSysTheme) {
                 if (value) {
                   AdaptiveTheme.of(context).setDark();

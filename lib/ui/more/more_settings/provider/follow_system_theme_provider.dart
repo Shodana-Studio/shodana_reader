@@ -1,20 +1,22 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../app_constants.dart';
+import '../../../../core/data/app_data.dart';
+import '../../../../core/model/app_model.dart';
 import '../../../../core/service/storage_util.dart';
 
 final followSystemThemeSwitchProvider =
 StateNotifierProvider<FollowSystemThemeSwitch, bool>((ref) {
-  return FollowSystemThemeSwitch();
+  final appData = ref.read(appModelNotifierProvider);
+  return FollowSystemThemeSwitch(appData, ref);
 });
 
 class FollowSystemThemeSwitch extends StateNotifier<bool>{
-  // FollowSystemThemeSwitch() : super(StorageUtil.getBool('followSystemTheme'));
-  FollowSystemThemeSwitch() : super(StorageUtil.getSetting(key: AppConstant.followSystemThemeKey, defValue: true));
+  FollowSystemThemeSwitch(AppData appData, this.ref) : super(appData.followSystemTheme);
+  final ProviderReference ref;
 
   void toggle() {
     state = !state;
-    // StorageUtil.putBool('followSystemTheme', value: state);
     StorageUtil.putSetting(key: AppConstant.followSystemThemeKey, value: state);
   }
 

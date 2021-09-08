@@ -3,8 +3,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
+import '../../../core/model/app_model.dart';
 import '../../app_screen/provider/left_navigation_rail_provider.dart';
-import '../more_settings/provider/dark_mode_provider.dart';
 import '../more_settings/provider/follow_system_theme_provider.dart';
 import 'more_general_settings_screen_mobile.dart';
 
@@ -13,8 +13,9 @@ class GeneralSettings extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appData = useProvider(appModelNotifierProvider);
+    final darkMode = appData.darkMode;
     final followSysTheme = useProvider(followSystemThemeSwitchProvider);
-    final darkMode = useProvider(darkModeSwitchProvider);
     final bool leftRail = useProvider(leftNavigationRailProvider);
 
     return ScreenTypeLayout.builder(
