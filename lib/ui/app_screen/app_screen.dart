@@ -74,15 +74,6 @@ class _AppScreenState extends State<AppScreen> {
         return NotFound(path: state.uri.toString());
       },
     ),
-    // BeamerDelegate(
-    //   initialPath: '/more',
-    //   locationBuilder: (state) {
-    //     if (state.uri.path.contains('more')) {
-    //       return MoreLocation(state);
-    //     }
-    //     return NotFound(path: state.uri.toString());
-    //   },
-    // ),
   ];
 
   @override
@@ -175,10 +166,6 @@ class _AppScreenState extends State<AppScreen> {
                 label: 'Discover'.i18n,
                 icon: const Icon(Icons.explore_rounded)
             ),
-            // BottomNavigationBarItem(
-            //     label: TR.of(context)!.moreBottomNavItemText,
-            //     icon: const Icon(Icons.more_horiz)
-            // ),
           ],
           onTap: (i) => onNavigationItemTap(i, lastUsedIndex),
         ),
@@ -212,17 +199,13 @@ class _AppScreenState extends State<AppScreen> {
           label: Text('Discover'.i18n),
           icon: const Icon(Icons.explore_rounded)
         ),
-        // NavigationRailDestination(
-        //   label: Text(TR.of(context)!.moreBottomNavItemText),
-        //   icon: const Icon(Icons.more_horiz)
-        // ),
       ],
       selectedIndex: currentIndex,
       onDestinationSelected: (i) => onNavigationItemTap(i, lastUsedIndex),
     );
 
 
-    Widget widget;
+    final Widget widget;
     switch(authNotifier.status) {
       case AuthStatus.authenticated:
         widget = ValueListenableBuilder(
