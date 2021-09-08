@@ -17,7 +17,7 @@ dependencies:
 
   # For Architecture
   beamer: ^0.14.1
-  hooks_riverpod: ^0.14.0+4
+  hooks_riverpod: ^1.0.0-dev.7
   responsive_builder: ^0.4.1
   multi_screen_layout: ^2.0.0
   intl: ^0.17.0

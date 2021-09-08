@@ -6,7 +6,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'provider/bottom_navigation_provider.dart';
 import 'provider/left_navigation_rail_provider.dart';
 
-class AppScreenTablet extends HookWidget {
+class AppScreenTablet extends HookConsumerWidget {
   const AppScreenTablet({Key? key,
     required this.indexedStack,
     this.bottomNavigationBar,
@@ -17,10 +17,10 @@ class AppScreenTablet extends HookWidget {
 
 
   @override
-  Widget build(BuildContext context) {
-    final bool enableNav = useProvider(shouldShowBottomNavigationProvider)
+  Widget build(BuildContext context, WidgetRef ref) {
+    final bool enableNav = ref.watch(shouldShowBottomNavigationProvider)
         .state;
-    final bool isLeftRail = useProvider(leftNavigationRailProvider);
+    final bool isLeftRail = ref.watch(leftNavigationRailProvider);
 
     final Widget railRow;
 
