@@ -25,8 +25,6 @@ class LoginCommand extends BaseCommand {
         (r) => log.i('Books refreshed'),
       ));
     }
-    // Update appModel with current user. Any views bound to this will rebuild
-    appModel.currentUser = loginSuccess? appwriteService.user?.id : null;
  
     // Return the result to whoever called us, in case they care
     if (loginSuccess == true) {

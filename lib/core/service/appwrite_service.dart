@@ -18,16 +18,14 @@ final appwriteServiceProvider = Provider<AppwriteService>((ref) {
   return appwriteService;
 });
 
-class AppwriteService extends AuthNotifier{
+class AppwriteService extends AuthNotifier {
   AppwriteService({required Client client}) : super(client) {
-    _client = client;
-    _db = Database(_client);
-    _teams = Teams(_client);
-    _storage = Storage(_client);
-    _avatars = Avatars(_client);
+    _db = Database(client);
+    _teams = Teams(client);
+    _storage = Storage(client);
+    _avatars = Avatars(client);
   }
 
-  late final Client _client;
   late final Database _db;
   late final Teams _teams;
   late final Storage _storage;

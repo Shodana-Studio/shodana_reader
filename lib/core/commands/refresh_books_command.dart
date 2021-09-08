@@ -12,7 +12,7 @@ class RefreshBooksCommand extends BaseCommand {
     try {
       // TODO: Sync local books database with appwrite database here
       final List<Book> books = await appwriteService.getBooks();
-      userModel.userBooks = books;
+      userModelNotifier.setBooks(books);
        
       // Return our posts to the caller in case they care
       return Right(books);

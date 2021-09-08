@@ -21,8 +21,6 @@ class OAuthLoginCommand extends BaseCommand {
     if (loginSuccess) {
       await RefreshBooksCommand().run();
     }
-    // Update appModel with current user. Any views bound to this will rebuild
-    appModel.currentUser = loginSuccess? appwriteService.user?.id : null;
  
     // Return the result to whoever called us, in case they care
     if (loginSuccess == true) {

@@ -3,7 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../l10n/my.i18n.dart';
-import '../../app_screen/provider/starting_screen_button_choice.dart';
+import '../../app_screen/provider/default_starting_page_provider.dart';
 import '../../app_screen/provider/starting_screen_provider.dart';
 import 'simple_dialog_item.dart';
 
@@ -56,8 +56,8 @@ class StartingScreenWidget extends HookWidget {
   Future<String?> onStartingScreenTapped(
       BuildContext context) {
 
-    final StartingScreenButtonChoice groupProvider = context.read
-      (startingScreenButtonChoiceProvider.notifier);
+    final DefaultStartingPage groupProvider = context.read
+      (defaultStartingPageProvider.notifier);
 
     final Map<int, Map<String, String>> options = {
       0: {'last_used': 'Last used'.i18n},
@@ -75,7 +75,7 @@ class StartingScreenWidget extends HookWidget {
         children: [
           for (final MapEntry<int, Map<String, String>> option in options.entries)
             SimpleDialogItem(
-              leading: Radio(value: option.key, groupValue: groupProvider.getChoice(),
+              leading: Radio(value: option.key, groupValue: groupProvider.getDefaultPage(),
                 onChanged: (int? newValue) {
                   if (newValue != null) {
                     groupProvider.setPage(newValue);

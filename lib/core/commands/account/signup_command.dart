@@ -19,9 +19,6 @@ class SignupCommand extends BaseCommand {
   Future<Either<Failure, bool>> run({required BuildContext context, required String? username, required String email, required String password}) async {
     // Await service call
     final bool signupSuccess = await context.authNotifier.create(name: username, email: email, password: password);
-    
-    // Update appModel with current user. Any views bound to this will rebuild
-    appModel.currentUser = signupSuccess? appwriteService.user?.id : null;
  
     // Return the result to whoever called us, in case they care
     if (signupSuccess == true) {

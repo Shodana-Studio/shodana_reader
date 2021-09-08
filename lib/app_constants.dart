@@ -2,6 +2,7 @@ class AppConstant {
   // Settings
   static const String settingsBoxKey = 'settings';
   static const String booksBoxKey = 'bookBox';
+
   static const String darkModeKey = 'darkMode';
   static const String followSystemThemeKey = 'followSystemTheme';
   static const String defaultStartingPageKey = 'defaultStartingPage';
@@ -39,7 +40,7 @@ class AppConstant {
 
 }
 
-enum NavigationTabs{home, shelves, clubs, discover, more}
+enum AppPage{home, shelves, clubs, discover}
 enum AppStates{loggedInAndOnline, loggedInAndOffline, notLoggedInAndOnline, notLoggedInAndOffline}
 enum TileType{series, book}
 enum BookFileType{epub, pdf, mobi, html}
