@@ -6,12 +6,13 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'core/commands/base_command.dart' as Commands;
 import 'ui/app_screen/locations/app_location.dart';
 
 
-class App extends StatefulWidget {
+class App extends ConsumerStatefulWidget {
   const App({Key? key, this.savedThemeMode}) : super(key: key);
   final AdaptiveThemeMode? savedThemeMode;
 
@@ -19,7 +20,7 @@ class App extends StatefulWidget {
   _AppState createState() => _AppState();
 }
 
-class _AppState extends State<App> {
+class _AppState extends ConsumerState<App> {
   final FlexScheme flexScheme = FlexScheme.blue;
   final rootBeamerRouter =
     // TODO: This breaks opening to a different tab than home by default. Need
@@ -55,11 +56,9 @@ class _AppState extends State<App> {
       scheme: flexScheme,
       visualDensity: FlexColorScheme.comfortablePlatformDensity,
     ).toTheme;
-
-    
-    Commands.init(context);
+    final baseCommand = ref.watch(Commands.baseCommandProvider);
     return FlAppwriteAccountKit(
-      client: Commands.BaseCommand().appwriteService.client,
+      client: baseCommand.appwriteService.client,
       child: AdaptiveTheme(
         light: light.copyWith(
           snackBarTheme: dark.snackBarTheme.copyWith(

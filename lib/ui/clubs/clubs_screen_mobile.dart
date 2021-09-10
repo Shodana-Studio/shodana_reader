@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../core/model/book_search_model.dart';
 import '../../l10n/my.i18n.dart';
 import '../widgets/search_bar.dart';
 
-class ClubsScreenMobile extends HookWidget {
+class ClubsScreenMobile extends HookConsumerWidget {
   const ClubsScreenMobile({
     Key? key, required this.beamToClub}) : super(key: key);
   final Function(BuildContext, String) beamToClub;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     // TODO: Implement search clubs and messages
-    final BookSearchModel searchModel = useProvider(bookSearchProvider);
+    final BookSearchModel searchModel = ref.watch(bookSearchProvider);
     return Scaffold(
       // appBar: AppBar(title: 'Clubs'.i18n
       //     ?? 'No Title'.i18n)),

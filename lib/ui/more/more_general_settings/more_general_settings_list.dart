@@ -10,7 +10,7 @@ import '../more_settings/provider/follow_system_theme_provider.dart';
 import '../widgets/settings_section_header.dart';
 import 'starting_screen_item.dart';
 
-class GeneralSettingsList extends StatelessWidget {
+class GeneralSettingsList extends ConsumerWidget {
   const GeneralSettingsList({
     Key? key,
     required this.leftRail,
@@ -23,7 +23,7 @@ class GeneralSettingsList extends StatelessWidget {
   final bool darkMode;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,7 +36,7 @@ class GeneralSettingsList extends StatelessWidget {
             title: Text('Left handed navigation rail'.i18n),
             subtitle: Text('Show on left side'.i18n),
             onChanged: (bool value) {
-              context.read(leftNavigationRailProvider.notifier).toggle();
+              ref.read(leftNavigationRailProvider.notifier).toggle();
             },
             value: leftRail,
           ),
@@ -52,7 +52,7 @@ class GeneralSettingsList extends StatelessWidget {
           SwitchListTile(
             title: Text('Dark mode'.i18n),
             onChanged: (bool value) {
-              context.read(appModelNotifierProvider.notifier).toggleDarkMode();
+              ref.read(appModelNotifierProvider.notifier).toggleDarkMode();
               if (!followSysTheme) {
                 if (value) {
                   AdaptiveTheme.of(context).setDark();
@@ -89,7 +89,7 @@ class GeneralSettingsList extends StatelessWidget {
             title: Text('Follow system theme'.i18n),
             subtitle: Text('Dark mode setting will be ignored'.i18n),
             onChanged: (bool value) {
-              context.read(followSystemThemeSwitchProvider.notifier).toggle();
+              ref.read(followSystemThemeSwitchProvider.notifier).toggle();
               if (value) {
                 // final backgroundColor = Theme.of(context).backgroundColor;
                 AdaptiveTheme.of(context).setSystem();

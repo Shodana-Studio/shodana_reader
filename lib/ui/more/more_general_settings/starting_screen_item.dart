@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../l10n/my.i18n.dart';
@@ -7,15 +6,15 @@ import '../../app_screen/provider/default_starting_page_provider.dart';
 import '../../app_screen/provider/starting_screen_provider.dart';
 import 'simple_dialog_item.dart';
 
-class StartingScreenWidget extends HookWidget {
+class StartingScreenWidget extends ConsumerWidget {
   const StartingScreenWidget({Key? key}) : super(key: key);
   // int? _value = 0; // TODO: Store in a provider
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     // TODO: set _value to value from SharedPrefs
     // _value = context.read()
-    final String screen = useProvider(startingPageProvider);
+    final String screen = ref.watch(startingPageProvider);
     final String subtitle;
     if (screen == 'last_used') {
       subtitle = 'Last used'.i18n;
@@ -37,26 +36,23 @@ class StartingScreenWidget extends HookWidget {
       title: Text('Starting screen'.i18n),
       subtitle: Text(subtitle),
       onTap: () async {
-        return onStartingScreenTapped(context)
-            .then((screen) {
+        return onStartingScreenTapped(context, ref).then((screen) {
           if (screen == null) {
             debugPrint('Info: Starting Screen not chosen'.i18n);
             return;
           }
-          context.read(startingPageProvider.notifier)
-              .setScreen(screen);
-        })
-            .onError((error, stackTrace) {
+
+          ref.read(startingPageProvider.notifier).setScreen(screen);
+        }).onError((error, stackTrace) {
           debugPrint('Starting screen not set'.i18n);
         });
       },
     );
   }
 
-  Future<String?> onStartingScreenTapped(
-      BuildContext context) {
+  Future<String?> onStartingScreenTapped(BuildContext context, WidgetRef ref) {
 
-    final DefaultStartingPage groupProvider = context.read
+    final DefaultStartingPage groupProvider = ref.read
       (defaultStartingPageProvider.notifier);
 
     final Map<int, Map<String, String>> options = {

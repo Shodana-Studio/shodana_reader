@@ -13,7 +13,7 @@ StateNotifierProvider<FollowSystemThemeSwitch, bool>((ref) {
 
 class FollowSystemThemeSwitch extends StateNotifier<bool>{
   FollowSystemThemeSwitch(AppData appData, this.ref) : super(appData.followSystemTheme);
-  final ProviderReference ref;
+  final ProviderRefBase ref;
 
   void toggle() {
     state = !state;

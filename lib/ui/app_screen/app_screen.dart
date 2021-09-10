@@ -3,7 +3,6 @@ import 'package:beamer/beamer.dart';
 import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -23,7 +22,7 @@ import 'provider/default_starting_page_provider.dart';
 import 'provider/last_used_enabled_provider.dart';
 import 'provider/last_used_index_provider.dart';
 
-class AppScreen extends StatefulHookWidget {
+class AppScreen extends ConsumerStatefulWidget {
   const AppScreen({Key? key, required this.beamState}) : super(key: key);
 
   final BeamState beamState;
@@ -32,7 +31,7 @@ class AppScreen extends StatefulHookWidget {
   _AppScreenState createState() => _AppScreenState();
 }
 
-class _AppScreenState extends State<AppScreen> {
+class _AppScreenState extends ConsumerState<AppScreen> {
   Widget? bottomNavigationBar;
   late NavigationRail navigationRail;
   late int currentIndex;
@@ -100,7 +99,7 @@ class _AppScreenState extends State<AppScreen> {
   @override
   Widget build(BuildContext context) {
     final authNotifier = context.authNotifier;
-    final LastUsedIndex lastUsedIndex = context.read
+    final LastUsedIndex lastUsedIndex = ref.read
       (lastUsedIndexProvider.notifier);
 
     final brightness = Theme.of(context).brightness;
@@ -256,9 +255,9 @@ class _AppScreenState extends State<AppScreen> {
   }
 
   int getCurrentIndex() {
-    final bool lastUsedEnabled = context.read(lastUsedEnabledProvider);
-    final lastUsedIndexNotifier = context.read(lastUsedIndexProvider.notifier);
-    final int defaultStartingPage = context.read(defaultStartingPageProvider);
+    final bool lastUsedEnabled = ref.read(lastUsedEnabledProvider);
+    final lastUsedIndexNotifier = ref.read(lastUsedIndexProvider.notifier);
+    final int defaultStartingPage = ref.read(defaultStartingPageProvider);
 
     if (widget.beamState.uri.path.contains('home')) {
       currentIndex = 0;
@@ -317,12 +316,12 @@ class _AppScreenState extends State<AppScreen> {
   }
 }
 
-class WelcomePage extends HookWidget {
+class WelcomePage extends HookConsumerWidget {
   const WelcomePage({ Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final BookSearchModel searchModel = useProvider(bookSearchProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final BookSearchModel searchModel = ref.watch(bookSearchProvider);
     return Scaffold(
       body: SearchBar(
         body: Center(

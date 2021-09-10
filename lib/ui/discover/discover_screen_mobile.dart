@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../core/model/book_search_model.dart';
 import '../../l10n/my.i18n.dart';
 import '../widgets/search_bar.dart';
 
-class DiscoverScreenMobile extends HookWidget {
+class DiscoverScreenMobile extends HookConsumerWidget {
   const DiscoverScreenMobile({
     Key? key, required this.beamToInternetBook
   }) : super(key: key);
   final Function(BuildContext, String) beamToInternetBook;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     // TODO: Implement search public clubs
-    final BookSearchModel searchModel = useProvider(bookSearchProvider);
+    final BookSearchModel searchModel = ref.watch(bookSearchProvider);
     return Scaffold(
       // appBar: AppBar(title: Text(TR.of(context)!.discoverPageTitle)),
       body: SearchBar(

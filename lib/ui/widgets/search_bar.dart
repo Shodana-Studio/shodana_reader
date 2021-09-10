@@ -4,7 +4,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hive/hive.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:implicitly_animated_reorderable_list/implicitly_animated_reorderable_list.dart';
@@ -22,7 +21,7 @@ import '../../l10n/my.i18n.dart';
 import '../more/more_about/more_about_screen.dart';
 import '../more/more_settings/more_settings_screen.dart' show MoreSettingsScreen;
 
-class SearchBar extends StatefulWidget {
+class SearchBar extends ConsumerStatefulWidget {
   const SearchBar({
     Key? key,
     required this.body,
@@ -38,7 +37,7 @@ class SearchBar extends StatefulWidget {
   _SearchState createState() => _SearchState();
 }
 
-class _SearchState extends State<SearchBar> {
+class _SearchState extends ConsumerState<SearchBar> {
   final controller = FloatingSearchBarController();
 
   int _index = 0;
@@ -60,7 +59,7 @@ class _SearchState extends State<SearchBar> {
     PopupMenuItem(
       padding: EdgeInsets.zero,
       child: FutureBuilder<Response>(
-        future: GetAccountCommand().run(),
+        future: ref.read(getAccountCommandProvider).run(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             // Menu items for when not logged in
@@ -291,7 +290,7 @@ class _SearchState extends State<SearchBar> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(90.0),
               child: FutureBuilder<Response>(
-                future: GetAccountCommand().run(),
+                future: ref.read(getAccountCommandProvider).run(),
                 builder: (context, snapshot) {
                   if (snapshot.hasError) {
                     return const CircleAvatar(
@@ -430,7 +429,7 @@ class _SearchState extends State<SearchBar> {
         ),
         TextButton(
           onPressed: () {
-            LogoutCommand().run(context);
+            ref.read(logoutCommandProvider).run(context: context);
             Navigator.of(context).pop();
           },
           style: Theme.of(context).textButtonTheme.style,
@@ -442,7 +441,7 @@ class _SearchState extends State<SearchBar> {
 
   Widget buildProfileImage(String name) {
     return CachedNetworkImage(
-      imageUrl: ProfileImageCommand().run(name),
+      imageUrl: ref.read(profileImageCommandProvider).run(name: name),
       progressIndicatorBuilder: (context, url, downloadProgress) =>
           CircularProgressIndicator(value: downloadProgress.progress),
       errorWidget: (context, url, error) => const Icon(Icons.error),
@@ -450,7 +449,7 @@ class _SearchState extends State<SearchBar> {
   }
 }
 
-class SearchItem extends HookWidget {
+class SearchItem extends ConsumerWidget {
   const SearchItem({
     Key? key,
     required this.book,
@@ -459,11 +458,11 @@ class SearchItem extends HookWidget {
   final Book book;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
 
-    final model = useProvider(bookSearchProvider);
+    final model = ref.watch(bookSearchProvider);
 
     return Column(
       mainAxisSize: MainAxisSize.min,

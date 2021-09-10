@@ -1,8 +1,18 @@
+
+
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 import '../base_command.dart';
 
+final profileImageCommandProvider = Provider<ProfileImageCommand>((ref) {
+  return ProfileImageCommand(ref);
+});
+
 class ProfileImageCommand extends BaseCommand {
+  ProfileImageCommand(ProviderRef ref) : super(ref);
+
  
-  String run(String name) {
+  String run({required String name}) {
     // Await service call
     final String profileImage = appwriteService.getInitialsLink(name);
  

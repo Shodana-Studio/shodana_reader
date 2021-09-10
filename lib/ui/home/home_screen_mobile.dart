@@ -52,8 +52,8 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
   //   return file;
   // }
 
-  Future<void> _onRefresh() async {
-    final resp = await RefreshBooksCommand().run();
+  Future<void> _onRefresh(WidgetRef ref) async {
+    final resp = await ref.read(refreshCommandProvider).run();
     resp.fold(
       (l) => log.e(l.message),
       (r) => log.i('Books refreshed successfully'),
@@ -89,24 +89,28 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
 
   @override
   Widget build(BuildContext context) {
-    final BookSearchModel searchModel = useProvider(bookSearchProvider);
     final scrollController = useScrollController();
-    return Scaffold(
-      // appBar: AppBar(title: Text('appName'.i18n)),
-      body: SearchBar(
-        body: buildHome(scrollController),
-        hint: 'Search recents...'.i18n,
-        model: searchModel,
-      ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: _downloadFile,
-      //   tooltip: 'Download'.i18n,
-      //   child: const Icon(Icons.download),
-      // ),
-    ) ;
+    return Consumer(
+      builder: (BuildContext context, WidgetRef ref, Widget? child) { 
+        final BookSearchModel searchModel = ref.watch(bookSearchProvider);
+        return Scaffold(
+          // appBar: AppBar(title: Text('appName'.i18n)),
+          body: SearchBar(
+            body: buildHome(scrollController, ref),
+            hint: 'Search recents...'.i18n,
+            model: searchModel,
+          ),
+          // floatingActionButton: FloatingActionButton(
+          //   onPressed: _downloadFile,
+          //   tooltip: 'Download'.i18n,
+          //   child: const Icon(Icons.download),
+          // ),
+        );
+      },
+    );
   }
 
-  Widget buildHome(ScrollController scrollController) {
+  Widget buildHome(ScrollController scrollController, WidgetRef ref) {
     return SafeArea(
       child: Scrollbar(
         child: ValueListenableBuilder(
@@ -147,7 +151,7 @@ class _HomeScreenMobileState extends State<HomeScreenMobile> {
               //     );
               //   },
               // ),
-              onRefresh: _onRefresh,
+              onRefresh: () => _onRefresh(ref),
               onLoading: _onLoading,
               // TODO: Get list of books from hive 'books' box
               // child: _GridWidget(widget: widget, books: books, scrollController: scrollController),

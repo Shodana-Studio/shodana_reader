@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../core/model/book_search_model.dart';
 import '../../l10n/my.i18n.dart';
 import '../widgets/search_bar.dart';
 
-class ShelvesScreenMobile extends HookWidget {
+class ShelvesScreenMobile extends ConsumerWidget {
   const ShelvesScreenMobile({
     Key? key, required this.beamToShelf, required this.beamToBook,
   }) : super(key: key);
@@ -14,9 +13,9 @@ class ShelvesScreenMobile extends HookWidget {
   final Function(BuildContext, String, String) beamToBook;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     // TODO: Implement search clubs and messages
-    final BookSearchModel searchModel = useProvider(bookSearchProvider);
+    final BookSearchModel searchModel = ref.watch(bookSearchProvider);
     return Scaffold(
       // appBar: AppBar(title: Text(TR.of(context)!.shelvesPageTitle)),
       body: SearchBar(

@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../l10n/my.i18n.dart';
 
-class BookDetailsScreenMobile extends StatelessWidget {
+class BookDetailsScreenMobile extends ConsumerWidget {
   const BookDetailsScreenMobile({
     Key? key,
     required this.book,
     required this.startReadingButtonPressed,
   }) : super(key: key);
   final Map<String, String> book;
-  final Function(BuildContext) startReadingButtonPressed;
+  final Function(BuildContext, WidgetRef) startReadingButtonPressed;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: Text(book['title']!),
@@ -24,7 +25,7 @@ class BookDetailsScreenMobile extends StatelessWidget {
             child: Text('Author: %s'.i18n.fill([book['author']!])),
           ),
           TextButton(
-            onPressed: () => startReadingButtonPressed(context),
+            onPressed: () => startReadingButtonPressed(context, ref),
             child: Text('Start Reading'.i18n),
           ),
         ],

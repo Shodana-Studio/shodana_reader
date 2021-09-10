@@ -7,7 +7,7 @@ import '../app_screen/provider/bottom_navigation_provider.dart';
 import 'ebook_reader/ebook_reader_screen.dart';
 import 'html_reader/html_reader_screen.dart';
 
-class ReaderScreen extends StatefulWidget {
+class ReaderScreen extends ConsumerStatefulWidget {
   const ReaderScreen({
     Key? key,
     required this.book,
@@ -22,7 +22,7 @@ class ReaderScreen extends StatefulWidget {
   _ReaderScreenState createState() => _ReaderScreenState();
 }
 
-class _ReaderScreenState extends State<ReaderScreen> {
+class _ReaderScreenState extends ConsumerState<ReaderScreen> {
   int count = 0;
 
   @override
@@ -30,7 +30,7 @@ class _ReaderScreenState extends State<ReaderScreen> {
     SystemChrome.setEnabledSystemUIOverlays([]);
     return WillPopScope(
       onWillPop: () async {
-        context.read(shouldShowBottomNavigationProvider).state = true;
+        ref.read(shouldShowBottomNavigationProvider).state = true;
         await SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
         return true;
       },

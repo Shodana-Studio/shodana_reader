@@ -1,11 +1,18 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:dartz/dartz.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../data/book.dart';
 import '../data/failure.dart';
 import 'base_command.dart';
 
+final refreshCommandProvider = Provider<RefreshBooksCommand>((ref) {
+  return RefreshBooksCommand(ref);
+});
+
 class RefreshBooksCommand extends BaseCommand {
+  RefreshBooksCommand(ProviderRef ref) : super(ref);
+
  
   Future<Either<Failure, List<Book>>> run() async {
     // Make service call and inject results into the model

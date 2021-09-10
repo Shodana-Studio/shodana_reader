@@ -3,6 +3,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart' as flutter_signin_button;
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sign_button/sign_button.dart' as sign_button;
 
 import '../../../core/commands/account/login_command.dart';
@@ -117,17 +118,17 @@ class _PasswordInputState extends State<PasswordInput> {
   }
 }
 
-class SignInWithGithub extends StatelessWidget {
+class SignInWithGithub extends ConsumerWidget {
   const SignInWithGithub({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return sign_button.SignInButton(
       buttonType: sign_button.ButtonType.github,
       onPressed: () async {    
-        final dz.Either<Failure, bool> result = await OAuthLoginCommand().run(provider: OAuth.github);
+        final dz.Either<Failure, bool> result = await ref.read(oAuthLoginCommandProvider).run(provider: OAuth.github);
 
         result.fold(
           (failure) {
@@ -146,19 +147,19 @@ class SignInWithGithub extends StatelessWidget {
   }
 }
 
-class SignInWithDiscord extends StatelessWidget {
+class SignInWithDiscord extends ConsumerWidget {
   const SignInWithDiscord({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return flutter_signin_button.SignInButtonBuilder(
       backgroundColor: const Color.fromRGBO(64, 78, 237, 1),
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.horizontal(left: Radius.circular(90.0), right: Radius.circular(90.0))),
       text: 'Sign in with Discord'.i18n,
       onPressed: () async {
-        final dz.Either<Failure, bool> result = await OAuthLoginCommand().run(provider: OAuth.discord);
+        final dz.Either<Failure, bool> result = await ref.read(oAuthLoginCommandProvider).run(provider: OAuth.discord);
 
         result.fold(
           (failure) {
@@ -177,7 +178,7 @@ class SignInWithDiscord extends StatelessWidget {
   }
 }
 
-class LoginButton extends StatelessWidget {
+class LoginButton extends ConsumerWidget {
   const LoginButton(
       {Key? key,
         required this.emailController,
@@ -188,14 +189,14 @@ class LoginButton extends StatelessWidget {
   final TextEditingController passwordController;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
         onPressed: () async {
           final email = emailController.text;
           final password = passwordController.text;
-          final dz.Either<Failure, bool> result = await LoginCommand().run(context: context, email: email, password: password);
+          final dz.Either<Failure, bool> result = await ref.read(loginCommandProvider).run(context: context, email: email, password: password);
 
           result.fold(
             (failure) {
@@ -236,7 +237,7 @@ class GoToSignupButton extends StatelessWidget {
   }
 }
 
-class SignupButton extends StatelessWidget {
+class SignupButton extends ConsumerWidget {
   const SignupButton(
       {Key? key,
         required this.usernameController,
@@ -249,7 +250,7 @@ class SignupButton extends StatelessWidget {
   final TextEditingController passwordController;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
@@ -259,7 +260,7 @@ class SignupButton extends StatelessWidget {
           final password = passwordController.text;
 
           
-          final dz.Either<Failure, bool> result = await SignupCommand().run(context: context, username: username, email: email, password: password);
+          final dz.Either<Failure, bool> result = await ref.read(signupCommandProvider).run(context: context, username: username, email: email, password: password);
 
           result.fold(
             (failure) {
