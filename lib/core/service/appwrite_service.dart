@@ -92,7 +92,6 @@ class AppwriteService extends AuthNotifier {
     return res.data;
   }
 
-  // TODO: test
   Future<AppwriteFile> uploadFile(MultipartFile file, List<String> readPermission, List<String> writePermission) async {
     final res = await _storage.createFile(
       file: file,

@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:beamer/beamer.dart';
-import 'package:responsive_builder/responsive_builder.dart';
 import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
+import 'package:flutter/material.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 import 'clubs_screen_mobile.dart';
 

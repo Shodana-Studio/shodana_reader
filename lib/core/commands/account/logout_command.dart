@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../base_command.dart';

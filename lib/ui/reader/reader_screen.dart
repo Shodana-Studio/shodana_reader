@@ -27,11 +27,12 @@ class _ReaderScreenState extends ConsumerState<ReaderScreen> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIOverlays([]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
     return WillPopScope(
       onWillPop: () async {
         ref.read(shouldShowBottomNavigationProvider).state = true;
-        await SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
+        // TODO: Maybe remove await
+        await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
         return true;
       },
       child: Shortcuts(

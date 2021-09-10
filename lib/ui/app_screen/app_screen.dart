@@ -78,7 +78,7 @@ class _AppScreenState extends ConsumerState<AppScreen> {
   @override
   void initState() {
     super.initState();
-    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     currentIndex = getCurrentIndex();
     // Set the current index to active, all others to not active
     setActiveIndex();

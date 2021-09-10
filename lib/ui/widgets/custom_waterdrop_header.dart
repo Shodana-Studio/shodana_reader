@@ -7,12 +7,13 @@
 // Modified to add offset
 
 import 'dart:async';
+
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart'
     hide RefreshIndicatorState, RefreshIndicator;
 import 'package:flutter/widgets.dart';
-import 'package:flutter/foundation.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:flutter/cupertino.dart';
 
 /// QQ ios refresh  header effect
 class CustomWaterDropHeader extends RefreshIndicator {

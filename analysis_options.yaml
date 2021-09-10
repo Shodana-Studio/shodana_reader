@@ -87,3 +87,5 @@ linter:
 
     # Disabled to better distinquish commands
     library_prefixes: false
+
+    directives_ordering: true
