@@ -497,7 +497,7 @@ packages:
     source: hosted
     version: "0.9.1"
   flutter_lints:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: flutter_lints
       url: "https://pub.dartlang.org"
@@ -509,12 +509,12 @@ packages:
     source: sdk
     version: "0.0.0"
   flutter_native_splash:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: flutter_native_splash
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.2.1"
+    version: "1.2.3"
   flutter_persistent_queue:
     dependency: "direct main"
     description:

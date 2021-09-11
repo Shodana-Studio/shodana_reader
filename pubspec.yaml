@@ -47,7 +47,7 @@ dependencies:
   # For books
   file_picker: ^4.0.0
   epubx: ^3.0.0-dev.3
-  path_provider: ^2.0.1 
+  path_provider: ^2.0.1
   file_selector: ^0.8.2
   file_selector_windows: ^0.0.2+1
 
@@ -59,7 +59,6 @@ dependencies:
   smart_select: ^4.3.2
   adaptive_theme: ^2.2.0
   flex_color_scheme: ^3.0.1
-  flutter_native_splash: ^1.2.1
   material_floating_search_bar: ^0.3.4
   cached_network_image: ^3.1.0
   implicitly_animated_reorderable_list: ^0.4.0
@@ -97,13 +96,14 @@ dev_dependencies:
   build_runner: ^2.1.1
   flutter_gen_runner: ^3.1.1
   flutter_launcher_icons: ^0.9.0
+  flutter_native_splash: ^1.2.3
   hive_generator: ^1.1.0
   flutter_lints: ^1.0.4
 
 # Uncomment the flutter_icons section when adding an icon, then run
 # flutter pub run flutter_launcher_icons:main
 
-#flutter_icons:
+# flutter_icons:
 #  android: "launcher_icon"
 #  ios: true
 #  image_path: "assets/icon/icon.png"
