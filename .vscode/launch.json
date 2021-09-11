@@ -8,7 +8,12 @@
             "name": "shodana_reader",
             "request": "launch",
             "type": "dart",
-            "program": "lib/main.dart"
+        },
+        {
+            "name": "shodana_reader (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
         }
     ]
 }
