@@ -102,6 +102,30 @@ class AppwriteService extends AuthNotifier {
     return AppwriteFile.fromJson(res.data);
   }
 
+  /// Upload a file to Appwrite using its byte data
+  /// 
+  /// Ex: [readPermission] Each entry should be in format 'user:$userId'
+  /// 
+  /// See Appwrite docs for details
+  Future<AppwriteFile> uploadFileFromBytes({
+      required List<int> bytes,
+      required String filename,
+      required List<String> readPermission,
+      required List<String> writePermission,
+    }) async {
+    final res = await _storage.createFile(
+      file: MultipartFile.fromBytes(
+        'file',
+        bytes,
+        filename: filename,
+      ),
+      read: readPermission,
+      write: writePermission,
+    );
+
+    return AppwriteFile.fromJson(res.data);
+  }
+
   Future<Uint8List> getFileDownload(String fileId) async {
     final res = await _storage.getFileDownload(fileId: fileId);
 
