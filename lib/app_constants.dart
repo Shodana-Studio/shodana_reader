@@ -24,19 +24,14 @@ class AppConstant {
   static const String welcomeShown = 'welcome_shown';
 
   // Appwrite
-  // Mac
-  static const String url = 'http://localhost/';
-  static const String endpoint = 'http://localhost/v1';
-  static const String project = '60bbe0b4363f5';
-  // Desktop
-  // static const String url = 'http://192.168.1.191';
-  // static const String endpoint = 'http://192.168.1.191/v1';
-  // static const String project = '611ffbae6bdd9';
+  static const String url = 'https://bk.shodana.app/';
+  static const String endpoint = 'https://bk.shodana.app/v1';
+  static const String project = '615a678115f4d';
 
   // Appwrite Database
-  static const String readingStatsCollection = '613435387a69b';
-  static const String booksCollection = '6134353890dd5';
-  static const String shelvesCollection = '61343538cfeba';
+  static const String readingStatsCollection = '6164bc1b24fc4';
+  static const String booksCollection = '6164bc1b4f455';
+  static const String shelvesCollection = '6164bc1bc7ea5';
 
 }
 
