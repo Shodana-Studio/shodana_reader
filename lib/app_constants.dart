@@ -24,8 +24,8 @@ class AppConstant {
   static const String welcomeShown = 'welcome_shown';
 
   // Appwrite
-  static const String url = 'https://bk.shodana.app/';
-  static const String endpoint = 'https://bk.shodana.app/v1';
+  static const String url = 'http://192.168.1.203/';
+  static const String endpoint = 'http://192.168.1.203/v1';
   static const String project = '615a678115f4d';
 
   // Appwrite Database
