@@ -1,4 +1,4 @@
-import 'package:appwrite/appwrite.dart';
+import 'package:appwrite/models.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../base_command.dart';
 
@@ -10,9 +10,9 @@ class GetAccountCommand extends BaseCommand {
   GetAccountCommand(ProviderRef ref) : super(ref);
 
  
-  Future<Response> run() async {
+  Future<User> run() async {
     // Await service call
-    final Response res = await appwriteService.account.get();
-    return res;
+    final User user = await appwriteService.account.get();
+    return user;
   }
 }

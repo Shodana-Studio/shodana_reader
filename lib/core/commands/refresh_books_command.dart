@@ -1,4 +1,5 @@
 import 'package:appwrite/appwrite.dart';
+import 'package:appwrite/models.dart';
 import 'package:dartz/dartz.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -18,7 +19,8 @@ class RefreshBooksCommand extends BaseCommand {
     // Make service call and inject results into the model
     try {
       // TODO: Sync local books database with appwrite database here
-      final List<Book> books = await appwriteService.getBooks();
+      final DocumentList documents = await appwriteService.getBooks();
+      final List<Book> books = documents.documents.map((doc) => Book.fromMap(doc.data)).toList();
       userModelNotifier.setBooks(books);
        
       // Return our posts to the caller in case they care

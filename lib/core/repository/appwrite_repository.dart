@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:appwrite/models.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -17,10 +18,10 @@ class AppwriteRepository {
   AppwriteRepository(this._appwriteService);
   final AppwriteService _appwriteService;
 
-  Future<Either<Failure, Response<dynamic>>> createDocument({required String collectionId, required Map<dynamic, dynamic> data}) async {
+  Future<Either<Failure, Document>> createDocument({required String collectionId, required Map<dynamic, dynamic> data}) async {
     try {
-      final response = await _appwriteService.db.createDocument(collectionId: collectionId, data: data);
-      return Right(response);
+      final doc = await _appwriteService.db.createDocument(collectionId: collectionId, data: data);
+      return Right(doc);
     } on AppwriteException catch (e) {
       return Left(Failure('AppwriteException\nCode: ${e.code}\nMessage:${e.message}'));
     } on SocketException catch (_) {

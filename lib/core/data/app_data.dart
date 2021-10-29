@@ -1,9 +1,9 @@
 // ignore_for_file: sort_constructors_first
 import 'dart:convert';
 
+import 'package:appwrite/models.dart';
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 import 'package:flutter/material.dart';
 
 import '../../app_constants.dart';

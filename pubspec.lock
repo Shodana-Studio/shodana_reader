@@ -35,7 +35,7 @@ packages:
       name: appwrite
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.4"
+    version: "2.0.3"
   archive:
     dependency: transitive
     description:
@@ -433,8 +433,8 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: a6159e2453f15edc20651c98436301213d70bed4
-      url: "https://github.com/getBoolean/flappwrite_account_kit"
+      resolved-ref: "41303a9b9f7e4a142c05707d4da7c18f7866f544"
+      url: "https://github.com/lohanidamodar/flappwrite_account_kit"
     source: git
     version: "0.0.1"
   flex_color_scheme:
@@ -818,7 +818,7 @@ packages:
       name: package_info_plus
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.5"
+    version: "1.3.0"
   package_info_plus_linux:
     dependency: transitive
     description:
@@ -832,7 +832,7 @@ packages:
       name: package_info_plus_macos
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.1"
+    version: "1.3.0"
   package_info_plus_platform_interface:
     dependency: transitive
     description:
@@ -846,14 +846,14 @@ packages:
       name: package_info_plus_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.3"
+    version: "1.0.4"
   package_info_plus_windows:
     dependency: transitive
     description:
       name: package_info_plus_windows
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.3"
+    version: "1.0.4"
   path:
     dependency: transitive
     description:
@@ -867,7 +867,7 @@ packages:
       name: path_provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.2"
+    version: "2.0.6"
   path_provider_linux:
     dependency: transitive
     description:
@@ -1385,5 +1385,5 @@ packages:
     source: hosted
     version: "3.1.0"
 sdks:
-  dart: ">=2.13.0 <3.0.0"
-  flutter: ">=2.0.0"
+  dart: ">=2.14.0 <3.0.0"
+  flutter: ">=2.5.0"

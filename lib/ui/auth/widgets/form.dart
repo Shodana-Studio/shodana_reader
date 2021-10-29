@@ -1,3 +1,4 @@
+import 'package:appwrite/models.dart';
 import 'package:dartz/dartz.dart' as dz;
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/foundation.dart';
@@ -260,7 +261,7 @@ class SignupButton extends ConsumerWidget {
           final password = passwordController.text;
 
           
-          final dz.Either<Failure, bool> result = await ref.read(signupCommandProvider).run(context: context, username: username, email: email, password: password);
+          final dz.Either<Failure, User> result = await ref.read(signupCommandProvider).run(context: context, username: username, email: email, password: password);
 
           result.fold(
             (failure) {
@@ -272,7 +273,7 @@ class SignupButton extends ConsumerWidget {
 
               debugPrint(failure.message);
             },
-            (success) {
+            (_) {
               // Signup successful
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,

@@ -6,9 +6,6 @@ version: 0.1.0+173
 environment:
   sdk: '>=2.12.0 <3.0.0'
 
-dependency_overrides:
-  appwrite: ^1.0.4
-
 dependencies:
   flutter:
     sdk: flutter
@@ -35,9 +32,9 @@ dependencies:
   hive_flutter: ^1.1.0
 
   # For backend
-  appwrite: ^1.0.4
+  appwrite: ^2.0.3
   flappwrite_account_kit:
-    git: https://github.com/getBoolean/flappwrite_account_kit
+    git: https://github.com/lohanidamodar/flappwrite_account_kit
 
   # For login
   email_validator: ^2.0.1

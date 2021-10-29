@@ -1,3 +1,4 @@
+import 'package:appwrite/models.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 import 'package:flutter/material.dart';
@@ -24,13 +25,13 @@ class SignupCommand extends BaseCommand {
   /// route to start verifying the user email address. To allow the new user to
   /// login to their new account, you need to create a new [account
   /// session](/docs/client/account#accountCreateSession).
-  Future<Either<Failure, bool>> run({required BuildContext context, required String? username, required String email, required String password}) async {
+  Future<Either<Failure, User>> run({required BuildContext context, required String? username, required String email, required String password}) async {
     // Await service call
-    final bool signupSuccess = await context.authNotifier.create(name: username, email: email, password: password);
+    final User? newUser = await context.authNotifier.create(name: username, email: email, password: password);
  
     // Return the result to whoever called us, in case they care
-    if (signupSuccess == true) {
-      return Right(signupSuccess);
+    if (newUser != null) {
+      return Right(newUser);
     } else {
       return Left(Failure(appwriteService.error ?? 'Unknown error'.i18n));
     }

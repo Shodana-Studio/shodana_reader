@@ -1,8 +1,8 @@
 import 'dart:math';
 
+import 'package:appwrite/models.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:community_material_icon/community_material_icon.dart';
-import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -58,7 +58,7 @@ class _SearchState extends ConsumerState<SearchBar> {
   List<PopupMenuEntry> buildProfileMenuItems(BuildContext context) => [
     PopupMenuItem(
       padding: EdgeInsets.zero,
-      child: FutureBuilder<Response>(
+      child: FutureBuilder<User>(
         future: ref.read(getAccountCommandProvider).run(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
@@ -81,9 +81,9 @@ class _SearchState extends ConsumerState<SearchBar> {
             );
           }
 
-          else if (snapshot.hasData) {
+          else if (snapshot.hasData && snapshot.data != null) {
             // Menu items for when logged in
-            final User user = User.fromMap((snapshot.data!).data);
+            final User user = snapshot.data!;
             return ListTile(
               contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
               leading: Column(
@@ -289,7 +289,7 @@ class _SearchState extends ConsumerState<SearchBar> {
             radius: 16.0,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(90.0),
-              child: FutureBuilder<Response>(
+              child: FutureBuilder<User>(
                 future: ref.read(getAccountCommandProvider).run(),
                 builder: (context, snapshot) {
                   if (snapshot.hasError) {
@@ -299,8 +299,8 @@ class _SearchState extends ConsumerState<SearchBar> {
                     );
                   }
 
-                  else if (snapshot.hasData) {
-                    final User user = User.fromMap((snapshot.data!).data);
+                  else if (snapshot.hasData && snapshot.data != null) {
+                    final User user = snapshot.data!;
                     return buildProfileImage(user.name);
                   }
                   

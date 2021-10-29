@@ -24,7 +24,7 @@ final booksFutureProvider = FutureProvider.autoDispose<List<Book>>((ref) async {
 
   final appwriteService = ref.read(appwriteServiceProvider);
   final books = await appwriteService.getBooks();
-  return books;
+  return books.documents.map((doc) => Book.fromMap(doc.data)).toList();
 });
 
 class HomeScreen extends StatefulWidget {
@@ -114,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
         // TODO: Add fileId from id given by appwrite storage
         // Put data into Book object
-        final userId = authNotifier.user!.id;
+        final userId = authNotifier.user!.$id;
         final book = EPUB(
           bookType: BookType.epub,
           createdDate: DateTime.now().toUtc(),
