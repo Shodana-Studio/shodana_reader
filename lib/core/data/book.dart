@@ -79,7 +79,7 @@ class Book extends Equatable {
   final DateTime? finishReadingDate;
 
   @HiveField(15)
-  final dynamic metadata;
+  final Object? metadata;
 
   @HiveField(16)
   final List<String>? shelfIds;
@@ -148,7 +148,7 @@ class Book extends Equatable {
     DateTime? lastModifiedDate,
     DateTime? startReadingDate,
     DateTime? finishReadingDate,
-    dynamic metadata,
+    Object? metadata,
     List<String>? shelfIds,
   }) {
     return Book(

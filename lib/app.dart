@@ -3,14 +3,12 @@ import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:beamer/beamer.dart';
 import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'core/commands/base_command.dart' as Commands;
+import 'core/commands/base_command.dart' as commands;
 import 'ui/app_screen/locations/app_location.dart';
-
 
 class App extends ConsumerStatefulWidget {
   const App({Key? key, this.savedThemeMode}) : super(key: key);
@@ -23,24 +21,22 @@ class App extends ConsumerStatefulWidget {
 class _AppState extends ConsumerState<App> {
   final FlexScheme flexScheme = FlexScheme.blue;
   final rootBeamerRouter =
-    // TODO: This breaks opening to a different tab than home by default. Need
-    // to get from shared preferences instead of setting it to home by default.
+      // TODO(@getBoolean): This breaks opening to a different tab than home by default. Need
+      // to get from shared preferences instead of setting it to home by default.
 
-    // kIsWeb ?
-    // BeamerDelegate(
-    //   initialPath: '/home',
-    //   locationBuilder: SimpleLocationBuilder(
-    //     routes: {
-    //       '*': (context, state) => AppScreen(beamState: state,),
-    //     },
-    //   ),
-    // );
-    // :
-    BeamerDelegate(
-      locationBuilder: (state) => AppLocation(state),
-    );
-
-  
+      // kIsWeb ?
+      // BeamerDelegate(
+      //   initialPath: '/home',
+      //   locationBuilder: SimpleLocationBuilder(
+      //     routes: {
+      //       '*': (context, state) => AppScreen(beamState: state,),
+      //     },
+      //   ),
+      // );
+      // :
+      BeamerDelegate(
+    locationBuilder: (state) => AppLocation(state),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -56,24 +52,22 @@ class _AppState extends ConsumerState<App> {
       scheme: flexScheme,
       visualDensity: FlexColorScheme.comfortablePlatformDensity,
     ).toTheme;
-    final baseCommand = ref.watch(Commands.baseCommandProvider);
+    final baseCommand = ref.watch(commands.baseCommandProvider);
     return FlAppwriteAccountKit(
       client: baseCommand.appwriteService.client,
       child: AdaptiveTheme(
         light: light.copyWith(
           snackBarTheme: dark.snackBarTheme.copyWith(
-            backgroundColor: Colors.grey[800],
-            contentTextStyle: dark.textTheme.bodyText2
-          ),
+              backgroundColor: Colors.grey[800],
+              contentTextStyle: dark.textTheme.bodyText2),
           bottomAppBarTheme: dark.bottomAppBarTheme.copyWith(
-              color: Colors.white,
+            color: Colors.white,
           ),
         ),
         dark: dark.copyWith(
           snackBarTheme: dark.snackBarTheme.copyWith(
-            backgroundColor: Colors.grey[800],
-            contentTextStyle: dark.textTheme.bodyText2
-          ),
+              backgroundColor: Colors.grey[800],
+              contentTextStyle: dark.textTheme.bodyText2),
           bottomAppBarTheme: dark.bottomAppBarTheme.copyWith(
             color: Colors.grey[900],
           ),

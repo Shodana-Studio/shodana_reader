@@ -1,7 +1,17 @@
-# Lint rules from https://robertbrunhage.com/videos/perfect-flutter-codebase-using-linting
-include: all_lint_rules.yaml
+# This file configures the analyzer, which statically analyzes Dart code to
+# check for errors, warnings, and lints.
+#
+# The issues identified by the analyzer are surfaced in the UI of Dart-enabled
+# IDEs (https://dart.dev/tools#ides-and-editors). The analyzer can also be
+# invoked from the command line by running `flutter analyze`.
+
+# The following line activates a set of recommended lints for Flutter apps,
+# packages, and plugins designed to encourage good coding practices.
+include: package:flutter_lints/flutter.yaml
 
 analyzer:
+  errors:
+    todo: ignore
   exclude:
     - "lib/generated_plugin_registrant.dart"
     - "**/*.g.dart"
@@ -10,82 +20,80 @@ analyzer:
     - "**/i18n.dart"
     - "lib/generated/intl/messages*.dart"
 
-  errors:
-    # Otherwise cause the import of all_lint_rules to warn because of some rules conflicts.
-    # We explicitly enabled even conflicting rules and are fixing the conflict
-    # in this file
-    included_file_warning: ignore
-
 linter:
+  # The lint rules applied to this project can be customized in the
+  # section below to disable rules from the `package:flutter_lints/flutter.yaml`
+  # included above or to enable additional rules. A list of all available lints
+  # and their documentation is published at
+  # https://dart-lang.github.io/linter/lints/index.html.
+  #
+  # Instead of disabling a lint rule for the entire project in the
+  # section below, it can also be suppressed for a single line of code
+  # or a specific dart file by using the `// ignore: name_of_lint` and
+  # `// ignore_for_file: name_of_lint` syntax on the line or in the file
+  # producing the lint.
   rules:
-    # Personal preference. I don't find it more readable
-    cascade_invocations: false
-
-    # Conflicts with `prefer_single_quotes`
     # Single quotes are easier to type and don't compromise on readability.
-    prefer_double_quotes: false
+    prefer_single_quotes: true
 
-    # Conflicts with `omit_local_variable_types` and other rules.
-    # As per Dart guidelines, we want to avoid unnecessary types to make the code
-    # more readable.
-    # See https://dart.dev/guides/language/effective-dart/design#avoid-type-annotating-initialized-local-variables
-    always_specify_types: false
-
-    # Incompatible with `prefer_final_locals`
-    # Having immutable local variables makes larger functions more predictible
-    # so we will use `prefer_final_locals` instead.
-    unnecessary_final: false
-
-    # Not quite suitable for Flutter, which may have a `build` method with a single
-    # return, but that return is still complex enough that a "body" is worth it.
-    prefer_expression_function_bodies: false
-
-    # Conflicts with the convention used by flutter, which puts `Key key`
-    # and `@required Widget child` last.
-    always_put_required_named_parameters_first: false
-
-    # `as` is not that bad (especially with the upcoming non-nullable types).
-    # Explicit exceptions is better than implicit exceptions.
-    avoid_as: false
-
-    # This project doesn't use Flutter-style todos
-    flutter_style_todos: false
-
-    # There are situations where we voluntarily want to catch everything,
-    # especially as a library.
-    avoid_catches_without_on_clauses: false
-
-    # Boring as it sometimes force a line of 81 characters to be split in two.
-    # As long as we try to respect that 80 characters limit, going slightly
-    # above is fine.
-    lines_longer_than_80_chars: false
-
-    # Conflicts with disabling `implicit-dynamic`
-    avoid_annotating_with_dynamic: false
-
-    # Not necessary for an application and more pointed towards public API's
-    public_member_api_docs: false
-
-    # Temporarily
-    diagnostic_describe_all_properties: false
-
-    # I think it's easier to read if they are grouped together
-    sort_pub_dependencies: false
-
-    # Easier to identify which files are for this project
-    prefer_relative_imports: true
-    always_use_package_imports: false
-
-    # Sometimes it is better to use a double
-    prefer_int_literals: false
-
-    # I like type annotations
+    # Type annotations are sometimes necessary for readability
     omit_local_variable_types: false
 
-    # Breaks FutureBuilder with widgets
-    avoid_types_on_closure_parameters: false
+    # Better to declare variables as final
+    prefer_final_locals: true
 
-    # Disabled to better distinquish commands
-    library_prefixes: false
+    # Better to leave it up to the programmer
+    prefer_int_literals: false
+
+    # It is better to group related packages
+    sort_pub_dependencies: false
 
     directives_ordering: true
+
+    unawaited_futures: true
+
+    prefer_relative_imports: true
+
+    cast_nullable_to_non_nullable: true
+
+    avoid_annotating_with_dynamic: true
+
+    lines_longer_than_80_chars: false
+
+    prefer_interpolation_to_compose_strings: true
+
+    unnecessary_await_in_return: true
+
+    unnecessary_lambdas: true
+
+    unnecessary_late: true
+
+    unnecessary_null_aware_assignments: true
+
+    unnecessary_null_checks: true
+
+    unnecessary_nullable_for_final_variable_declarations: true
+
+    unnecessary_parenthesis: true
+
+    unnecessary_raw_strings: true
+
+    use_decorated_box: true
+
+    use_is_even_rather_than_modulo: true
+
+    use_late_for_private_fields_and_variables: true
+
+    use_string_buffers: true
+
+    use_test_throws_matchers: true
+
+    void_checks: true
+
+    use_to_and_as_if_applicable: true
+
+    depend_on_referenced_packages: true
+
+    secure_pubspec_urls: true
+# Additional information about this file can be found at
+# https://dart.dev/guides/language/analysis-options

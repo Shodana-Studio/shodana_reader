@@ -128,14 +128,14 @@ class StorageUtil {
   /// Get a dymanic variable from Hive 'settings' box.
   /// 
   /// Hive supports all primitive types, List, Map, DateTime, BigInt and Uint8List. Any object can be stored using TypeAdapters.
-  static dynamic getSetting({required String key, required dynamic defValue}) {
+  static T getSetting<T>({required String key, required T defValue}) {
     return _settingsBox.get(key) ?? defValue;
   }
 
   /// put a dynamic variable in Hive 'settings' box.
   /// 
   /// Hive supports all primitive types, List, Map, DateTime, BigInt and Uint8List. Any object can be stored using TypeAdapters.
-  static Future<void> putSetting({required String key, required dynamic value}) {
+  static Future<void> putSetting<T>({required String key, required T value}) {
     return _settingsBox.put(key, value);
   }
 
@@ -163,7 +163,7 @@ class StorageUtil {
   }
 
   /// Get a book from Hive 'books' box.
-  static Book? getBook({required int key, dynamic defValue}) {
+  static Book? getBook<T>({required int key, Book? defValue}) {
     return _booksBox.get(key, defaultValue: defValue);
   }
 

@@ -96,6 +96,7 @@ class _PasswordInputState extends State<PasswordInput> {
         if (value.length < 6 || value.length > 32) {
           return 'Must be between 6 and 32 characters';
         }
+        return null;
       },
       focusNode: widget.focusNode,
       textInputAction: TextInputAction.done,
