@@ -37,14 +37,19 @@ class UserData extends Equatable {
 
   factory UserData.fromMap(Map<String, dynamic> map) {
     return UserData(
-      books: List<Book>.from((map['books'] as List<Map<String, dynamic>>).map((bookMap) => Book.fromMap(bookMap))),
-      shelves: List<Shelf>.from((map['shelves'] as List<Map<String, dynamic>>).map((shelfMap) => Shelf.fromMap(shelfMap))),
+      books: List<Book>.from(
+        (map['books'] as List<Map<String, dynamic>>).map(Book.fromMap),
+      ),
+      shelves: List<Shelf>.from(
+        (map['shelves'] as List<Map<String, dynamic>>).map(Shelf.fromMap),
+      ),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory UserData.fromJson(String source) => UserData.fromMap(json.decode(source));
+  factory UserData.fromJson(String source) =>
+      UserData.fromMap(json.decode(source));
 
   @override
   bool get stringify => true;

@@ -35,7 +35,7 @@ class _AppState extends ConsumerState<App> {
       // );
       // :
       BeamerDelegate(
-    locationBuilder: (state) => AppLocation(state),
+    locationBuilder: AppLocation.new,
   );
 
   @override
