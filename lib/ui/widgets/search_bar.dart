@@ -1,26 +1,27 @@
 import 'dart:math';
 
+import 'package:appwrite/models.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:community_material_icon/community_material_icon.dart';
-import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hive/hive.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:implicitly_animated_reorderable_list/implicitly_animated_reorderable_list.dart';
 import 'package:implicitly_animated_reorderable_list/transitions.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 
-import '../../core/data/model/book.dart';
-import '../../core/data/model/book_search_model.dart';
-import '../../core/data/repository/fake_data.dart';
-import '../../core/data/service/appwrite_service.dart';
-import '../../core/res/constants.dart';
+import '../../app_constants.dart';
+import '../../core/commands/account/get_account_command.dart';
+import '../../core/commands/account/logout_command.dart';
+import '../../core/commands/account/profile_image_url.dart';
+import '../../core/data/book.dart';
+import '../../core/model/book_search_model.dart';
+import '../../core/repository/fake_data.dart';
 import '../../l10n/my.i18n.dart';
 import '../more/more_about/more_about_screen.dart';
 import '../more/more_settings/more_settings_screen.dart' show MoreSettingsScreen;
 
-class SearchBar extends StatefulWidget {
+class SearchBar extends ConsumerStatefulWidget {
   const SearchBar({
     Key? key,
     required this.body,
@@ -36,7 +37,7 @@ class SearchBar extends StatefulWidget {
   _SearchState createState() => _SearchState();
 }
 
-class _SearchState extends State<SearchBar> {
+class _SearchState extends ConsumerState<SearchBar> {
   final controller = FloatingSearchBarController();
 
   int _index = 0;
@@ -57,8 +58,8 @@ class _SearchState extends State<SearchBar> {
   List<PopupMenuEntry> buildProfileMenuItems(BuildContext context) => [
     PopupMenuItem(
       padding: EdgeInsets.zero,
-      child: FutureBuilder(
-        future: context.authNotifier.account.get(),
+      child: FutureBuilder<User>(
+        future: ref.read(getAccountCommandProvider).run(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             // Menu items for when not logged in
@@ -80,9 +81,9 @@ class _SearchState extends State<SearchBar> {
             );
           }
 
-          else if (snapshot.hasData) {
+          else if (snapshot.hasData && snapshot.data != null) {
             // Menu items for when logged in
-            final User user = User.fromMap((snapshot.data! as Response<dynamic>).data);
+            final User user = snapshot.data!;
             return ListTile(
               contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
               leading: Column(
@@ -288,8 +289,8 @@ class _SearchState extends State<SearchBar> {
             radius: 16.0,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(90.0),
-              child: FutureBuilder(
-                future: context.authNotifier.account.get(),
+              child: FutureBuilder<User>(
+                future: ref.read(getAccountCommandProvider).run(),
                 builder: (context, snapshot) {
                   if (snapshot.hasError) {
                     return const CircleAvatar(
@@ -298,8 +299,8 @@ class _SearchState extends State<SearchBar> {
                     );
                   }
 
-                  else if (snapshot.hasData) {
-                    final User user = User.fromMap((snapshot.data! as Response<dynamic>).data);
+                  else if (snapshot.hasData && snapshot.data != null) {
+                    final User user = snapshot.data!;
                     return buildProfileImage(user.name);
                   }
                   
@@ -428,7 +429,7 @@ class _SearchState extends State<SearchBar> {
         ),
         TextButton(
           onPressed: () {
-            context.authNotifier.deleteSession();
+            ref.read(logoutCommandProvider).run(context: context);
             Navigator.of(context).pop();
           },
           style: Theme.of(context).textButtonTheme.style,
@@ -440,7 +441,7 @@ class _SearchState extends State<SearchBar> {
 
   Widget buildProfileImage(String name) {
     return CachedNetworkImage(
-      imageUrl: AppwriteService.instance.getInitialsLink(name),
+      imageUrl: ref.read(profileImageCommandProvider).run(name: name),
       progressIndicatorBuilder: (context, url, downloadProgress) =>
           CircularProgressIndicator(value: downloadProgress.progress),
       errorWidget: (context, url, error) => const Icon(Icons.error),
@@ -448,7 +449,7 @@ class _SearchState extends State<SearchBar> {
   }
 }
 
-class SearchItem extends HookWidget {
+class SearchItem extends ConsumerWidget {
   const SearchItem({
     Key? key,
     required this.book,
@@ -457,11 +458,11 @@ class SearchItem extends HookWidget {
   final Book book;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
 
-    final model = useProvider(bookSearchProvider);
+    final model = ref.watch(bookSearchProvider);
 
     return Column(
       mainAxisSize: MainAxisSize.min,

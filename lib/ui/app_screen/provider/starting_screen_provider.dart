@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../core/data/service/storage_utils.dart';
-import '../../../core/res/constants.dart';
+import '../../../app_constants.dart';
+import '../../../core/service/storage_util.dart';
 import 'default_starting_page_provider.dart';
 import 'last_used_enabled_provider.dart';
 
@@ -54,9 +54,6 @@ class StartingPage extends StateNotifier<String>{
     } else if (screen == AppConstant.discoverScreen) {
       lastUsedEnabled.setDisabled();
       defaultStartingPageProvider.setPage(3);
-    // } else if (screen == moreScreen) {
-    //   lastUsedEnabled.setDisabled();
-    //   defaultStartingPageProvider.setPage(4);
     } else {
       debugPrint('Error: Invalid screen passed into setScreen');
     }

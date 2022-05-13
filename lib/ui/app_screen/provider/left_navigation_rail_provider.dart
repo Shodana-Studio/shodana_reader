@@ -1,7 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../core/data/service/storage_utils.dart';
-import '../../../core/res/constants.dart';
+import '../../../app_constants.dart';
+import '../../../core/service/storage_util.dart';
 
 final leftNavigationRailProvider =
 StateNotifierProvider<LeftNavigationRail, bool>((ref) {

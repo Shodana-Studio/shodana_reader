@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:beamer/beamer.dart';
+import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import 'shelves_screen_mobile.dart';
@@ -8,7 +8,7 @@ class ShelvesScreen extends StatelessWidget {
   const ShelvesScreen({Key? key,}) : super(key: key);
 
   void beamToShelf(BuildContext context, String shelf) {
-    context.beamToNamed('/shelves/$shelf}');
+    context.beamToNamed('/shelves/$shelf');
   }
 
   void beamToBook(BuildContext context, String shelf, String book) {

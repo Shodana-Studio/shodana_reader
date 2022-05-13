@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import 'provider/bottom_navigation_provider.dart';
 import 'provider/left_navigation_rail_provider.dart';
 
-class AppScreenMobile extends HookWidget {
+class AppScreenMobile extends HookConsumerWidget {
   const AppScreenMobile({Key? key,
     required this.indexedStack,
     this.bottomNavigationBar,
@@ -17,10 +16,10 @@ class AppScreenMobile extends HookWidget {
 
 
   @override
-  Widget build(BuildContext context) {
-    final bool enableNav = useProvider(shouldShowBottomNavigationProvider)
+  Widget build(BuildContext context, WidgetRef ref) {
+    final bool enableNav = ref.watch(shouldShowBottomNavigationProvider)
         .state;
-    final bool isLeftRail = useProvider(leftNavigationRailProvider);
+    final bool isLeftRail = ref.watch(leftNavigationRailProvider);
 
     final Widget railRow;
 
