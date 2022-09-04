@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:appwrite/models.dart';
-import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
+import 'package:appwrite_auth_kit/appwrite_auth_kit.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../app_constants.dart';
@@ -21,17 +21,15 @@ final appwriteServiceProvider = Provider<AppwriteService>((ref) {
 
 class AppwriteService extends AuthNotifier {
   AppwriteService({required Client client}) : super(client) {
-    _db = Database(client);
-    _teams = Teams(client);
+    _db = Databases(client, databaseId: AppConstant.booksDatabaseId);
     _storage = Storage(client);
     _avatars = Avatars(client);
   }
 
-  late final Database _db;
-  late final Teams _teams;
+  late final Databases _db;
   late final Storage _storage;
   late final Avatars _avatars;
-  Database get db => _db;
+  Databases get db => _db;
 
   // Account functions in flappwrite_account_kit
 
@@ -47,6 +45,7 @@ class AppwriteService extends AuthNotifier {
       data: book.toMap(),
       read: read,
       write: write,
+      documentId: AppConstant.booksDatabaseId,
     );
     return doc;
   }
@@ -60,93 +59,38 @@ class AppwriteService extends AuthNotifier {
 
   // TODO: Modify and delete books using cloud function
 
-  // Teams functions
-
-  Future<TeamList> listTeams() {
-    return _teams.list();
-  }
-
-  Future<Team> createTeam(String name) {
-    return _teams.create(name: name);
-  }
-
-  Future<dynamic> deleteTeam(String teamId) {
-    return _teams.delete(teamId: teamId);
-  }
-
-  Future<MembershipList> listMembers(String teamId) {
-    return _teams.getMemberships(teamId: teamId);
-  }
-
-  Future<Membership> addMember({
-    required String teamId,
-    required String email,
-    required List<String> roles,
-  }) {
-    return _teams.createMembership(
-        teamId: teamId, email: email, roles: roles, url: AppConstant.url);
-  }
-
-  /// Delete Team Membership
-  ///
-  /// This endpoint allows a user to leave a team or for a team owner to delete the
-  /// membership of any other team member. You can also use this endpoint to delete
-  /// a user membership even if it is not accepted.
-  Future<dynamic> deleteMember({
-    required String teamId,
-    required String membershipId,
-  }) {
-    return _teams.deleteMembership(teamId: teamId, membershipId: membershipId);
-  }
-
   // Storage functions
 
   Future<Uint8List> getProfilePicture(String fileId) async {
-    final data =
-        await _storage.getFilePreview(fileId: fileId, width: 100, height: 100);
+    final data = await _storage.getFilePreview(
+      fileId: fileId,
+      width: 100,
+      height: 100,
+      bucketId: AppConstant.booksStorageBucketId,
+    );
     return data;
   }
 
   Future<File> uploadFile(
-    MultipartFile file,
+    InputFile file,
+    String fileId,
     List<String> readPermission,
     List<String> writePermission,
   ) async {
     final appwriteFile = await _storage.createFile(
       file: file,
+      fileId: fileId,
       read: readPermission,
       write: writePermission,
-    );
-
-    return appwriteFile;
-  }
-
-  /// Upload a file to Appwrite using its byte data
-  ///
-  /// Ex: [readPermission] Each entry should be in format 'user:$userId'
-  ///
-  /// See Appwrite docs for details
-  Future<File> uploadFileFromBytes({
-    required List<int> bytes,
-    required String filename,
-    required List<String> readPermission,
-    required List<String> writePermission,
-  }) async {
-    final appwriteFile = await _storage.createFile(
-      file: MultipartFile.fromBytes(
-        'file',
-        bytes,
-        filename: filename,
-      ),
-      read: readPermission,
-      write: writePermission,
+      bucketId: AppConstant.booksStorageBucketId,
     );
 
     return appwriteFile;
   }
 
   Future<Uint8List> getFileDownload(String fileId) async {
-    final data = await _storage.getFileDownload(fileId: fileId);
+    final data = await _storage.getFileDownload(
+        fileId: fileId, bucketId: AppConstant.booksStorageBucketId);
 
     return data;
   }

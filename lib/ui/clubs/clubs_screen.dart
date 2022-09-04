@@ -1,5 +1,5 @@
+import 'package:appwrite_auth_kit/appwrite_auth_kit.dart';
 import 'package:beamer/beamer.dart';
-import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 

@@ -1,7 +1,7 @@
 // APP
 import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:appwrite_auth_kit/appwrite_auth_kit.dart';
 import 'package:beamer/beamer.dart';
-import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -53,7 +53,7 @@ class _AppState extends ConsumerState<App> {
       visualDensity: FlexColorScheme.comfortablePlatformDensity,
     ).toTheme;
     final baseCommand = ref.watch(commands.baseCommandProvider);
-    return FlAppwriteAccountKit(
+    return AppwriteAuthKit(
       client: baseCommand.appwriteService.client,
       child: AdaptiveTheme(
         light: light.copyWith(

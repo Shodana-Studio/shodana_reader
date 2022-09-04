@@ -41,52 +41,51 @@ class AboutScreen extends HookWidget {
     final String buildNumber = packageInfo.buildNumber;
     final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     const String website = 'https://www.shodana.app';
-    const String github = 'https://www.github.com/Shodana-Studio/shodana_reader';
+    const String github =
+        'https://www.github.com/Shodana-Studio/shodana_reader';
     const String discord = 'https://www.shodana.app/discord';
 
     return Scaffold(
-      appBar: AppBar(
-          title: Text('About'.i18n)
-      ),
+      appBar: AppBar(title: Text('About'.i18n)),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ListTile(
-                key: const ValueKey('version'),
-                title: Text('Version'.i18n),
-                subtitle: Text('Alpha $version+$buildNumber'),
-                onTap: () => versionOnPressed(context,
-                    deviceInfo, version, buildNumber),
+              key: const ValueKey('version'),
+              title: Text('Version'.i18n),
+              subtitle: Text('Alpha $version+$buildNumber'),
+              onTap: () =>
+                  versionOnPressed(context, deviceInfo, version, buildNumber),
             ),
             const Divider(height: 1.0),
             ListTile(
-                key: const ValueKey('website'),
-                title: Text('Website'.i18n),
-                subtitle: const Text(website),
-                onTap: () => _launchURL(website),
+              key: const ValueKey('website'),
+              title: Text('Website'.i18n),
+              subtitle: const Text(website),
+              onTap: () => _launchURL(website),
             ),
             ListTile(
-                key: const ValueKey('discord'),
-                title: Text('Discord'.i18n),
-                subtitle: const Text(discord),
-                onTap: () => _launchURL(discord),
+              key: const ValueKey('discord'),
+              title: Text('Discord'.i18n),
+              subtitle: const Text(discord),
+              onTap: () => _launchURL(discord),
             ),
             ListTile(
-                key: const ValueKey('github'),
-                title: Text('Github'.i18n),
-                subtitle: const Text(github),
-                onTap: () => _launchURL(github),
+              key: const ValueKey('github'),
+              title: Text('Github'.i18n),
+              subtitle: const Text(github),
+              onTap: () => _launchURL(github),
             ),
             ListTile(
-                key: const ValueKey('licenses'),
-                title: Text('Open source licenses'.i18n),
-                onTap: () => showAboutDialog(
-                  context: context,
-                  applicationName: 'Shodana Reader'.i18n,
-                  applicationVersion: version,
-                  applicationLegalese: legalese.i18n,
-                ),
+              key: const ValueKey('licenses'),
+              title: Text('Open source licenses'.i18n),
+              onTap: () => showAboutDialog(
+                context: context,
+                applicationName: 'Shodana Reader'.i18n,
+                applicationVersion: version,
+                applicationLegalese: legalese.i18n,
+              ),
             ),
           ],
         ),
@@ -94,20 +93,26 @@ class AboutScreen extends HookWidget {
     );
   }
 
-  Future<void> _launchURL(String url) async =>
-      await canLaunch(url) ? await launch(url) : debugPrint('Could not launch $url');
+  Future<void> _launchURL(String url) async {
+    try {
+      final uri = Uri.parse(url);
+      await canLaunchUrl(uri)
+          ? await launchUrl(uri)
+          : debugPrint('Could not launch $url');
+    } on FormatException catch (e) {
+      debugPrint('Could not launch $url, invalid URL: ${e.toString()}');
+      return;
+    }
+  }
 
-  Future<void> versionOnPressed(
-      BuildContext context, DeviceInfoPlugin
-      deviceInfo, String version, String buildNumber
-  ) async {
+  Future<void> versionOnPressed(BuildContext context,
+      DeviceInfoPlugin deviceInfo, String version, String buildNumber) async {
     String versionText = '';
     if (kIsWeb) {
       versionText = 'Copied to clipboard:'
           '\nApp version: $version'
           '\nPlatform: Web';
-    }
-    else if (io.Platform.isIOS) {
+    } else if (io.Platform.isIOS) {
       final IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
       versionText = 'Copied to clipboard:'
           '\nApp version: $version (build $buildNumber)'
@@ -140,11 +145,10 @@ class AboutScreen extends HookWidget {
       // final isDark = AdaptiveTheme.of(context).mode.isDark;
       // final isLight = AdaptiveTheme.of(context).mode.isLight;
       // final isSystem = AdaptiveTheme.of(context).mode.isSystem;
-      final backgroundColor = Theme.of(context).appBarTheme
-          .backgroundColor;
+      final backgroundColor = Theme.of(context).appBarTheme.backgroundColor;
       final titleTextStyle = Theme.of(context).textTheme.bodyText2?.copyWith(
-        color: Theme.of(context).textTheme.headline6?.color,
-      );
+            color: Theme.of(context).textTheme.headline6?.color,
+          );
       final snackBar = SnackBar(
         backgroundColor: backgroundColor,
         content: RichText(

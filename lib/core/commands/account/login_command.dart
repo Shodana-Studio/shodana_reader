@@ -1,5 +1,5 @@
+import 'package:appwrite_auth_kit/appwrite_auth_kit.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flappwrite_account_kit/flappwrite_account_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
@@ -21,7 +21,7 @@ class LoginCommand extends BaseCommand {
     final log = Logger();
 
     // Await service call
-    final bool loginSuccess = await context.authNotifier.createSession(email: email, password: password);
+    final bool loginSuccess = await context.authNotifier.createEmailSession(email: email, password: password);
  
     // Run a 2nd command if service call was successful
     if (loginSuccess) {

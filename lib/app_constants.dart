@@ -1,4 +1,6 @@
 class AppConstant {
+  AppConstant._();
+
   // Settings
   static const String settingsBoxKey = 'settings';
   static const String booksBoxKey = 'bookBox';
@@ -38,14 +40,20 @@ class AppConstant {
   static const String readingStatsCollection = '6164bc1b24fc4';
   static const String booksCollection = '6164bc1b4f455';
   static const String shelvesCollection = '6164bc1bc7ea5';
+
+  static const String booksDatabaseId = 'booksDatabase';
+  static const String booksStorageBucketId = 'booksStorageBucket';
 }
 
 enum AppPage { home, shelves, clubs, discover }
+
 enum AppStates {
   loggedInAndOnline,
   loggedInAndOffline,
   notLoggedInAndOnline,
   notLoggedInAndOffline
 }
+
 enum TileType { series, book }
+
 enum BookFileType { epub, pdf, mobi, html }
